@@ -365,15 +365,13 @@ def generate_3d_scene(view_mode="Floor Plan"):
                 showlegend=False,
                 hoverinfo='skip'
             ))
-            # Arrow head
+            # Arrow head (simple marker at destination)
             fig.add_trace(go.Scatter3d(
                 x=[actor['move_to_x']],
                 y=[actor['move_to_y']],
                 z=[0],
                 mode='markers',
-                marker=dict(size=8, color='red', symbol='arrow', 
-                           angle=np.degrees(np.arctan2(actor['move_to_y']-actor['y'], 
-                                                       actor['move_to_x']-actor['x']))),
+                marker=dict(size=10, color='red', symbol='diamond'),
                 showlegend=False,
                 hoverinfo='skip'
             ))

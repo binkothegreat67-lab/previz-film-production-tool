@@ -2,7 +2,7 @@
 PreViz - Interactive Film Production Planning Tool
 Educational Technology for Digital Media Arts
 Developed by: Eduardo Carmona
-Version: 3.0 (Professional Edition)
+Version: 3.5 Beta (Production Ready)
 """
 
 import streamlit as st
@@ -14,7 +14,7 @@ import copy
 
 # Page Configuration
 st.set_page_config(
-    page_title="PreViz 3.0 - Film Production Planning",
+    page_title="PreViz Beta 3.5 - Film Production Planning",
     page_icon="🎬",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -35,7 +35,7 @@ st.markdown("""
         margin-bottom: 2rem;
     }
     .version-badge {
-        background-color: #4CAF50;
+        background-color: #2196F3;
         color: white;
         padding: 0.3rem 0.8rem;
         border-radius: 12px;
@@ -44,6 +44,13 @@ st.markdown("""
     }
     .stButton>button {
         width: 100%;
+    }
+    .workflow-note {
+        background-color: #fff3cd;
+        border-left: 4px solid #ffc107;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 4px;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -61,13 +68,16 @@ if 'scene_elements' not in st.session_state:
     }
 
 if 'view_mode' not in st.session_state:
-    st.session_state.view_mode = "Perspective"
+    st.session_state.view_mode = "Floor Plan"  # Default to Floor Plan
 
 if 'scene_name' not in st.session_state:
     st.session_state.scene_name = "Untitled Scene"
 
-if 'clipboard' not in st.session_state:
-    st.session_state.clipboard = None
+if 'editing_element' not in st.session_state:
+    st.session_state.editing_element = None
+
+if 'editing_type' not in st.session_state:
+    st.session_state.editing_type = None
 
 # Camera height presets
 CAMERA_HEIGHT_PRESETS = {
@@ -143,16 +153,30 @@ def create_light_coverage(x, y, z, rotation, intensity, light_type):
     
     return [x, y, z, x + dx, y + dy, z]
 
+def create_actor_movement_arrow(x_start, y_start, x_end, y_end):
+    """Create movement arrow for actor blocking"""
+    return {
+        'x_start': x_start,
+        'y_start': y_start,
+        'x_end': x_end,
+        'y_end': y_end
+    }
+
 def duplicate_element(element_type, element_data):
     """Duplicate an element with offset position"""
     new_element = copy.deepcopy(element_data)
-    new_element['x'] += 1.0  # Offset by 1 foot
-    new_element['y'] += 1.0
+    
+    # Smart offset based on element type
+    if element_type == 'cameras':
+        new_element['x'] += 2.0  # Cameras offset more
+        new_element['y'] += 2.0
+    else:
+        new_element['x'] += 1.0
+        new_element['y'] += 1.0
     
     # Rename
     original_name = new_element['name']
     if 'Copy' in original_name:
-        # Find number in "Copy N" and increment
         try:
             parts = original_name.rsplit('Copy', 1)
             if len(parts) == 2 and parts[1].strip().isdigit():
@@ -167,11 +191,21 @@ def duplicate_element(element_type, element_data):
     
     return new_element
 
-def generate_3d_scene(view_mode="Perspective"):
-    """Generate enhanced 3D visualization"""
+def generate_3d_scene(view_mode="Floor Plan"):
+    """Generate enhanced visualization with white background for Floor Plan"""
     fig = go.Figure()
     
     stage_size = 20
+    
+    # Set background color based on view mode
+    if view_mode == "Floor Plan":
+        bg_color = 'white'
+        grid_color = '#cccccc'
+        paper_bg = 'white'
+    else:
+        bg_color = '#f5f5f5'
+        grid_color = 'lightgray'
+        paper_bg = 'white'
     
     # Draw stage floor grid
     grid_lines_x = []
@@ -187,12 +221,12 @@ def generate_3d_scene(view_mode="Perspective"):
         y=grid_lines_y,
         z=[0] * len(grid_lines_x),
         mode='lines',
-        line=dict(color='lightgray', width=1),
+        line=dict(color=grid_color, width=1),
         showlegend=False,
         hoverinfo='skip'
     ))
     
-    # Add cameras (with enhanced visualization)
+    # Add cameras
     for cam in st.session_state.scene_elements['cameras']:
         # Camera body
         fig.add_trace(go.Scatter3d(
@@ -211,33 +245,47 @@ def generate_3d_scene(view_mode="Perspective"):
                          f"FOV: {cam['fov']}°<extra></extra>"
         ))
         
-        # Camera viewing frustum
-        frustum = create_camera_frustum(cam['x'], cam['y'], cam['z'], 
-                                       cam['rotation'], cam['fov'])
-        
-        # Draw frustum edges
-        fig.add_trace(go.Scatter3d(
-            x=[frustum[0][0], frustum[1][0]],
-            y=[frustum[0][1], frustum[1][1]],
-            z=[frustum[0][2], frustum[1][2]],
-            mode='lines',
-            line=dict(color='blue', width=3, dash='dash'),
-            showlegend=False,
-            hoverinfo='skip',
-            opacity=0.6
-        ))
-        fig.add_trace(go.Scatter3d(
-            x=[frustum[0][0], frustum[2][0]],
-            y=[frustum[0][1], frustum[2][1]],
-            z=[frustum[0][2], frustum[2][2]],
-            mode='lines',
-            line=dict(color='blue', width=3, dash='dash'),
-            showlegend=False,
-            hoverinfo='skip',
-            opacity=0.6
-        ))
+        # Camera viewing frustum (only in 3D views)
+        if view_mode != "Floor Plan":
+            frustum = create_camera_frustum(cam['x'], cam['y'], cam['z'], 
+                                           cam['rotation'], cam['fov'])
+            
+            # Draw frustum edges
+            fig.add_trace(go.Scatter3d(
+                x=[frustum[0][0], frustum[1][0]],
+                y=[frustum[0][1], frustum[1][1]],
+                z=[frustum[0][2], frustum[1][2]],
+                mode='lines',
+                line=dict(color='blue', width=3, dash='dash'),
+                showlegend=False,
+                hoverinfo='skip',
+                opacity=0.6
+            ))
+            fig.add_trace(go.Scatter3d(
+                x=[frustum[0][0], frustum[2][0]],
+                y=[frustum[0][1], frustum[2][1]],
+                z=[frustum[0][2], frustum[2][2]],
+                mode='lines',
+                line=dict(color='blue', width=3, dash='dash'),
+                showlegend=False,
+                hoverinfo='skip',
+                opacity=0.6
+            ))
+        else:
+            # In Floor Plan, show direction arrow
+            arrow_length = 2
+            dx, dy = rotate_point(0, arrow_length, cam['rotation'])
+            fig.add_trace(go.Scatter3d(
+                x=[cam['x'], cam['x'] + dx],
+                y=[cam['y'], cam['y'] + dy],
+                z=[0, 0],
+                mode='lines',
+                line=dict(color='blue', width=4),
+                showlegend=False,
+                hoverinfo='skip'
+            ))
     
-    # Add lights (with enhanced types and visualization)
+    # Add lights
     for light in st.session_state.scene_elements['lights']:
         # Light color based on type
         if light['type'] == "Key Light":
@@ -254,12 +302,14 @@ def generate_3d_scene(view_mode="Perspective"):
             color = 'lightblue'
         
         # Light fixture
+        z_pos = light['z'] if view_mode != "Floor Plan" else 0
         fig.add_trace(go.Scatter3d(
             x=[light['x']],
             y=[light['y']],
-            z=[light['z']],
+            z=[z_pos],
             mode='markers+text',
-            marker=dict(size=10, color=color, symbol='diamond'),
+            marker=dict(size=10, color=color, symbol='diamond', 
+                       line=dict(color='black', width=1)),
             text=[light['name']],
             textposition='top center',
             name=light['name'],
@@ -274,10 +324,13 @@ def generate_3d_scene(view_mode="Perspective"):
         beam = create_light_coverage(light['x'], light['y'], light['z'], 
                                      light['rotation'], light['intensity'], 
                                      light['type'])
+        beam_z_start = beam[2] if view_mode != "Floor Plan" else 0
+        beam_z_end = beam[5] if view_mode != "Floor Plan" else 0
+        
         fig.add_trace(go.Scatter3d(
             x=[beam[0], beam[3]],
             y=[beam[1], beam[4]],
-            z=[beam[2], beam[5]],
+            z=[beam_z_start, beam_z_end],
             mode='lines',
             line=dict(color=color, width=4),
             showlegend=False,
@@ -285,7 +338,7 @@ def generate_3d_scene(view_mode="Perspective"):
             opacity=0.5
         ))
     
-    # Add actors
+    # Add actors with movement arrows
     for actor in st.session_state.scene_elements['actors']:
         fig.add_trace(go.Scatter3d(
             x=[actor['x']],
@@ -300,10 +353,33 @@ def generate_3d_scene(view_mode="Perspective"):
                          f"Position: ({actor['x']:.1f}, {actor['y']:.1f})<br>" +
                          f"Notes: {actor['notes']}<extra></extra>"
         ))
+        
+        # Add movement arrow if actor has movement defined
+        if 'move_to_x' in actor and 'move_to_y' in actor:
+            fig.add_trace(go.Scatter3d(
+                x=[actor['x'], actor['move_to_x']],
+                y=[actor['y'], actor['move_to_y']],
+                z=[0, 0],
+                mode='lines',
+                line=dict(color='red', width=3, dash='dot'),
+                showlegend=False,
+                hoverinfo='skip'
+            ))
+            # Arrow head
+            fig.add_trace(go.Scatter3d(
+                x=[actor['move_to_x']],
+                y=[actor['move_to_y']],
+                z=[0],
+                mode='markers',
+                marker=dict(size=8, color='red', symbol='arrow', 
+                           angle=np.degrees(np.arctan2(actor['move_to_y']-actor['y'], 
+                                                       actor['move_to_x']-actor['x']))),
+                showlegend=False,
+                hoverinfo='skip'
+            ))
     
     # Add set pieces
     for piece in st.session_state.scene_elements['set_pieces']:
-        # Different colors for different types
         color_map = {
             'Table': 'brown',
             'Chair': 'saddlebrown',
@@ -348,10 +424,11 @@ def generate_3d_scene(view_mode="Perspective"):
     
     # Add screens/monitors
     for screen in st.session_state.scene_elements['screens']:
+        z_pos = screen['z'] if view_mode != "Floor Plan" else 0
         fig.add_trace(go.Scatter3d(
             x=[screen['x']],
             y=[screen['y']],
-            z=[screen['z']],
+            z=[z_pos],
             mode='markers+text',
             marker=dict(size=14, color='black', symbol='square'),
             text=[screen['name']],
@@ -365,37 +442,33 @@ def generate_3d_scene(view_mode="Perspective"):
     
     # Add green screens
     for gs in st.session_state.scene_elements['green_screens']:
-        # Draw as a vertical surface
-        width = 8
-        height = 8
+        if view_mode != "Floor Plan":
+            # Draw as vertical surface in 3D
+            width = 8
+            height = 8
+            corners = [(-width/2, 0), (width/2, 0)]
+            rotated = [rotate_point(px, py, gs['rotation']) for px, py in corners]
+            
+            fig.add_trace(go.Scatter3d(
+                x=[gs['x'] + rotated[0][0], gs['x'] + rotated[1][0]],
+                y=[gs['y'] + rotated[0][1], gs['y'] + rotated[1][1]],
+                z=[0, height],
+                mode='lines',
+                line=dict(color='green', width=10),
+                showlegend=False,
+                hoverinfo='skip',
+                opacity=0.6
+            ))
         
-        # Rotate points based on rotation
-        corners = [
-            (-width/2, 0), (width/2, 0),
-            (width/2, 0), (width/2, 0),
-            (-width/2, 0), (-width/2, 0)
-        ]
-        
-        rotated = [rotate_point(px, py, gs['rotation']) for px, py in corners]
-        
-        fig.add_trace(go.Scatter3d(
-            x=[gs['x'] + rotated[0][0], gs['x'] + rotated[1][0]],
-            y=[gs['y'] + rotated[0][1], gs['y'] + rotated[1][1]],
-            z=[0, height],
-            mode='lines',
-            line=dict(color='green', width=10),
-            showlegend=False,
-            hoverinfo='skip',
-            opacity=0.6
-        ))
-        
+        # Marker at base
         fig.add_trace(go.Scatter3d(
             x=[gs['x']],
             y=[gs['y']],
-            z=[height/2],
-            mode='text',
+            z=[0],
+            mode='markers+text',
+            marker=dict(size=12, color='green', symbol='square'),
             text=[gs['name']],
-            textposition='middle center',
+            textposition='top center',
             name=gs['name'],
             hovertemplate=f"<b>{gs['name']}</b><br>" +
                          f"Size: {gs['size']}<br>" +
@@ -403,25 +476,34 @@ def generate_3d_scene(view_mode="Perspective"):
         ))
     
     # Set camera view
-    if view_mode == "Top-Down":
+    if view_mode == "Floor Plan":
         camera = dict(eye=dict(x=0, y=0, z=2.5), up=dict(x=0, y=1, z=0))
+        scene_aspectmode = 'cube'
     elif view_mode == "Side View":
         camera = dict(eye=dict(x=2.5, y=0, z=0.5), up=dict(x=0, y=0, z=1))
-    else:
+        scene_aspectmode = 'cube'
+    else:  # Perspective
         camera = dict(eye=dict(x=1.5, y=-1.5, z=1.5), up=dict(x=0, y=0, z=1))
+        scene_aspectmode = 'cube'
     
     # Update layout
     fig.update_layout(
         scene=dict(
-            xaxis=dict(range=[-stage_size//2, stage_size//2], title="X (feet)"),
-            yaxis=dict(range=[-stage_size//2, stage_size//2], title="Y (feet)"),
-            zaxis=dict(range=[0, 15], title="Z (feet)"),
-            aspectmode='cube',
-            camera=camera
+            xaxis=dict(range=[-stage_size//2, stage_size//2], title="X (feet)",
+                      gridcolor=grid_color, showbackground=True, backgroundcolor=bg_color),
+            yaxis=dict(range=[-stage_size//2, stage_size//2], title="Y (feet)",
+                      gridcolor=grid_color, showbackground=True, backgroundcolor=bg_color),
+            zaxis=dict(range=[0, 15], title="Z (feet)",
+                      gridcolor=grid_color, showbackground=True, backgroundcolor=bg_color),
+            aspectmode=scene_aspectmode,
+            camera=camera,
+            bgcolor=bg_color
         ),
         height=600,
         margin=dict(l=0, r=0, t=30, b=0),
-        title=f"Scene: {st.session_state.scene_name} ({view_mode})"
+        title=f"Scene: {st.session_state.scene_name} ({view_mode})",
+        paper_bgcolor=paper_bg,
+        plot_bgcolor=bg_color
     )
     
     return fig
@@ -465,10 +547,13 @@ TALENT ({len(st.session_state.scene_elements['actors'])})
 -------------------------------------
 """
     for i, actor in enumerate(st.session_state.scene_elements['actors'], 1):
+        movement = ""
+        if 'move_to_x' in actor and 'move_to_y' in actor:
+            movement = f"\n   Movement: → ({actor['move_to_x']:.1f}, {actor['move_to_y']:.1f})"
         report += f"""
 {i}. {actor['name']}
    Position: ({actor['x']:.1f}, {actor['y']:.1f}) feet
-   Notes: {actor['notes']}
+   Notes: {actor['notes']}{movement}
 """
     
     if st.session_state.scene_elements['set_pieces']:
@@ -536,7 +621,7 @@ def export_scene_json():
         'scene_name': st.session_state.scene_name,
         'created': datetime.now().isoformat(),
         'elements': st.session_state.scene_elements,
-        'version': '3.0'
+        'version': '3.5-beta'
     }
     return json.dumps(scene_data, indent=2)
 
@@ -545,10 +630,18 @@ def main():
     # Header
     col1, col2 = st.columns([4, 1])
     with col1:
-        st.markdown('<div class="main-header">🎬 PreViz 3.0</div>', unsafe_allow_html=True)
-        st.markdown('<div class="sub-header">Interactive Film Production Planning Tool - Professional Edition</div>', unsafe_allow_html=True)
+        st.markdown('<div class="main-header">🎬 PreViz Beta 3.5</div>', unsafe_allow_html=True)
+        st.markdown('<div class="sub-header">Film Production Planning - Industry Workflow Edition</div>', unsafe_allow_html=True)
     with col2:
-        st.markdown('<div class="version-badge">v3.0 Pro</div>', unsafe_allow_html=True)
+        st.markdown('<div class="version-badge">Beta 3.5</div>', unsafe_allow_html=True)
+    
+    # Workflow guidance
+    st.markdown("""
+    <div class="workflow-note">
+        <strong>📐 Professional Workflow:</strong> Start with Floor Plan (2D) for crew communication → 
+        Switch to 3D views for verification and sightline checks
+    </div>
+    """, unsafe_allow_html=True)
     
     # Sidebar
     with st.sidebar:
@@ -560,200 +653,331 @@ def main():
         
         st.divider()
         
-        # Element type selector
-        element_type = st.selectbox(
-            "Add Element",
-            ["Select...", "Camera", "Light", "Actor", "Set Piece", "Vehicle", 
-             "Screen/Monitor", "Green Screen"]
-        )
+        # Check if editing mode
+        if st.session_state.editing_element is not None:
+            st.subheader(f"✏️ Editing {st.session_state.editing_type}")
+            
+            if st.session_state.editing_type == "Camera":
+                cam = st.session_state.scene_elements['cameras'][st.session_state.editing_element]
+                
+                with st.form("edit_camera_form"):
+                    cam_name = st.text_input("Camera Name", value=cam['name'])
+                    
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        cam_x = st.number_input("X Position", value=float(cam['x']), step=0.5)
+                        cam_y = st.number_input("Y Position", value=float(cam['y']), step=0.5)
+                    with col2:
+                        height_preset_keys = list(CAMERA_HEIGHT_PRESETS.keys())
+                        # Find closest preset
+                        closest_preset = min(height_preset_keys, 
+                                           key=lambda k: abs(CAMERA_HEIGHT_PRESETS[k] - cam['z']))
+                        height_preset = st.selectbox("Height Preset", height_preset_keys,
+                                                    index=height_preset_keys.index(closest_preset))
+                        cam_z = st.number_input("Height (Z)", 
+                            value=CAMERA_HEIGHT_PRESETS[height_preset], step=0.5, min_value=0.0)
+                    
+                    cam_rotation = st.slider("Rotation (degrees)", 0, 359, int(cam['rotation']))
+                    
+                    # Find current focal length preset
+                    focal_preset_keys = list(FOV_PRESETS.keys())
+                    current_focal_str = f"{cam['focal_length']}mm"
+                    matching_preset = None
+                    for key in focal_preset_keys:
+                        if current_focal_str in key:
+                            matching_preset = key
+                            break
+                    if matching_preset is None:
+                        matching_preset = "50mm (Normal)"
+                    
+                    focal_preset = st.selectbox("Focal Length Preset", focal_preset_keys,
+                                              index=focal_preset_keys.index(matching_preset))
+                    cam_focal = int(focal_preset.split('mm')[0])
+                    cam_fov = FOV_PRESETS[focal_preset]
+                    
+                    st.caption(f"Field of View: {cam_fov}°")
+                    
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        if st.form_submit_button("💾 Save Changes", type="primary"):
+                            st.session_state.scene_elements['cameras'][st.session_state.editing_element] = {
+                                'name': cam_name,
+                                'x': cam_x,
+                                'y': cam_y,
+                                'z': cam_z,
+                                'rotation': cam_rotation,
+                                'focal_length': cam_focal,
+                                'fov': cam_fov
+                            }
+                            st.session_state.editing_element = None
+                            st.session_state.editing_type = None
+                            st.success("Camera updated!")
+                            st.rerun()
+                    with col2:
+                        if st.form_submit_button("❌ Cancel"):
+                            st.session_state.editing_element = None
+                            st.session_state.editing_type = None
+                            st.rerun()
+            
+            elif st.session_state.editing_type == "Light":
+                light = st.session_state.scene_elements['lights'][st.session_state.editing_element]
+                
+                with st.form("edit_light_form"):
+                    light_name = st.text_input("Light Name", value=light['name'])
+                    light_type = st.selectbox("Type", 
+                        ["Key Light", "Fill Light", "Back Light", "LED Panel", "Practical", "Natural Light"],
+                        index=["Key Light", "Fill Light", "Back Light", "LED Panel", "Practical", "Natural Light"].index(light['type']))
+                    
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        light_x = st.number_input("X Position", value=float(light['x']), step=0.5)
+                        light_y = st.number_input("Y Position", value=float(light['y']), step=0.5)
+                        light_z = st.number_input("Height (Z)", value=float(light['z']), step=0.5, min_value=0.0)
+                    with col2:
+                        light_rotation = st.slider("Rotation", 0, 359, int(light['rotation']), key="edit_light_rot")
+                        light_intensity = st.slider("Intensity (%)", 0, 100, int(light['intensity']), key="edit_light_int")
+                    
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        if st.form_submit_button("💾 Save Changes", type="primary"):
+                            st.session_state.scene_elements['lights'][st.session_state.editing_element] = {
+                                'name': light_name,
+                                'type': light_type,
+                                'x': light_x,
+                                'y': light_y,
+                                'z': light_z,
+                                'rotation': light_rotation,
+                                'intensity': light_intensity
+                            }
+                            st.session_state.editing_element = None
+                            st.session_state.editing_type = None
+                            st.success("Light updated!")
+                            st.rerun()
+                    with col2:
+                        if st.form_submit_button("❌ Cancel"):
+                            st.session_state.editing_element = None
+                            st.session_state.editing_type = None
+                            st.rerun()
         
-        if element_type == "Camera":
-            st.subheader("📷 Add Camera")
-            with st.form("camera_form"):
-                cam_name = st.text_input("Camera Name", 
-                    value=f"Camera {chr(65 + len(st.session_state.scene_elements['cameras']))}")  # A, B, C...
-                
-                col1, col2 = st.columns(2)
-                with col1:
-                    cam_x = st.number_input("X Position", value=0.0, step=0.5)
-                    cam_y = st.number_input("Y Position", value=-5.0, step=0.5)
-                with col2:
-                    # Height preset selector
-                    height_preset = st.selectbox("Height Preset", list(CAMERA_HEIGHT_PRESETS.keys()))
-                    cam_z = st.number_input("Height (Z)", 
-                        value=CAMERA_HEIGHT_PRESETS[height_preset], step=0.5, min_value=0.0)
-                
-                cam_rotation = st.slider("Rotation (degrees)", 0, 359, 0)
-                
-                # Focal length with FOV calculation
-                focal_preset = st.selectbox("Focal Length Preset", list(FOV_PRESETS.keys()))
-                cam_focal = int(focal_preset.split('mm')[0])
-                cam_fov = FOV_PRESETS[focal_preset]
-                
-                st.caption(f"Field of View: {cam_fov}°")
-                
-                if st.form_submit_button("Add Camera"):
-                    st.session_state.scene_elements['cameras'].append({
-                        'name': cam_name,
-                        'x': cam_x,
-                        'y': cam_y,
-                        'z': cam_z,
-                        'rotation': cam_rotation,
-                        'focal_length': cam_focal,
-                        'fov': cam_fov
-                    })
-                    st.success(f"Added {cam_name}")
-                    st.rerun()
-        
-        elif element_type == "Light":
-            st.subheader("💡 Add Light")
-            with st.form("light_form"):
-                light_name = st.text_input("Light Name", 
-                    value=f"Light {len(st.session_state.scene_elements['lights'])+1}")
-                light_type = st.selectbox("Type", 
-                    ["Key Light", "Fill Light", "Back Light", "LED Panel", "Practical", "Natural Light"])
-                
-                col1, col2 = st.columns(2)
-                with col1:
-                    light_x = st.number_input("X Position", value=3.0, step=0.5)
-                    light_y = st.number_input("Y Position", value=0.0, step=0.5)
-                    light_z = st.number_input("Height (Z)", value=7.0, step=0.5, min_value=0.0)
-                with col2:
-                    light_rotation = st.slider("Rotation", 0, 359, 0, key="light_rot")
-                    light_intensity = st.slider("Intensity (%)", 0, 100, 80, key="light_int")
-                
-                if st.form_submit_button("Add Light"):
-                    st.session_state.scene_elements['lights'].append({
-                        'name': light_name,
-                        'type': light_type,
-                        'x': light_x,
-                        'y': light_y,
-                        'z': light_z,
-                        'rotation': light_rotation,
-                        'intensity': light_intensity
-                    })
-                    st.success(f"Added {light_name}")
-                    st.rerun()
-        
-        elif element_type == "Actor":
-            st.subheader("🎭 Add Actor")
-            with st.form("actor_form"):
-                actor_name = st.text_input("Actor/Character Name", 
-                    value=f"Actor {len(st.session_state.scene_elements['actors'])+1}")
-                col1, col2 = st.columns(2)
-                with col1:
-                    actor_x = st.number_input("X Position", value=0.0, step=0.5)
-                with col2:
-                    actor_y = st.number_input("Y Position", value=0.0, step=0.5)
-                
-                actor_notes = st.text_area("Blocking Notes", 
-                    placeholder="e.g., Standing, sitting, walking towards...")
-                
-                if st.form_submit_button("Add Actor"):
-                    st.session_state.scene_elements['actors'].append({
-                        'name': actor_name,
-                        'x': actor_x,
-                        'y': actor_y,
-                        'notes': actor_notes
-                    })
-                    st.success(f"Added {actor_name}")
-                    st.rerun()
-        
-        elif element_type == "Set Piece":
-            st.subheader("🪑 Add Set Piece")
-            with st.form("setpiece_form"):
-                piece_name = st.text_input("Name", value="Furniture")
-                piece_type = st.selectbox("Type", 
-                    ["Table", "Chair", "Sofa", "Desk", "Wall", "Door", "Window"])
-                
-                col1, col2 = st.columns(2)
-                with col1:
-                    piece_x = st.number_input("X Position", value=0.0, step=0.5)
-                with col2:
-                    piece_y = st.number_input("Y Position", value=0.0, step=0.5)
-                
-                if st.form_submit_button("Add Set Piece"):
-                    st.session_state.scene_elements['set_pieces'].append({
-                        'name': piece_name,
-                        'type': piece_type,
-                        'x': piece_x,
-                        'y': piece_y
-                    })
-                    st.success(f"Added {piece_name}")
-                    st.rerun()
-        
-        elif element_type == "Vehicle":
-            st.subheader("🚗 Add Vehicle")
-            with st.form("vehicle_form"):
-                veh_name = st.text_input("Name", value="Car")
-                veh_type = st.selectbox("Type", ["Car", "Van", "Truck", "Motorcycle", "Bicycle"])
-                
-                col1, col2 = st.columns(2)
-                with col1:
-                    veh_x = st.number_input("X Position", value=0.0, step=0.5)
-                    veh_y = st.number_input("Y Position", value=0.0, step=0.5)
-                with col2:
-                    veh_rotation = st.slider("Rotation", 0, 359, 0, key="veh_rot")
-                
-                if st.form_submit_button("Add Vehicle"):
-                    st.session_state.scene_elements['vehicles'].append({
-                        'name': veh_name,
-                        'type': veh_type,
-                        'x': veh_x,
-                        'y': veh_y,
-                        'rotation': veh_rotation
-                    })
-                    st.success(f"Added {veh_name}")
-                    st.rerun()
-        
-        elif element_type == "Screen/Monitor":
-            st.subheader("🖥️ Add Screen")
-            with st.form("screen_form"):
-                scr_name = st.text_input("Name", value="Monitor")
-                scr_size = st.selectbox("Size", 
-                    ["24\" Monitor", "32\" Monitor", "55\" TV", "75\" TV", "Projector Screen"])
-                
-                col1, col2 = st.columns(2)
-                with col1:
-                    scr_x = st.number_input("X Position", value=0.0, step=0.5)
-                    scr_y = st.number_input("Y Position", value=0.0, step=0.5)
-                with col2:
-                    scr_z = st.number_input("Height", value=3.0, step=0.5, min_value=0.0)
-                
-                if st.form_submit_button("Add Screen"):
-                    st.session_state.scene_elements['screens'].append({
-                        'name': scr_name,
-                        'size': scr_size,
-                        'x': scr_x,
-                        'y': scr_y,
-                        'z': scr_z
-                    })
-                    st.success(f"Added {scr_name}")
-                    st.rerun()
-        
-        elif element_type == "Green Screen":
-            st.subheader("🟢 Add Green Screen")
-            with st.form("greenscreen_form"):
-                gs_name = st.text_input("Name", value="Green Screen")
-                gs_size = st.selectbox("Size", ["6x8 ft", "8x10 ft", "10x12 ft", "12x20 ft"])
-                
-                col1, col2 = st.columns(2)
-                with col1:
-                    gs_x = st.number_input("X Position", value=0.0, step=0.5)
-                    gs_y = st.number_input("Y Position", value=5.0, step=0.5)
-                with col2:
-                    gs_rotation = st.slider("Rotation", 0, 359, 0, key="gs_rot")
-                
-                if st.form_submit_button("Add Green Screen"):
-                    st.session_state.scene_elements['green_screens'].append({
-                        'name': gs_name,
-                        'size': gs_size,
-                        'x': gs_x,
-                        'y': gs_y,
-                        'rotation': gs_rotation
-                    })
-                    st.success(f"Added {gs_name}")
-                    st.rerun()
+        else:
+            # Normal add mode
+            element_type = st.selectbox(
+                "Add Element",
+                ["Select...", "Camera", "Light", "Actor", "Set Piece", "Vehicle", 
+                 "Screen/Monitor", "Green Screen"]
+            )
+            
+            if element_type == "Camera":
+                st.subheader("📷 Add Camera")
+                with st.form("camera_form"):
+                    # Smart auto-naming and positioning
+                    num_cameras = len(st.session_state.scene_elements['cameras'])
+                    cam_name = st.text_input("Camera Name", 
+                        value=f"Camera {chr(65 + num_cameras)}")
+                    
+                    # Auto-offset position for new cameras
+                    base_x = 0.0 + (num_cameras * 2.0)
+                    base_y = -5.0
+                    
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        cam_x = st.number_input("X Position", value=base_x, step=0.5)
+                        cam_y = st.number_input("Y Position", value=base_y, step=0.5)
+                    with col2:
+                        height_preset = st.selectbox("Height Preset", list(CAMERA_HEIGHT_PRESETS.keys()))
+                        cam_z = st.number_input("Height (Z)", 
+                            value=CAMERA_HEIGHT_PRESETS[height_preset], step=0.5, min_value=0.0)
+                    
+                    cam_rotation = st.slider("Rotation (degrees)", 0, 359, 0)
+                    
+                    focal_preset = st.selectbox("Focal Length Preset", list(FOV_PRESETS.keys()))
+                    cam_focal = int(focal_preset.split('mm')[0])
+                    cam_fov = FOV_PRESETS[focal_preset]
+                    
+                    st.caption(f"Field of View: {cam_fov}°")
+                    
+                    if st.form_submit_button("Add Camera"):
+                        st.session_state.scene_elements['cameras'].append({
+                            'name': cam_name,
+                            'x': cam_x,
+                            'y': cam_y,
+                            'z': cam_z,
+                            'rotation': cam_rotation,
+                            'focal_length': cam_focal,
+                            'fov': cam_fov
+                        })
+                        st.success(f"Added {cam_name}")
+                        st.rerun()
+            
+            elif element_type == "Light":
+                st.subheader("💡 Add Light")
+                with st.form("light_form"):
+                    light_name = st.text_input("Light Name", 
+                        value=f"Light {len(st.session_state.scene_elements['lights'])+1}")
+                    light_type = st.selectbox("Type", 
+                        ["Key Light", "Fill Light", "Back Light", "LED Panel", "Practical", "Natural Light"])
+                    
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        light_x = st.number_input("X Position", value=3.0, step=0.5)
+                        light_y = st.number_input("Y Position", value=0.0, step=0.5)
+                        light_z = st.number_input("Height (Z)", value=7.0, step=0.5, min_value=0.0)
+                    with col2:
+                        light_rotation = st.slider("Rotation", 0, 359, 0, key="light_rot")
+                        light_intensity = st.slider("Intensity (%)", 0, 100, 80, key="light_int")
+                    
+                    if st.form_submit_button("Add Light"):
+                        st.session_state.scene_elements['lights'].append({
+                            'name': light_name,
+                            'type': light_type,
+                            'x': light_x,
+                            'y': light_y,
+                            'z': light_z,
+                            'rotation': light_rotation,
+                            'intensity': light_intensity
+                        })
+                        st.success(f"Added {light_name}")
+                        st.rerun()
+            
+            elif element_type == "Actor":
+                st.subheader("🎭 Add Actor")
+                with st.form("actor_form"):
+                    actor_name = st.text_input("Actor/Character Name", 
+                        value=f"Actor {len(st.session_state.scene_elements['actors'])+1}")
+                    
+                    st.markdown("**Starting Position**")
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        actor_x = st.number_input("X Position", value=0.0, step=0.5)
+                    with col2:
+                        actor_y = st.number_input("Y Position", value=0.0, step=0.5)
+                    
+                    actor_notes = st.text_area("Blocking Notes", 
+                        placeholder="e.g., Standing, sitting, walking towards...")
+                    
+                    st.markdown("**Movement (Optional)**")
+                    add_movement = st.checkbox("Add movement arrow")
+                    
+                    move_to_x = None
+                    move_to_y = None
+                    
+                    if add_movement:
+                        col1, col2 = st.columns(2)
+                        with col1:
+                            move_to_x = st.number_input("Move to X", value=2.0, step=0.5, key="move_x")
+                        with col2:
+                            move_to_y = st.number_input("Move to Y", value=2.0, step=0.5, key="move_y")
+                    
+                    if st.form_submit_button("Add Actor"):
+                        actor_data = {
+                            'name': actor_name,
+                            'x': actor_x,
+                            'y': actor_y,
+                            'notes': actor_notes
+                        }
+                        if add_movement and move_to_x is not None:
+                            actor_data['move_to_x'] = move_to_x
+                            actor_data['move_to_y'] = move_to_y
+                        
+                        st.session_state.scene_elements['actors'].append(actor_data)
+                        st.success(f"Added {actor_name}")
+                        st.rerun()
+            
+            elif element_type == "Set Piece":
+                st.subheader("🪑 Add Set Piece")
+                with st.form("setpiece_form"):
+                    piece_name = st.text_input("Name", value="Furniture")
+                    piece_type = st.selectbox("Type", 
+                        ["Table", "Chair", "Sofa", "Desk", "Wall", "Door", "Window"])
+                    
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        piece_x = st.number_input("X Position", value=0.0, step=0.5)
+                    with col2:
+                        piece_y = st.number_input("Y Position", value=0.0, step=0.5)
+                    
+                    if st.form_submit_button("Add Set Piece"):
+                        st.session_state.scene_elements['set_pieces'].append({
+                            'name': piece_name,
+                            'type': piece_type,
+                            'x': piece_x,
+                            'y': piece_y
+                        })
+                        st.success(f"Added {piece_name}")
+                        st.rerun()
+            
+            elif element_type == "Vehicle":
+                st.subheader("🚗 Add Vehicle")
+                with st.form("vehicle_form"):
+                    veh_name = st.text_input("Name", value="Car")
+                    veh_type = st.selectbox("Type", ["Car", "Van", "Truck", "Motorcycle", "Bicycle"])
+                    
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        veh_x = st.number_input("X Position", value=0.0, step=0.5)
+                        veh_y = st.number_input("Y Position", value=0.0, step=0.5)
+                    with col2:
+                        veh_rotation = st.slider("Rotation", 0, 359, 0, key="veh_rot")
+                    
+                    if st.form_submit_button("Add Vehicle"):
+                        st.session_state.scene_elements['vehicles'].append({
+                            'name': veh_name,
+                            'type': veh_type,
+                            'x': veh_x,
+                            'y': veh_y,
+                            'rotation': veh_rotation
+                        })
+                        st.success(f"Added {veh_name}")
+                        st.rerun()
+            
+            elif element_type == "Screen/Monitor":
+                st.subheader("🖥️ Add Screen")
+                with st.form("screen_form"):
+                    scr_name = st.text_input("Name", value="Monitor")
+                    scr_size = st.selectbox("Size", 
+                        ["24\" Monitor", "32\" Monitor", "55\" TV", "75\" TV", "Projector Screen"])
+                    
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        scr_x = st.number_input("X Position", value=0.0, step=0.5)
+                        scr_y = st.number_input("Y Position", value=0.0, step=0.5)
+                    with col2:
+                        scr_z = st.number_input("Height", value=3.0, step=0.5, min_value=0.0)
+                    
+                    if st.form_submit_button("Add Screen"):
+                        st.session_state.scene_elements['screens'].append({
+                            'name': scr_name,
+                            'size': scr_size,
+                            'x': scr_x,
+                            'y': scr_y,
+                            'z': scr_z
+                        })
+                        st.success(f"Added {scr_name}")
+                        st.rerun()
+            
+            elif element_type == "Green Screen":
+                st.subheader("🟢 Add Green Screen")
+                with st.form("greenscreen_form"):
+                    gs_name = st.text_input("Name", value="Green Screen")
+                    gs_size = st.selectbox("Size", ["6x8 ft", "8x10 ft", "10x12 ft", "12x20 ft"])
+                    
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        gs_x = st.number_input("X Position", value=0.0, step=0.5)
+                        gs_y = st.number_input("Y Position", value=5.0, step=0.5)
+                    with col2:
+                        gs_rotation = st.slider("Rotation", 0, 359, 0, key="gs_rot")
+                    
+                    if st.form_submit_button("Add Green Screen"):
+                        st.session_state.scene_elements['green_screens'].append({
+                            'name': gs_name,
+                            'size': gs_size,
+                            'x': gs_x,
+                            'y': gs_y,
+                            'rotation': gs_rotation
+                        })
+                        st.success(f"Added {gs_name}")
+                        st.rerun()
         
         st.divider()
         
@@ -831,11 +1055,12 @@ def main():
     col1, col2 = st.columns([3, 1])
     
     with col1:
-        # View mode
+        # View mode (Floor Plan is default)
         view_mode = st.radio(
             "View Mode",
-            ["Perspective", "Top-Down", "Side View"],
-            horizontal=True
+            ["Floor Plan", "Perspective (3D)", "Side View (3D)"],
+            horizontal=True,
+            help="Start with Floor Plan for crew communication, use 3D for verification"
         )
         st.session_state.view_mode = view_mode
         
@@ -898,18 +1123,23 @@ def main():
     with tabs[0]:
         if st.session_state.scene_elements['cameras']:
             for i, cam in enumerate(st.session_state.scene_elements['cameras']):
-                col1, col2, col3 = st.columns([3, 1, 1])
+                col1, col2, col3, col4 = st.columns([3, 1, 1, 1])
                 with col1:
                     st.markdown(f"""
                     **{cam['name']}** | FL: {cam['focal_length']}mm | FOV: {cam['fov']}°  
                     Pos: ({cam['x']:.1f}, {cam['y']:.1f}, {cam['z']:.1f}) | Rot: {cam['rotation']}°
                     """)
                 with col2:
+                    if st.button("✏️", key=f"edit_cam_{i}"):
+                        st.session_state.editing_element = i
+                        st.session_state.editing_type = "Camera"
+                        st.rerun()
+                with col3:
                     if st.button("📋", key=f"copy_cam_{i}"):
                         dup = duplicate_element('cameras', cam)
                         st.session_state.scene_elements['cameras'].append(dup)
                         st.rerun()
-                with col3:
+                with col4:
                     if st.button("🗑️", key=f"del_cam_{i}"):
                         st.session_state.scene_elements['cameras'].pop(i)
                         st.rerun()
@@ -920,18 +1150,23 @@ def main():
     with tabs[1]:
         if st.session_state.scene_elements['lights']:
             for i, light in enumerate(st.session_state.scene_elements['lights']):
-                col1, col2, col3 = st.columns([3, 1, 1])
+                col1, col2, col3, col4 = st.columns([3, 1, 1, 1])
                 with col1:
                     st.markdown(f"""
                     **{light['name']}** ({light['type']}) | {light['intensity']}%  
                     Pos: ({light['x']:.1f}, {light['y']:.1f}, {light['z']:.1f}) | Rot: {light['rotation']}°
                     """)
                 with col2:
+                    if st.button("✏️", key=f"edit_light_{i}"):
+                        st.session_state.editing_element = i
+                        st.session_state.editing_type = "Light"
+                        st.rerun()
+                with col3:
                     if st.button("📋", key=f"copy_light_{i}"):
                         dup = duplicate_element('lights', light)
                         st.session_state.scene_elements['lights'].append(dup)
                         st.rerun()
-                with col3:
+                with col4:
                     if st.button("🗑️", key=f"del_light_{i}"):
                         st.session_state.scene_elements['lights'].pop(i)
                         st.rerun()
@@ -944,8 +1179,11 @@ def main():
             for i, actor in enumerate(st.session_state.scene_elements['actors']):
                 col1, col2 = st.columns([4, 1])
                 with col1:
+                    movement_text = ""
+                    if 'move_to_x' in actor and 'move_to_y' in actor:
+                        movement_text = f" → ({actor['move_to_x']:.1f}, {actor['move_to_y']:.1f})"
                     st.markdown(f"""
-                    **{actor['name']}** | Pos: ({actor['x']:.1f}, {actor['y']:.1f})  
+                    **{actor['name']}** | Pos: ({actor['x']:.1f}, {actor['y']:.1f}){movement_text}  
                     {actor['notes']}
                     """)
                 with col2:
@@ -1023,11 +1261,10 @@ def main():
     st.divider()
     st.markdown("""
     <div style='text-align: center; color: #666; padding: 1rem;'>
-        PreViz v3.0 Professional Edition | Educational Technology for Digital Media Arts<br>
-        Developed by Eduardo Carmona | CSUDH & LMU
+        PreViz Beta 3.5 - Industry Workflow Edition | Educational Technology for Digital Media Arts<br>
+        Developed by Eduardo Carmona | CSUDH & LMU | Beta Testing Version
     </div>
     """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
-

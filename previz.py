@@ -1259,8 +1259,9 @@ def main():
     st.divider()
     st.markdown("""
     <div style='text-align: center; color: #666; padding: 1rem;'>
-        PreViz Beta 3.5 - Industry Workflow Edition | Educational Technology for Digital Media Arts<br>
-        Developed by Eduardo Carmona | CSUDH & LMU | Beta Testing Version
+        PreViz Beta 3.5 - Industry Workflow Edition<br>
+        Developed by Eduardo Carmona | Educational Film Production Planning Tool<br>
+        Beta Testing Version
     </div>
     """, unsafe_allow_html=True)
 

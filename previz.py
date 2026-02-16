@@ -123,7 +123,7 @@ def create_camera_frustum(x, y, z, rotation, fov=60, name="Camera"):
     rotated_points = [rotate_point(px, py, rotation) for px, py in points]
     
     # Add world position
-    world_points = [(x + px, y + py, z) for px, py, _ in rotated_points]
+    world_points = [(x + px, y + py, z) for px, py in rotated_points]
     
     return world_points
 

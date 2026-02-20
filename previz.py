@@ -201,19 +201,16 @@ def generate_3d_scene(view_mode="Floor Plan"):
         paper_bg = 'white'
         grid_visible = True
     
-    # Draw stage floor as a colored rectangle
+    # Draw stage floor outline (no fill - just boundaries)
     stage_half = stage_size // 2
     fig.add_trace(go.Scatter3d(
         x=[-stage_half, stage_half, stage_half, -stage_half, -stage_half],
         y=[-stage_half, -stage_half, stage_half, stage_half, -stage_half],
         z=[0, 0, 0, 0, 0],
         mode='lines',
-        line=dict(color=stage_outline_color, width=4),
-        fill='toself',
-        fillcolor=bg_color,
+        line=dict(color=stage_outline_color, width=6),
         showlegend=False,
-        hoverinfo='skip',
-        surfaceaxis=2
+        hoverinfo='skip'
     ))
     
     # Add cameras with IMPROVED VISIBILITY

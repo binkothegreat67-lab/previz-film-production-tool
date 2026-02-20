@@ -2,7 +2,7 @@
 PreViz - Interactive Film Production Planning Tool
 Educational Technology for Digital Media Arts
 Developed by: Eduardo Carmona
-Version: 3.5 Beta (Production Ready)
+Version: 3.5 Phase 1 (Visual Clarity Update)
 """
 
 import streamlit as st
@@ -68,7 +68,7 @@ if 'scene_elements' not in st.session_state:
     }
 
 if 'view_mode' not in st.session_state:
-    st.session_state.view_mode = "Floor Plan"  # Default to Floor Plan
+    st.session_state.view_mode = "Floor Plan"
 
 if 'scene_name' not in st.session_state:
     st.session_state.scene_name = "Untitled Scene"
@@ -153,22 +153,13 @@ def create_light_coverage(x, y, z, rotation, intensity, light_type):
     
     return [x, y, z, x + dx, y + dy, z]
 
-def create_actor_movement_arrow(x_start, y_start, x_end, y_end):
-    """Create movement arrow for actor blocking"""
-    return {
-        'x_start': x_start,
-        'y_start': y_start,
-        'x_end': x_end,
-        'y_end': y_end
-    }
-
 def duplicate_element(element_type, element_data):
     """Duplicate an element with offset position"""
     new_element = copy.deepcopy(element_data)
     
     # Smart offset based on element type
     if element_type == 'cameras':
-        new_element['x'] += 2.0  # Cameras offset more
+        new_element['x'] += 2.0
         new_element['y'] += 2.0
     else:
         new_element['x'] += 1.0
@@ -192,51 +183,56 @@ def duplicate_element(element_type, element_data):
     return new_element
 
 def generate_3d_scene(view_mode="Floor Plan"):
-    """Generate enhanced visualization with white background for Floor Plan"""
+    """Generate enhanced visualization with clear, colored floor plan"""
     fig = go.Figure()
     
     stage_size = 20
     
-    # Set background color based on view mode
+    # PHASE 1 IMPROVEMENT: Clear visual boundaries
     if view_mode == "Floor Plan":
-        bg_color = 'white'
-        grid_color = '#cccccc'
-        paper_bg = 'white'
+        # Tan/beige stage floor - clearly bounded
+        bg_color = '#d4c4a8'  # Tan/beige
+        stage_outline_color = '#8b7355'  # Dark brown
+        paper_bg = '#f5f5f5'  # Light gray surrounding
+        grid_visible = False  # NO GRID in floor plan
     else:
-        bg_color = '#f5f5f5'
-        grid_color = 'lightgray'
+        bg_color = '#f0f0f0'
+        stage_outline_color = 'lightgray'
         paper_bg = 'white'
+        grid_visible = True
     
-    # Draw stage floor grid
-    grid_lines_x = []
-    grid_lines_y = []
-    for i in range(-stage_size//2, stage_size//2 + 1, 2):
-        grid_lines_x.extend([i, i, None])
-        grid_lines_y.extend([-stage_size//2, stage_size//2, None])
-        grid_lines_x.extend([-stage_size//2, stage_size//2, None])
-        grid_lines_y.extend([i, i, None])
-    
+    # Draw stage floor as a colored rectangle
+    stage_half = stage_size // 2
     fig.add_trace(go.Scatter3d(
-        x=grid_lines_x,
-        y=grid_lines_y,
-        z=[0] * len(grid_lines_x),
+        x=[-stage_half, stage_half, stage_half, -stage_half, -stage_half],
+        y=[-stage_half, -stage_half, stage_half, stage_half, -stage_half],
+        z=[0, 0, 0, 0, 0],
         mode='lines',
-        line=dict(color=grid_color, width=1),
+        line=dict(color=stage_outline_color, width=4),
+        fill='toself',
+        fillcolor=bg_color,
         showlegend=False,
-        hoverinfo='skip'
+        hoverinfo='skip',
+        surfaceaxis=2
     ))
     
-    # Add cameras
+    # Add cameras with IMPROVED VISIBILITY
     for cam in st.session_state.scene_elements['cameras']:
-        # Camera body
+        # PHASE 1: Larger, more visible camera marker
         fig.add_trace(go.Scatter3d(
             x=[cam['x']],
             y=[cam['y']],
-            z=[cam['z']],
+            z=[cam['z'] if view_mode != "Floor Plan" else 0],
             mode='markers+text',
-            marker=dict(size=12, color='blue', symbol='diamond'),
-            text=[cam['name']],
+            marker=dict(
+                size=18,  # BIGGER
+                color='blue',
+                symbol='square',
+                line=dict(color='darkblue', width=3)  # BOLD OUTLINE
+            ),
+            text=[f"📷 {cam['name']}"],  # EMOJI + NAME
             textposition='top center',
+            textfont=dict(size=14, color='darkblue', family='Arial Black'),  # BOLD TEXT
             name=cam['name'],
             hovertemplate=f"<b>{cam['name']}</b><br>" +
                          f"Position: ({cam['x']:.1f}, {cam['y']:.1f}, {cam['z']:.1f})<br>" +
@@ -245,73 +241,82 @@ def generate_3d_scene(view_mode="Floor Plan"):
                          f"FOV: {cam['fov']}°<extra></extra>"
         ))
         
-        # Camera viewing frustum (only in 3D views)
+        # Camera viewing direction - BOLD ARROW
         if view_mode != "Floor Plan":
             frustum = create_camera_frustum(cam['x'], cam['y'], cam['z'], 
                                            cam['rotation'], cam['fov'])
-            
-            # Draw frustum edges
             fig.add_trace(go.Scatter3d(
                 x=[frustum[0][0], frustum[1][0]],
                 y=[frustum[0][1], frustum[1][1]],
                 z=[frustum[0][2], frustum[1][2]],
                 mode='lines',
-                line=dict(color='blue', width=3, dash='dash'),
+                line=dict(color='blue', width=4, dash='dash'),
                 showlegend=False,
                 hoverinfo='skip',
-                opacity=0.6
+                opacity=0.7
             ))
             fig.add_trace(go.Scatter3d(
                 x=[frustum[0][0], frustum[2][0]],
                 y=[frustum[0][1], frustum[2][1]],
                 z=[frustum[0][2], frustum[2][2]],
                 mode='lines',
-                line=dict(color='blue', width=3, dash='dash'),
+                line=dict(color='blue', width=4, dash='dash'),
                 showlegend=False,
                 hoverinfo='skip',
-                opacity=0.6
+                opacity=0.7
             ))
         else:
-            # In Floor Plan, show direction arrow
-            arrow_length = 2
+            # Floor plan: THICK direction arrow
+            arrow_length = 3
             dx, dy = rotate_point(0, arrow_length, cam['rotation'])
             fig.add_trace(go.Scatter3d(
                 x=[cam['x'], cam['x'] + dx],
                 y=[cam['y'], cam['y'] + dy],
                 z=[0, 0],
                 mode='lines',
-                line=dict(color='blue', width=4),
+                line=dict(color='blue', width=6),  # THICKER
                 showlegend=False,
                 hoverinfo='skip'
             ))
     
-    # Add lights
+    # Add lights with IMPROVED VISIBILITY
     for light in st.session_state.scene_elements['lights']:
         # Light color based on type
         if light['type'] == "Key Light":
-            color = 'yellow'
+            color = 'gold'
+            emoji = "💡"
         elif light['type'] == "Fill Light":
-            color = 'lightyellow'
+            color = 'yellow'
+            emoji = "💡"
         elif light['type'] == "Back Light":
             color = 'orange'
+            emoji = "💡"
         elif light['type'] == "LED Panel":
             color = 'white'
+            emoji = "⬜"
         elif light['type'] == "Practical":
             color = 'gold'
+            emoji = "🔆"
         else:  # Natural Light
             color = 'lightblue'
+            emoji = "☀️"
         
-        # Light fixture
+        # PHASE 1: Larger, clearer light markers
         z_pos = light['z'] if view_mode != "Floor Plan" else 0
         fig.add_trace(go.Scatter3d(
             x=[light['x']],
             y=[light['y']],
             z=[z_pos],
             mode='markers+text',
-            marker=dict(size=10, color=color, symbol='diamond', 
-                       line=dict(color='black', width=1)),
-            text=[light['name']],
+            marker=dict(
+                size=16,  # BIGGER
+                color=color,
+                symbol='diamond',
+                line=dict(color='black', width=2)  # BLACK OUTLINE
+            ),
+            text=[f"{emoji} {light['name']}"],  # EMOJI + NAME
             textposition='top center',
+            textfont=dict(size=13, color='black', family='Arial Black'),  # BOLD
             name=light['name'],
             hovertemplate=f"<b>{light['name']}</b><br>" +
                          f"Type: {light['type']}<br>" +
@@ -320,7 +325,7 @@ def generate_3d_scene(view_mode="Floor Plan"):
                          f"Intensity: {light['intensity']}%<extra></extra>"
         ))
         
-        # Light beam/coverage
+        # Light beam - BOLDER
         beam = create_light_coverage(light['x'], light['y'], light['z'], 
                                      light['rotation'], light['intensity'], 
                                      light['type'])
@@ -332,51 +337,57 @@ def generate_3d_scene(view_mode="Floor Plan"):
             y=[beam[1], beam[4]],
             z=[beam_z_start, beam_z_end],
             mode='lines',
-            line=dict(color=color, width=4),
+            line=dict(color=color, width=5),  # THICKER
             showlegend=False,
             hoverinfo='skip',
-            opacity=0.5
+            opacity=0.6
         ))
     
-    # Add actors with movement arrows
+    # Add actors with IMPROVED VISIBILITY
     for actor in st.session_state.scene_elements['actors']:
         fig.add_trace(go.Scatter3d(
             x=[actor['x']],
             y=[actor['y']],
             z=[0],
             mode='markers+text',
-            marker=dict(size=15, color='red', symbol='circle'),
-            text=[actor['name']],
+            marker=dict(
+                size=20,  # LARGER
+                color='red',
+                symbol='circle',
+                line=dict(color='darkred', width=3)  # BOLD OUTLINE
+            ),
+            text=[f"🎭 {actor['name']}"],  # EMOJI
             textposition='top center',
+            textfont=dict(size=14, color='darkred', family='Arial Black'),
             name=actor['name'],
             hovertemplate=f"<b>{actor['name']}</b><br>" +
                          f"Position: ({actor['x']:.1f}, {actor['y']:.1f})<br>" +
                          f"Notes: {actor['notes']}<extra></extra>"
         ))
         
-        # Add movement arrow if actor has movement defined
+        # Movement arrow - BOLDER
         if 'move_to_x' in actor and 'move_to_y' in actor:
             fig.add_trace(go.Scatter3d(
                 x=[actor['x'], actor['move_to_x']],
                 y=[actor['y'], actor['move_to_y']],
                 z=[0, 0],
                 mode='lines',
-                line=dict(color='red', width=3, dash='dot'),
+                line=dict(color='red', width=5, dash='dot'),  # THICKER
                 showlegend=False,
                 hoverinfo='skip'
             ))
-            # Arrow head (simple marker at destination)
+            # Arrow destination
             fig.add_trace(go.Scatter3d(
                 x=[actor['move_to_x']],
                 y=[actor['move_to_y']],
                 z=[0],
                 mode='markers',
-                marker=dict(size=10, color='red', symbol='diamond'),
+                marker=dict(size=12, color='red', symbol='diamond'),
                 showlegend=False,
                 hoverinfo='skip'
             ))
     
-    # Add set pieces
+    # Add set pieces with IMPROVED VISIBILITY
     for piece in st.session_state.scene_elements['set_pieces']:
         color_map = {
             'Table': 'brown',
@@ -394,9 +405,15 @@ def generate_3d_scene(view_mode="Floor Plan"):
             y=[piece['y']],
             z=[0],
             mode='markers+text',
-            marker=dict(size=12, color=color, symbol='square'),
-            text=[piece['name']],
+            marker=dict(
+                size=16,  # LARGER
+                color=color,
+                symbol='square',
+                line=dict(color='black', width=2)
+            ),
+            text=[f"🪑 {piece['name']}"],
             textposition='top center',
+            textfont=dict(size=12, color='black', family='Arial Black'),
             name=piece['name'],
             hovertemplate=f"<b>{piece['name']}</b><br>" +
                          f"Type: {piece['type']}<br>" +
@@ -410,9 +427,15 @@ def generate_3d_scene(view_mode="Floor Plan"):
             y=[vehicle['y']],
             z=[0],
             mode='markers+text',
-            marker=dict(size=18, color='darkblue', symbol='square'),
-            text=[vehicle['name']],
+            marker=dict(
+                size=20,
+                color='darkblue',
+                symbol='square',
+                line=dict(color='black', width=2)
+            ),
+            text=[f"🚗 {vehicle['name']}"],
             textposition='top center',
+            textfont=dict(size=12, color='black', family='Arial Black'),
             name=vehicle['name'],
             hovertemplate=f"<b>{vehicle['name']}</b><br>" +
                          f"Type: {vehicle['type']}<br>" +
@@ -428,9 +451,15 @@ def generate_3d_scene(view_mode="Floor Plan"):
             y=[screen['y']],
             z=[z_pos],
             mode='markers+text',
-            marker=dict(size=14, color='black', symbol='square'),
-            text=[screen['name']],
+            marker=dict(
+                size=18,
+                color='black',
+                symbol='square',
+                line=dict(color='white', width=2)
+            ),
+            text=[f"🖥️ {screen['name']}"],
             textposition='top center',
+            textfont=dict(size=12, color='black', family='Arial Black'),
             name=screen['name'],
             hovertemplate=f"<b>{screen['name']}</b><br>" +
                          f"Size: {screen['size']}<br>" +
@@ -438,10 +467,10 @@ def generate_3d_scene(view_mode="Floor Plan"):
                          f"Position: ({screen['x']:.1f}, {screen['y']:.1f})<extra></extra>"
         ))
     
-    # Add green screens
+    # PHASE 1: GREEN SCREEN AS WALL (not just a line)
     for gs in st.session_state.scene_elements['green_screens']:
         if view_mode != "Floor Plan":
-            # Draw as vertical surface in 3D
+            # 3D view: vertical surface
             width = 8
             height = 8
             corners = [(-width/2, 0), (width/2, 0)]
@@ -452,21 +481,46 @@ def generate_3d_scene(view_mode="Floor Plan"):
                 y=[gs['y'] + rotated[0][1], gs['y'] + rotated[1][1]],
                 z=[0, height],
                 mode='lines',
-                line=dict(color='green', width=10),
+                line=dict(color='green', width=15),
                 showlegend=False,
                 hoverinfo='skip',
-                opacity=0.6
+                opacity=0.7
+            ))
+        else:
+            # FLOOR PLAN: Show green screen as THICK WALL
+            width = 8
+            # Calculate wall endpoints based on rotation
+            half_width = width / 2
+            left_point = rotate_point(-half_width, 0, gs['rotation'])
+            right_point = rotate_point(half_width, 0, gs['rotation'])
+            
+            # Draw THICK green wall
+            fig.add_trace(go.Scatter3d(
+                x=[gs['x'] + left_point[0], gs['x'] + right_point[0]],
+                y=[gs['y'] + left_point[1], gs['y'] + right_point[1]],
+                z=[0, 0],
+                mode='lines',
+                line=dict(color='green', width=20),  # VERY THICK
+                showlegend=False,
+                hoverinfo='skip',
+                opacity=0.8
             ))
         
-        # Marker at base
+        # Label marker
         fig.add_trace(go.Scatter3d(
             x=[gs['x']],
             y=[gs['y']],
             z=[0],
             mode='markers+text',
-            marker=dict(size=12, color='green', symbol='square'),
-            text=[gs['name']],
+            marker=dict(
+                size=14,
+                color='green',
+                symbol='square',
+                line=dict(color='darkgreen', width=2)
+            ),
+            text=[f"🟢 {gs['name']}"],
             textposition='top center',
+            textfont=dict(size=12, color='darkgreen', family='Arial Black'),
             name=gs['name'],
             hovertemplate=f"<b>{gs['name']}</b><br>" +
                          f"Size: {gs['size']}<br>" +
@@ -484,22 +538,46 @@ def generate_3d_scene(view_mode="Floor Plan"):
         camera = dict(eye=dict(x=1.5, y=-1.5, z=1.5), up=dict(x=0, y=0, z=1))
         scene_aspectmode = 'cube'
     
-    # Update layout
+    # Update layout with CLEAN appearance
     fig.update_layout(
         scene=dict(
-            xaxis=dict(range=[-stage_size//2, stage_size//2], title="X (feet)",
-                      gridcolor=grid_color, showbackground=True, backgroundcolor=bg_color),
-            yaxis=dict(range=[-stage_size//2, stage_size//2], title="Y (feet)",
-                      gridcolor=grid_color, showbackground=True, backgroundcolor=bg_color),
-            zaxis=dict(range=[0, 15], title="Z (feet)",
-                      gridcolor=grid_color, showbackground=True, backgroundcolor=bg_color),
+            xaxis=dict(
+                range=[-stage_size//2, stage_size//2],
+                title="X (feet)" if view_mode != "Floor Plan" else "",
+                gridcolor='#bbb' if grid_visible else bg_color,
+                showbackground=True,
+                backgroundcolor=bg_color,
+                showgrid=grid_visible,
+                zeroline=False
+            ),
+            yaxis=dict(
+                range=[-stage_size//2, stage_size//2],
+                title="Y (feet)" if view_mode != "Floor Plan" else "",
+                gridcolor='#bbb' if grid_visible else bg_color,
+                showbackground=True,
+                backgroundcolor=bg_color,
+                showgrid=grid_visible,
+                zeroline=False
+            ),
+            zaxis=dict(
+                range=[0, 15],
+                title="Z (feet)" if view_mode != "Floor Plan" else "",
+                gridcolor='#bbb' if grid_visible else bg_color,
+                showbackground=True,
+                backgroundcolor=bg_color,
+                showgrid=grid_visible,
+                zeroline=False
+            ),
             aspectmode=scene_aspectmode,
             camera=camera,
-            bgcolor=bg_color
+            bgcolor=paper_bg
         ),
-        height=600,
+        height=700,  # TALLER for better visibility
         margin=dict(l=0, r=0, t=30, b=0),
-        title=f"Scene: {st.session_state.scene_name} ({view_mode})",
+        title=dict(
+            text=f"Scene: {st.session_state.scene_name} ({view_mode})",
+            font=dict(size=20, family='Arial Black')
+        ),
         paper_bgcolor=paper_bg,
         plot_bgcolor=bg_color
     )
@@ -619,7 +697,7 @@ def export_scene_json():
         'scene_name': st.session_state.scene_name,
         'created': datetime.now().isoformat(),
         'elements': st.session_state.scene_elements,
-        'version': '3.5-beta'
+        'version': '3.5-phase1'
     }
     return json.dumps(scene_data, indent=2)
 
@@ -629,15 +707,14 @@ def main():
     col1, col2 = st.columns([4, 1])
     with col1:
         st.markdown('<div class="main-header">🎬 PreViz Beta 3.5</div>', unsafe_allow_html=True)
-        st.markdown('<div class="sub-header">Film Production Planning - Industry Workflow Edition</div>', unsafe_allow_html=True)
+        st.markdown('<div class="sub-header">Film Production Planning - Phase 1 Visual Update</div>', unsafe_allow_html=True)
     with col2:
-        st.markdown('<div class="version-badge">Beta 3.5</div>', unsafe_allow_html=True)
+        st.markdown('<div class="version-badge">Phase 1</div>', unsafe_allow_html=True)
     
     # Workflow guidance
     st.markdown("""
     <div class="workflow-note">
-        <strong>📐 Professional Workflow:</strong> Start with Floor Plan (2D) for crew communication → 
-        Switch to 3D views for verification and sightline checks
+        <strong>📐 Start with Floor Plan:</strong> Tan stage = your work area. Place elements → Then verify in 3D
     </div>
     """, unsafe_allow_html=True)
     
@@ -667,7 +744,6 @@ def main():
                         cam_y = st.number_input("Y Position", value=float(cam['y']), step=0.5)
                     with col2:
                         height_preset_keys = list(CAMERA_HEIGHT_PRESETS.keys())
-                        # Find closest preset
                         closest_preset = min(height_preset_keys, 
                                            key=lambda k: abs(CAMERA_HEIGHT_PRESETS[k] - cam['z']))
                         height_preset = st.selectbox("Height Preset", height_preset_keys,
@@ -677,7 +753,6 @@ def main():
                     
                     cam_rotation = st.slider("Rotation (degrees)", 0, 359, int(cam['rotation']))
                     
-                    # Find current focal length preset
                     focal_preset_keys = list(FOV_PRESETS.keys())
                     current_focal_str = f"{cam['focal_length']}mm"
                     matching_preset = None
@@ -768,12 +843,10 @@ def main():
             if element_type == "Camera":
                 st.subheader("📷 Add Camera")
                 with st.form("camera_form"):
-                    # Smart auto-naming and positioning
                     num_cameras = len(st.session_state.scene_elements['cameras'])
                     cam_name = st.text_input("Camera Name", 
                         value=f"Camera {chr(65 + num_cameras)}")
                     
-                    # Auto-offset position for new cameras
                     base_x = 0.0 + (num_cameras * 2.0)
                     base_y = -5.0
                     
@@ -1053,12 +1126,12 @@ def main():
     col1, col2 = st.columns([3, 1])
     
     with col1:
-        # View mode (Floor Plan is default)
+        # View mode
         view_mode = st.radio(
             "View Mode",
             ["Floor Plan", "Perspective (3D)", "Side View (3D)"],
             horizontal=True,
-            help="Start with Floor Plan for crew communication, use 3D for verification"
+            help="Start with Floor Plan (tan stage) for planning, use 3D for verification"
         )
         st.session_state.view_mode = view_mode
         
@@ -1259,7 +1332,7 @@ def main():
     st.divider()
     st.markdown("""
     <div style='text-align: center; color: #666; padding: 1rem;'>
-        PreViz Beta 3.5 - Industry Workflow Edition<br>
+        PreViz Beta 3.5 - Phase 1 Visual Update<br>
         Developed by Eduardo Carmona | Educational Film Production Planning Tool<br>
         Beta Testing Version
     </div>

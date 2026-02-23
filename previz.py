@@ -164,6 +164,8 @@ def init_session_state():
         st.session_state.slate_dp = ""
     if 'slate_gaffer' not in st.session_state:
         st.session_state.slate_gaffer = ""
+    if 'slate_date' not in st.session_state:
+        st.session_state.slate_date = datetime.now().strftime("%Y-%m-%d")
 
     # Approval gate
     if 'approved_dp' not in st.session_state:

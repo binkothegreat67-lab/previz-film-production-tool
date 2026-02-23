@@ -353,129 +353,234 @@ def calculate_fstop(key_intensity, iso, shutter_denom, nd_stops=0):
     return closest
 
 def draw_camera_shape(fig, cam_x, cam_y, pan_deg, fov_deg):
-    """Draw a 2D overhead camera body + FOV cone on the Plotly figure."""
-    # Camera body: 1.6 ft wide, 0.8 ft deep (overhead rectangle)
-    body_w, body_d = 0.8, 0.4
-    # Lens protrusion: 0.5 ft forward
-    lens_l = 0.5
+    """Draw a 2D overhead video camera — body, viewfinder, handgrip, lens barrel, FOV cone."""
 
-    # Define camera body corners relative to camera center, facing +Y (toward stage)
-    body_pts = [
-        (-body_w, -body_d), (body_w, -body_d),
-        (body_w, body_d), (-body_w, body_d), (-body_w, -body_d)
-    ]
-    # Lens points (front center protrusion)
-    lens_pts = [
-        (-body_w * 0.4, body_d), (body_w * 0.4, body_d),
-        (0, body_d + lens_l), (-body_w * 0.4, body_d)
-    ]
-
-    # Rotate all points by pan angle
     def rot(pts, angle):
         return [rotate_point(x, y, angle) for x, y in pts]
 
-    body_rot = rot(body_pts, pan_deg)
-    lens_rot = rot(lens_pts, pan_deg)
+    # ── Camera main body (wider, flatter — ENG/cinema camera profile) ─────
+    # Facing +Y (toward stage). All coords relative to cam center.
+    body = [
+        (-1.0, -0.55), ( 1.0, -0.55),   # back edge
+        ( 1.0,  0.30), ( 0.6,  0.30),   # front-right shoulder
+        ( 0.6,  0.55), (-0.6,  0.55),   # front face (where lens is)
+        (-0.6,  0.30), (-1.0,  0.30),   # front-left shoulder
+        (-1.0, -0.55),                   # close
+    ]
 
-    # Draw camera body
-    bx = [cam_x + p[0] for p in body_rot]
-    by = [cam_y + p[1] for p in body_rot]
+    # ── Viewfinder — eyecup on back-right ─────────────────────────────────
+    vf = [
+        ( 0.55, -0.55), ( 1.0, -0.55),
+        ( 1.0,  -0.85), ( 0.55, -0.85),
+        ( 0.55, -0.55),
+    ]
+
+    # ── Top handle bar ─────────────────────────────────────────────────────
+    handle = [
+        (-0.65, 0.30), ( 0.65, 0.30),
+        ( 0.65, 0.60), (-0.65, 0.60),
+        (-0.65, 0.30),
+    ]
+
+    # ── Lens barrel — round cylinder protruding from front ─────────────────
+    lens_r  = 0.28
+    lens_cx, lens_cy = 0.0, 0.55 + lens_r + 0.05
+    theta_lens = np.linspace(0, 2 * np.pi, 32)
+    lens_circle = [(lens_cx + lens_r * np.cos(t),
+                    lens_cy + lens_r * np.sin(t)) for t in theta_lens]
+
+    # Outer lens ring (hood)
+    hood_r = 0.38
+    hood_cy = lens_cy + 0.15
+    hood_circle = [(lens_cx + hood_r * np.cos(t),
+                    hood_cy + hood_r * np.sin(t)) for t in theta_lens]
+
+    # ── Rotate everything by pan angle ─────────────────────────────────────
+    body_r   = rot(body,        pan_deg)
+    vf_r     = rot(vf,          pan_deg)
+    handle_r = rot(handle,      pan_deg)
+    lens_r_  = rot(lens_circle, pan_deg)
+    hood_r_  = rot(hood_circle, pan_deg)
+
+    def xs(pts): return [cam_x + p[0] for p in pts]
+    def ys(pts): return [cam_y + p[1] for p in pts]
+
+    # Draw main body
     fig.add_trace(go.Scatter(
-        x=bx, y=by, mode='lines',
-        fill='toself', fillcolor='#1a1a2e',
-        line=dict(color='#4a90d9', width=2),
-        showlegend=False, hoverinfo='skip', name='_cam_body'
+        x=xs(body_r), y=ys(body_r), mode="lines",
+        fill="toself", fillcolor="#1a1a2e",
+        line=dict(color="#4a90d9", width=2),
+        showlegend=False, hoverinfo="skip", name="_cam_body"
     ))
 
-    # Draw lens
-    lx = [cam_x + p[0] for p in lens_rot]
-    ly = [cam_y + p[1] for p in lens_rot]
+    # Draw viewfinder
     fig.add_trace(go.Scatter(
-        x=lx, y=ly, mode='lines',
-        fill='toself', fillcolor='#4a90d9',
-        line=dict(color='#74b9ff', width=1.5),
-        showlegend=False, hoverinfo='skip', name='_cam_lens'
+        x=xs(vf_r), y=ys(vf_r), mode="lines",
+        fill="toself", fillcolor="#0d0d1a",
+        line=dict(color="#74b9ff", width=1.5),
+        showlegend=False, hoverinfo="skip", name="_cam_vf"
     ))
 
-    # FOV cone — extend to a reasonable distance
+    # Draw top handle
+    fig.add_trace(go.Scatter(
+        x=xs(handle_r), y=ys(handle_r), mode="lines",
+        fill="toself", fillcolor="#2a2a3e",
+        line=dict(color="#4a90d9", width=1.5),
+        showlegend=False, hoverinfo="skip", name="_cam_handle"
+    ))
+
+    # Draw lens hood (outer ring)
+    fig.add_trace(go.Scatter(
+        x=xs(hood_r_), y=ys(hood_r_), mode="lines",
+        fill="toself", fillcolor="#222233",
+        line=dict(color="#74b9ff", width=1.5),
+        showlegend=False, hoverinfo="skip", name="_cam_hood"
+    ))
+
+    # Draw lens barrel (inner circle — dark glass)
+    fig.add_trace(go.Scatter(
+        x=xs(lens_r_), y=ys(lens_r_), mode="lines",
+        fill="toself", fillcolor="#050510",
+        line=dict(color="#aaccff", width=1),
+        showlegend=False, hoverinfo="skip", name="_cam_lens"
+    ))
+
+    # ── FOV cone ──────────────────────────────────────────────────────────
     half_fov = np.radians(fov_deg / 2)
-    cone_dist = 18  # feet
-
-    # Left ray: pan_deg + 90 offset for facing-up convention, then add half_fov
-    # Camera faces +Y, pan rotates from there
-    base_angle_rad = np.radians(pan_deg) + np.pi / 2  # facing direction in math coords
-    left_angle = base_angle_rad + half_fov
+    cone_dist = 18
+    base_angle_rad = np.radians(pan_deg) + np.pi / 2
+    left_angle  = base_angle_rad + half_fov
     right_angle = base_angle_rad - half_fov
 
-    lx_end = cam_x + cone_dist * np.cos(left_angle)
-    ly_end = cam_y + cone_dist * np.sin(left_angle)
-    rx_end = cam_x + cone_dist * np.cos(right_angle)
-    ry_end = cam_y + cone_dist * np.sin(right_angle)
+    lx_end = np.clip(cam_x + cone_dist * np.cos(left_angle),  -14, 36)
+    ly_end = np.clip(cam_y + cone_dist * np.sin(left_angle),   -9, 24)
+    rx_end = np.clip(cam_x + cone_dist * np.cos(right_angle), -14, 36)
+    ry_end = np.clip(cam_y + cone_dist * np.sin(right_angle),  -9, 24)
 
-    # Clip to stage (rough clipping, just limit to stage bounds)
-    lx_end = np.clip(lx_end, -2, 32)
-    ly_end = np.clip(ly_end, -2, 22)
-    rx_end = np.clip(rx_end, -2, 32)
-    ry_end = np.clip(ry_end, -2, 22)
+    # Cone origin: tip of lens hood
+    cone_ox, cone_oy = rot([(lens_cx, hood_cy + hood_r)], pan_deg)[0]
 
     fig.add_trace(go.Scatter(
-        x=[cam_x, lx_end, rx_end, cam_x],
-        y=[cam_y, ly_end, ry_end, cam_y],
-        mode='lines',
-        fill='toself',
-        fillcolor='rgba(74, 144, 217, 0.08)',
-        line=dict(color='rgba(74,144,217,0.5)', width=1.5, dash='dash'),
-        showlegend=False, hoverinfo='skip', name='_fov'
+        x=[cam_x + cone_ox, lx_end, rx_end, cam_x + cone_ox],
+        y=[cam_y + cone_oy, ly_end, ry_end, cam_y + cone_oy],
+        mode="lines",
+        fill="toself",
+        fillcolor="rgba(74,144,217,0.07)",
+        line=dict(color="rgba(74,144,217,0.55)", width=1.5, dash="dash"),
+        showlegend=False, hoverinfo="skip", name="_fov"
     ))
 
-    # Camera label
+    # ── Label ─────────────────────────────────────────────────────────────
+    label_x, label_y = rot([(0, -1.4)], pan_deg)[0]
     fig.add_annotation(
-        x=cam_x, y=cam_y - 1.2,
-        text="<b>📷 CAMERA</b><br><i>Wall 4 — Master Shot</i>",
+        x=cam_x + label_x, y=cam_y + label_y,
+        text="<b>📷 CAMERA</b><br><i>Wall 4</i>",
         showarrow=False,
-        font=dict(size=10, color='#4a90d9'),
-        bgcolor='rgba(255,255,255,0.85)',
-        bordercolor='#4a90d9',
-        borderwidth=1,
-        borderpad=3
+        font=dict(size=10, color="#4a90d9"),
+        bgcolor="rgba(255,255,255,0.88)",
+        bordercolor="#4a90d9",
+        borderwidth=1, borderpad=3
     )
 
 def draw_key_light(fig, key_x, key_y, key_kelvin, talent_x=15, talent_y=10, visible=True):
-    """Draw the Key Light as a half-dome (semicircle) facing right toward subject."""
+    """Draw the Key Light as a proper half-dome facing the talent, with stand."""
     if not visible:
         return
     color = kelvin_to_color(key_kelvin)
-    dome_r = 1.2
-    # Half dome: arc from -90° to +90° (right-facing semicircle)
-    theta = np.linspace(-np.pi / 2, np.pi / 2, 40)
-    dome_x = [key_x + dome_r * np.cos(t) for t in theta]
-    dome_y = [key_y + dome_r * np.sin(t) for t in theta]
-    # Close with straight line (flat back on left)
-    dome_x_full = dome_x + [key_x, key_x + dome_r * np.cos(-np.pi / 2)]
-    dome_y_full = dome_y + [key_y, key_y + dome_r * np.sin(-np.pi / 2)]
+    r, g, b = int(color[1:3], 16), int(color[3:5], 16), int(color[5:7], 16)
 
+    # ── Compute facing angle toward talent ─────────────────────────────────
+    dx = talent_x - key_x
+    dy = talent_y - key_y
+    face_angle = np.arctan2(dy, dx)  # direction from key to talent
+
+    # ── Half-dome arc (the curved face, larger for visibility) ────────────
+    dome_r = 1.8
+    # Arc spans 180° centered on face_angle (the half facing talent)
+    arc_start = face_angle - np.pi / 2
+    arc_end   = face_angle + np.pi / 2
+    theta = np.linspace(arc_start, arc_end, 50)
+
+    arc_x = [key_x + dome_r * np.cos(t) for t in theta]
+    arc_y = [key_y + dome_r * np.sin(t) for t in theta]
+
+    # Close the shape: arc endpoints + back to center (flat back of dome)
+    dome_x_full = arc_x + [key_x]
+    dome_y_full = arc_y + [key_y]
+
+    # ── Draw filled dome ───────────────────────────────────────────────────
     fig.add_trace(go.Scatter(
         x=dome_x_full, y=dome_y_full, mode='lines',
         fill='toself',
-        fillcolor=f'rgba({int(color[1:3], 16)},{int(color[3:5], 16)},{int(color[5:7], 16)},0.35)',
-        line=dict(color=color, width=2.5),
-        showlegend=False, hoverinfo='skip', name='_key'
+        fillcolor=f'rgba({r},{g},{b},0.45)',
+        line=dict(color=color, width=3),
+        showlegend=False, hoverinfo='skip', name='_key_dome'
     ))
 
-    # Beam line toward subject
+    # ── Flat back of dome (housing plate) ─────────────────────────────────
+    back_angle_perp = face_angle + np.pi / 2
+    bx1 = key_x + dome_r * np.cos(arc_start)
+    by1 = key_y + dome_r * np.sin(arc_start)
+    bx2 = key_x + dome_r * np.cos(arc_end)
+    by2 = key_y + dome_r * np.sin(arc_end)
     fig.add_trace(go.Scatter(
-        x=[key_x + dome_r, talent_x], y=[key_y, talent_y],
+        x=[bx1, key_x, bx2], y=[by1, key_y, by2],
         mode='lines',
-        line=dict(color=color, width=1.5, dash='dot'),
+        line=dict(color=color, width=3),
+        showlegend=False, hoverinfo='skip', name='_key_back'
+    ))
+
+    # ── Light stand (thin vertical line below dome) ────────────────────────
+    stand_bottom_x = key_x - dome_r * np.sin(face_angle) * 0.1
+    fig.add_trace(go.Scatter(
+        x=[key_x, key_x], y=[key_y - dome_r, key_y],
+        mode='lines',
+        line=dict(color='#888888', width=2),
+        showlegend=False, hoverinfo='skip', name='_key_stand'
+    ))
+    # Stand base (tripod feet)
+    foot = 0.5
+    fig.add_trace(go.Scatter(
+        x=[key_x - foot, key_x, key_x + foot],
+        y=[key_y - dome_r - 0.2, key_y - dome_r, key_y - dome_r - 0.2],
+        mode='lines',
+        line=dict(color='#888888', width=2),
+        showlegend=False, hoverinfo='skip', name='_key_base'
+    ))
+
+    # ── Light rays (3 dotted lines from dome face toward talent) ──────────
+    for offset in [-0.3, 0, 0.3]:
+        ray_angle = face_angle + offset
+        rx_start = key_x + dome_r * np.cos(ray_angle)
+        ry_start = key_y + dome_r * np.sin(ray_angle)
+        rx_end   = key_x + dome_r * 3.5 * np.cos(ray_angle)
+        ry_end   = key_y + dome_r * 3.5 * np.sin(ray_angle)
+        fig.add_trace(go.Scatter(
+            x=[rx_start, rx_end], y=[ry_start, ry_end],
+            mode='lines',
+            line=dict(color=f'rgba({r},{g},{b},0.3)', width=1.2, dash='dot'),
+            showlegend=False, hoverinfo='skip', name='_key_ray'
+        ))
+
+    # ── Main beam line to talent ───────────────────────────────────────────
+    fig.add_trace(go.Scatter(
+        x=[key_x + dome_r * np.cos(face_angle), talent_x],
+        y=[key_y + dome_r * np.sin(face_angle), talent_y],
+        mode='lines',
+        line=dict(color=color, width=2, dash='dot'),
         showlegend=False, hoverinfo='skip', name='_keybeam'
     ))
 
+    # ── Label ─────────────────────────────────────────────────────────────
+    label_offset_x = -np.sin(face_angle) * 1.2
+    label_offset_y =  np.cos(face_angle) * 1.2
     fig.add_annotation(
-        x=key_x - 0.5, y=key_y + 1.8,
-        text=f"<b>KEY LIGHT</b><br>{key_kelvin}K",
+        x=key_x + label_offset_x - 0.3,
+        y=key_y + label_offset_y + 0.5,
+        text=f"<b>KEY</b><br>{key_kelvin}K",
         showarrow=False,
-        font=dict(size=9, color='#333'),
-        bgcolor='rgba(255,255,255,0.85)',
+        font=dict(size=9, color='#222'),
+        bgcolor='rgba(255,255,255,0.88)',
         bordercolor=color, borderwidth=1.5, borderpad=3
     )
 
@@ -514,25 +619,79 @@ def draw_overhead_light(fig, lx, ly, label, kelvin, visible=True):
     )
 
 def draw_subject(fig, talent_x=15, talent_y=10, talent_name="TALENT"):
-    """Draw the subject/actor marker at given position."""
+    """Draw the talent as a bold overhead standing-figure shape — unmissable."""
+    import numpy as np
+
+    tc  = '#FF2222'   # bright red — main color
+    tco = '#8B0000'   # dark red — outline
+
+    # ── Outer glow ring (visibility halo) ─────────────────────────────────
+    glow_r = 1.4
+    theta  = np.linspace(0, 2 * np.pi, 48)
     fig.add_trace(go.Scatter(
-        x=[talent_x], y=[talent_y], mode='markers+text',
-        marker=dict(size=20, color='#e74c3c', symbol='circle',
-                    line=dict(color='#922b21', width=2.5)),
-        text=[talent_name],
-        textposition='top center',
-        textfont=dict(size=10, color='#922b21'),
-        showlegend=False, name='Talent',
-        hovertemplate=f'<b>{talent_name}</b><br>X: {talent_x:.1f} ft ({talent_x*0.3048:.2f} m)<br>Y: {talent_y:.1f} ft ({talent_y*0.3048:.2f} m)<extra></extra>'
+        x=[talent_x + glow_r * np.cos(t) for t in theta],
+        y=[talent_y + glow_r * np.sin(t) for t in theta],
+        mode='lines', fill='toself',
+        fillcolor='rgba(255,34,34,0.12)',
+        line=dict(color='rgba(255,34,34,0.35)', width=1),
+        showlegend=False, hoverinfo='skip', name='_talent_glow'
     ))
-    # Small crosshair lines for precision
-    cross = 0.6
+
+    # ── Body circle (torso overhead — large, bold) ─────────────────────────
+    body_r = 0.75
     fig.add_trace(go.Scatter(
-        x=[talent_x - cross, talent_x + cross, None, talent_x, talent_x],
-        y=[talent_y, talent_y, None, talent_y - cross, talent_y + cross],
-        mode='lines', line=dict(color='#922b21', width=1, dash='dot'),
+        x=[talent_x + body_r * np.cos(t) for t in theta],
+        y=[talent_y + body_r * np.sin(t) for t in theta],
+        mode='lines', fill='toself',
+        fillcolor=tc,
+        line=dict(color=tco, width=3),
+        showlegend=False, hoverinfo='skip', name='_talent_body'
+    ))
+
+    # ── Head circle (smaller, offset forward — top of figure) ─────────────
+    head_r  = 0.35
+    head_cy = talent_y + body_r + head_r + 0.1
+    fig.add_trace(go.Scatter(
+        x=[talent_x + head_r * np.cos(t) for t in theta],
+        y=[head_cy  + head_r * np.sin(t) for t in theta],
+        mode='lines', fill='toself',
+        fillcolor='#FFAAAA',
+        line=dict(color=tco, width=2.5),
+        showlegend=False, hoverinfo='skip', name='_talent_head'
+    ))
+
+    # ── Crosshair (precision position marker) ─────────────────────────────
+    arm = 1.8
+    fig.add_trace(go.Scatter(
+        x=[talent_x - arm, talent_x + arm, None, talent_x, talent_x],
+        y=[talent_y,        talent_y,       None, talent_y - arm, talent_y + arm],
+        mode='lines',
+        line=dict(color='rgba(255,34,34,0.5)', width=1, dash='dot'),
         showlegend=False, hoverinfo='skip', name='_talent_cross'
     ))
+
+    # ── Name label — large, white on red background ────────────────────────
+    fig.add_annotation(
+        x=talent_x, y=talent_y - body_r - 0.9,
+        text=f"<b>{talent_name}</b>",
+        showarrow=False,
+        font=dict(size=13, color='white', family='Arial Black'),
+        bgcolor=tc,
+        bordercolor=tco,
+        borderwidth=2,
+        borderpad=4
+    )
+
+    # ── Position readout underneath label ─────────────────────────────────
+    fig.add_annotation(
+        x=talent_x, y=talent_y - body_r - 1.85,
+        text=f"({talent_x:.1f}ft, {talent_y:.1f}ft)",
+        showarrow=False,
+        font=dict(size=8, color=tco),
+        bgcolor='rgba(255,255,255,0.85)',
+        bordercolor='rgba(200,0,0,0.3)',
+        borderwidth=1, borderpad=2
+    )
 
 def calculate_light_ratio(key_intensity, fill_intensity):
     """Calculate Key:Fill light ratio and return ratio string + mood description."""
@@ -558,7 +717,7 @@ def calculate_light_ratio(key_intensity, fill_intensity):
 
 
 def draw_light_ratio_badge(fig, ratio_str, mood_str, key_intensity, fill_intensity):
-    """Draw the light ratio badge on the floor plan."""
+    """Draw the light ratio badge OUTSIDE the stage, right of Wall 3."""
     # Color coding by drama level
     ratio_val = key_intensity / fill_intensity if fill_intensity > 0 else 99
     if ratio_val <= 2:
@@ -570,36 +729,71 @@ def draw_light_ratio_badge(fig, ratio_str, mood_str, key_intensity, fill_intensi
     else:
         badge_color = "#F44336"   # red — extreme
 
+    # Position: right of Wall 3 (stage ends at x=30)
+    bx0, by0, bx1, by1 = 31.0, 6.0, 35.5, 14.5
+
+    # Background panel
     fig.add_shape(type="rect",
-        x0=19, y0=14.5, x1=29.5, y1=17.5,
-        fillcolor="rgba(10,10,10,0.82)",
-        line=dict(color=badge_color, width=2), layer="above"
+        x0=bx0, y0=by0, x1=bx1, y1=by1,
+        fillcolor="#0a0a0a",
+        line=dict(color=badge_color, width=2.5), layer="above"
     )
-    fig.add_annotation(
-        x=24.2, y=16.8,
-        text=f"<b>LIGHT RATIO</b>",
-        showarrow=False, font=dict(size=8.5, color=badge_color, family="monospace"),
+    # Accent top bar
+    fig.add_shape(type="rect",
+        x0=bx0, y0=by1 - 1.2, x1=bx1, y1=by1,
+        fillcolor=badge_color,
+        line=dict(color=badge_color, width=0), layer="above"
+    )
+
+    cx = (bx0 + bx1) / 2
+
+    # Header in accent bar
+    fig.add_annotation(x=cx, y=by1 - 0.6,
+        text="<b>LIGHT RATIO</b>",
+        showarrow=False,
+        font=dict(size=9, color="#000000", family="monospace"),
         bgcolor="rgba(0,0,0,0)"
     )
-    fig.add_annotation(
-        x=24.2, y=15.9,
-        text=f"<b>Key : Fill = {ratio_str}</b>",
-        showarrow=False, font=dict(size=10, color="white", family="monospace"),
+    # Big ratio number
+    fig.add_annotation(x=cx, y=(by0 + by1) / 2 + 1.2,
+        text=f"<b>{ratio_str}</b>",
+        showarrow=False,
+        font=dict(size=16, color="white", family="monospace"),
         bgcolor="rgba(0,0,0,0)"
     )
-    fig.add_annotation(
-        x=24.2, y=15.1,
-        text=f"<i>{mood_str.split('—')[1].strip() if '—' in mood_str else mood_str}</i>",
-        showarrow=False, font=dict(size=8, color="#CCCCCC", family="monospace"),
+    # Key : Fill label
+    fig.add_annotation(x=cx, y=(by0 + by1) / 2 - 0.2,
+        text="Key : Fill",
+        showarrow=False,
+        font=dict(size=8, color=badge_color, family="monospace"),
         bgcolor="rgba(0,0,0,0)"
     )
+    # Mood description
+    mood_short = mood_str.split("—")[1].strip() if "—" in mood_str else mood_str
+    # Wrap long mood text
+    words = mood_short.split()
+    line1 = " ".join(words[:3])
+    line2 = " ".join(words[3:]) if len(words) > 3 else ""
+    fig.add_annotation(x=cx, y=by0 + 1.5,
+        text=f"<i>{line1}</i>",
+        showarrow=False,
+        font=dict(size=7.5, color="#CCCCCC", family="monospace"),
+        bgcolor="rgba(0,0,0,0)"
+    )
+    if line2:
+        fig.add_annotation(x=cx, y=by0 + 0.7,
+            text=f"<i>{line2}</i>",
+            showarrow=False,
+            font=dict(size=7.5, color="#CCCCCC", family="monospace"),
+            bgcolor="rgba(0,0,0,0)"
+        )
 
 
 def draw_slate(fig, production, scene, shot, shot_type, director, dp, gaffer,
                date_str, approved_dp, approved_gaffer, approved_director, approval_ts):
     """Draw a film-slate clapperboard panel on the floor plan."""
-    # Main slate body — upper left area of the stage
-    sx0, sy0, sx1, sy1 = 0.3, 12.0, 10.0, 19.5
+    # Slate lives OUTSIDE the stage, left of Wall 1 (stage starts at x=0)
+    sx0, sy0, sx1, sy1 = -12.5, 9.0, -0.5, 20.5
 
     # Slate body (black)
     fig.add_shape(type="rect", x0=sx0, y0=sy0, x1=sx1, y1=sy1,
@@ -842,7 +1036,7 @@ def generate_preset_floor_plan(
     draw_overhead_light(fig, 25.5, 17, "Fill #2", fill2_kelvin, show_fill2)
 
     # ── Key Light (half-dome, left side) ───────────────────────────────────
-    key_y = talent_y  # tracks talent depth
+    key_y = cam_dolly  # 90° to camera — Key Light sits beside camera at Wall 4
     draw_key_light(fig, key_x, key_y, key_kelvin, talent_x=talent_x, talent_y=talent_y, visible=show_key)
 
     # ── Subject (talent, movable) ──────────────────────────────────────────
@@ -887,7 +1081,7 @@ def generate_preset_floor_plan(
     # ── Layout ─────────────────────────────────────────────────────────────
     fig.update_layout(
         xaxis=dict(
-            range=[-5, 35], showgrid=False, zeroline=False,
+            range=[-14, 35], showgrid=False, zeroline=False,
             showticklabels=False, scaleanchor="y", scaleratio=1
         ),
         yaxis=dict(
@@ -1036,11 +1230,13 @@ def preset_page():
         st.caption(f"🌡 {key_kelvin}K — {kelvin_to_name(key_kelvin)}")
         tip("kelvin")
 
-        key_x = st.slider("Dolly — Key Light (X position)", 1.0, 12.0,
+        key_x = st.slider("Key Light — Left/Right of Camera (ft)", 1.0, 12.0,
                            st.session_state.preset_key_x, step=0.5, key="key_x_sl")
         st.session_state.preset_key_x = key_x
-        key_dist = abs(st.session_state.preset_talent_x - key_x)
-        st.caption(f"Distance to talent: {key_dist:.1f} ft / {key_dist*0.3048:.2f} m")
+        key_dist_x = abs(st.session_state.preset_talent_x - key_x)
+        key_dist_y = abs(st.session_state.preset_talent_y - st.session_state.preset_cam_dolly)
+        key_dist_total = round((key_dist_x**2 + key_dist_y**2)**0.5, 1)
+        st.caption(f"90° to camera · Distance to talent: {key_dist_total} ft / {round(key_dist_total*0.3048,2)} m")
 
         st.divider()
 

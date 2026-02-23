@@ -585,37 +585,75 @@ def draw_key_light(fig, key_x, key_y, key_kelvin, talent_x=15, talent_y=10, visi
     )
 
 def draw_overhead_light(fig, lx, ly, label, kelvin, visible=True):
-    """Draw an overhead/preset light as a circle marker with label."""
+    """Draw overhead light as a proper fresnel/softbox fixture viewed from above."""
     if not visible:
         return
     color = kelvin_to_color(kelvin)
-    # Outer glow circle
-    theta = np.linspace(0, 2 * np.pi, 36)
-    glow_r = 0.9
-    gx = [lx + glow_r * np.cos(t) for t in theta]
-    gy = [ly + glow_r * np.sin(t) for t in theta]
+    r = int(color[1:3], 16)
+    g = int(color[3:5], 16)
+    b = int(color[5:7], 16)
+
+    # ── Outer glow halo ────────────────────────────────────────────────────
+    theta = np.linspace(0, 2 * np.pi, 48)
+    glow_r = 1.4
     fig.add_trace(go.Scatter(
-        x=gx, y=gy, mode='lines',
-        fill='toself',
-        fillcolor=f'rgba({int(color[1:3], 16)},{int(color[3:5], 16)},{int(color[5:7], 16)},0.4)',
-        line=dict(color=color, width=2),
-        showlegend=False, hoverinfo='skip', name=f'_light_{label}'
+        x=[lx + glow_r * np.cos(t) for t in theta],
+        y=[ly + glow_r * np.sin(t) for t in theta],
+        mode='lines', fill='toself',
+        fillcolor=f'rgba({r},{g},{b},0.12)',
+        line=dict(color=f'rgba({r},{g},{b},0.2)', width=1),
+        showlegend=False, hoverinfo='skip', name=f'_glow_{label}'
     ))
-    # Inner dot
+
+    # ── Fixture housing (rounded square — overhead view of softbox/fresnel) 
+    hw, hd = 0.70, 0.70   # half-width, half-depth
+    corner = 0.18          # corner rounding offset
+    housing = [
+        (-(hw-corner), -hd), ( (hw-corner), -hd),   # bottom edge
+        ( hw, -(hd-corner)), ( hw,  (hd-corner)),    # right edge
+        ( (hw-corner),  hd), (-(hw-corner),  hd),    # top edge
+        (-hw,  (hd-corner)), (-hw, -(hd-corner)),    # left edge
+        (-(hw-corner), -hd),                          # close
+    ]
     fig.add_trace(go.Scatter(
-        x=[lx], y=[ly], mode='markers',
-        marker=dict(size=8, color=color, symbol='circle',
-                    line=dict(color='#555', width=1)),
-        showlegend=False, hoverinfo='skip', name=f'_lightcenter_{label}'
+        x=[lx + p[0] for p in housing],
+        y=[ly + p[1] for p in housing],
+        mode='lines', fill='toself',
+        fillcolor=f'rgba({r},{g},{b},0.55)',
+        line=dict(color=color, width=2.5),
+        showlegend=False, hoverinfo='skip', name=f'_housing_{label}'
     ))
-    # Label
+
+    # ── Inner lens circle (the lamp face) ─────────────────────────────────
+    lens_r = 0.38
+    fig.add_trace(go.Scatter(
+        x=[lx + lens_r * np.cos(t) for t in theta],
+        y=[ly + lens_r * np.sin(t) for t in theta],
+        mode='lines', fill='toself',
+        fillcolor=f'rgba({r},{g},{b},0.85)',
+        line=dict(color='white', width=1.5),
+        showlegend=False, hoverinfo='skip', name=f'_lens_{label}'
+    ))
+
+    # ── Barn door flaps (4 short lines extending from each side) ──────────
+    flap = 0.45
+    for dx, dy in [(0, hd), (0, -hd), (hw, 0), (-hw, 0)]:
+        fig.add_trace(go.Scatter(
+            x=[lx + dx, lx + dx + (flap if dx > 0 else -flap if dx < 0 else 0)],
+            y=[ly + dy, ly + dy + (flap if dy > 0 else -flap if dy < 0 else 0)],
+            mode='lines',
+            line=dict(color='#555555', width=3),
+            showlegend=False, hoverinfo='skip', name=f'_barn_{label}'
+        ))
+
+    # ── Label ─────────────────────────────────────────────────────────────
     fig.add_annotation(
-        x=lx, y=ly - 1.3,
+        x=lx, y=ly - hd - 0.85,
         text=f"<b>{label}</b><br>{kelvin}K",
         showarrow=False,
-        font=dict(size=8.5, color='#333'),
-        bgcolor='rgba(255,255,255,0.85)',
-        bordercolor=color, borderwidth=1, borderpad=2
+        font=dict(size=8.5, color='#222'),
+        bgcolor='rgba(255,255,255,0.88)',
+        bordercolor=color, borderwidth=1.5, borderpad=3
     )
 
 def draw_subject(fig, talent_x=15, talent_y=10, talent_name="TALENT"):

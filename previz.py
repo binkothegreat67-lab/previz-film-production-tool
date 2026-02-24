@@ -26,8 +26,8 @@ st.markdown("""
     .badge       { background:#1565C0; color:white; padding:0.25rem 0.7rem;
                    border-radius:10px; font-size:0.8rem; font-weight:bold; }
     .stButton>button { width:100%; }
-    .cam-settings { background:#f0f4ff; border-radius:8px; padding:10px;
-                    border-left:4px solid #1565C0; margin-bottom:8px; }
+    .cam-settings { background:#f0f4ff; color:#0a1a3a; border-radius:8px; padding:10px;
+                    border-left:4px solid #1565C0; margin-bottom:8px; font-size:0.85rem; line-height:1.7; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -51,7 +51,7 @@ DEFAULT_SCENE = {
     }],
     "subject": {"x": 0.0, "y": 10.0, "name": "Subject"},
     "lights": [
-        {"name": "Key Light",   "type": "Key Light",   "x": 12.0, "y":  8.0, "rotation": 210, "intensity": 100, "kelvin": 5600},
+        {"name": "Key Light",   "type": "Key Light",   "x": 12.0, "y": 10.0, "rotation": 270, "intensity": 100, "kelvin": 5600},
         {"name": "Fill 1",      "type": "Fill Light",  "x": -13.0, "y": 18.0, "rotation": 135, "intensity": 50,  "kelvin": 5600},
         {"name": "Back Light",  "type": "Back Light",  "x":  0.0,  "y": 19.0, "rotation": 180, "intensity": 70,  "kelvin": 3200},
         {"name": "Fill 2",      "type": "Fill Light",  "x": 13.0,  "y": 18.0, "rotation": 225, "intensity": 50,  "kelvin": 5600},
@@ -61,7 +61,7 @@ DEFAULT_SCENE = {
 }
 
 # ── Session State ─────────────────────────────────────────────────────────────
-PREVIZ_VERSION = "4.0"
+PREVIZ_VERSION = "4.1"
 if st.session_state.get("_version") != PREVIZ_VERSION:
     st.session_state.scene = copy.deepcopy(DEFAULT_SCENE)
     st.session_state.scene_name = "Master Shot - Studio"
@@ -130,28 +130,34 @@ def generate_floor_plan():
 
     # ── Layout ────────────────────────────────────────────────────────────────
     fig.update_layout(
-        plot_bgcolor="white",
+        plot_bgcolor="#FDFCFB",
         paper_bgcolor="white",
         xaxis=dict(
             range=[-hw - 3, hw + 3],
-            showgrid=True, gridcolor="#ececec", gridwidth=1,
-            zeroline=False,
-            tickmode="linear", tick0=-15, dtick=5,
-            title=dict(text="Width (feet)  |  Stage Left (-) / Stage Right (+)", font=dict(size=11))
+            showgrid=True, gridcolor="#E5E5E3", gridwidth=0.4,
+            zeroline=True, zerolinecolor="#D0D0CE", zerolinewidth=1,
+            tickmode="array",
+            tickvals=[-15,-10,-5,0,5,10,15],
+            ticktext=["-15ft (-4.6m)","-10ft (-3.0m)","-5ft (-1.5m)","0","5ft (1.5m)","10ft (3.0m)","15ft (4.6m)"],
+            title=dict(text="Stage Left  ←  Width  →  Stage Right", font=dict(size=10, color="#888")),
+            tickfont=dict(size=8, color="#999")
         ),
         yaxis=dict(
             range=[-4, d + 3],
-            showgrid=True, gridcolor="#ececec", gridwidth=1,
-            zeroline=False,
-            tickmode="linear", tick0=0, dtick=5,
-            title=dict(text="Depth (feet)", font=dict(size=11)),
+            showgrid=True, gridcolor="#E5E5E3", gridwidth=0.4,
+            zeroline=True, zerolinecolor="#D0D0CE", zerolinewidth=1,
+            tickmode="array",
+            tickvals=[0,5,10,15,20],
+            ticktext=["0","5ft (1.5m)","10ft (3.0m)","15ft (4.6m)","20ft (6.1m)"],
+            title=dict(text="Depth", font=dict(size=10, color="#888")),
+            tickfont=dict(size=8, color="#999"),
             scaleanchor="x",
             scaleratio=1
         ),
         height=720,
         margin=dict(l=60, r=20, t=60, b=60),
         title=dict(
-            text=f"PREVIZ 4.0  |  {name}  |  Studio: {int(STUDIO_W)} x {int(STUDIO_D)} ft",
+            text=f"PREVIZ 4.0  |  {name}  |  Studio: {int(STUDIO_W)} x {int(STUDIO_D)} ft  /  {STUDIO_W*0.3048:.1f} x {STUDIO_D*0.3048:.1f} m",
             font=dict(size=14, color="#222", family="Arial Black"),
             x=0.01
         ),
@@ -321,26 +327,21 @@ def generate_floor_plan():
             showlegend=False, hoverinfo="skip"
         ))
 
-        # Camera icon - large emoji
+        # Camera body — single clean marker
         fig.add_trace(go.Scatter(
             x=[cx], y=[cy],
-            mode="text",
-            text=["CAMERA"],
-            textfont=dict(size=13, color="#1565C0", family="Arial Black"),
-            textposition="middle center",
-            showlegend=False, hoverinfo="skip"
-        ))
-        fig.add_trace(go.Scatter(
-            x=[cx], y=[cy],
-            mode="markers",
-            marker=dict(size=32, color="#1565C0", symbol="square",
+            mode="markers+text",
+            marker=dict(size=28, color="#1565C0", symbol="square",
                         line=dict(color="#0D47A1", width=3)),
+            text=["🎥"],
+            textfont=dict(size=18),
+            textposition="middle center",
             showlegend=False, hoverinfo="skip"
         ))
 
         # Camera specs label
         fig.add_trace(go.Scatter(
-            x=[cx], y=[cy - 2.2],
+            x=[cx], y=[cy - 1.8],
             mode="text",
             text=[f"{cam['name']}  {fl}mm | FOV {fov}deg"],
             textfont=dict(size=9, color="#0D47A1", family="Arial Black"),

@@ -51,7 +51,7 @@ DEFAULT_SCENE = {
     }],
     "subject": {"x": 0.0, "y": 10.0, "name": "Subject"},
     "lights": [
-        {"name": "Key Light",   "type": "Key Light",   "x": 12.0, "y": 10.0, "rotation": 270, "intensity": 100, "kelvin": 5600},
+        {"name": "Key Light",   "type": "Key Light",   "x": 12.0, "y": 10.0, "rotation": 90, "intensity": 100, "kelvin": 5600},
         {"name": "Fill 1",      "type": "Fill Light",  "x": -13.0, "y": 18.0, "rotation": 135, "intensity": 50,  "kelvin": 5600},
         {"name": "Back Light",  "type": "Back Light",  "x":  0.0,  "y": 19.0, "rotation": 180, "intensity": 70,  "kelvin": 3200},
         {"name": "Fill 2",      "type": "Fill Light",  "x": 13.0,  "y": 18.0, "rotation": 225, "intensity": 50,  "kelvin": 5600},
@@ -61,7 +61,7 @@ DEFAULT_SCENE = {
 }
 
 # ── Session State ─────────────────────────────────────────────────────────────
-PREVIZ_VERSION = "4.1"
+PREVIZ_VERSION = "4.2"
 if st.session_state.get("_version") != PREVIZ_VERSION:
     st.session_state.scene = copy.deepcopy(DEFAULT_SCENE)
     st.session_state.scene_name = "Master Shot - Studio"
@@ -246,12 +246,13 @@ def generate_floor_plan():
             showlegend=False, hoverinfo="skip", opacity=0.7
         ))
 
-        # Key light = half dome shape
+        # Key light = half dome shape (dome opens toward direction light is pointing)
         if ltype == "Key Light":
-            theta = np.linspace(0, np.pi, 30)
-            r = 1.2
-            hx = lx + r * np.cos(theta + np.radians(rot + 90))
-            hy = ly + r * np.sin(theta + np.radians(rot + 90))
+            rot_rad_dome = np.radians(rot)
+            theta = np.linspace(rot_rad_dome, np.pi + rot_rad_dome, 40)
+            r = 1.4
+            hx = lx + r * np.cos(theta)
+            hy = ly + r * np.sin(theta)
             fig.add_trace(go.Scatter(
                 x=list(hx) + [lx], y=list(hy) + [ly],
                 mode="lines",
@@ -779,73 +780,176 @@ ND: {cam.get('nd','None')}<br>
 
     tabs = st.tabs(["🎥 Cameras", "💡 Lights", "🧍 Subject", "🪑 Set Pieces", "🎭 Props"])
 
+    # ── Cameras tab ───────────────────────────────────────────────────────────
     with tabs[0]:
         if scene.get("cameras"):
             for i, cam in enumerate(scene["cameras"]):
-                c1, c2 = st.columns([4, 1])
+                subj = scene.get("subject", {"x": 0, "y": 10})
+                dist = distance(cam["x"], cam["y"], subj["x"], subj["y"])
+                dist_m = dist * 0.3048
+                c1, c2 = st.columns([5, 1])
                 with c1:
-                    subj = scene.get("subject", {"x": 0, "y": 10})
-                    dist = distance(cam["x"], cam["y"], subj["x"], subj["y"])
-                    st.markdown(
-                        f"**{cam['name']}** | {cam['focal_length']}mm | FOV {cam['fov']} deg | "
-                        f"T{cam.get('fstop','2.8')} | ISO {cam.get('iso',800)} | "
-                        f"ND: {cam.get('nd','None')}  \n"
-                        f"{cam.get('fps','24')} fps | {cam.get('shutter','1/48')} | {cam.get('resolution','1080p')} | "
-                        f"Dist to subject: **{dist:.1f} ft**"
-                    )
+                    st.markdown(f"""
+<div style="background:#EFF4FF;border-left:5px solid #1565C0;border-radius:6px;
+padding:12px 16px;margin-bottom:8px;font-size:0.9rem;line-height:1.9;">
+<span style="font-size:1.3rem;">📷</span>&nbsp;&nbsp;
+<b style="font-size:1.05rem;color:#0D47A1;">{cam['name']}</b>
+<span style="background:#1565C0;color:white;border-radius:4px;
+padding:2px 8px;font-size:0.75rem;margin-left:8px;">{cam['focal_length']}mm</span>
+<span style="background:#37474F;color:white;border-radius:4px;
+padding:2px 8px;font-size:0.75rem;margin-left:4px;">FOV {cam['fov']}&deg;</span>
+<br>
+<span style="color:#555;">
+&nbsp;&nbsp;&nbsp;&nbsp;
+🔍 <b>{cam.get('fstop','T2.8')}</b>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+🎞 ISO <b>{cam.get('iso',800)}</b>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+🌫 ND: <b>{cam.get('nd','None')}</b>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+🎬 <b>{cam.get('fps','24')} fps</b>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+⏱ <b>{cam.get('shutter','1/48')}</b>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+📺 <b>{cam.get('resolution','1080p')}</b>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+📍 Position: ({cam['x']:.1f}, {cam['y']:.1f}) ft
+&nbsp;&nbsp;|&nbsp;&nbsp;
+📐 Dist to subject: <b>{dist:.1f} ft / {dist_m:.1f} m</b>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+🔄 Pan: {cam.get('rotation',0)}&deg;
+&nbsp;&nbsp;|&nbsp;&nbsp;
+↕ Tilt: {cam.get('tilt',0)}&deg;
+</span>
+</div>
+""", unsafe_allow_html=True)
                 with c2:
-                    if st.button("🗑️", key=f"del_cam_{i}"):
+                    if st.button("🗑️", key=f"del_cam_{i}", help="Remove camera"):
                         scene["cameras"].pop(i)
                         st.rerun()
         else:
-            st.info("No cameras. Use sidebar to add.")
+            st.info("No cameras yet. Use the sidebar to add one.")
 
+    # ── Lights tab ────────────────────────────────────────────────────────────
     with tabs[1]:
+        LIGHT_ICON = {"Key Light":"☀️","Fill Light":"💡","Back Light":"🔦","LED Panel":"🟦","Practical":"🕯️","Natural Light":"🌤️"}
+        LIGHT_COLOR = {"Key Light":"#FFF8E1","Fill Light":"#F9FBE7","Back Light":"#E3F2FD","LED Panel":"#E8EAF6","Practical":"#FFF3E0","Natural Light":"#E0F7FA"}
+        LIGHT_BORDER = {"Key Light":"#F9A825","Fill Light":"#9CCC65","Back Light":"#42A5F5","LED Panel":"#5C6BC0","Practical":"#FF7043","Natural Light":"#26C6DA"}
         if scene.get("lights"):
             for i, l in enumerate(scene["lights"]):
-                c1, c2 = st.columns([4, 1])
+                ltype = l.get("type","Key Light")
+                icon  = LIGHT_ICON.get(ltype,"💡")
+                bg    = LIGHT_COLOR.get(ltype,"#FFF8E1")
+                bdr   = LIGHT_BORDER.get(ltype,"#F9A825")
+                k     = l.get("kelvin",5600)
+                intensity = l.get("intensity",100)
+                c1, c2 = st.columns([5, 1])
                 with c1:
-                    st.markdown(
-                        f"**{l['name']}** ({l['type']}) | {l.get('intensity',100)}% | "
-                        f"{l.get('kelvin',5600)}K | "
-                        f"Pos: ({l['x']:.1f}, {l['y']:.1f}) ft | Rot: {l.get('rotation',0)} deg"
-                    )
+                    st.markdown(f"""
+<div style="background:{bg};border-left:5px solid {bdr};border-radius:6px;
+padding:12px 16px;margin-bottom:8px;font-size:0.9rem;line-height:1.9;">
+<span style="font-size:1.3rem;">{icon}</span>&nbsp;&nbsp;
+<b style="font-size:1.05rem;">{l['name']}</b>
+<span style="background:{bdr};color:white;border-radius:4px;
+padding:2px 8px;font-size:0.75rem;margin-left:8px;">{ltype}</span>
+<br>
+<span style="color:#555;">
+&nbsp;&nbsp;&nbsp;&nbsp;
+🌡 Color Temp: <b>{k}K</b>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+💪 Intensity: <b>{intensity}%</b>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+📍 Pos: ({l['x']:.1f}, {l['y']:.1f}) ft
+&nbsp;&nbsp;|&nbsp;&nbsp;
+🔄 Rot: {l.get('rotation',0)}&deg;
+</span>
+</div>
+""", unsafe_allow_html=True)
                 with c2:
-                    if st.button("🗑️", key=f"del_light_{i}"):
+                    if st.button("🗑️", key=f"del_light_{i}", help="Remove light"):
                         scene["lights"].pop(i)
                         st.rerun()
         else:
-            st.info("No lights.")
+            st.info("No lights yet. Use the sidebar to add one.")
 
+    # ── Subject tab ───────────────────────────────────────────────────────────
     with tabs[2]:
         subj = scene.get("subject", {})
-        st.markdown(f"**{subj.get('name','Subject')}** | Position: ({subj.get('x',0):.1f}, {subj.get('y',10):.1f}) ft")
+        sx, sy = subj.get("x",0), subj.get("y",10)
+        cam_list = scene.get("cameras",[])
+        st.markdown(f"""
+<div style="background:#FFEBEE;border-left:5px solid #E53935;border-radius:6px;
+padding:12px 16px;margin-bottom:8px;font-size:0.9rem;line-height:1.9;">
+<span style="font-size:1.3rem;">🧍</span>&nbsp;&nbsp;
+<b style="font-size:1.05rem;color:#B71C1C;">{subj.get('name','Subject')}</b>
+<br>
+<span style="color:#555;">
+&nbsp;&nbsp;&nbsp;&nbsp;
+📍 Position: <b>({sx:.1f}, {sy:.1f}) ft</b>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+🌍 <b>({sx*0.3048:.2f}, {sy*0.3048:.2f}) m</b>
+</span>
+</div>
+""", unsafe_allow_html=True)
+        for cam in cam_list:
+            d_ft = distance(cam["x"], cam["y"], sx, sy)
+            d_m  = d_ft * 0.3048
+            st.markdown(f"&nbsp;&nbsp;&nbsp;&nbsp;📷 Distance from **{cam['name']}**: **{d_ft:.1f} ft / {d_m:.1f} m**")
 
+    # ── Set Pieces tab ────────────────────────────────────────────────────────
     with tabs[3]:
+        PIECE_ICON = {"Table":"🪵","Chair":"🪑","Sofa":"🛋️","Desk":"🖥️","Wall":"🧱","Door":"🚪","Window":"🪟"}
         if scene.get("set_pieces"):
             for i, p in enumerate(scene["set_pieces"]):
-                c1, c2 = st.columns([4, 1])
+                icon = PIECE_ICON.get(p.get("type","Table"),"🪑")
+                c1, c2 = st.columns([5, 1])
                 with c1:
-                    st.markdown(f"**{p['name']}** ({p['type']}) | ({p['x']:.1f}, {p['y']:.1f}) ft")
+                    st.markdown(f"""
+<div style="background:#F1F8E9;border-left:5px solid #7CB342;border-radius:6px;
+padding:10px 16px;margin-bottom:6px;font-size:0.9rem;line-height:1.8;">
+<span style="font-size:1.2rem;">{icon}</span>&nbsp;&nbsp;
+<b>{p['name']}</b>
+<span style="background:#7CB342;color:white;border-radius:4px;
+padding:2px 7px;font-size:0.75rem;margin-left:8px;">{p.get('type','')}</span>
+&nbsp;&nbsp;
+<span style="color:#555;">📍 ({p['x']:.1f}, {p['y']:.1f}) ft &nbsp;/&nbsp; ({p['x']*0.3048:.2f}, {p['y']*0.3048:.2f}) m</span>
+</div>
+""", unsafe_allow_html=True)
                 with c2:
                     if st.button("🗑️", key=f"del_piece_{i}"):
                         scene["set_pieces"].pop(i)
                         st.rerun()
         else:
-            st.info("No set pieces.")
+            st.info("No set pieces yet. Use the sidebar to add one.")
 
+    # ── Props tab ─────────────────────────────────────────────────────────────
     with tabs[4]:
+        PROP_ICON = {"Weapon":"🔫","Phone":"📱","Bag":"👜","Food / Drink":"🍽️","Book":"📖","Electronics":"💻","Tool":"🔧","Other":"🎭"}
         if scene.get("props"):
             for i, p in enumerate(scene["props"]):
-                c1, c2 = st.columns([4, 1])
+                icon = PROP_ICON.get(p.get("type","Other"),"🎭")
+                c1, c2 = st.columns([5, 1])
                 with c1:
-                    st.markdown(f"**{p['name']}** ({p.get('type','Prop')}) | ({p['x']:.1f}, {p['y']:.1f}) ft  \n{p.get('notes','')}")
+                    st.markdown(f"""
+<div style="background:#F3E5F5;border-left:5px solid #8E24AA;border-radius:6px;
+padding:10px 16px;margin-bottom:6px;font-size:0.9rem;line-height:1.8;">
+<span style="font-size:1.2rem;">{icon}</span>&nbsp;&nbsp;
+<b>{p['name']}</b>
+<span style="background:#8E24AA;color:white;border-radius:4px;
+padding:2px 7px;font-size:0.75rem;margin-left:8px;">{p.get('type','Prop')}</span>
+<br>
+<span style="color:#555;">
+&nbsp;&nbsp;&nbsp;&nbsp;📍 ({p['x']:.1f}, {p['y']:.1f}) ft
+{f" &nbsp;|&nbsp; 📝 {p.get('notes','')}" if p.get('notes') else ""}
+</span>
+</div>
+""", unsafe_allow_html=True)
                 with c2:
                     if st.button("🗑️", key=f"del_prop_{i}"):
                         scene["props"].pop(i)
                         st.rerun()
         else:
-            st.info("No props.")
+            st.info("No props yet. Use the sidebar to add one.")
 
     # Footer
     st.divider()

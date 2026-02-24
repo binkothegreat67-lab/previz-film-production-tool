@@ -262,10 +262,14 @@ def draw_floor_plan():
 
         # Glow if on
         if is_on:
+            # Convert hex to rgba for add_shape (Plotly requires rgba, not hex+alpha)
+            r = int(lcolor[1:3], 16)
+            g = int(lcolor[3:5], 16)
+            b = int(lcolor[5:7], 16)
             fig.add_shape(type="circle",
                           x0=lx - 1.0, y0=ly - 1.0,
                           x1=lx + 1.0, y1=ly + 1.0,
-                          fillcolor=lcolor + "55",
+                          fillcolor=f"rgba({r},{g},{b},0.33)",
                           line=dict(color=lcolor, width=2))
 
         fig.add_trace(go.Scatter(
@@ -318,7 +322,7 @@ def draw_floor_plan():
         x=dome_xs, y=dome_ys,
         mode="lines",
         fill="toself",
-        fillcolor=key_color + "CC",
+        fillcolor="rgba({},{},{},0.80)".format(int(key_color[1:3],16), int(key_color[3:5],16), int(key_color[5:7],16)),
         line=dict(color=key_color, width=3),
         showlegend=False,
         hovertemplate=(
@@ -463,7 +467,7 @@ def draw_floor_plan():
             type="rect",
             x0=0, y0=row_y - 0.55,
             x1=W, y1=row_y + 0.55,
-            fillcolor=row_color + "18",
+            fillcolor="rgba({},{},{},0.09)".format(int(row_color[1:3],16), int(row_color[3:5],16), int(row_color[5:7],16)),
             line=dict(color=row_color, width=1.5)
         )
         fig.add_annotation(

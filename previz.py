@@ -200,7 +200,7 @@ def draw_floor_plan():
     cam_x       = W / 2
     cam_y       = s.cam_dolly
     key_x       = s.key_x
-    key_y       = s.talent_y          # key light tracks talent depth
+    key_y       = cam_y              # 90° to camera axis — same depth as camera
     tx, ty      = s.talent_x, s.talent_y
     key_color, key_kname  = kelvin_to_display(s.key_kelvin)
     ratio_label, ratio_color, ratio_mood = calculate_ratio(
@@ -237,7 +237,7 @@ def draw_floor_plan():
              showarrow=False, font=dict(size=9, color="#999")),
         dict(x=W+1.8, y=H/2, text="WALL 3", textangle=90,
              showarrow=False, font=dict(size=9, color="#999")),
-        dict(x=W/2, y=-1.3, text="4TH WALL — OPEN (CAMERA)",
+        dict(x=W/2, y=-0.7, text="4TH WALL — OPEN (CAMERA)",
              showarrow=False, font=dict(size=9, color="#999")),
     ]:
         fig.add_annotation(**ann)
@@ -272,17 +272,17 @@ def draw_floor_plan():
                           fillcolor=f"rgba({r},{g},{b},0.33)",
                           line=dict(color=lcolor, width=2))
 
+        # Marker color: use fixed contrasting colors, not washed-out Kelvin color
+        marker_color = "#FF9900" if is_on else "#BBBBBB"  # bright amber when on
         fig.add_trace(go.Scatter(
             x=[lx], y=[ly],
-            mode="markers+text",
+            mode="markers",
             marker=dict(
-                size=16,
-                color=lcolor if is_on else "#BBBBBB",
+                size=18,
+                color=marker_color,
                 symbol="square",
                 line=dict(color="#333", width=2)
             ),
-            text=[f"💡"],
-            textposition="middle center",
             showlegend=False,
             hovertemplate=(
                 f"<b>{label}</b><br>"
@@ -291,6 +291,14 @@ def draw_floor_plan():
                 f"Intensity: {lintens}%<extra></extra>"
             )
         ))
+        # Emoji as annotation so it's always visible on top
+        fig.add_annotation(
+            x=lx, y=ly,
+            text="💡",
+            showarrow=False,
+            font=dict(size=13),
+            xanchor="center", yanchor="middle"
+        )
         fig.add_annotation(
             x=lx, y=ly + 1.5,
             text=f"{label}<br>{lkelvin}K",
@@ -393,7 +401,7 @@ def draw_floor_plan():
 
     fig.add_annotation(
         x=cam_x + 2.0, y=cam_y + 0.3,
-        text=f"📷 {s.lens} | {fov}°",
+        text=f"{s.lens} | {fov}°",
         showarrow=False,
         font=dict(size=9, color="#1E3A8A")
     )
@@ -468,7 +476,7 @@ def draw_floor_plan():
     ]
 
     for i, (row_color, row_text) in enumerate(rows):
-        row_y = -1.8 - i * 1.35
+        row_y = -2.5 - i * 1.35
         fig.add_shape(
             type="rect",
             x0=0, y0=row_y - 0.55,
@@ -498,7 +506,7 @@ def draw_floor_plan():
             fixedrange=True
         ),
         yaxis=dict(
-            range=[-8.5, H + 4],
+            range=[-11.5, H + 4],
             showgrid=False, zeroline=False,
             showticklabels=False,
             fixedrange=True

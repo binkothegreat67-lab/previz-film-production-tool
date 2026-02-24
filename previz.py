@@ -1074,8 +1074,8 @@ def main():
     st.divider()
     st.subheader("Scene Elements")
     
-    tabs = st.tabs(["ðŸ“· Cameras", "ðŸ’¡ Lights", "ðŸŽ­ Actors", "ðŸª‘ Set Pieces", 
-                    "ðŸš— Vehicles", "ðŸ–¥ï¸ Screens", "ðŸŸ¢ Green Screens"])
+    tabs = st.tabs(["📷 Cameras", "💡 Lights", "🎭 Actors", "🪑 Set Pieces", "🎭 Props", "🚗 Vehicles", "🖥️ Screens", "🟢 Green Screens"])
+
     
     # Cameras tab
     with tabs[0]:

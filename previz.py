@@ -40,7 +40,7 @@ STUDIO_D = 20.0   # feet, Y axis
 DEFAULT_SCENE = {
     "cameras": [{
         "name": "Camera A",
-        "x": 0.0, "y": -1.5,
+        "x": 0.0, "y": 0.0,
         "rotation": 0,
         "focal_length": 35, "fov": 63,
         "fps": "24", "shutter": "1/48",
@@ -51,7 +51,7 @@ DEFAULT_SCENE = {
     }],
     "subject": {"x": 0.0, "y": 10.0, "name": "Subject"},
     "lights": [
-        {"name": "Key Light",   "type": "Key Light",   "x": 12.0, "y": 10.0, "rotation": 90, "intensity": 100, "kelvin": 5600},
+        {"name": "Key Light",   "type": "Key Light",   "x": 12.0, "y": 0.0, "rotation": 50, "intensity": 100, "kelvin": 5600},
         {"name": "Fill 1",      "type": "Fill Light",  "x": -13.0, "y": 18.0, "rotation": 135, "intensity": 50,  "kelvin": 5600},
         {"name": "Back Light",  "type": "Back Light",  "x":  0.0,  "y": 19.0, "rotation": 180, "intensity": 70,  "kelvin": 3200},
         {"name": "Fill 2",      "type": "Fill Light",  "x": 13.0,  "y": 18.0, "rotation": 225, "intensity": 50,  "kelvin": 5600},
@@ -61,7 +61,7 @@ DEFAULT_SCENE = {
 }
 
 # ── Session State ─────────────────────────────────────────────────────────────
-PREVIZ_VERSION = "4.3"
+PREVIZ_VERSION = "4.4"
 if st.session_state.get("_version") != PREVIZ_VERSION:
     st.session_state.scene = copy.deepcopy(DEFAULT_SCENE)
     st.session_state.scene_name = "Master Shot - Studio"
@@ -161,16 +161,7 @@ def generate_floor_plan():
             font=dict(size=14, color="#222", family="Arial Black"),
             x=0.01
         ),
-        showlegend=True,
-        legend=dict(
-            x=0.01, y=0.99,
-            xanchor="left", yanchor="top",
-            bgcolor="rgba(20,30,50,0.88)",
-            bordercolor="#445",
-            borderwidth=1,
-            font=dict(size=12, color="white", family="Arial"),
-            title=dict(text="<b>LEGEND</b>", font=dict(size=12, color="#AAD4FF"))
-        )
+        showlegend=False
     )
 
     # ── Studio walls ──────────────────────────────────────────────────────────
@@ -881,43 +872,63 @@ ND: {cam.get('nd','None')}<br>
             st.success("Scene loaded!")
             st.rerun()
 
-    # ── ICON LEGEND ───────────────────────────────────────────────────────────
+    # ── FILM PRODUCTION DICTIONARY ────────────────────────────────────────────
     st.divider()
-    st.markdown("### 📖 Floor Plan Symbol Guide")
-    st.caption("Hover over any element on the floor plan above for full details. The cards below explain what each symbol means.")
+    st.markdown("### 📚 Film Production Dictionary")
+    st.caption("Click any term below to read its definition. These are the building blocks of professional production planning.")
 
-    icon_cols = st.columns(4)
-    ICON_GUIDE = [
-        ("📷", "CAMERA", "#EFF4FF", "#1565C0",
-         "Blue square on the floor plan. The shaded triangle in front shows the <b>Field of View</b> — how wide the lens sees. A wider angle = more of the scene. The dashed line connects camera to subject showing <b>shooting distance</b>."),
-        ("☀️", "KEY LIGHT", "#FFF8E1", "#F9A825",
-         "Gold star with half-dome shape. The <b>Key Light</b> is the main source of illumination. Placed at <b>90° to the camera axis</b> for classic 3-point lighting. The orange dashed line shows this angle."),
-        ("💡", "FILL LIGHT", "#F9FBE7", "#7CB342",
-         "Circle marker. <b>Fill Lights</b> reduce harsh shadows created by the Key. Typically placed on the opposite side at lower intensity (50% of Key). Upper-left and upper-right corners in a standard studio setup."),
-        ("🔦", "BACK LIGHT", "#E3F2FD", "#1976D2",
-         "Circle marker, center back wall. The <b>Back Light</b> (or hair light / rim light) separates the subject from the background. Placed behind and above the subject. Warm 3200K adds depth."),
-        ("🧍", "SUBJECT", "#FFEBEE", "#E53935",
-         "Large red circle. Marks the <b>position of the actor or subject</b>. The dotted line to the camera shows <b>working distance</b>. The 90° angle marker shows the Key Light relationship."),
-        ("🪑", "SET PIECE", "#F1F8E9", "#7CB342",
-         "Square marker. Represents <b>furniture and set dressing</b> — tables, chairs, doors, walls. Position these before placing lights and camera so you plan around the actual set layout."),
-        ("🎭", "PROP", "#F3E5F5", "#8E24AA",
-         "Diamond marker. <b>Hand props or set props</b> the actors will use or interact with. Important to plan because props affect blocking, lighting, and framing."),
-        ("🟢", "GREEN SCREEN", "#E8F5E9", "#2E7D32",
-         "Thick green line along the back wall. Marks the <b>chroma key background</b>. Light the green screen separately from your subject — use LED panels on each side at even intensity to avoid hot spots."),
+    DICTIONARY = [
+        ("Camera — Floor Plan Symbol", "#1565C0", "#EFF4FF",
+         "On the floor plan, the camera appears as a **blue square** with a shaded triangle projecting from it. That triangle is the **Field of View (FOV)** — the area the lens can see. A 16mm wide-angle lens gives a wide FOV cone. A 200mm telephoto gives a narrow one. The dotted line to the subject shows your **working distance**."),
+
+        ("Key Light — The Main Source", "#F9A825", "#FFF8E1",
+         "The **Key Light** is the dominant light source — it creates the main illumination and defines shadows on the subject's face. In the classic 3-point lighting setup, the Key is placed at **90° to the camera axis**, on the right side of the studio (stage right). On the floor plan it appears as a gold half-dome pointing toward the subject. Color temperature is typically **5600K (daylight)**."),
+
+        ("Fill Light — Controlling Shadows", "#7CB342", "#F9FBE7",
+         "**Fill Lights** soften or fill the shadows created by the Key Light. They are placed on the **opposite side** from the Key, at lower intensity — typically **50% of the Key**. In a standard master shot, Fill 1 is in the **upper-left corner** and Fill 2 in the **upper-right corner**. The ratio between Key and Fill controls the contrast and mood of the scene."),
+
+        ("Back Light — Separation & Depth", "#1976D2", "#E3F2FD",
+         "The **Back Light** (also called Hair Light or Rim Light) is placed **behind and above the subject**, pointing back toward camera. Its purpose is to separate the subject from the background, creating a visible edge of light around the hair and shoulders. On the floor plan it sits at the **center of the back wall**. Often warmer (3200K) to contrast with the daylight Key."),
+
+        ("Subject Position & Blocking", "#E53935", "#FFEBEE",
+         "The **red circle** on the floor plan marks where the **actor or subject stands**. This is the anchor point for all lighting calculations. The 90° angle marker shows the geometric relationship between camera and Key Light. The working distance (camera to subject) determines lens choice — a 50mm at 10 feet gives a very different look than a 85mm at 20 feet."),
+
+        ("Focal Length & Field of View", "#6A1B9A", "#F3E5F5",
+         "**Focal length** (measured in mm) controls how wide or tight the shot is. **16mm** = extreme wide angle, shows the whole room. **50mm** ≈ human eye, natural perspective. **85mm** = flattering portrait compression. **135mm+** = telephoto, compresses distance between subject and background. Longer lenses require greater **working distance** from subject."),
+
+        ("T-Stops vs. f/Stops", "#00695C", "#E0F2F1",
+         "**f/stops** are *calculated* aperture values based on lens geometry. **T-stops** (Transmission stops) are *measured* — they account for actual light loss through the glass elements. Cinema lenses use T-stops for accurate, consistent exposure across different lenses. Video and photo lenses use f/stops. A T2.8 and f/2.8 are close but not identical. On professional sets, **always work in T-stops**."),
+
+        ("180° Shutter Rule", "#E65100", "#FFF3E0",
+         "The **180° shutter rule** is the foundation of cinematic motion blur. Set your shutter speed to **double your frame rate**: at 24fps → shutter 1/48. At 30fps → 1/60. This produces the natural motion blur the human eye expects from film. Breaking this rule creates either **strobing** (too fast) or excessive **motion smear** (too slow). Use ND filters — not shutter speed — to control exposure outdoors."),
+
+        ("ISO / Gain — Sensor Sensitivity", "#37474F", "#ECEFF1",
+         "**ISO** measures how sensitive the camera sensor is to light. **ISO 800** is a common clean native gain for cinema cameras — the starting point in a controlled studio. Doubling ISO (800→1600) adds one stop of exposure but also adds **noise/grain**. In low-light situations, raise ISO gradually. Use **ND filters** to reduce light rather than closing aperture, to preserve depth of field."),
+
+        ("ND Filters — Neutral Density", "#4527A0", "#EDE7F6",
+         "**Neutral Density (ND) filters** reduce light entering the lens without affecting color. Essential when shooting outdoors (too much light) or when you want a **wide aperture in bright conditions** to blur the background. ND 0.3 = 1 stop reduction. ND 0.6 = 2 stops. ND 0.9 = 3 stops. Variable ND filters let you dial in exposure while keeping your shutter angle fixed at 180°."),
+
+        ("Working Distance — Camera to Subject", "#1565C0", "#E3F2FD",
+         "**Working distance** is the physical space between camera and subject. It affects: (1) **Perspective** — closer camera = more distortion, wider feel. (2) **Depth of field** — closer subject = shallower focus. (3) **Lens choice** — a wide lens close creates a different look than a telephoto far away, even if subject appears the same size. The dotted line on the floor plan shows this distance in both feet and meters."),
+
+        ("3-Point Lighting — Classic Setup", "#F9A825", "#FFFDE7",
+         "The **3-point lighting** setup is the industry standard for narrative film and interviews. **Point 1: Key Light** — stage right, 90° from camera axis, primary illumination. **Point 2: Fill Light** — opposite side, 50% intensity, softens shadows. **Point 3: Back Light** — behind subject, separates from background. This is the default master shot in PreViz. Every variation in cinematography — high-key, low-key, Rembrandt — begins here."),
     ]
 
-    for idx, (icon, label, bg, color, desc) in enumerate(ICON_GUIDE):
-        col = icon_cols[idx % 4]
-        with col:
-            st.markdown(f"""
-<div style="background:{bg};border-top:4px solid {color};border-radius:8px;
-padding:14px;margin-bottom:12px;min-height:200px;">
-<div style="font-size:2rem;text-align:center;">{icon}</div>
-<div style="text-align:center;font-weight:bold;color:{color};
-font-size:0.85rem;letter-spacing:1px;margin:6px 0;">{label}</div>
-<div style="font-size:0.8rem;color:#333;line-height:1.5;">{desc}</div>
-</div>
-""", unsafe_allow_html=True)
+    # Show 3 per row as clean definition cards with expanders
+    for i in range(0, len(DICTIONARY), 3):
+        row = st.columns(3)
+        for j, col in enumerate(row):
+            if i + j < len(DICTIONARY):
+                term, color, bg, definition = DICTIONARY[i + j]
+                with col:
+                    st.markdown(f"""
+<div style="background:{bg};border-left:4px solid {color};
+border-radius:6px;padding:10px 14px;margin-bottom:4px;">
+<span style="font-weight:700;color:{color};font-size:0.9rem;">{term}</span>
+</div>""", unsafe_allow_html=True)
+                    with st.expander("? What is this"):
+                        st.markdown(definition)
 
     # ── ELEMENT TABS ──────────────────────────────────────────────────────────
     st.divider()

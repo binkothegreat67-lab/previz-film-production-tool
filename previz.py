@@ -682,11 +682,18 @@ def render_sidebar():
     st.sidebar.subheader("🎭 Talent")
 
     st.sidebar.text_input("Name", key="talent_name")
-    st.sidebar.slider("Stage Left / Right  (ft)", 2.0, 28.0, step=0.5, key="talent_x")
-    st.sidebar.slider("Stage Depth  (ft from Wall 4)", 2.0, 18.0, step=0.5, key="talent_y")
 
-    cam_to_t = dist(STAGE_W / 2, s.cam_dolly, s.talent_x, s.talent_y)
-    key_to_t = dist(s.key_x, s.talent_y, s.talent_x, s.talent_y)
+    # Use value= (not key=) so we can reset without widget-binding conflict
+    tx_val = st.sidebar.slider("Stage Left / Right  (ft)", 2.0, 28.0,
+                                value=float(s.talent_x), step=0.5)
+    st.session_state.talent_x = tx_val
+
+    ty_val = st.sidebar.slider("Stage Depth  (ft from Wall 4)", 2.0, 18.0,
+                                value=float(s.talent_y), step=0.5)
+    st.session_state.talent_y = ty_val
+
+    cam_to_t = dist(STAGE_W / 2, s.cam_dolly, tx_val, ty_val)
+    key_to_t = dist(s.key_x, ty_val, tx_val, ty_val)
     st.sidebar.caption(
         f"📏  Camera → Talent: **{cam_to_t:.1f} ft** / {ft_m(cam_to_t):.1f} m  \n"
         f"📏  Key → Talent: **{key_to_t:.1f} ft** / {ft_m(key_to_t):.1f} m"

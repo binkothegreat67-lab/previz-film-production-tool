@@ -137,17 +137,16 @@ def generate_floor_plan():
             showgrid=True, gridcolor="#ececec", gridwidth=1,
             zeroline=False,
             tickmode="linear", tick0=-15, dtick=5,
-            title="Width (feet)  |  Stage Left (-) / Stage Right (+)",
-            titlefont=dict(size=11)
+            title=dict(text="Width (feet)  |  Stage Left (-) / Stage Right (+)", font=dict(size=11))
         ),
         yaxis=dict(
             range=[-4, d + 3],
             showgrid=True, gridcolor="#ececec", gridwidth=1,
             zeroline=False,
-            scaleanchor="x", scaleratio=1,
             tickmode="linear", tick0=0, dtick=5,
-            title="Depth (feet)",
-            titlefont=dict(size=11)
+            title=dict(text="Depth (feet)", font=dict(size=11)),
+            scaleanchor="x",
+            scaleratio=1
         ),
         height=720,
         margin=dict(l=60, r=20, t=60, b=60),

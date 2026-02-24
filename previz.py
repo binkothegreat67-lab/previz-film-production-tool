@@ -1,1120 +1,785 @@
 """
-PreViz 4.0 - Professional Studio Floor Plan
-Free Educational Technology for Film Students
-Developed by: Eduardo Carmona | CSUDH & LMU
+PreViz 4.0 — Open Educational Edition
+Developed by Eduardo Carmona, MFA — CSUDH · LMU
+GNU General Public License v3.0
+Free for every student — from Los Angeles to Lima to Windhoek.
 """
 
 import streamlit as st
 import plotly.graph_objects as go
 import numpy as np
-import json
+import math
 from datetime import datetime
-import copy
 
-# ── Page Config ───────────────────────────────────────────────────────────────
-st.set_page_config(
-    page_title="PreViz 4.0 - Studio Floor Plan",
-    page_icon="🎬",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+# ─────────────────────────────────────────────────────────────────
+# CONSTANTS
+# ─────────────────────────────────────────────────────────────────
+PREVIZ_VERSION = "4.0"
+STAGE_W = 30   # feet wide
+STAGE_H = 20   # feet deep
 
-st.markdown("""
-<style>
-    .main-header { font-size:2rem; font-weight:bold; color:#1a1a1a; }
-    .sub-header  { font-size:0.95rem; color:#666; margin-bottom:0.8rem; }
-    .badge       { background:#1565C0; color:white; padding:0.25rem 0.7rem;
-                   border-radius:10px; font-size:0.8rem; font-weight:bold; }
-    .stButton>button { width:100%; }
-    .cam-settings { background:#f0f4ff; color:#0a1a3a; border-radius:8px; padding:10px;
-                    border-left:4px solid #1565C0; margin-bottom:8px; font-size:0.85rem; line-height:1.7; }
-</style>
-""", unsafe_allow_html=True)
-
-# ── Constants ─────────────────────────────────────────────────────────────────
-STUDIO_W = 30.0   # feet, X axis
-STUDIO_D = 20.0   # feet, Y axis
-# Studio: X from -15 to +15, Y from 0 (open 4th wall) to 20 (back wall)
-
-# Default scene
-DEFAULT_SCENE = {
-    "cameras": [{
-        "name": "Camera A",
-        "x": 0.0, "y": 0.0,
-        "rotation": 0,
-        "focal_length": 35, "fov": 63,
-        "fps": "24", "shutter": "1/48",
-        "resolution": "1080p",
-        "iso": 800,
-        "nd": "None",
-        "fstop": "T2.8"
-    }],
-    "subject": {"x": 0.0, "y": 10.0, "name": "Subject"},
-    "lights": [
-        {"name": "Key Light",   "type": "Key Light",   "x": 12.0, "y": 0.0, "rotation": 50, "intensity": 100, "kelvin": 5600},
-        {"name": "Fill 1",      "type": "Fill Light",  "x": -13.0, "y": 18.0, "rotation": 135, "intensity": 50,  "kelvin": 5600},
-        {"name": "Back Light",  "type": "Back Light",  "x":  0.0,  "y": 19.0, "rotation": 180, "intensity": 70,  "kelvin": 3200},
-        {"name": "Fill 2",      "type": "Fill Light",  "x": 13.0,  "y": 18.0, "rotation": 225, "intensity": 50,  "kelvin": 5600},
-    ],
-    "set_pieces": [],
-    "props": []
+LENS_OPTIONS = ["12mm", "16mm", "24mm", "35mm", "50mm", "85mm", "100mm", "135mm"]
+LENS_FOV = {
+    "12mm": 90, "16mm": 83, "24mm": 73, "35mm": 54,
+    "50mm": 39, "85mm": 24, "100mm": 20, "135mm": 15
 }
 
-# ── Session State ─────────────────────────────────────────────────────────────
-PREVIZ_VERSION = "4.4"
-if st.session_state.get("_version") != PREVIZ_VERSION:
-    st.session_state.scene = copy.deepcopy(DEFAULT_SCENE)
-    st.session_state.scene_name = "Master Shot - Studio"
-    st.session_state._version = PREVIZ_VERSION
+ISO_OPTIONS = [100, 200, 400, 800, 1600, 3200, 6400]
+RESOLUTION_OPTIONS = ["720p", "1080p", "4K UHD", "4K DCI"]
+FPS_OPTIONS = [24, 25, 30, 60]
+SHUTTER_BY_FPS = {24: "1/48", 25: "1/50", 30: "1/60", 60: "1/120"}
+SHUTTER_DENOM  = {"1/48": 48, "1/50": 50, "1/60": 60, "1/120": 120}
 
-# ── Presets ───────────────────────────────────────────────────────────────────
-LENSES = {
-    "16mm  - Ultra Wide  (107 deg)": (16,  107),
-    "24mm  - Wide        (84 deg)":  (24,  84),
-    "35mm  - Standard    (63 deg)":  (35,  63),
-    "50mm  - Normal      (47 deg)":  (50,  47),
-    "85mm  - Portrait    (29 deg)":  (85,  29),
-    "135mm - Telephoto   (18 deg)":  (135, 18),
-    "200mm - Super Tele  (12 deg)":  (200, 12),
+ND_OPTIONS = {
+    "None (0 stops)": 0,
+    "ND 0.3 — 1 stop":  1,
+    "ND 0.6 — 2 stops": 2,
+    "ND 0.9 — 3 stops": 3,
+    "ND 1.2 — 4 stops": 4,
+    "ND 1.8 — 6 stops": 6,
+    "ND 2.4 — 8 stops": 8,
+    "ND 3.0 — 10 stops": 10,
 }
 
-TSTOPS = ["T1.4", "T2", "T2.8", "T4", "T5.6", "T8", "T11", "T16"]
-FSTOPS = ["f/1.4", "f/2", "f/2.8", "f/4", "f/5.6", "f/8", "f/11", "f/16"]
-ND_FILTERS = ["None", "ND 0.3 (1 stop)", "ND 0.6 (2 stop)", "ND 0.9 (3 stop)", "ND 1.2 (4 stop)", "ND 1.5 (5 stop)"]
-ISO_VALUES = [100, 200, 400, 800, 1600, 3200, 6400]
-KELVIN_VALUES = [2700, 3200, 4000, 4500, 5000, 5600, 6500]
-FPS_OPTIONS = ["23.976", "24", "25", "29.97", "30", "48", "60"]
-SHUTTER_OPTIONS = ["1/24", "1/48", "1/50", "1/60", "1/96", "1/120", "1/250"]
-RESOLUTIONS = ["720p", "1080p", "2K", "4K", "6K"]
+FSTOPS = [1.0, 1.4, 2.0, 2.8, 4.0, 5.6, 8.0, 11, 16, 22]
 
-LIGHT_TYPES = ["Key Light", "Fill Light", "Back Light", "LED Panel", "Practical", "Natural Light"]
+# (max_kelvin, hex_color, display_name)
+KELVIN_SCALE = [
+    (2000,  "#FF5500", "Candlelight"),
+    (2700,  "#FF8040", "Incandescent"),
+    (3200,  "#FFB347", "Tungsten"),
+    (4000,  "#FFD580", "Warm White"),
+    (4300,  "#FFE8C0", "Late Afternoon"),
+    (5600,  "#FFF3DC", "Daylight"),
+    (6500,  "#EEF5FF", "Overcast Sky"),
+    (7500,  "#D5E8FF", "Cloudy"),
+    (10000, "#B8D5FF", "Blue Sky"),
+]
 
-KELVIN_COLOR = {
-    2700: "#FFB347",
-    3200: "#FFC87A",
-    4000: "#FFE0A0",
-    4500: "#FFF0C0",
-    5000: "#FFFDE0",
-    5600: "#FFFFFF",
-    6500: "#D0E8FF"
+# (ratio_upper_bound, label, badge_color, mood)
+RATIO_TABLE = [
+    (1.2,  "1:1",  "#4A90D9", "Flat, even — broadcast / news"),
+    (1.7,  "2:1",  "#4A90D9", "Soft, commercial look"),
+    (2.5,  "3:1",  "#27AE60", "Classic cinematic"),
+    (3.5,  "4:1",  "#27AE60", "Dramatic portrait"),
+    (5.0,  "6:1",  "#E67E22", "High contrast"),
+    (10.0, "8:1",  "#E67E22", "Near noir"),
+    (999,  "16:1", "#C0392B", "High contrast noir"),
+]
+
+# ─────────────────────────────────────────────────────────────────
+# TIPS DICTIONARY  (swap this dict for multilingual support)
+# ─────────────────────────────────────────────────────────────────
+TIPS = {
+    "Key Light":     "The main light source. It establishes exposure and the direction of primary shadows. Everything else is relative to it.",
+    "Fill Light":    "Fills in the shadows from the Key. Always softer and dimmer than the Key. Controls how deep the shadows are.",
+    "Back Light":    "Positioned behind and above the subject. Creates a rim that separates them from the background. Also called a hair light.",
+    "Kelvin":        "Color temperature of light. Low values (2000K) are warm orange. High values (10000K) are cool blue. Daylight is 5600K.",
+    "f-stop":        "The aperture setting. Lower number (f/1.4) = wide open = more light. Higher number (f/16) = closed down = less light.",
+    "ISO":           "Sensor sensitivity. ISO 100 = base, least noise. ISO 6400 = very sensitive, more noise. Higher ISO brightens the image.",
+    "Shutter Speed": "How long each frame is exposed. The 180° rule: set shutter to 2× your frame rate. At 24fps, use 1/48s for natural motion blur.",
+    "ND Filter":     "Neutral Density filter — sunglasses for the lens. Reduces light without changing color. Lets you shoot wide open outdoors.",
+    "Pan":           "Rotating the camera left or right on its vertical axis without moving it. Measured in degrees from center.",
+    "Tilt":          "Rotating the camera up or down on its horizontal axis. Five positions from low to high.",
+    "Dolly":         "Physically moving the camera toward or away from the subject. Changes perspective, not just framing.",
+    "FOV":           "Field of View. The angle the lens captures. Wide lens (12mm) = 90° FOV. Telephoto (135mm) = only 15° FOV.",
+    "Light Ratio":   "The brightness relationship between Key and Fill lights. 3:1 is classic Hollywood. 8:1+ creates noir and drama.",
+    "Master Shot":   "A wide establishing shot that captures all the action in a scene. Usually set up first so everything else is covered relative to it.",
+    "Fourth Wall":   "The imaginary wall between the actors and the camera. Leaving it open means the camera lives outside the scene.",
+    "Approval Gate": "All three department heads (DP, Gaffer, Director) must sign off before a floor plan becomes an official production document.",
 }
 
-# ── Helpers ───────────────────────────────────────────────────────────────────
-def rotate_pt(x, y, deg):
-    r = np.radians(deg)
-    return x * np.cos(r) - y * np.sin(r), x * np.sin(r) + y * np.cos(r)
+# ─────────────────────────────────────────────────────────────────
+# HELPERS
+# ─────────────────────────────────────────────────────────────────
 
-def fov_triangle(cx, cy, rot, fov, length=5.0):
-    half = fov / 2.0
-    w = np.tan(np.radians(half)) * length
-    lx, ly = rotate_pt(-w, length, rot)
-    rx, ry = rotate_pt( w, length, rot)
-    return (cx, cy), (cx + lx, cy + ly), (cx + rx, cy + ry)
+def kelvin_to_display(k):
+    """Return (hex_color, name) for a Kelvin value."""
+    for max_k, color, name in KELVIN_SCALE:
+        if k <= max_k:
+            return color, name
+    return KELVIN_SCALE[-1][1], KELVIN_SCALE[-1][2]
 
-def distance(x1, y1, x2, y2):
-    return np.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+def calculate_fstop(key_intensity, iso, shutter_str, nd_stops):
+    """
+    Calculate suggested f-stop from exposure parameters.
+    Baseline: key=100%, ISO=800, 1/48s, ND=0 → f/5.6
+    Key Light drives exposure (pedagogical principle).
+    """
+    if key_intensity <= 0:
+        return "---"
+    denom = SHUTTER_DENOM.get(shutter_str, 48)
+    base_idx = 5  # f/5.6
+    key_adj     =  math.log2(max(key_intensity, 0.1) / 100)  # brighter key → close down
+    iso_adj     =  math.log2(iso / 800)                       # higher ISO  → close down
+    shutter_adj =  math.log2(48 / denom)                      # faster shutter → open up
+    nd_adj      = -nd_stops                                    # more ND → open up
+    total = key_adj + iso_adj + shutter_adj + nd_adj
+    idx = max(0, min(len(FSTOPS) - 1, round(base_idx + total)))
+    return f"f/{FSTOPS[int(idx)]}"
 
-def kelvin_to_hex(k):
-    options = sorted(KELVIN_COLOR.keys())
-    closest = min(options, key=lambda x: abs(x - k))
-    return KELVIN_COLOR[closest]
+def calculate_ratio(key_int, fill_int):
+    """Return (label, badge_color, mood) for Key:Fill ratio."""
+    if fill_int <= 0:
+        return "∞:1", "#C0392B", "No fill — maximum contrast"
+    ratio = key_int / max(fill_int, 0.1)
+    for upper, label, color, mood in RATIO_TABLE:
+        if ratio < upper:
+            return label, color, mood
+    return "16:1", "#C0392B", "High contrast noir"
 
-# ── Floor Plan Generator ──────────────────────────────────────────────────────
-def generate_floor_plan():
-    fig = go.Figure()
-    scene = st.session_state.scene
-    name = st.session_state.scene_name
+def dist(x1, y1, x2, y2):
+    return math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
 
-    hw = STUDIO_W / 2  # 15 ft half-width
-    d  = STUDIO_D      # 20 ft depth
+def ft_m(ft):
+    return round(ft * 0.3048, 1)
 
-    # ── Layout ────────────────────────────────────────────────────────────────
-    fig.update_layout(
-        plot_bgcolor="#FDFCFB",
-        paper_bgcolor="white",
-        xaxis=dict(
-            range=[-hw - 3, hw + 3],
-            showgrid=True, gridcolor="#E5E5E3", gridwidth=0.4,
-            zeroline=True, zerolinecolor="#D0D0CE", zerolinewidth=1,
-            tickmode="array",
-            tickvals=[-15,-10,-5,0,5,10,15],
-            ticktext=["-15ft (-4.6m)","-10ft (-3.0m)","-5ft (-1.5m)","0","5ft (1.5m)","10ft (3.0m)","15ft (4.6m)"],
-            title=dict(text="Stage Left  ←  Width  →  Stage Right", font=dict(size=10, color="#888")),
-            tickfont=dict(size=8, color="#999")
-        ),
-        yaxis=dict(
-            range=[-4, d + 3],
-            showgrid=True, gridcolor="#E5E5E3", gridwidth=0.4,
-            zeroline=True, zerolinecolor="#D0D0CE", zerolinewidth=1,
-            tickmode="array",
-            tickvals=[0,5,10,15,20],
-            ticktext=["0","5ft (1.5m)","10ft (3.0m)","15ft (4.6m)","20ft (6.1m)"],
-            title=dict(text="Depth", font=dict(size=10, color="#888")),
-            tickfont=dict(size=8, color="#999"),
-            scaleanchor="x",
-            scaleratio=1
-        ),
-        height=720,
-        margin=dict(l=60, r=20, t=60, b=60),
-        title=dict(
-            text=f"PREVIZ 4.0  |  {name}  |  Studio: {int(STUDIO_W)} x {int(STUDIO_D)} ft  /  {STUDIO_W*0.3048:.1f} x {STUDIO_D*0.3048:.1f} m",
-            font=dict(size=14, color="#222", family="Arial Black"),
-            x=0.01
-        ),
-        showlegend=False
+def rot2d(vx, vy, theta):
+    """Rotate vector (vx, vy) by theta radians."""
+    return (vx * math.cos(theta) - vy * math.sin(theta),
+            vx * math.sin(theta) + vy * math.cos(theta))
+
+# ─────────────────────────────────────────────────────────────────
+# SESSION STATE
+# ─────────────────────────────────────────────────────────────────
+
+def init_state():
+    defaults = {
+        # Camera
+        "lens":         "24mm",
+        "cam_pan":      0,
+        "cam_dolly":    3.0,
+        "fps":          24,
+        # Video specs
+        "resolution":   "1080p",
+        "iso":          800,
+        "nd_label":     "None (0 stops)",
+        # Key Light
+        "key_intensity": 80,
+        "key_kelvin":    5600,
+        "key_x":         5.0,  # stage left, ft from Wall 1
+        # Fill #1 (upper left corner)
+        "fill1_on":        True,
+        "fill1_intensity": 40,
+        "fill1_kelvin":    5600,
+        # Back Light (center of Wall 2)
+        "back_on":        True,
+        "back_intensity": 60,
+        "back_kelvin":    5600,
+        # Fill #2 (upper right corner)
+        "fill2_on":        True,
+        "fill2_intensity": 40,
+        "fill2_kelvin":    5600,
+        # Talent
+        "talent_name": "Actor",
+        "talent_x":    15.0,
+        "talent_y":    10.0,
+        # Approval
+        "approved_dp":      False,
+        "approved_gaffer":  False,
+        "approved_director": False,
+        "approved_at":      None,
+    }
+    for k, v in defaults.items():
+        if k not in st.session_state:
+            st.session_state[k] = v
+
+# ─────────────────────────────────────────────────────────────────
+# FLOOR PLAN
+# ─────────────────────────────────────────────────────────────────
+
+def draw_floor_plan():
+    s  = st.session_state
+    W, H = STAGE_W, STAGE_H
+
+    # Derived values
+    fov         = LENS_FOV[s.lens]
+    shutter_str = SHUTTER_BY_FPS[s.fps]
+    nd_stops    = ND_OPTIONS[s.nd_label]
+    fstop       = calculate_fstop(s.key_intensity, s.iso, shutter_str, nd_stops)
+    cam_x       = W / 2
+    cam_y       = s.cam_dolly
+    key_x       = s.key_x
+    key_y       = s.talent_y          # key light tracks talent depth
+    tx, ty      = s.talent_x, s.talent_y
+    key_color, key_kname  = kelvin_to_display(s.key_kelvin)
+    ratio_label, ratio_color, ratio_mood = calculate_ratio(
+        s.key_intensity,
+        s.fill1_intensity if s.fill1_on else 0
     )
+    cam_to_talent = dist(cam_x, cam_y, tx, ty)
+    key_to_talent = dist(key_x, key_y, tx, ty)
 
-    # ── Studio walls ──────────────────────────────────────────────────────────
-    wall_style = dict(type="line", line=dict(color="#222", width=5))
+    fig = go.Figure()
 
-    # Back wall (y = d)
-    fig.add_shape(**wall_style, x0=-hw, y0=d, x1=hw, y1=d)
-    # Left wall
-    fig.add_shape(**wall_style, x0=-hw, y0=0, x1=-hw, y1=d)
-    # Right wall
-    fig.add_shape(**wall_style, x0=hw, y0=0, x1=hw, y1=d)
+    # ── STAGE FLOOR ───────────────────────────────────────────
+    fig.add_shape(type="rect", x0=0, y0=0, x1=W, y1=H,
+                  fillcolor="#FAF8F4",
+                  line=dict(color="#8B7355", width=4))
 
-    # 4th wall indicator (open wall, dashed)
-    fig.add_shape(type="line", x0=-hw, y0=0, x1=hw, y1=0,
-                  line=dict(color="#aaa", width=3, dash="dot"))
+    # Grid every 5 ft
+    for x in range(5, W, 5):
+        fig.add_shape(type="line", x0=x, y0=0, x1=x, y1=H,
+                      line=dict(color="#E0D8C8", width=1))
+    for y in range(5, H, 5):
+        fig.add_shape(type="line", x0=0, y0=y, x1=W, y1=y,
+                      line=dict(color="#E0D8C8", width=1))
+
+    # Wall 4 — open (camera side, bottom) — dashed
+    fig.add_shape(type="line", x0=0, y0=0, x1=W, y1=0,
+                  line=dict(color="#888", width=2.5, dash="dot"))
 
     # Wall labels
-    fig.add_annotation(x=0, y=d + 0.8, text="BACK WALL",
-                       showarrow=False, font=dict(size=10, color="#444", family="Arial Black"))
-    fig.add_annotation(x=-hw - 1.5, y=d / 2, text="STAGE<br>LEFT",
-                       showarrow=False, font=dict(size=9, color="#444"), textangle=-90)
-    fig.add_annotation(x=hw + 1.5, y=d / 2, text="STAGE<br>RIGHT",
-                       showarrow=False, font=dict(size=9, color="#444"), textangle=90)
-    fig.add_annotation(x=0, y=-2.5, text="4th WALL  (OPEN)  - DIRECTOR'S PERSPECTIVE",
-                       showarrow=False, font=dict(size=10, color="#888", family="Arial Black"))
+    for ann in [
+        dict(x=-1.8, y=H/2, text="WALL 1", textangle=-90,
+             showarrow=False, font=dict(size=9, color="#999")),
+        dict(x=W/2, y=H+1.5, text="WALL 2 — BACK",
+             showarrow=False, font=dict(size=9, color="#999")),
+        dict(x=W+1.8, y=H/2, text="WALL 3", textangle=90,
+             showarrow=False, font=dict(size=9, color="#999")),
+        dict(x=W/2, y=-1.3, text="4TH WALL — OPEN (CAMERA)",
+             showarrow=False, font=dict(size=9, color="#999")),
+    ]:
+        fig.add_annotation(**ann)
 
-    # Dimension labels
-    fig.add_annotation(x=0, y=d + 1.8,
-                       text=f"<-- {int(STUDIO_W)} ft -->",
-                       showarrow=False, font=dict(size=10, color="#666"))
-    fig.add_annotation(x=hw + 2.5, y=d / 2,
-                       text=f"{int(STUDIO_D)} ft",
-                       showarrow=False, font=dict(size=10, color="#666"), textangle=-90)
+    # Stage dimensions
+    fig.add_annotation(x=W/2, y=H+0.7, text="30 ft  |  9.1 m",
+                       showarrow=False, font=dict(size=8, color="#AAA"))
+    fig.add_annotation(x=-0.6, y=H/2, text="20 ft | 6.1 m",
+                       showarrow=False, font=dict(size=8, color="#AAA"), textangle=-90)
 
-    # ── Set pieces ────────────────────────────────────────────────────────────
-    piece_color = {"Table": "#8B4513", "Chair": "#A0522D", "Sofa": "#D2B48C",
-                   "Desk": "#8B4513", "Wall": "#808080", "Door": "#555", "Window": "#87CEEB"}
-    for p in scene.get("set_pieces", []):
-        c = piece_color.get(p.get("type", "Table"), "#888")
+    # ── OVERHEAD LIGHTS ───────────────────────────────────────
+    overhead = [
+        (4,      16, "fill1_on", "fill1_intensity", "fill1_kelvin", "Fill #1"),
+        (W / 2,  18, "back_on",  "back_intensity",  "back_kelvin",  "Back"),
+        (W - 4,  16, "fill2_on", "fill2_intensity", "fill2_kelvin", "Fill #2"),
+    ]
+    for lx, ly, key_on, key_int, key_k, label in overhead:
+        is_on   = getattr(s, key_on)
+        lkelvin = getattr(s, key_k)
+        lintens = getattr(s, key_int)
+        lcolor, lkname = kelvin_to_display(lkelvin)
+
+        # Glow if on
+        if is_on:
+            fig.add_shape(type="circle",
+                          x0=lx - 1.0, y0=ly - 1.0,
+                          x1=lx + 1.0, y1=ly + 1.0,
+                          fillcolor=lcolor + "55",
+                          line=dict(color=lcolor, width=2))
+
         fig.add_trace(go.Scatter(
-            x=[p["x"]], y=[p["y"]], mode="markers+text",
-            marker=dict(size=24, color=c, symbol="square", line=dict(color="#333", width=1.5)),
-            text=[p.get("type", "")[:3]], textposition="middle center",
-            textfont=dict(color="white", size=9, family="Arial Black"),
-            name=f"  {p['name']}", showlegend=True,
-            hovertemplate=f"<b>{p['name']}</b><br>({p['x']:.1f}, {p['y']:.1f})<extra></extra>"
-        ))
-
-    # ── Props ─────────────────────────────────────────────────────────────────
-    for p in scene.get("props", []):
-        fig.add_trace(go.Scatter(
-            x=[p["x"]], y=[p["y"]], mode="markers+text",
-            marker=dict(size=14, color="#9C27B0", symbol="diamond",
-                        line=dict(color="#6A0080", width=1.5)),
-            text=[p["name"]], textposition="top center",
-            textfont=dict(size=9, color="#6A0080"),
-            name=f"  {p['name']}", showlegend=True,
-            hovertemplate=f"<b>{p['name']}</b><br>{p.get('notes','')}<extra></extra>"
-        ))
-
-    # ── Lights ────────────────────────────────────────────────────────────────
-    for light in scene.get("lights", []):
-        kc = kelvin_to_hex(light.get("kelvin", 5600))
-        ltype = light.get("type", "Key Light")
-        lx, ly = light["x"], light["y"]
-        rot = light.get("rotation", 0)
-        intensity = light.get("intensity", 100)
-        beam_len = 2.5 + intensity / 40.0
-        bx, by = rotate_pt(0, beam_len, rot)
-
-        # Beam line
-        fig.add_trace(go.Scatter(
-            x=[lx, lx + bx], y=[ly, ly + by],
-            mode="lines",
-            line=dict(color=kc if kc != "#FFFFFF" else "#FFE080", width=3),
-            showlegend=False, hoverinfo="skip", opacity=0.7
-        ))
-
-        # Key light = half dome shape (dome opens toward direction light is pointing)
-        if ltype == "Key Light":
-            rot_rad_dome = np.radians(rot)
-            theta = np.linspace(rot_rad_dome, np.pi + rot_rad_dome, 40)
-            r = 1.4
-            hx = lx + r * np.cos(theta)
-            hy = ly + r * np.sin(theta)
-            fig.add_trace(go.Scatter(
-                x=list(hx) + [lx], y=list(hy) + [ly],
-                mode="lines",
-                fill="toself",
-                fillcolor=kc if kc != "#FFFFFF" else "#FFE080",
-                line=dict(color="#AA7700", width=2),
-                showlegend=False, hoverinfo="skip", opacity=0.85
-            ))
-            # Key light marker
-            fig.add_trace(go.Scatter(
-                x=[lx], y=[ly], mode="markers+text",
-                marker=dict(size=20, color="#FFD700",
-                            symbol="star", line=dict(color="#AA7700", width=2)),
-                text=[f"KEY\n{light.get('kelvin',5600)}K\n{intensity}%"],
-                textposition="bottom center",
-                textfont=dict(size=8, color="#774400"),
-                name=f"  KEY LIGHT ({light.get('kelvin',5600)}K)",
-                hovertemplate=(
-                    f"<b>{light['name']}</b><br>"
-                    f"Type: {ltype}<br>"
-                    f"Intensity: {intensity}%<br>"
-                    f"Color Temp: {light.get('kelvin',5600)}K<extra></extra>"
-                )
-            ))
-        else:
-            # Fill / Back lights = circle marker
-            fill_color = "#ADD8E6" if ltype == "Back Light" else "#FFFACD"
-            fig.add_trace(go.Scatter(
-                x=[lx], y=[ly], mode="markers+text",
-                marker=dict(size=18, color=fill_color,
-                            symbol="circle", line=dict(color="#666", width=1.5)),
-                text=[f"{light['name']}\n{light.get('kelvin',5600)}K"],
-                textposition="top center",
-                textfont=dict(size=8, color="#444"),
-                name=f"  {light['name']} ({light.get('kelvin',5600)}K)",
-                hovertemplate=(
-                    f"<b>{light['name']}</b><br>"
-                    f"Type: {ltype}<br>"
-                    f"Intensity: {intensity}%<br>"
-                    f"Color Temp: {light.get('kelvin',5600)}K<extra></extra>"
-                )
-            ))
-
-    # ── Subject ───────────────────────────────────────────────────────────────
-    subj = scene.get("subject", {"x": 0, "y": 10, "name": "Subject"})
-    sx, sy = subj["x"], subj["y"]
-
-    fig.add_trace(go.Scatter(
-        x=[sx], y=[sy], mode="markers+text",
-        marker=dict(size=26, color="#E53935", symbol="circle",
-                    line=dict(color="#B71C1C", width=2.5)),
-        text=[subj["name"]], textposition="top center",
-        textfont=dict(size=11, color="#B71C1C", family="Arial Black"),
-        name=f"  {subj['name']} (Subject)",
-        hovertemplate=f"<b>{subj['name']}</b><br>({sx:.1f}, {sy:.1f})<extra></extra>"
-    ))
-
-    # ── Camera ────────────────────────────────────────────────────────────────
-    for cam in scene.get("cameras", []):
-        cx, cy = cam["x"], cam["y"]
-        rot = cam.get("rotation", 0)
-        fov = cam.get("fov", 63)
-        fl  = cam.get("focal_length", 35)
-
-        # FOV cone
-        apex, left, right = fov_triangle(cx, cy, rot, fov, length=7.0)
-        fig.add_trace(go.Scatter(
-            x=[apex[0], left[0], right[0], apex[0]],
-            y=[apex[1], left[1], right[1], apex[1]],
-            mode="lines", fill="toself",
-            fillcolor="rgba(21,101,192,0.13)",
-            line=dict(color="#1565C0", width=2.5, dash="dash"),
-            showlegend=False, hoverinfo="skip"
-        ))
-
-        # Camera body — single clean marker
-        fig.add_trace(go.Scatter(
-            x=[cx], y=[cy],
+            x=[lx], y=[ly],
             mode="markers+text",
-            marker=dict(size=28, color="#1565C0", symbol="square",
-                        line=dict(color="#0D47A1", width=3)),
-            text=["🎥"],
-            textfont=dict(size=18),
+            marker=dict(
+                size=16,
+                color=lcolor if is_on else "#BBBBBB",
+                symbol="square",
+                line=dict(color="#333", width=2)
+            ),
+            text=[f"💡"],
             textposition="middle center",
-            showlegend=False, hoverinfo="skip"
-        ))
-
-        # Camera specs label
-        fig.add_trace(go.Scatter(
-            x=[cx], y=[cy - 1.8],
-            mode="text",
-            text=[f"{cam['name']}  {fl}mm | FOV {fov}deg"],
-            textfont=dict(size=9, color="#0D47A1", family="Arial Black"),
-            textposition="middle center",
-            name=f"Camera: {cam['name']} ({fl}mm)",
+            showlegend=False,
             hovertemplate=(
-                f"<b>{cam['name']}</b><br>"
-                f"Lens: {fl}mm | FOV: {fov} deg<br>"
-                f"T-Stop: {cam.get('fstop','T2.8')}<br>"
-                f"ISO: {cam.get('iso',800)}<br>"
-                f"ND: {cam.get('nd','None')}<br>"
-                f"{cam.get('fps','24')} fps | {cam.get('shutter','1/48')} | {cam.get('resolution','1080p')}<br>"
-                f"({cx:.1f}, {cy:.1f}) ft<extra></extra>"
+                f"<b>{label}</b><br>"
+                f"{'ON' if is_on else 'OFF'}<br>"
+                f"{lkelvin}K — {lkname}<br>"
+                f"Intensity: {lintens}%<extra></extra>"
             )
         ))
+        fig.add_annotation(
+            x=lx, y=ly + 1.5,
+            text=f"{label}<br>{lkelvin}K",
+            showarrow=False,
+            font=dict(size=8, color="#555"),
+            align="center"
+        )
 
-        # ── Camera-to-Subject axis line ───────────────────────────────────────
-        dist = distance(cx, cy, sx, sy)
-        dist_m = dist * 0.3048
-        fig.add_trace(go.Scatter(
-            x=[cx, sx], y=[cy, sy],
-            mode="lines+text",
-            line=dict(color="#888", width=1.5, dash="dot"),
-            text=["", f"  {dist:.1f}ft / {dist_m:.1f}m"],
-            textposition="middle right",
-            textfont=dict(size=9, color="#555"),
-            showlegend=False, hoverinfo="skip"
-        ))
+    # ── KEY LIGHT ─────────────────────────────────────────────
+    # Beam line: key → talent
+    fig.add_trace(go.Scatter(
+        x=[key_x, tx], y=[key_y, ty],
+        mode="lines",
+        line=dict(color=key_color, width=3),
+        showlegend=False,
+        hoverinfo="skip"
+    ))
 
-        # ── 90° Key Light guide: subject→key line perpendicular to camera axis ─
-        # Draw a dashed orange line from subject to key light (if one exists)
-        for kl in scene.get("lights", []):
-            if kl.get("type") == "Key Light":
-                klx, kly = kl["x"], kl["y"]
-                # Line from subject to key light
-                fig.add_trace(go.Scatter(
-                    x=[sx, klx], y=[sy, kly],
-                    mode="lines",
-                    line=dict(color="#F9A825", width=2, dash="dash"),
-                    showlegend=False, hoverinfo="skip", opacity=0.7
-                ))
-                # 90° angle marker at subject position
-                # Small L-shape: step along camera axis then step toward key
-                step = 0.8
-                # unit vector camera→subject
-                cam_dx = (sx - cx) / dist if dist > 0 else 0
-                cam_dy = (sy - cy) / dist if dist > 0 else 1
-                # perpendicular (90° clockwise)
-                perp_x = cam_dy
-                perp_y = -cam_dx
-                # figure out which side key is on
-                key_side = 1 if (klx - sx) * perp_x + (kly - sy) * perp_y > 0 else -1
-                corner1 = (sx + cam_dx * step, sy + cam_dy * step)
-                corner2 = (sx + cam_dx * step + perp_x * key_side * step,
-                           sy + cam_dy * step + perp_y * key_side * step)
-                corner3 = (sx + perp_x * key_side * step, sy + perp_y * key_side * step)
-                fig.add_trace(go.Scatter(
-                    x=[corner1[0], corner2[0], corner3[0]],
-                    y=[corner1[1], corner2[1], corner3[1]],
-                    mode="lines",
-                    line=dict(color="#F9A825", width=1.5),
-                    showlegend=False, hoverinfo="skip", opacity=0.8
-                ))
-                # 90° label
-                fig.add_annotation(
-                    x=corner2[0], y=corner2[1],
-                    text="90°", showarrow=False,
-                    font=dict(size=9, color="#F9A825"),
-                    bgcolor="rgba(255,255,255,0.7)"
-                )
-                break
+    # Half-dome (semicircle) facing talent
+    angle_to_talent = math.atan2(ty - key_y, tx - key_x)
+    dome_r   = 1.4
+    n_pts    = 30
+    arc_a    = np.linspace(angle_to_talent - math.pi / 2,
+                           angle_to_talent + math.pi / 2, n_pts)
+    dome_xs  = [key_x + dome_r * math.cos(a) for a in arc_a]
+    dome_ys  = [key_y + dome_r * math.sin(a) for a in arc_a]
 
-    # ── Compass / orientation note ────────────────────────────────────────────
-    fig.add_annotation(x=-hw + 0.5, y=d - 0.8,
-                       text="[Upstage]", showarrow=False,
-                       font=dict(size=8, color="#aaa"))
-    fig.add_annotation(x=-hw + 0.5, y=0.6,
-                       text="[Downstage]", showarrow=False,
-                       font=dict(size=8, color="#aaa"))
+    fig.add_trace(go.Scatter(
+        x=dome_xs, y=dome_ys,
+        mode="lines",
+        fill="toself",
+        fillcolor=key_color + "CC",
+        line=dict(color=key_color, width=3),
+        showlegend=False,
+        hovertemplate=(
+            f"<b>🔆 Key Light</b><br>"
+            f"{s.key_kelvin}K — {key_kname}<br>"
+            f"Intensity: {s.key_intensity}%<extra></extra>"
+        )
+    ))
+
+    fig.add_annotation(
+        x=key_x - 0.4, y=key_y + dome_r + 1.2,
+        text=f"🔆 KEY<br>{s.key_kelvin}K",
+        showarrow=False,
+        font=dict(size=9, color="#333"),
+        align="center"
+    )
+
+    # ── CAMERA ────────────────────────────────────────────────
+    pan_rad      = math.radians(s.cam_pan)
+    fov_half_rad = math.radians(fov / 2)
+    fwd          = (math.sin(pan_rad), math.cos(pan_rad))  # faces +y at pan=0
+    cone_len     = min(15.0, H - cam_y + 0.5)
+
+    left_dir  = rot2d(fwd[0], fwd[1],  fov_half_rad)
+    right_dir = rot2d(fwd[0], fwd[1], -fov_half_rad)
+
+    fov_lx = cam_x + left_dir[0]  * cone_len
+    fov_ly = cam_y + left_dir[1]  * cone_len
+    fov_rx = cam_x + right_dir[0] * cone_len
+    fov_ry = cam_y + right_dir[1] * cone_len
+
+    # FOV cone (filled)
+    fig.add_trace(go.Scatter(
+        x=[cam_x, fov_lx, fov_rx, cam_x],
+        y=[cam_y, fov_ly, fov_ry, cam_y],
+        fill="toself",
+        fillcolor="rgba(60, 90, 200, 0.10)",
+        line=dict(color="rgba(60, 90, 200, 0.45)", width=1.5),
+        mode="lines",
+        showlegend=False,
+        hoverinfo="skip"
+    ))
+
+    # Camera body
+    fig.add_trace(go.Scatter(
+        x=[cam_x], y=[cam_y],
+        mode="markers+text",
+        marker=dict(
+            size=22, color="#1E3A8A", symbol="square",
+            line=dict(color="white", width=2)
+        ),
+        text=["📷"],
+        textposition="middle center",
+        showlegend=False,
+        hovertemplate=(
+            f"<b>📷 Camera — Master Shot</b><br>"
+            f"{s.lens} | FOV: {fov}°<br>"
+            f"Pan: {s.cam_pan}°<br>"
+            f"Dolly: {s.cam_dolly} ft from Wall 4<extra></extra>"
+        )
+    ))
+
+    fig.add_annotation(
+        x=cam_x + 2.0, y=cam_y + 0.3,
+        text=f"📷 {s.lens} | {fov}°",
+        showarrow=False,
+        font=dict(size=9, color="#1E3A8A")
+    )
+
+    # ── TALENT ────────────────────────────────────────────────
+    # Crosshair
+    fig.add_trace(go.Scatter(
+        x=[tx - 1.4, tx + 1.4, None, tx, tx],
+        y=[ty,       ty,       None, ty - 1.4, ty + 1.4],
+        mode="lines",
+        line=dict(color="#CC0000", width=2),
+        showlegend=False,
+        hoverinfo="skip"
+    ))
+
+    fig.add_trace(go.Scatter(
+        x=[tx], y=[ty],
+        mode="markers",
+        marker=dict(
+            size=26,
+            color="rgba(210,0,0,0.12)",
+            symbol="circle",
+            line=dict(color="#CC0000", width=3)
+        ),
+        showlegend=False,
+        hovertemplate=(
+            f"<b>🎭 {s.talent_name}</b><br>"
+            f"X: {tx:.1f} ft ({ft_m(tx):.1f} m)<br>"
+            f"Y: {ty:.1f} ft ({ft_m(ty):.1f} m)<br>"
+            f"Camera → Talent: {cam_to_talent:.1f} ft ({ft_m(cam_to_talent):.1f} m)<br>"
+            f"Key → Talent: {key_to_talent:.1f} ft ({ft_m(key_to_talent):.1f} m)<extra></extra>"
+        )
+    ))
+
+    fig.add_annotation(
+        x=tx, y=ty + 2.0,
+        text=f"🎭 {s.talent_name}",
+        showarrow=False,
+        font=dict(size=11, color="#CC0000", family="Arial Black"),
+        align="center"
+    )
+
+    # ── LIGHT RATIO BADGE (outside stage, upper right) ────────
+    fig.add_annotation(
+        x=W + 0.5, y=H - 1,
+        xanchor="left",
+        text=(
+            f"<b>KEY : FILL</b><br>"
+            f"<span style='font-size:16px'><b>{ratio_label}</b></span><br>"
+            f"<i>{ratio_mood}</i>"
+        ),
+        showarrow=False,
+        bgcolor=ratio_color,
+        bordercolor=ratio_color,
+        borderwidth=2,
+        borderpad=8,
+        font=dict(size=10, color="white"),
+        align="center"
+    )
+
+    # ── LOWER THIRD ───────────────────────────────────────────
+    active_lights = f"KEY {s.key_kelvin}K"
+    if s.fill1_on: active_lights += f"  |  FILL-1 {s.fill1_kelvin}K"
+    if s.back_on:  active_lights += f"  |  BACK {s.back_kelvin}K"
+    if s.fill2_on: active_lights += f"  |  FILL-2 {s.fill2_kelvin}K"
+
+    rows = [
+        ("#444444", f"📷  {s.lens}   FOV:{fov}°   PAN:{s.cam_pan}°   DOLLY:{s.cam_dolly}ft   C→T: {cam_to_talent:.1f}ft / {ft_m(cam_to_talent):.1f}m"),
+        ("#1A6B3C", f"🎯  {fstop}   ISO:{s.iso}   {shutter_str}s   {s.nd_label.split('—')[0].strip()}   {s.fps}fps   {s.resolution}"),
+        ("#1A3C6B", f"💡  {active_lights}"),
+        ("#8B0000", f"🎭  {s.talent_name}   X:{tx:.1f}ft / {ft_m(tx):.1f}m   Y:{ty:.1f}ft / {ft_m(ty):.1f}m   K→T: {key_to_talent:.1f}ft / {ft_m(key_to_talent):.1f}m"),
+    ]
+
+    for i, (row_color, row_text) in enumerate(rows):
+        row_y = -1.8 - i * 1.35
+        fig.add_shape(
+            type="rect",
+            x0=0, y0=row_y - 0.55,
+            x1=W, y1=row_y + 0.55,
+            fillcolor=row_color + "18",
+            line=dict(color=row_color, width=1.5)
+        )
+        fig.add_annotation(
+            x=0.4, y=row_y,
+            text=row_text,
+            showarrow=False,
+            font=dict(size=9, color=row_color, family="monospace"),
+            xanchor="left",
+            align="left"
+        )
+
+    # ── LAYOUT ────────────────────────────────────────────────
+    fig.update_layout(
+        margin=dict(l=60, r=160, t=40, b=30),
+        paper_bgcolor="white",
+        plot_bgcolor="white",
+        xaxis=dict(
+            range=[-3, W + 9],
+            showgrid=False, zeroline=False,
+            showticklabels=False,
+            scaleanchor="y", scaleratio=1,
+            fixedrange=True
+        ),
+        yaxis=dict(
+            range=[-8.5, H + 4],
+            showgrid=False, zeroline=False,
+            showticklabels=False,
+            fixedrange=True
+        ),
+        height=760,
+        dragmode=False,
+        showlegend=False,
+    )
 
     return fig
 
 
-# ── Export ────────────────────────────────────────────────────────────────────
-def export_report():
-    sc = st.session_state.scene
-    nm = st.session_state.scene_name
-    lines = [
-        "=" * 50,
-        "PRODUCTION SETUP REPORT",
-        f"Scene:   {nm}",
-        f"Studio:  {int(STUDIO_W)} x {int(STUDIO_D)} ft",
-        f"Date:    {datetime.now().strftime('%Y-%m-%d  %H:%M')}",
-        "=" * 50, ""
-    ]
+# ─────────────────────────────────────────────────────────────────
+# SIDEBAR
+# ─────────────────────────────────────────────────────────────────
 
-    for cam in sc.get("cameras", []):
-        subj = sc.get("subject", {"x": 0, "y": 10})
-        dist = distance(cam["x"], cam["y"], subj["x"], subj["y"])
-        lines += [
-            "CAMERA",
-            "-" * 30,
-            f"  Name:          {cam['name']}",
-            f"  Lens:          {cam['focal_length']}mm",
-            f"  FOV:           {cam['fov']} deg",
-            f"  T-Stop:        {cam.get('fstop','T2.8')}",
-            f"  ISO / Gain:    {cam.get('iso', 800)}",
-            f"  ND Filter:     {cam.get('nd','None')}",
-            f"  Frame Rate:    {cam.get('fps','24')} fps",
-            f"  Shutter:       {cam.get('shutter','1/48')}",
-            f"  Resolution:    {cam.get('resolution','1080p')}",
-            f"  Position:      ({cam['x']:.1f}, {cam['y']:.1f}) ft",
-            f"  Rotation:      {cam.get('rotation',0)} deg",
-            f"  Dist to Subj:  {dist:.1f} ft",
-            ""
-        ]
+def render_sidebar():
+    s = st.session_state
 
-    lines += ["LIGHTING", "-" * 30]
-    for l in sc.get("lights", []):
-        lines += [
-            f"  {l['name']} ({l['type']})",
-            f"    Position:   ({l['x']:.1f}, {l['y']:.1f}) ft",
-            f"    Rotation:   {l.get('rotation',0)} deg",
-            f"    Intensity:  {l.get('intensity',100)}%",
-            f"    Color Temp: {l.get('kelvin',5600)}K",
-            ""
-        ]
+    st.sidebar.markdown(
+        f"<div style='text-align:center; font-size:11px; color:#999; padding:4px'>"
+        f"PreViz {PREVIZ_VERSION} — Open Educational Edition</div>",
+        unsafe_allow_html=True
+    )
+    st.sidebar.divider()
 
-    lines += ["SUBJECT", "-" * 30]
-    subj = sc.get("subject", {})
-    lines += [
-        f"  Name:      {subj.get('name','Subject')}",
-        f"  Position:  ({subj.get('x',0):.1f}, {subj.get('y',10):.1f}) ft",
-        ""
-    ]
+    # ── 📷 CAMERA ─────────────────────────────────────────────
+    st.sidebar.subheader("📷 Camera — Master Shot")
 
-    lines += ["EQUIPMENT CHECKLIST", "-" * 30]
-    lines.append(f"  [ ] {len(sc.get('cameras',[]))} Camera(s)")
-    lines.append(f"  [ ] {len(sc.get('lights',[]))} Light(s)")
-    if sc.get("set_pieces"):
-        lines.append(f"  [ ] {len(sc['set_pieces'])} Set Piece(s)")
-    if sc.get("props"):
-        lines.append(f"  [ ] {len(sc['props'])} Prop(s)")
+    lens_idx = LENS_OPTIONS.index(s.lens)
+    new_lens = st.sidebar.selectbox("Lens", LENS_OPTIONS, index=lens_idx)
+    if new_lens != s.lens:
+        st.session_state.lens = new_lens
+        st.rerun()
 
-    return "\n".join(lines)
+    with st.sidebar.expander("ℹ️ What is FOV?"):
+        st.caption(TIPS["FOV"])
+
+    st.sidebar.slider("Pan  (°)",  -45, 45, step=1, key="cam_pan")
+    with st.sidebar.expander("ℹ️ What is Pan?"):
+        st.caption(TIPS["Pan"])
+
+    st.sidebar.slider("Dolly  (ft from Wall 4)", 0.5, 9.0, step=0.5, key="cam_dolly")
+    with st.sidebar.expander("ℹ️ What is Dolly?"):
+        st.caption(TIPS["Dolly"])
+
+    with st.sidebar.expander("ℹ️ What is Master Shot?"):
+        st.caption(TIPS["Master Shot"])
+    with st.sidebar.expander("ℹ️ What is the Fourth Wall?"):
+        st.caption(TIPS["Fourth Wall"])
+
+    st.sidebar.divider()
+
+    # ── 📹 VIDEO SPECS ────────────────────────────────────────
+    st.sidebar.subheader("📹 Video Specifications")
+
+    fps_idx = FPS_OPTIONS.index(s.fps)
+    new_fps = st.sidebar.selectbox("Frame Rate (fps)", FPS_OPTIONS, index=fps_idx)
+    if new_fps != s.fps:
+        st.session_state.fps = new_fps
+        st.rerun()
+
+    shutter_str = SHUTTER_BY_FPS[s.fps]
+    st.sidebar.info(f"Shutter: **{shutter_str}s**  (180° rule → 2× frame rate)")
+    with st.sidebar.expander("ℹ️ What is Shutter Speed?"):
+        st.caption(TIPS["Shutter Speed"])
+
+    res_idx = RESOLUTION_OPTIONS.index(s.resolution)
+    new_res = st.sidebar.selectbox("Resolution", RESOLUTION_OPTIONS, index=res_idx)
+    if new_res != s.resolution:
+        st.session_state.resolution = new_res
+        st.rerun()
+
+    iso_idx = ISO_OPTIONS.index(s.iso)
+    new_iso = st.sidebar.selectbox("ISO / Gain", ISO_OPTIONS, index=iso_idx)
+    if new_iso != s.iso:
+        st.session_state.iso = new_iso
+        st.rerun()
+    with st.sidebar.expander("ℹ️ What is ISO?"):
+        st.caption(TIPS["ISO"])
+
+    nd_labels = list(ND_OPTIONS.keys())
+    nd_idx = nd_labels.index(s.nd_label)
+    new_nd = st.sidebar.selectbox("ND Filter", nd_labels, index=nd_idx)
+    if new_nd != s.nd_label:
+        st.session_state.nd_label = new_nd
+        st.rerun()
+    with st.sidebar.expander("ℹ️ What is an ND Filter?"):
+        st.caption(TIPS["ND Filter"])
+
+    # Exposure result
+    nd_stops = ND_OPTIONS[s.nd_label]
+    fstop = calculate_fstop(s.key_intensity, s.iso, shutter_str, nd_stops)
+    st.sidebar.success(f"**Suggested f-stop: {fstop}**")
+    with st.sidebar.expander("ℹ️ What is f-stop?"):
+        st.caption(TIPS["f-stop"])
+
+    st.sidebar.divider()
+
+    # ── 🔆 KEY LIGHT ──────────────────────────────────────────
+    st.sidebar.subheader("🔆 Key Light")
+
+    st.sidebar.slider("Intensity (%)", 0, 100, step=1, key="key_intensity")
+    st.sidebar.slider("Color Temperature (K)", 2000, 10000, step=100, key="key_kelvin")
+
+    kc, kname = kelvin_to_display(s.key_kelvin)
+    st.sidebar.markdown(
+        f"<div style='background:{kc};border-radius:6px;padding:4px 10px;"
+        f"font-size:12px;color:#333;display:inline-block'>"
+        f"<b>{s.key_kelvin}K</b> — {kname}</div>",
+        unsafe_allow_html=True
+    )
+
+    st.sidebar.slider("Position — Stage Left/Right (ft)", 2.0, 14.0, step=0.5, key="key_x")
+    with st.sidebar.expander("ℹ️ What is Key Light?"):
+        st.caption(TIPS["Key Light"])
+    with st.sidebar.expander("ℹ️ What is Kelvin?"):
+        st.caption(TIPS["Kelvin"])
+
+    st.sidebar.divider()
+
+    # ── 💡 OVERHEAD THREE-POINT LIGHTS ───────────────────────
+    st.sidebar.subheader("💡 Overhead Three-Point Lights")
+
+    for label, key_on, key_int, key_k, tip_key in [
+        ("Fill #1  (upper left)",  "fill1_on", "fill1_intensity", "fill1_kelvin",  "Fill Light"),
+        ("Back Light  (Wall 2)",   "back_on",  "back_intensity",  "back_kelvin",   "Back Light"),
+        ("Fill #2  (upper right)", "fill2_on", "fill2_intensity", "fill2_kelvin",  "Fill Light"),
+    ]:
+        col1, col2 = st.sidebar.columns([3, 1])
+        with col1:
+            st.markdown(f"**{label}**")
+        with col2:
+            st.toggle("", value=getattr(s, key_on), key=key_on)
+
+        if getattr(s, key_on):
+            st.sidebar.slider(f"Intensity  ({label[:6]})", 0, 100, step=1, key=key_int)
+            st.sidebar.slider(f"Kelvin  ({label[:6]})", 2000, 10000, step=100, key=key_k)
+            lc, lname = kelvin_to_display(getattr(s, key_k))
+            st.sidebar.markdown(
+                f"<div style='background:{lc};border-radius:4px;padding:2px 8px;"
+                f"font-size:11px;color:#333;display:inline-block;margin-bottom:6px'>"
+                f"{getattr(s, key_k)}K — {lname}</div>",
+                unsafe_allow_html=True
+            )
+
+    with st.sidebar.expander("ℹ️ What is Fill Light?"):
+        st.caption(TIPS["Fill Light"])
+    with st.sidebar.expander("ℹ️ What is Back Light?"):
+        st.caption(TIPS["Back Light"])
+
+    st.sidebar.divider()
+
+    # ── 📊 LIGHT RATIO ────────────────────────────────────────
+    st.sidebar.subheader("📊 Light Ratio")
+    ratio_label, ratio_color, ratio_mood = calculate_ratio(
+        s.key_intensity,
+        s.fill1_intensity if s.fill1_on else 0
+    )
+    st.sidebar.markdown(
+        f"<div style='background:{ratio_color};border-radius:8px;padding:8px 14px;"
+        f"font-size:13px;color:white;text-align:center'>"
+        f"<b>Key : Fill — {ratio_label}</b><br>"
+        f"<span style='font-size:11px'>{ratio_mood}</span></div>",
+        unsafe_allow_html=True
+    )
+    with st.sidebar.expander("ℹ️ What is Light Ratio?"):
+        st.caption(TIPS["Light Ratio"])
+
+    st.sidebar.divider()
+
+    # ── 🎭 TALENT ─────────────────────────────────────────────
+    st.sidebar.subheader("🎭 Talent")
+
+    st.sidebar.text_input("Name", key="talent_name")
+    st.sidebar.slider("Stage Left / Right  (ft)", 2.0, 28.0, step=0.5, key="talent_x")
+    st.sidebar.slider("Stage Depth  (ft from Wall 4)", 2.0, 18.0, step=0.5, key="talent_y")
+
+    cam_to_t = dist(STAGE_W / 2, s.cam_dolly, s.talent_x, s.talent_y)
+    key_to_t = dist(s.key_x, s.talent_y, s.talent_x, s.talent_y)
+    st.sidebar.caption(
+        f"📏  Camera → Talent: **{cam_to_t:.1f} ft** / {ft_m(cam_to_t):.1f} m  \n"
+        f"📏  Key → Talent: **{key_to_t:.1f} ft** / {ft_m(key_to_t):.1f} m"
+    )
+
+    if st.sidebar.button("↩ Reset to Center"):
+        st.session_state.talent_x = 15.0
+        st.session_state.talent_y = 10.0
+        st.rerun()
+
+    st.sidebar.divider()
+
+    # ── ✅ APPROVAL GATE ──────────────────────────────────────
+    st.sidebar.subheader("✅ Approval Gate")
+
+    st.sidebar.checkbox("DP Approved",       key="approved_dp")
+    st.sidebar.checkbox("Gaffer Approved",   key="approved_gaffer")
+    st.sidebar.checkbox("Director Approved", key="approved_director")
+
+    all_approved = s.approved_dp and s.approved_gaffer and s.approved_director
+
+    if all_approved and not s.approved_at:
+        st.session_state.approved_at = datetime.now().strftime("%Y-%m-%d  %H:%M")
+    elif not all_approved:
+        st.session_state.approved_at = None
+
+    if all_approved:
+        st.sidebar.success(f"✅ All approved  |  {s.approved_at}")
+        st.sidebar.button("🖨️ Print Floor Plan", on_click=lambda: None)
+        st.sidebar.caption("Use your browser's Print command (⌘P / Ctrl+P) — landscape layout is applied automatically.")
+    else:
+        st.sidebar.button("🖨️ Print Floor Plan", disabled=True)
+        remaining = []
+        if not s.approved_dp:      remaining.append("DP")
+        if not s.approved_gaffer:  remaining.append("Gaffer")
+        if not s.approved_director: remaining.append("Director")
+        st.sidebar.caption(f"Waiting for: {', '.join(remaining)}")
+
+    with st.sidebar.expander("ℹ️ What is the Approval Gate?"):
+        st.caption(TIPS["Approval Gate"])
 
 
-def export_json():
-    return json.dumps({
-        "scene_name": st.session_state.scene_name,
-        "created": datetime.now().isoformat(),
-        "studio_w": STUDIO_W,
-        "studio_d": STUDIO_D,
-        "scene": st.session_state.scene,
-        "version": "4.0"
-    }, indent=2)
+# ─────────────────────────────────────────────────────────────────
+# MAIN
+# ─────────────────────────────────────────────────────────────────
 
-
-# ── Main ──────────────────────────────────────────────────────────────────────
 def main():
-    scene = st.session_state.scene
+    st.set_page_config(
+        page_title=f"PreViz {PREVIZ_VERSION} — Open Educational Edition",
+        page_icon="🎬",
+        layout="wide",
+        initial_sidebar_state="expanded"
+    )
+
+    # Print CSS
+    st.markdown("""
+    <style>
+    @media print {
+        [data-testid="stSidebar"]  { display: none !important; }
+        [data-testid="stToolbar"]  { display: none !important; }
+        header                     { display: none !important; }
+        .stButton                  { display: none !important; }
+        .block-container           { padding: 0 !important; }
+        @page                      { size: landscape; margin: 0.4in; }
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    init_state()
+    render_sidebar()
 
     # Header
-    c1, c2 = st.columns([4, 1])
-    with c1:
-        st.markdown('<div class="main-header">🎬 PreViz 4.0</div>', unsafe_allow_html=True)
-        st.markdown('<div class="sub-header">Free Educational Technology for Film Students</div>', unsafe_allow_html=True)
-    with c2:
-        st.markdown('<div class="badge">Studio Floor Plan</div>', unsafe_allow_html=True)
-
-    # ── SIDEBAR ──────────────────────────────────────────────────────────────
-    with st.sidebar:
-        st.header("Scene Setup")
-
-        sname = st.text_input("Scene Name", value=st.session_state.scene_name)
-        if sname != st.session_state.scene_name:
-            st.session_state.scene_name = sname
-
-        st.divider()
-
-        # ── What to add ───────────────────────────────────────────────────────
-        element_type = st.selectbox("Add Element", [
-            "-- Select --",
-            "🎥  Camera",
-            "💡  Light",
-            "🧍  Subject / Actor",
-            "🪑  Set Piece",
-            "🎭  Prop"
-        ])
-
-        # ── Camera Form ───────────────────────────────────────────────────────
-        if "Camera" in element_type:
-            st.subheader("🎥 Camera Settings")
-            with st.form("cam_form"):
-                cam_name = st.text_input("Camera Name", value="Camera A")
-
-                # Position
-                st.markdown("---")
-                st.markdown("**📍 Camera Position on Floor Plan**")
-                st.caption("X = left/right on stage  |  Y = depth into studio")
-                cx = st.number_input(
-                    "X — Stage Left (-) / Stage Right (+)  in feet",
-                    value=0.0, step=0.5, min_value=-14.0, max_value=14.0
-                )
-                cy = st.number_input(
-                    "Y — Depth from 4th wall  (0 = open wall)  in feet",
-                    value=-1.5, step=0.5, min_value=-3.0, max_value=19.0
-                )
-                st.markdown("---")
-                st.markdown("**🔄 Camera Movement**")
-                cam_rot = st.slider(
-                    "Pan  Left (-) / Right (+)  in degrees",
-                    -90, 90, 0,
-                    help="0 = straight ahead toward back wall"
-                )
-                st.caption("Pan = horizontal rotation of the camera.")
-                cam_tilt = st.slider(
-                    "Tilt  Down (-) / Up (+)  in degrees",
-                    -45, 45, 0,
-                    help="0 = level horizon"
-                )
-                st.caption("Tilt = vertical angle of the camera.")
-
-                st.markdown("**Optics**")
-                st.caption("Lens determines how wide or tight your shot is.")
-                lens_key = st.selectbox("Lens / Focal Length", list(LENSES.keys()))
-                fl, fov = LENSES[lens_key]
-                st.info(f"Focal length: **{fl}mm**  |  Field of View: **{fov}°**")
-
-                cam_type = st.radio(
-                    "Camera Type",
-                    ["🎬 Cinema (T-stop)", "📹 Video / DSLR (f/stop)"],
-                    horizontal=True,
-                    help="Cinema cameras use T-stops (measured). Video cameras use f/stops (calculated)."
-                )
-                if "Cinema" in cam_type:
-                    fstop = st.select_slider(
-                        "T-Stop  (cinema aperture)",
-                        options=TSTOPS, value="T2.8"
-                    )
-                    st.caption("T-stops are measured values — more accurate for exposure.")
-                else:
-                    fstop = st.select_slider(
-                        "f/Stop  (video / photo aperture)",
-                        options=FSTOPS, value="f/2.8"
-                    )
-                    st.caption("f/stops are calculated values — standard on video cameras.")
-
-                nd = st.selectbox(
-                    "ND Filter",
-                    ND_FILTERS,
-                    help="Neutral Density filters reduce light without changing depth of field."
-                )
-                st.caption("Use ND filters outdoors or when shutter angle is fixed.")
-
-                st.markdown("---")
-                st.markdown("**🎞 Recording Settings**")
-
-                fps = st.selectbox(
-                    "Frame Rate (fps)",
-                    FPS_OPTIONS, index=1,
-                    help="24fps = cinematic look | 30fps = broadcast | 60fps = slow motion"
-                )
-                st.caption("24fps gives a cinematic look. 180° shutter rule: shutter = 2× frame rate.")
-
-                shutter = st.selectbox(
-                    "Shutter Speed / Angle",
-                    SHUTTER_OPTIONS, index=1,
-                    help="Rule of thumb: shutter speed = 2x frame rate (24fps → 1/48)"
-                )
-                st.caption(f"At {fps}fps, the 180° shutter rule = 1/{int(float(fps)*2)}")
-
-                iso = st.select_slider(
-                    "ISO / Gain  (sensitivity)",
-                    options=ISO_VALUES, value=800,
-                    help="Lower ISO = less noise. Start at 800 in controlled studio."
-                )
-                st.caption("ISO 800 is a clean native gain for most cinema cameras.")
-
-                res = st.selectbox(
-                    "Resolution",
-                    RESOLUTIONS, index=1
-                )
-
-                st.markdown("---")
-                st.markdown("**🎬 Camera Move**")
-                dolly = st.selectbox(
-                    "Dolly / Truck",
-                    ["Static", "Dolly In (push)", "Dolly Out (pull)", "Truck Left", "Truck Right"],
-                    help="Dolly In = physically move camera closer to subject"
-                )
-                st.caption("Dolly In ≠ Zoom. Moving the camera changes perspective.")
-
-                if st.form_submit_button("✅ Set Camera"):
-                    new_cam = {
-                        "name": cam_name,
-                        "x": cx, "y": cy,
-                        "rotation": cam_rot,
-                        "tilt": cam_tilt,
-                        "focal_length": fl, "fov": fov,
-                        "fstop": fstop,
-                        "nd": nd,
-                        "fps": fps,
-                        "shutter": shutter,
-                        "resolution": res,
-                        "iso": iso,
-                        "dolly": dolly
-                    }
-                    # Replace or add
-                    existing = [c for c in scene["cameras"] if c["name"] == cam_name]
-                    if existing:
-                        idx = next(i for i, c in enumerate(scene["cameras"]) if c["name"] == cam_name)
-                        scene["cameras"][idx] = new_cam
-                    else:
-                        scene["cameras"].append(new_cam)
-                    st.success(f"Camera set: {cam_name}")
-                    st.rerun()
-
-        # ── Light Form ────────────────────────────────────────────────────────
-        elif "Light" in element_type:
-            st.subheader("💡 Add / Edit Light")
-            with st.form("light_form"):
-                # Pick existing or new
-                light_names = [l["name"] for l in scene.get("lights", [])]
-                light_names_opts = ["-- New Light --"] + light_names
-                sel = st.selectbox("Edit existing or add new", light_names_opts)
-
-                # Defaults
-                default = next((l for l in scene["lights"] if l["name"] == sel), None)
-                lname     = st.text_input("Light Name", value=default["name"] if default else "Light")
-                ltype     = st.selectbox("Type", LIGHT_TYPES,
-                                         index=LIGHT_TYPES.index(default["type"]) if default else 0)
-                c1, c2 = st.columns(2)
-                with c1:
-                    lx = st.number_input("X (ft)", value=float(default["x"]) if default else 0.0,
-                                         step=0.5, min_value=-15.0, max_value=15.0)
-                    ly = st.number_input("Y (ft)", value=float(default["y"]) if default else 5.0,
-                                         step=0.5, min_value=0.0, max_value=20.0)
-                with c2:
-                    lrot = st.slider("Rotation", 0, 359,
-                                     int(default["rotation"]) if default else 180, key="lrot")
-                    lint = st.slider("Intensity %", 0, 100,
-                                     int(default["intensity"]) if default else 80, key="lint")
-
-                kelvin = st.select_slider("Color Temp (K)", options=KELVIN_VALUES,
-                                          value=int(default["kelvin"]) if default else 5600)
-                k_hex = kelvin_to_hex(kelvin)
-                st.markdown(
-                    f'<div style="background:{k_hex};border:1px solid #ccc;'
-                    f'border-radius:4px;padding:4px;text-align:center;font-size:0.8rem;">'
-                    f'{kelvin}K</div>', unsafe_allow_html=True
-                )
-
-                if st.form_submit_button("✅ Set Light"):
-                    new_l = {"name": lname, "type": ltype,
-                             "x": lx, "y": ly, "rotation": lrot,
-                             "intensity": lint, "kelvin": kelvin}
-                    existing = [l for l in scene["lights"] if l["name"] == sel]
-                    if existing:
-                        idx = next(i for i, l in enumerate(scene["lights"]) if l["name"] == sel)
-                        scene["lights"][idx] = new_l
-                    else:
-                        scene["lights"].append(new_l)
-                    st.success(f"Light set: {lname}")
-                    st.rerun()
-
-        # ── Subject Form ──────────────────────────────────────────────────────
-        elif "Subject" in element_type or "Actor" in element_type:
-            st.subheader("🧍 Subject / Actor")
-            with st.form("subj_form"):
-                sname = st.text_input("Name", value=scene["subject"].get("name", "Subject"))
-                c1, c2 = st.columns(2)
-                with c1:
-                    sx = st.number_input("X (ft)", value=float(scene["subject"]["x"]),
-                                         step=0.5, min_value=-14.0, max_value=14.0)
-                with c2:
-                    sy = st.number_input("Y (ft)", value=float(scene["subject"]["y"]),
-                                         step=0.5, min_value=0.5, max_value=19.0)
-                if st.form_submit_button("✅ Place Subject"):
-                    scene["subject"] = {"name": sname, "x": sx, "y": sy}
-                    st.success(f"Subject placed at ({sx}, {sy}) ft")
-                    st.rerun()
-
-        # ── Set Piece Form ────────────────────────────────────────────────────
-        elif "Set Piece" in element_type:
-            st.subheader("🪑 Add Set Piece")
-            with st.form("piece_form"):
-                pname = st.text_input("Name", value="Chair")
-                ptype = st.selectbox("Type", ["Table", "Chair", "Sofa", "Desk", "Wall", "Door", "Window"])
-                c1, c2 = st.columns(2)
-                with c1:
-                    px = st.number_input("X (ft)", value=0.0, step=0.5)
-                with c2:
-                    py = st.number_input("Y (ft)", value=5.0, step=0.5)
-                if st.form_submit_button("✅ Add Set Piece"):
-                    if "set_pieces" not in scene:
-                        scene["set_pieces"] = []
-                    scene["set_pieces"].append({"name": pname, "type": ptype, "x": px, "y": py})
-                    st.success(f"Added {pname}")
-                    st.rerun()
-
-        # ── Prop Form ─────────────────────────────────────────────────────────
-        elif "Prop" in element_type:
-            st.subheader("🎭 Add Prop")
-            with st.form("prop_form"):
-                prname = st.text_input("Prop Name", value="Prop")
-                prtype = st.selectbox("Category",
-                    ["Weapon", "Phone", "Bag", "Food / Drink", "Book", "Electronics", "Tool", "Other"])
-                c1, c2 = st.columns(2)
-                with c1:
-                    prx = st.number_input("X (ft)", value=0.0, step=0.5)
-                with c2:
-                    pry = st.number_input("Y (ft)", value=5.0, step=0.5)
-                prnotes = st.text_input("Notes", placeholder="Hero prop, breakaway...")
-                if st.form_submit_button("✅ Add Prop"):
-                    if "props" not in scene:
-                        scene["props"] = []
-                    scene["props"].append({"name": prname, "type": prtype,
-                                           "x": prx, "y": pry, "notes": prnotes})
-                    st.success(f"Added {prname}")
-                    st.rerun()
-
-        st.divider()
-
-        # ── Quick Templates ───────────────────────────────────────────────────
-        st.subheader("Quick Templates")
-
-        if st.button("Master Shot (Standard)"):
-            st.session_state.scene = copy.deepcopy(DEFAULT_SCENE)
-            st.rerun()
-
-        if st.button("Two-Person Interview"):
-            st.session_state.scene = {
-                "cameras": [
-                    {"name": "Camera A (Wide)", "x": 0.0, "y": -1.5, "rotation": 0,
-                     "focal_length": 35, "fov": 63, "fps": "24", "shutter": "1/48",
-                     "resolution": "1080p", "iso": 800, "nd": "None", "fstop": "T2.8"},
-                    {"name": "Camera B (Close)", "x": -3.0, "y": -1.0, "rotation": 10,
-                     "focal_length": 85, "fov": 29, "fps": "24", "shutter": "1/48",
-                     "resolution": "1080p", "iso": 800, "nd": "None", "fstop": "T2.8"}
-                ],
-                "subject": {"x": -2.0, "y": 8.0, "name": "Person A"},
-                "lights": [
-                    {"name": "Key Light",  "type": "Key Light",  "x": 10.0, "y":  8.0, "rotation": 210, "intensity": 100, "kelvin": 5600},
-                    {"name": "Fill 1",     "type": "Fill Light", "x": -12.0,"y": 17.0, "rotation": 135, "intensity": 50,  "kelvin": 5600},
-                    {"name": "Back Light", "type": "Back Light", "x":  0.0, "y": 18.0, "rotation": 180, "intensity": 60,  "kelvin": 3200},
-                    {"name": "Fill 2",     "type": "Fill Light", "x": 12.0, "y": 17.0, "rotation": 225, "intensity": 50,  "kelvin": 5600},
-                ],
-                "set_pieces": [{"name": "Chair A", "type": "Chair", "x": -2.0, "y": 8.0},
-                               {"name": "Chair B", "type": "Chair", "x":  2.0, "y": 8.0}],
-                "props": []
-            }
-            st.rerun()
-
-        if st.button("Green Screen Setup"):
-            st.session_state.scene = {
-                "cameras": [{"name": "Camera A", "x": 0.0, "y": -1.5, "rotation": 0,
-                              "focal_length": 50, "fov": 47, "fps": "24", "shutter": "1/48",
-                              "resolution": "1080p", "iso": 800, "nd": "None", "fstop": "T4"}],
-                "subject": {"x": 0.0, "y": 7.0, "name": "Subject"},
-                "lights": [
-                    {"name": "Key Light",          "type": "Key Light",  "x": 10.0, "y":  5.0, "rotation": 200, "intensity": 100, "kelvin": 5600},
-                    {"name": "Fill",               "type": "Fill Light", "x": -8.0, "y":  5.0, "rotation": 160, "intensity": 60,  "kelvin": 5600},
-                    {"name": "Green Screen L",     "type": "LED Panel",  "x": -8.0, "y": 17.0, "rotation": 180, "intensity": 80,  "kelvin": 5600},
-                    {"name": "Green Screen R",     "type": "LED Panel",  "x":  8.0, "y": 17.0, "rotation": 180, "intensity": 80,  "kelvin": 5600},
-                ],
-                "set_pieces": [],
-                "props": []
-            }
-            st.rerun()
-
-        st.divider()
-
-        if st.button("🗑️ Reset to Default", type="secondary"):
-            st.session_state.scene = copy.deepcopy(DEFAULT_SCENE)
-            st.session_state.scene_name = "Master Shot - Studio"
-            st.rerun()
-
-    # ── MAIN CONTENT ──────────────────────────────────────────────────────────
-    col_plan, col_info = st.columns([3, 1])
-
-    with col_plan:
-        fig = generate_floor_plan()
-        st.plotly_chart(fig, use_container_width=True)
-
-    with col_info:
-        st.subheader("Scene Summary")
-        subj = scene.get("subject", {})
-
-        # Camera specs display
-        for cam in scene.get("cameras", []):
-            dist = distance(cam["x"], cam["y"],
-                            subj.get("x", 0), subj.get("y", 10))
-            st.markdown(f"""
-<div class="cam-settings">
-<b>{cam['name']}</b><br>
-Lens: <b>{cam['focal_length']}mm</b>  FOV: {cam['fov']} deg<br>
-T-Stop: <b>{cam.get('fstop','T2.8')}</b>  ISO: <b>{cam.get('iso',800)}</b><br>
-ND: {cam.get('nd','None')}<br>
-{cam.get('fps','24')} fps  |  {cam.get('shutter','1/48')}  |  {cam.get('resolution','1080p')}<br>
-<b>Dist to subject: {dist:.1f} ft</b>
-</div>
-""", unsafe_allow_html=True)
-
-        st.divider()
-
-        st.markdown("**Lights**")
-        for l in scene.get("lights", []):
-            st.caption(f"{l['name']}: {l.get('intensity',100)}%  |  {l.get('kelvin',5600)}K")
-
-        st.divider()
-
-        # Export
-        st.subheader("Export / Save")
-
-        if st.button("📄 Setup Report"):
-            rpt = export_report()
-            st.download_button("Download Report (.txt)", data=rpt,
-                file_name=f"previz_{st.session_state.scene_name.replace(' ','_')}.txt",
-                mime="text/plain")
-
-        if st.button("💾 Save Scene"):
-            st.download_button("Download Scene (.json)", data=export_json(),
-                file_name=f"scene_{st.session_state.scene_name.replace(' ','_')}.json",
-                mime="application/json")
-
-        st.divider()
-        uploaded = st.file_uploader("Load Scene (.json)", type=["json"])
-        if uploaded:
-            data = json.loads(uploaded.read())
-            st.session_state.scene = data.get("scene", data.get("elements", {}))
-            st.session_state.scene_name = data.get("scene_name", "Loaded Scene")
-            st.success("Scene loaded!")
-            st.rerun()
-
-    # ── FILM PRODUCTION DICTIONARY ────────────────────────────────────────────
-    st.divider()
-    st.markdown("### 📚 Film Production Dictionary")
-    st.caption("Click any term below to read its definition. These are the building blocks of professional production planning.")
-
-    DICTIONARY = [
-        ("Camera — Floor Plan Symbol", "#1565C0", "#EFF4FF",
-         "On the floor plan, the camera appears as a **blue square** with a shaded triangle projecting from it. That triangle is the **Field of View (FOV)** — the area the lens can see. A 16mm wide-angle lens gives a wide FOV cone. A 200mm telephoto gives a narrow one. The dotted line to the subject shows your **working distance**."),
-
-        ("Key Light — The Main Source", "#F9A825", "#FFF8E1",
-         "The **Key Light** is the dominant light source — it creates the main illumination and defines shadows on the subject's face. In the classic 3-point lighting setup, the Key is placed at **90° to the camera axis**, on the right side of the studio (stage right). On the floor plan it appears as a gold half-dome pointing toward the subject. Color temperature is typically **5600K (daylight)**."),
-
-        ("Fill Light — Controlling Shadows", "#7CB342", "#F9FBE7",
-         "**Fill Lights** soften or fill the shadows created by the Key Light. They are placed on the **opposite side** from the Key, at lower intensity — typically **50% of the Key**. In a standard master shot, Fill 1 is in the **upper-left corner** and Fill 2 in the **upper-right corner**. The ratio between Key and Fill controls the contrast and mood of the scene."),
-
-        ("Back Light — Separation & Depth", "#1976D2", "#E3F2FD",
-         "The **Back Light** (also called Hair Light or Rim Light) is placed **behind and above the subject**, pointing back toward camera. Its purpose is to separate the subject from the background, creating a visible edge of light around the hair and shoulders. On the floor plan it sits at the **center of the back wall**. Often warmer (3200K) to contrast with the daylight Key."),
-
-        ("Subject Position & Blocking", "#E53935", "#FFEBEE",
-         "The **red circle** on the floor plan marks where the **actor or subject stands**. This is the anchor point for all lighting calculations. The 90° angle marker shows the geometric relationship between camera and Key Light. The working distance (camera to subject) determines lens choice — a 50mm at 10 feet gives a very different look than a 85mm at 20 feet."),
-
-        ("Focal Length & Field of View", "#6A1B9A", "#F3E5F5",
-         "**Focal length** (measured in mm) controls how wide or tight the shot is. **16mm** = extreme wide angle, shows the whole room. **50mm** ≈ human eye, natural perspective. **85mm** = flattering portrait compression. **135mm+** = telephoto, compresses distance between subject and background. Longer lenses require greater **working distance** from subject."),
-
-        ("T-Stops vs. f/Stops", "#00695C", "#E0F2F1",
-         "**f/stops** are *calculated* aperture values based on lens geometry. **T-stops** (Transmission stops) are *measured* — they account for actual light loss through the glass elements. Cinema lenses use T-stops for accurate, consistent exposure across different lenses. Video and photo lenses use f/stops. A T2.8 and f/2.8 are close but not identical. On professional sets, **always work in T-stops**."),
-
-        ("180° Shutter Rule", "#E65100", "#FFF3E0",
-         "The **180° shutter rule** is the foundation of cinematic motion blur. Set your shutter speed to **double your frame rate**: at 24fps → shutter 1/48. At 30fps → 1/60. This produces the natural motion blur the human eye expects from film. Breaking this rule creates either **strobing** (too fast) or excessive **motion smear** (too slow). Use ND filters — not shutter speed — to control exposure outdoors."),
-
-        ("ISO / Gain — Sensor Sensitivity", "#37474F", "#ECEFF1",
-         "**ISO** measures how sensitive the camera sensor is to light. **ISO 800** is a common clean native gain for cinema cameras — the starting point in a controlled studio. Doubling ISO (800→1600) adds one stop of exposure but also adds **noise/grain**. In low-light situations, raise ISO gradually. Use **ND filters** to reduce light rather than closing aperture, to preserve depth of field."),
-
-        ("ND Filters — Neutral Density", "#4527A0", "#EDE7F6",
-         "**Neutral Density (ND) filters** reduce light entering the lens without affecting color. Essential when shooting outdoors (too much light) or when you want a **wide aperture in bright conditions** to blur the background. ND 0.3 = 1 stop reduction. ND 0.6 = 2 stops. ND 0.9 = 3 stops. Variable ND filters let you dial in exposure while keeping your shutter angle fixed at 180°."),
-
-        ("Working Distance — Camera to Subject", "#1565C0", "#E3F2FD",
-         "**Working distance** is the physical space between camera and subject. It affects: (1) **Perspective** — closer camera = more distortion, wider feel. (2) **Depth of field** — closer subject = shallower focus. (3) **Lens choice** — a wide lens close creates a different look than a telephoto far away, even if subject appears the same size. The dotted line on the floor plan shows this distance in both feet and meters."),
-
-        ("3-Point Lighting — Classic Setup", "#F9A825", "#FFFDE7",
-         "The **3-point lighting** setup is the industry standard for narrative film and interviews. **Point 1: Key Light** — stage right, 90° from camera axis, primary illumination. **Point 2: Fill Light** — opposite side, 50% intensity, softens shadows. **Point 3: Back Light** — behind subject, separates from background. This is the default master shot in PreViz. Every variation in cinematography — high-key, low-key, Rembrandt — begins here."),
-    ]
-
-    # Show 3 per row as clean definition cards with expanders
-    for i in range(0, len(DICTIONARY), 3):
-        row = st.columns(3)
-        for j, col in enumerate(row):
-            if i + j < len(DICTIONARY):
-                term, color, bg, definition = DICTIONARY[i + j]
-                with col:
-                    st.markdown(f"""
-<div style="background:{bg};border-left:4px solid {color};
-border-radius:6px;padding:10px 14px;margin-bottom:4px;">
-<span style="font-weight:700;color:{color};font-size:0.9rem;">{term}</span>
-</div>""", unsafe_allow_html=True)
-                    with st.expander("? What is this"):
-                        st.markdown(definition)
-
-    # ── ELEMENT TABS ──────────────────────────────────────────────────────────
-    st.divider()
-    st.subheader("Scene Elements")
-
-    tabs = st.tabs(["🎥 Cameras", "💡 Lights", "🧍 Subject", "🪑 Set Pieces", "🎭 Props"])
-
-    # ── Cameras tab ───────────────────────────────────────────────────────────
-    with tabs[0]:
-        if scene.get("cameras"):
-            for i, cam in enumerate(scene["cameras"]):
-                subj = scene.get("subject", {"x": 0, "y": 10})
-                dist = distance(cam["x"], cam["y"], subj["x"], subj["y"])
-                dist_m = dist * 0.3048
-                c1, c2 = st.columns([5, 1])
-                with c1:
-                    st.markdown(f"""
-<div style="background:#EFF4FF;border-left:5px solid #1565C0;border-radius:6px;
-padding:12px 16px;margin-bottom:8px;font-size:0.9rem;line-height:1.9;">
-<span style="font-size:1.3rem;">📷</span>&nbsp;&nbsp;
-<b style="font-size:1.05rem;color:#0D47A1;">{cam['name']}</b>
-<span style="background:#1565C0;color:white;border-radius:4px;
-padding:2px 8px;font-size:0.75rem;margin-left:8px;">{cam['focal_length']}mm</span>
-<span style="background:#37474F;color:white;border-radius:4px;
-padding:2px 8px;font-size:0.75rem;margin-left:4px;">FOV {cam['fov']}&deg;</span>
-<br>
-<span style="color:#555;">
-&nbsp;&nbsp;&nbsp;&nbsp;
-🔍 <b>{cam.get('fstop','T2.8')}</b>
-&nbsp;&nbsp;|&nbsp;&nbsp;
-🎞 ISO <b>{cam.get('iso',800)}</b>
-&nbsp;&nbsp;|&nbsp;&nbsp;
-🌫 ND: <b>{cam.get('nd','None')}</b>
-&nbsp;&nbsp;|&nbsp;&nbsp;
-🎬 <b>{cam.get('fps','24')} fps</b>
-&nbsp;&nbsp;|&nbsp;&nbsp;
-⏱ <b>{cam.get('shutter','1/48')}</b>
-&nbsp;&nbsp;|&nbsp;&nbsp;
-📺 <b>{cam.get('resolution','1080p')}</b>
-<br>&nbsp;&nbsp;&nbsp;&nbsp;
-📍 Position: ({cam['x']:.1f}, {cam['y']:.1f}) ft
-&nbsp;&nbsp;|&nbsp;&nbsp;
-📐 Dist to subject: <b>{dist:.1f} ft / {dist_m:.1f} m</b>
-&nbsp;&nbsp;|&nbsp;&nbsp;
-🔄 Pan: {cam.get('rotation',0)}&deg;
-&nbsp;&nbsp;|&nbsp;&nbsp;
-↕ Tilt: {cam.get('tilt',0)}&deg;
-</span>
-</div>
-""", unsafe_allow_html=True)
-                with c2:
-                    if st.button("🗑️", key=f"del_cam_{i}", help="Remove camera"):
-                        scene["cameras"].pop(i)
-                        st.rerun()
+    col_title, col_badge = st.columns([6, 1])
+    with col_title:
+        st.markdown(
+            f"<h2 style='margin-bottom:2px'>🎬 PreViz {PREVIZ_VERSION}"
+            f" — Preset Set  <span style='font-size:14px;color:#888'>"
+            f"Phase 1: Studio Lighting</span></h2>",
+            unsafe_allow_html=True
+        )
+        st.caption("30 × 20 ft studio stage  |  One subject  |  Three-point lighting  |  Adjust → Observe → Understand")
+    with col_badge:
+        s = st.session_state
+        all_approved = s.approved_dp and s.approved_gaffer and s.approved_director
+        if all_approved:
+            st.markdown(
+                "<div style='background:#27AE60;color:white;border-radius:8px;"
+                "padding:6px 12px;text-align:center;font-size:12px'>"
+                "✅ APPROVED</div>",
+                unsafe_allow_html=True
+            )
         else:
-            st.info("No cameras yet. Use the sidebar to add one.")
+            st.markdown(
+                "<div style='background:#E67E22;color:white;border-radius:8px;"
+                "padding:6px 12px;text-align:center;font-size:12px'>"
+                "⏳ PENDING</div>",
+                unsafe_allow_html=True
+            )
 
-    # ── Lights tab ────────────────────────────────────────────────────────────
-    with tabs[1]:
-        LIGHT_ICON = {"Key Light":"☀️","Fill Light":"💡","Back Light":"🔦","LED Panel":"🟦","Practical":"🕯️","Natural Light":"🌤️"}
-        LIGHT_COLOR = {"Key Light":"#FFF8E1","Fill Light":"#F9FBE7","Back Light":"#E3F2FD","LED Panel":"#E8EAF6","Practical":"#FFF3E0","Natural Light":"#E0F7FA"}
-        LIGHT_BORDER = {"Key Light":"#F9A825","Fill Light":"#9CCC65","Back Light":"#42A5F5","LED Panel":"#5C6BC0","Practical":"#FF7043","Natural Light":"#26C6DA"}
-        if scene.get("lights"):
-            for i, l in enumerate(scene["lights"]):
-                ltype = l.get("type","Key Light")
-                icon  = LIGHT_ICON.get(ltype,"💡")
-                bg    = LIGHT_COLOR.get(ltype,"#FFF8E1")
-                bdr   = LIGHT_BORDER.get(ltype,"#F9A825")
-                k     = l.get("kelvin",5600)
-                intensity = l.get("intensity",100)
-                c1, c2 = st.columns([5, 1])
-                with c1:
-                    st.markdown(f"""
-<div style="background:{bg};border-left:5px solid {bdr};border-radius:6px;
-padding:12px 16px;margin-bottom:8px;font-size:0.9rem;line-height:1.9;">
-<span style="font-size:1.3rem;">{icon}</span>&nbsp;&nbsp;
-<b style="font-size:1.05rem;">{l['name']}</b>
-<span style="background:{bdr};color:white;border-radius:4px;
-padding:2px 8px;font-size:0.75rem;margin-left:8px;">{ltype}</span>
-<br>
-<span style="color:#555;">
-&nbsp;&nbsp;&nbsp;&nbsp;
-🌡 Color Temp: <b>{k}K</b>
-&nbsp;&nbsp;|&nbsp;&nbsp;
-💪 Intensity: <b>{intensity}%</b>
-&nbsp;&nbsp;|&nbsp;&nbsp;
-📍 Pos: ({l['x']:.1f}, {l['y']:.1f}) ft
-&nbsp;&nbsp;|&nbsp;&nbsp;
-🔄 Rot: {l.get('rotation',0)}&deg;
-</span>
-</div>
-""", unsafe_allow_html=True)
-                with c2:
-                    if st.button("🗑️", key=f"del_light_{i}", help="Remove light"):
-                        scene["lights"].pop(i)
-                        st.rerun()
-        else:
-            st.info("No lights yet. Use the sidebar to add one.")
-
-    # ── Subject tab ───────────────────────────────────────────────────────────
-    with tabs[2]:
-        subj = scene.get("subject", {})
-        sx, sy = subj.get("x",0), subj.get("y",10)
-        cam_list = scene.get("cameras",[])
-        st.markdown(f"""
-<div style="background:#FFEBEE;border-left:5px solid #E53935;border-radius:6px;
-padding:12px 16px;margin-bottom:8px;font-size:0.9rem;line-height:1.9;">
-<span style="font-size:1.3rem;">🧍</span>&nbsp;&nbsp;
-<b style="font-size:1.05rem;color:#B71C1C;">{subj.get('name','Subject')}</b>
-<br>
-<span style="color:#555;">
-&nbsp;&nbsp;&nbsp;&nbsp;
-📍 Position: <b>({sx:.1f}, {sy:.1f}) ft</b>
-&nbsp;&nbsp;|&nbsp;&nbsp;
-🌍 <b>({sx*0.3048:.2f}, {sy*0.3048:.2f}) m</b>
-</span>
-</div>
-""", unsafe_allow_html=True)
-        for cam in cam_list:
-            d_ft = distance(cam["x"], cam["y"], sx, sy)
-            d_m  = d_ft * 0.3048
-            st.markdown(f"&nbsp;&nbsp;&nbsp;&nbsp;📷 Distance from **{cam['name']}**: **{d_ft:.1f} ft / {d_m:.1f} m**")
-
-    # ── Set Pieces tab ────────────────────────────────────────────────────────
-    with tabs[3]:
-        PIECE_ICON = {"Table":"🪵","Chair":"🪑","Sofa":"🛋️","Desk":"🖥️","Wall":"🧱","Door":"🚪","Window":"🪟"}
-        if scene.get("set_pieces"):
-            for i, p in enumerate(scene["set_pieces"]):
-                icon = PIECE_ICON.get(p.get("type","Table"),"🪑")
-                c1, c2 = st.columns([5, 1])
-                with c1:
-                    st.markdown(f"""
-<div style="background:#F1F8E9;border-left:5px solid #7CB342;border-radius:6px;
-padding:10px 16px;margin-bottom:6px;font-size:0.9rem;line-height:1.8;">
-<span style="font-size:1.2rem;">{icon}</span>&nbsp;&nbsp;
-<b>{p['name']}</b>
-<span style="background:#7CB342;color:white;border-radius:4px;
-padding:2px 7px;font-size:0.75rem;margin-left:8px;">{p.get('type','')}</span>
-&nbsp;&nbsp;
-<span style="color:#555;">📍 ({p['x']:.1f}, {p['y']:.1f}) ft &nbsp;/&nbsp; ({p['x']*0.3048:.2f}, {p['y']*0.3048:.2f}) m</span>
-</div>
-""", unsafe_allow_html=True)
-                with c2:
-                    if st.button("🗑️", key=f"del_piece_{i}"):
-                        scene["set_pieces"].pop(i)
-                        st.rerun()
-        else:
-            st.info("No set pieces yet. Use the sidebar to add one.")
-
-    # ── Props tab ─────────────────────────────────────────────────────────────
-    with tabs[4]:
-        PROP_ICON = {"Weapon":"🔫","Phone":"📱","Bag":"👜","Food / Drink":"🍽️","Book":"📖","Electronics":"💻","Tool":"🔧","Other":"🎭"}
-        if scene.get("props"):
-            for i, p in enumerate(scene["props"]):
-                icon = PROP_ICON.get(p.get("type","Other"),"🎭")
-                c1, c2 = st.columns([5, 1])
-                with c1:
-                    st.markdown(f"""
-<div style="background:#F3E5F5;border-left:5px solid #8E24AA;border-radius:6px;
-padding:10px 16px;margin-bottom:6px;font-size:0.9rem;line-height:1.8;">
-<span style="font-size:1.2rem;">{icon}</span>&nbsp;&nbsp;
-<b>{p['name']}</b>
-<span style="background:#8E24AA;color:white;border-radius:4px;
-padding:2px 7px;font-size:0.75rem;margin-left:8px;">{p.get('type','Prop')}</span>
-<br>
-<span style="color:#555;">
-&nbsp;&nbsp;&nbsp;&nbsp;📍 ({p['x']:.1f}, {p['y']:.1f}) ft
-{f" &nbsp;|&nbsp; 📝 {p.get('notes','')}" if p.get('notes') else ""}
-</span>
-</div>
-""", unsafe_allow_html=True)
-                with c2:
-                    if st.button("🗑️", key=f"del_prop_{i}"):
-                        scene["props"].pop(i)
-                        st.rerun()
-        else:
-            st.info("No props yet. Use the sidebar to add one.")
+    # Floor plan
+    fig = draw_floor_plan()
+    st.plotly_chart(fig, use_container_width=True)
 
     # Footer
-    st.divider()
-    st.markdown("""
-    <div style='text-align:center; color:#aaa; font-size:0.8rem; padding:0.5rem;'>
-        PreViz v4.0 &nbsp;|&nbsp; Free Educational Technology for Film Students
-        &nbsp;|&nbsp; Developed by Eduardo Carmona &nbsp;|&nbsp; CSUDH &amp; LMU
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown(
+        "<div style='text-align:center;color:#BBB;font-size:11px;padding:8px'>"
+        "Developed by Eduardo Carmona, MFA — CSUDH · LMU  |  "
+        "GNU GPL v3.0  |  Free for every student — from Los Angeles to Lima to Windhoek."
+        "</div>",
+        unsafe_allow_html=True
+    )
 
 
 if __name__ == "__main__":

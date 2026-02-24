@@ -157,7 +157,7 @@ def init_state():
         # Key Light
         "key_intensity": 80,
         "key_kelvin":    5600,
-        "key_x":         5.0,  # stage left, ft from Wall 1
+        "key_x":         22.0,  # stage right, near camera — default position
         # Fill #1 (upper left corner)
         "fill1_on":        True,
         "fill1_intensity": 40,
@@ -369,13 +369,11 @@ def draw_floor_plan():
     # Camera body
     fig.add_trace(go.Scatter(
         x=[cam_x], y=[cam_y],
-        mode="markers+text",
+        mode="markers",
         marker=dict(
-            size=22, color="#1E3A8A", symbol="square",
+            size=24, color="#1E3A8A", symbol="square",
             line=dict(color="white", width=2)
         ),
-        text=["📷"],
-        textposition="middle center",
         showlegend=False,
         hovertemplate=(
             f"<b>📷 Camera — Master Shot</b><br>"
@@ -384,6 +382,14 @@ def draw_floor_plan():
             f"Dolly: {s.cam_dolly} ft from Wall 4<extra></extra>"
         )
     ))
+    # Camera emoji as annotation (always visible on top of marker)
+    fig.add_annotation(
+        x=cam_x, y=cam_y,
+        text="📷",
+        showarrow=False,
+        font=dict(size=16),
+        xanchor="center", yanchor="middle"
+    )
 
     fig.add_annotation(
         x=cam_x + 2.0, y=cam_y + 0.3,
@@ -606,7 +612,7 @@ def render_sidebar():
         unsafe_allow_html=True
     )
 
-    st.sidebar.slider("Position — Stage Left/Right (ft)", 2.0, 14.0, step=0.5, key="key_x")
+    st.sidebar.slider("Position — Stage Left/Right (ft)", 2.0, 28.0, step=0.5, key="key_x")
     with st.sidebar.expander("ℹ️ What is Key Light?"):
         st.caption(TIPS["Key Light"])
     with st.sidebar.expander("ℹ️ What is Kelvin?"):

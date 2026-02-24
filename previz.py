@@ -61,7 +61,7 @@ DEFAULT_SCENE = {
 }
 
 # ── Session State ─────────────────────────────────────────────────────────────
-PREVIZ_VERSION = "4.2"
+PREVIZ_VERSION = "4.3"
 if st.session_state.get("_version") != PREVIZ_VERSION:
     st.session_state.scene = copy.deepcopy(DEFAULT_SCENE)
     st.session_state.scene_name = "Master Shot - Studio"
@@ -163,10 +163,13 @@ def generate_floor_plan():
         ),
         showlegend=True,
         legend=dict(
-            x=1.02, y=1, xanchor="left", yanchor="top",
-            bgcolor="rgba(255,255,255,0.95)",
-            bordercolor="#ccc", borderwidth=1,
-            font=dict(size=10)
+            x=0.01, y=0.99,
+            xanchor="left", yanchor="top",
+            bgcolor="rgba(20,30,50,0.88)",
+            bordercolor="#445",
+            borderwidth=1,
+            font=dict(size=12, color="white", family="Arial"),
+            title=dict(text="<b>LEGEND</b>", font=dict(size=12, color="#AAD4FF"))
         )
     )
 
@@ -359,17 +362,61 @@ def generate_floor_plan():
             )
         ))
 
-        # ── Distance line: camera to subject ──────────────────────────────────
+        # ── Camera-to-Subject axis line ───────────────────────────────────────
         dist = distance(cx, cy, sx, sy)
+        dist_m = dist * 0.3048
         fig.add_trace(go.Scatter(
             x=[cx, sx], y=[cy, sy],
             mode="lines+text",
-            line=dict(color="#888", width=1, dash="dot"),
-            text=["", f"  {dist:.1f} ft"],
+            line=dict(color="#888", width=1.5, dash="dot"),
+            text=["", f"  {dist:.1f}ft / {dist_m:.1f}m"],
             textposition="middle right",
             textfont=dict(size=9, color="#555"),
             showlegend=False, hoverinfo="skip"
         ))
+
+        # ── 90° Key Light guide: subject→key line perpendicular to camera axis ─
+        # Draw a dashed orange line from subject to key light (if one exists)
+        for kl in scene.get("lights", []):
+            if kl.get("type") == "Key Light":
+                klx, kly = kl["x"], kl["y"]
+                # Line from subject to key light
+                fig.add_trace(go.Scatter(
+                    x=[sx, klx], y=[sy, kly],
+                    mode="lines",
+                    line=dict(color="#F9A825", width=2, dash="dash"),
+                    showlegend=False, hoverinfo="skip", opacity=0.7
+                ))
+                # 90° angle marker at subject position
+                # Small L-shape: step along camera axis then step toward key
+                step = 0.8
+                # unit vector camera→subject
+                cam_dx = (sx - cx) / dist if dist > 0 else 0
+                cam_dy = (sy - cy) / dist if dist > 0 else 1
+                # perpendicular (90° clockwise)
+                perp_x = cam_dy
+                perp_y = -cam_dx
+                # figure out which side key is on
+                key_side = 1 if (klx - sx) * perp_x + (kly - sy) * perp_y > 0 else -1
+                corner1 = (sx + cam_dx * step, sy + cam_dy * step)
+                corner2 = (sx + cam_dx * step + perp_x * key_side * step,
+                           sy + cam_dy * step + perp_y * key_side * step)
+                corner3 = (sx + perp_x * key_side * step, sy + perp_y * key_side * step)
+                fig.add_trace(go.Scatter(
+                    x=[corner1[0], corner2[0], corner3[0]],
+                    y=[corner1[1], corner2[1], corner3[1]],
+                    mode="lines",
+                    line=dict(color="#F9A825", width=1.5),
+                    showlegend=False, hoverinfo="skip", opacity=0.8
+                ))
+                # 90° label
+                fig.add_annotation(
+                    x=corner2[0], y=corner2[1],
+                    text="90°", showarrow=False,
+                    font=dict(size=9, color="#F9A825"),
+                    bgcolor="rgba(255,255,255,0.7)"
+                )
+                break
 
     # ── Compass / orientation note ────────────────────────────────────────────
     fig.add_annotation(x=-hw + 0.5, y=d - 0.8,
@@ -496,41 +543,101 @@ def main():
                 cam_name = st.text_input("Camera Name", value="Camera A")
 
                 # Position
-                st.markdown("**Position**")
-                c1, c2 = st.columns(2)
-                with c1:
-                    cx = st.number_input("X (ft)", value=0.0, step=0.5,
-                                         min_value=-14.0, max_value=14.0)
-                with c2:
-                    cy = st.number_input("Y (ft)", value=-1.5, step=0.5,
-                                         min_value=-3.0, max_value=19.0)
-                cam_rot = st.slider("Pan L/R (deg)", -90, 90, 0,
-                                    help="0 = straight ahead | neg = left | pos = right")
-                cam_tilt = st.slider("Tilt Up/Down (deg)", -45, 45, 0,
-                                     help="Negative = tilt down | Positive = tilt up")
+                st.markdown("---")
+                st.markdown("**📍 Camera Position on Floor Plan**")
+                st.caption("X = left/right on stage  |  Y = depth into studio")
+                cx = st.number_input(
+                    "X — Stage Left (-) / Stage Right (+)  in feet",
+                    value=0.0, step=0.5, min_value=-14.0, max_value=14.0
+                )
+                cy = st.number_input(
+                    "Y — Depth from 4th wall  (0 = open wall)  in feet",
+                    value=-1.5, step=0.5, min_value=-3.0, max_value=19.0
+                )
+                st.markdown("---")
+                st.markdown("**🔄 Camera Movement**")
+                cam_rot = st.slider(
+                    "Pan  Left (-) / Right (+)  in degrees",
+                    -90, 90, 0,
+                    help="0 = straight ahead toward back wall"
+                )
+                st.caption("Pan = horizontal rotation of the camera.")
+                cam_tilt = st.slider(
+                    "Tilt  Down (-) / Up (+)  in degrees",
+                    -45, 45, 0,
+                    help="0 = level horizon"
+                )
+                st.caption("Tilt = vertical angle of the camera.")
 
                 st.markdown("**Optics**")
-                lens_key = st.selectbox("Lens", list(LENSES.keys()))
+                st.caption("Lens determines how wide or tight your shot is.")
+                lens_key = st.selectbox("Lens / Focal Length", list(LENSES.keys()))
                 fl, fov = LENSES[lens_key]
-                st.caption(f"Focal length: {fl}mm   FOV: {fov} deg")
+                st.info(f"Focal length: **{fl}mm**  |  Field of View: **{fov}°**")
 
-                c1, c2 = st.columns(2)
-                with c1:
-                    fstop = st.selectbox("T-Stop", TSTOPS, index=2)
-                with c2:
-                    nd = st.selectbox("ND Filter", ND_FILTERS)
+                cam_type = st.radio(
+                    "Camera Type",
+                    ["🎬 Cinema (T-stop)", "📹 Video / DSLR (f/stop)"],
+                    horizontal=True,
+                    help="Cinema cameras use T-stops (measured). Video cameras use f/stops (calculated)."
+                )
+                if "Cinema" in cam_type:
+                    fstop = st.select_slider(
+                        "T-Stop  (cinema aperture)",
+                        options=TSTOPS, value="T2.8"
+                    )
+                    st.caption("T-stops are measured values — more accurate for exposure.")
+                else:
+                    fstop = st.select_slider(
+                        "f/Stop  (video / photo aperture)",
+                        options=FSTOPS, value="f/2.8"
+                    )
+                    st.caption("f/stops are calculated values — standard on video cameras.")
 
-                st.markdown("**Recording**")
-                c1, c2 = st.columns(2)
-                with c1:
-                    fps = st.selectbox("Frame Rate", FPS_OPTIONS, index=1)
-                    res = st.selectbox("Resolution", RESOLUTIONS, index=1)
-                with c2:
-                    shutter = st.selectbox("Shutter", SHUTTER_OPTIONS, index=1)
-                    iso = st.select_slider("ISO / Gain", options=ISO_VALUES, value=800)
+                nd = st.selectbox(
+                    "ND Filter",
+                    ND_FILTERS,
+                    help="Neutral Density filters reduce light without changing depth of field."
+                )
+                st.caption("Use ND filters outdoors or when shutter angle is fixed.")
 
-                st.markdown("**Camera Moves**")
-                dolly = st.selectbox("Dolly", ["Static", "Dolly In", "Dolly Out (Push)"])
+                st.markdown("---")
+                st.markdown("**🎞 Recording Settings**")
+
+                fps = st.selectbox(
+                    "Frame Rate (fps)",
+                    FPS_OPTIONS, index=1,
+                    help="24fps = cinematic look | 30fps = broadcast | 60fps = slow motion"
+                )
+                st.caption("24fps gives a cinematic look. 180° shutter rule: shutter = 2× frame rate.")
+
+                shutter = st.selectbox(
+                    "Shutter Speed / Angle",
+                    SHUTTER_OPTIONS, index=1,
+                    help="Rule of thumb: shutter speed = 2x frame rate (24fps → 1/48)"
+                )
+                st.caption(f"At {fps}fps, the 180° shutter rule = 1/{int(float(fps)*2)}")
+
+                iso = st.select_slider(
+                    "ISO / Gain  (sensitivity)",
+                    options=ISO_VALUES, value=800,
+                    help="Lower ISO = less noise. Start at 800 in controlled studio."
+                )
+                st.caption("ISO 800 is a clean native gain for most cinema cameras.")
+
+                res = st.selectbox(
+                    "Resolution",
+                    RESOLUTIONS, index=1
+                )
+
+                st.markdown("---")
+                st.markdown("**🎬 Camera Move**")
+                dolly = st.selectbox(
+                    "Dolly / Truck",
+                    ["Static", "Dolly In (push)", "Dolly Out (pull)", "Truck Left", "Truck Right"],
+                    help="Dolly In = physically move camera closer to subject"
+                )
+                st.caption("Dolly In ≠ Zoom. Moving the camera changes perspective.")
 
                 if st.form_submit_button("✅ Set Camera"):
                     new_cam = {
@@ -773,6 +880,44 @@ ND: {cam.get('nd','None')}<br>
             st.session_state.scene_name = data.get("scene_name", "Loaded Scene")
             st.success("Scene loaded!")
             st.rerun()
+
+    # ── ICON LEGEND ───────────────────────────────────────────────────────────
+    st.divider()
+    st.markdown("### 📖 Floor Plan Symbol Guide")
+    st.caption("Hover over any element on the floor plan above for full details. The cards below explain what each symbol means.")
+
+    icon_cols = st.columns(4)
+    ICON_GUIDE = [
+        ("📷", "CAMERA", "#EFF4FF", "#1565C0",
+         "Blue square on the floor plan. The shaded triangle in front shows the <b>Field of View</b> — how wide the lens sees. A wider angle = more of the scene. The dashed line connects camera to subject showing <b>shooting distance</b>."),
+        ("☀️", "KEY LIGHT", "#FFF8E1", "#F9A825",
+         "Gold star with half-dome shape. The <b>Key Light</b> is the main source of illumination. Placed at <b>90° to the camera axis</b> for classic 3-point lighting. The orange dashed line shows this angle."),
+        ("💡", "FILL LIGHT", "#F9FBE7", "#7CB342",
+         "Circle marker. <b>Fill Lights</b> reduce harsh shadows created by the Key. Typically placed on the opposite side at lower intensity (50% of Key). Upper-left and upper-right corners in a standard studio setup."),
+        ("🔦", "BACK LIGHT", "#E3F2FD", "#1976D2",
+         "Circle marker, center back wall. The <b>Back Light</b> (or hair light / rim light) separates the subject from the background. Placed behind and above the subject. Warm 3200K adds depth."),
+        ("🧍", "SUBJECT", "#FFEBEE", "#E53935",
+         "Large red circle. Marks the <b>position of the actor or subject</b>. The dotted line to the camera shows <b>working distance</b>. The 90° angle marker shows the Key Light relationship."),
+        ("🪑", "SET PIECE", "#F1F8E9", "#7CB342",
+         "Square marker. Represents <b>furniture and set dressing</b> — tables, chairs, doors, walls. Position these before placing lights and camera so you plan around the actual set layout."),
+        ("🎭", "PROP", "#F3E5F5", "#8E24AA",
+         "Diamond marker. <b>Hand props or set props</b> the actors will use or interact with. Important to plan because props affect blocking, lighting, and framing."),
+        ("🟢", "GREEN SCREEN", "#E8F5E9", "#2E7D32",
+         "Thick green line along the back wall. Marks the <b>chroma key background</b>. Light the green screen separately from your subject — use LED panels on each side at even intensity to avoid hot spots."),
+    ]
+
+    for idx, (icon, label, bg, color, desc) in enumerate(ICON_GUIDE):
+        col = icon_cols[idx % 4]
+        with col:
+            st.markdown(f"""
+<div style="background:{bg};border-top:4px solid {color};border-radius:8px;
+padding:14px;margin-bottom:12px;min-height:200px;">
+<div style="font-size:2rem;text-align:center;">{icon}</div>
+<div style="text-align:center;font-weight:bold;color:{color};
+font-size:0.85rem;letter-spacing:1px;margin:6px 0;">{label}</div>
+<div style="font-size:0.8rem;color:#333;line-height:1.5;">{desc}</div>
+</div>
+""", unsafe_allow_html=True)
 
     # ── ELEMENT TABS ──────────────────────────────────────────────────────────
     st.divider()

@@ -5,233 +5,233 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PreViz 4.5 — Open Educational Edition</title>
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
-<style type="text/css">@font-face \{font-family:Barlow Condensed;font-style:normal;font-weight:400;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin-ext/400/normal.woff2);unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;\}@font-face \{font-family:Barlow Condensed;font-style:normal;font-weight:400;src:url(/cf-fonts/s/barlow-condensed/5.0.11/vietnamese/400/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;\}@font-face \{font-family:Barlow Condensed;font-style:normal;font-weight:400;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin/400/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;\}@font-face \{font-family:Barlow Condensed;font-style:normal;font-weight:600;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin/600/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;\}@font-face \{font-family:Barlow Condensed;font-style:normal;font-weight:600;src:url(/cf-fonts/s/barlow-condensed/5.0.11/vietnamese/600/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;\}@font-face \{font-family:Barlow Condensed;font-style:normal;font-weight:600;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin-ext/600/normal.woff2);unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;\}@font-face \{font-family:Barlow Condensed;font-style:normal;font-weight:700;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin/700/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;\}@font-face \{font-family:Barlow Condensed;font-style:normal;font-weight:700;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin-ext/700/normal.woff2);unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;\}@font-face \{font-family:Barlow Condensed;font-style:normal;font-weight:700;src:url(/cf-fonts/s/barlow-condensed/5.0.11/vietnamese/700/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;\}@font-face \{font-family:Barlow Condensed;font-style:normal;font-weight:800;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin-ext/800/normal.woff2);unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;\}@font-face \{font-family:Barlow Condensed;font-style:normal;font-weight:800;src:url(/cf-fonts/s/barlow-condensed/5.0.11/vietnamese/800/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;\}@font-face \{font-family:Barlow Condensed;font-style:normal;font-weight:800;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin/800/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;\}@font-face \{font-family:Barlow Condensed;font-style:normal;font-weight:900;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin-ext/900/normal.woff2);unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;\}@font-face \{font-family:Barlow Condensed;font-style:normal;font-weight:900;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin/900/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;\}@font-face \{font-family:Barlow Condensed;font-style:normal;font-weight:900;src:url(/cf-fonts/s/barlow-condensed/5.0.11/vietnamese/900/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;\}@font-face \{font-family:JetBrains Mono;font-style:normal;font-weight:400;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;\}@font-face \{font-family:JetBrains Mono;font-style:normal;font-weight:400;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;\}@font-face \{font-family:JetBrains Mono;font-style:normal;font-weight:400;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/greek/wght/normal.woff2);unicode-range:U+0370-03FF;font-display:swap;\}@font-face \{font-family:JetBrains Mono;font-style:normal;font-weight:400;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/latin-ext/wght/normal.woff2);unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;\}@font-face \{font-family:JetBrains Mono;font-style:normal;font-weight:400;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;\}@font-face \{font-family:JetBrains Mono;font-style:normal;font-weight:400;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;\}@font-face \{font-family:JetBrains Mono;font-style:normal;font-weight:700;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;\}@font-face \{font-family:JetBrains Mono;font-style:normal;font-weight:700;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/greek/wght/normal.woff2);unicode-range:U+0370-03FF;font-display:swap;\}@font-face \{font-family:JetBrains Mono;font-style:normal;font-weight:700;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;\}@font-face \{font-family:JetBrains Mono;font-style:normal;font-weight:700;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;\}@font-face \{font-family:JetBrains Mono;font-style:normal;font-weight:700;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/latin-ext/wght/normal.woff2);unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;\}@font-face \{font-family:JetBrains Mono;font-style:normal;font-weight:700;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;\}</style>
+<style type="text/css">@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:400;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin-ext/400/normal.woff2);unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:400;src:url(/cf-fonts/s/barlow-condensed/5.0.11/vietnamese/400/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:400;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin/400/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:600;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin/600/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:600;src:url(/cf-fonts/s/barlow-condensed/5.0.11/vietnamese/600/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:600;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin-ext/600/normal.woff2);unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:700;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin/700/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:700;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin-ext/700/normal.woff2);unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:700;src:url(/cf-fonts/s/barlow-condensed/5.0.11/vietnamese/700/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:800;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin-ext/800/normal.woff2);unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:800;src:url(/cf-fonts/s/barlow-condensed/5.0.11/vietnamese/800/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:800;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin/800/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:900;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin-ext/900/normal.woff2);unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:900;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin/900/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:900;src:url(/cf-fonts/s/barlow-condensed/5.0.11/vietnamese/900/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:JetBrains Mono;font-style:normal;font-weight:400;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:JetBrains Mono;font-style:normal;font-weight:400;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:JetBrains Mono;font-style:normal;font-weight:400;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/greek/wght/normal.woff2);unicode-range:U+0370-03FF;font-display:swap;}@font-face {font-family:JetBrains Mono;font-style:normal;font-weight:400;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/latin-ext/wght/normal.woff2);unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:JetBrains Mono;font-style:normal;font-weight:400;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:JetBrains Mono;font-style:normal;font-weight:400;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:JetBrains Mono;font-style:normal;font-weight:700;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:JetBrains Mono;font-style:normal;font-weight:700;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/greek/wght/normal.woff2);unicode-range:U+0370-03FF;font-display:swap;}@font-face {font-family:JetBrains Mono;font-style:normal;font-weight:700;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:JetBrains Mono;font-style:normal;font-weight:700;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:JetBrains Mono;font-style:normal;font-weight:700;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/latin-ext/wght/normal.woff2);unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:JetBrains Mono;font-style:normal;font-weight:700;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}</style>
 
 <style>
-*,*::before,*::after\{box-sizing:border-box;margin:0;padding:0\}
-:root\{
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
   --orange:#FF4500;--teal:#00D4CC;--yellow:#FFE200;
   --green:#00FF88;--red:#FF1744;--sun:#FFB300;
   --navy:#03060F;--panel:#060A15;--card:#080E1C;
   --border:#0F1A30;--dim:#1A2540;--muted:#304060;--text:#C8D8F0;
   --font-d:'Barlow Condensed',sans-serif;--font-m:'JetBrains Mono',monospace;
-\}
-html,body\{height:100%;background:var(--navy);color:var(--text);font-family:var(--font-m);font-size:12px;overflow:hidden\}
-#app\{display:flex;height:100vh;width:100vw\}
+}
+html,body{height:100%;background:var(--navy);color:var(--text);font-family:var(--font-m);font-size:12px;overflow:hidden}
+#app{display:flex;height:100vh;width:100vw}
 
-/* \uc0\u9472 \u9472  SIDEBAR \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
-#sidebar\{width:280px;min-width:280px;background:var(--panel);border-right:1px solid var(--border);
-  overflow-y:auto;overflow-x:hidden;padding:10px 12px 24px;display:flex;flex-direction:column;flex-shrink:0\}
-#sidebar::-webkit-scrollbar\{width:4px\}
-#sidebar::-webkit-scrollbar-thumb\{background:#1E2A44;border-radius:2px\}
+/* ─ \u9472  SIDEBAR \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
+#sidebar{width:280px;min-width:280px;background:var(--panel);border-right:1px solid var(--border);
+  overflow-y:auto;overflow-x:hidden;padding:10px 12px 24px;display:flex;flex-direction:column;flex-shrink:0}
+#sidebar::-webkit-scrollbar{width:4px}
+#sidebar::-webkit-scrollbar-thumb{background:#1E2A44;border-radius:2px}
 
-.sb-brand\{font-family:var(--font-d);font-size:22px;font-weight:900;letter-spacing:.10em;
+.sb-brand{font-family:var(--font-d);font-size:22px;font-weight:900;letter-spacing:.10em;
   color:var(--orange);text-transform:uppercase;padding:4px 0 1px;
-  text-shadow:0 0 20px rgba(255,69,0,.35)\}
-.sb-ver\{font-size:8px;color:var(--muted);letter-spacing:.15em;margin-bottom:6px\}
+  text-shadow:0 0 20px rgba(255,69,0,.35)}
+.sb-ver{font-size:8px;color:var(--muted);letter-spacing:.15em;margin-bottom:6px}
 
 /* Lang toggle */
-.lang-row\{display:flex;gap:4px;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--border)\}
-.lang-btn\{flex:1;padding:3px 0;background:var(--card);border:1px solid var(--border);
+.lang-row{display:flex;gap:4px;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.lang-btn{flex:1;padding:3px 0;background:var(--card);border:1px solid var(--border);
   color:var(--muted);border-radius:3px;font-family:var(--font-m);font-size:9px;
-  letter-spacing:.1em;cursor:pointer;text-transform:uppercase;text-align:center;transition:.2s\}
-.lang-btn.active\{background:#0A1428;border-color:var(--teal);color:var(--teal)\}
+  letter-spacing:.1em;cursor:pointer;text-transform:uppercase;text-align:center;transition:.2s}
+.lang-btn.active{background:#0A1428;border-color:var(--teal);color:var(--teal)}
 
-.section\{padding:7px 0;border-bottom:1px solid var(--border)\}
-.section:last-child\{border-bottom:none\}
-.sec-title\{font-family:var(--font-d);font-size:13px;font-weight:800;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--orange);margin-bottom:5px\}
+.section{padding:7px 0;border-bottom:1px solid var(--border)}
+.section:last-child{border-bottom:none}
+.sec-title{font-family:var(--font-d);font-size:13px;font-weight:800;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--orange);margin-bottom:5px}
 
-.ctrl\{margin-bottom:6px\}
-.ctrl label\{display:block;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;margin-bottom:2px\}
-.ctrl input[type=range]\{width:100%;height:3px;appearance:none;background:var(--dim);border-radius:2px;outline:none;cursor:pointer\}
-.ctrl input[type=range]::-webkit-slider-thumb\{appearance:none;width:12px;height:12px;border-radius:50%;
-  background:var(--orange);cursor:pointer;box-shadow:0 0 6px rgba(255,69,0,.5)\}
-.ctrl-val\{font-size:11px;color:var(--teal);margin-top:1px\}
-.ctrl select,.ctrl input[type=text]\{width:100%;background:var(--card);border:1px solid var(--border);
-  color:var(--text);padding:4px 7px;border-radius:3px;font-family:var(--font-m);font-size:11px;cursor:pointer;outline:none\}
+.ctrl{margin-bottom:6px}
+.ctrl label{display:block;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;margin-bottom:2px}
+.ctrl input[type=range]{width:100%;height:3px;appearance:none;background:var(--dim);border-radius:2px;outline:none;cursor:pointer}
+.ctrl input[type=range]::-webkit-slider-thumb{appearance:none;width:12px;height:12px;border-radius:50%;
+  background:var(--orange);cursor:pointer;box-shadow:0 0 6px rgba(255,69,0,.5)}
+.ctrl-val{font-size:11px;color:var(--teal);margin-top:1px}
+.ctrl select,.ctrl input[type=text]{width:100%;background:var(--card);border:1px solid var(--border);
+  color:var(--text);padding:4px 7px;border-radius:3px;font-family:var(--font-m);font-size:11px;cursor:pointer;outline:none}
 
-.tog\{display:flex;align-items:center;gap:7px;margin-bottom:5px;font-size:10px;color:var(--text);cursor:pointer\}
-.tog input[type=checkbox]\{width:13px;height:13px;accent-color:var(--orange);cursor:pointer\}
+.tog{display:flex;align-items:center;gap:7px;margin-bottom:5px;font-size:10px;color:var(--text);cursor:pointer}
+.tog input[type=checkbox]{width:13px;height:13px;accent-color:var(--orange);cursor:pointer}
 
 /* Compact XY row */
-.xy-row\{display:flex;gap:6px;margin-bottom:6px\}
-.xy-col\{flex:1\}
-.xy-col label\{display:block;font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px\}
-.xy-col input[type=range]\{width:100%;height:3px;appearance:none;background:var(--dim);border-radius:2px;outline:none;cursor:pointer\}
-.xy-col input[type=range]::-webkit-slider-thumb\{appearance:none;width:10px;height:10px;border-radius:50%;
-  background:var(--teal);cursor:pointer\}
-.xy-val\{font-size:9px;color:var(--teal)\}
+.xy-row{display:flex;gap:6px;margin-bottom:6px}
+.xy-col{flex:1}
+.xy-col label{display:block;font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px}
+.xy-col input[type=range]{width:100%;height:3px;appearance:none;background:var(--dim);border-radius:2px;outline:none;cursor:pointer}
+.xy-col input[type=range]::-webkit-slider-thumb{appearance:none;width:10px;height:10px;border-radius:50%;
+  background:var(--teal);cursor:pointer}
+.xy-val{font-size:9px;color:var(--teal)}
 
 /* Place button */
-.place-btn\{display:flex;align-items:center;gap:5px;width:100%;padding:4px 8px;margin:4px 0;
+.place-btn{display:flex;align-items:center;gap:5px;width:100%;padding:4px 8px;margin:4px 0;
   background:var(--card);border:1px solid var(--border);color:var(--muted);border-radius:3px;
-  font-family:var(--font-m);font-size:9px;letter-spacing:.09em;cursor:pointer;text-transform:uppercase;transition:.2s\}
-.place-btn:hover\{border-color:var(--teal);color:var(--teal)\}
-.place-btn.active\{border-color:var(--yellow);color:var(--yellow);background:#100E00;animation:place-pulse 1s ease-in-out infinite\}
-@keyframes place-pulse\{0%,100%\{box-shadow:0 0 4px rgba(255,226,0,.3)\}50%\{box-shadow:0 0 14px rgba(255,226,0,.7)\}\}
+  font-family:var(--font-m);font-size:9px;letter-spacing:.09em;cursor:pointer;text-transform:uppercase;transition:.2s}
+.place-btn:hover{border-color:var(--teal);color:var(--teal)}
+.place-btn.active{border-color:var(--yellow);color:var(--yellow);background:#100E00;animation:place-pulse 1s ease-in-out infinite}
+@keyframes place-pulse{0%,100%{box-shadow:0 0 4px rgba(255,226,0,.3)}50%{box-shadow:0 0 14px rgba(255,226,0,.7)}}
 
 /* Sun mode card */
-.sun-card\{background:#080600;border:1px solid #2A1A00;border-radius:4px;padding:8px 10px;margin:5px 0\}
-.sun-title\{font-family:var(--font-d);font-size:14px;font-weight:800;letter-spacing:.1em;color:var(--sun);margin-bottom:4px\}
-.sun-data\{font-size:10px;color:#806040;line-height:1.8\}
-.sun-data b\{color:var(--sun)\}
-.sun-toggle\{display:flex;align-items:center;gap:7px;margin-bottom:6px;font-size:10px;color:var(--sun);cursor:pointer\}
-.sun-toggle input[type=checkbox]\{accent-color:var(--sun)\}
+.sun-card{background:#080600;border:1px solid #2A1A00;border-radius:4px;padding:8px 10px;margin:5px 0}
+.sun-title{font-family:var(--font-d);font-size:14px;font-weight:800;letter-spacing:.1em;color:var(--sun);margin-bottom:4px}
+.sun-data{font-size:10px;color:#806040;line-height:1.8}
+.sun-data b{color:var(--sun)}
+.sun-toggle{display:flex;align-items:center;gap:7px;margin-bottom:6px;font-size:10px;color:var(--sun);cursor:pointer}
+.sun-toggle input[type=checkbox]{accent-color:var(--sun)}
 
-.sb-btn\{display:block;width:100%;padding:5px;margin:3px 0;background:var(--card);border:1px solid var(--border);
+.sb-btn{display:block;width:100%;padding:5px;margin:3px 0;background:var(--card);border:1px solid var(--border);
   color:var(--muted);border-radius:3px;font-family:var(--font-d);font-size:13px;font-weight:700;
-  letter-spacing:.1em;cursor:pointer;text-transform:uppercase;text-align:center;transition:.2s\}
-.sb-btn:hover:not(:disabled)\{border-color:var(--orange);color:var(--orange)\}
-.sb-btn:disabled\{opacity:.35;cursor:not-allowed\}
+  letter-spacing:.1em;cursor:pointer;text-transform:uppercase;text-align:center;transition:.2s}
+.sb-btn:hover:not(:disabled){border-color:var(--orange);color:var(--orange)}
+.sb-btn:disabled{opacity:.35;cursor:not-allowed}
 
-.kswatch\{display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:700;color:#111;margin-top:3px\}
-.ratio-badge\{border-radius:4px;padding:7px 10px;text-align:center;margin:4px 0;font-family:var(--font-d);
-  font-size:19px;font-weight:700;letter-spacing:.07em;color:white\}
-.ratio-mood\{font-family:var(--font-m);font-size:9px;opacity:.75;font-weight:400\}
+.kswatch{display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:700;color:#111;margin-top:3px}
+.ratio-badge{border-radius:4px;padding:7px 10px;text-align:center;margin:4px 0;font-family:var(--font-d);
+  font-size:19px;font-weight:700;letter-spacing:.07em;color:white}
+.ratio-mood{font-family:var(--font-m);font-size:9px;opacity:.75;font-weight:400}
 
-.fstop-card\{background:#020A04;border:1px solid #0A2A0A;border-radius:4px;padding:5px 10px;text-align:center;margin:3px 0\}
-.fstop-label\{font-size:8px;color:#204020;text-transform:uppercase;letter-spacing:.14em\}
-.fstop-val\{font-family:var(--font-d);font-size:28px;font-weight:800;color:var(--green);
-  text-shadow:0 0 16px rgba(0,255,136,.5);animation:fbreath 3s ease-in-out infinite\}
-@keyframes fbreath\{0%,100%\{text-shadow:0 0 14px rgba(0,255,136,.4)\}50%\{text-shadow:0 0 26px rgba(0,255,136,.75)\}\}
+.fstop-card{background:#020A04;border:1px solid #0A2A0A;border-radius:4px;padding:5px 10px;text-align:center;margin:3px 0}
+.fstop-label{font-size:8px;color:#204020;text-transform:uppercase;letter-spacing:.14em}
+.fstop-val{font-family:var(--font-d);font-size:28px;font-weight:800;color:var(--green);
+  text-shadow:0 0 16px rgba(0,255,136,.5);animation:fbreath 3s ease-in-out infinite}
+@keyframes fbreath{0%,100%{text-shadow:0 0 14px rgba(0,255,136,.4)}50%{text-shadow:0 0 26px rgba(0,255,136,.75)}}
 
-.shutter-pill\{background:#0A0800;border:1px solid #2A2000;border-radius:3px;padding:3px 8px;
-  font-size:10px;color:var(--yellow);letter-spacing:.06em;text-align:center;margin:3px 0\}
-.dist-readout\{font-size:10px;color:#3A5080;padding:3px 0;line-height:1.7\}
-.dist-readout b\{color:#6080B0\}
+.shutter-pill{background:#0A0800;border:1px solid #2A2000;border-radius:3px;padding:3px 8px;
+  font-size:10px;color:var(--yellow);letter-spacing:.06em;text-align:center;margin:3px 0}
+.dist-readout{font-size:10px;color:#3A5080;padding:3px 0;line-height:1.7}
+.dist-readout b{color:#6080B0}
 
-.appr-badge\{border-radius:4px;padding:5px 8px;font-family:var(--font-d);font-size:13px;font-weight:700;
-  letter-spacing:.13em;color:white;text-align:center;margin:4px 0\}
-.appr-ok\{background:#003A10;border:1px solid var(--green);color:var(--green);animation:glow-ok 2.5s ease-in-out infinite\}
-@keyframes glow-ok\{0%,100%\{box-shadow:0 0 6px rgba(0,255,136,.3)\}50%\{box-shadow:0 0 18px rgba(0,255,136,.6)\}\}
-.appr-pending\{background:#200500;border:1px solid #5A1500;color:#FF6030\}
+.appr-badge{border-radius:4px;padding:5px 8px;font-family:var(--font-d);font-size:13px;font-weight:700;
+  letter-spacing:.13em;color:white;text-align:center;margin:4px 0}
+.appr-ok{background:#003A10;border:1px solid var(--green);color:var(--green);animation:glow-ok 2.5s ease-in-out infinite}
+@keyframes glow-ok{0%,100%{box-shadow:0 0 6px rgba(0,255,136,.3)}50%{box-shadow:0 0 18px rgba(0,255,136,.6)}}
+.appr-pending{background:#200500;border:1px solid #5A1500;color:#FF6030}
 
-.tip-box\{background:#040810;border:1px solid var(--dim);border-radius:3px;padding:7px 8px;
-  margin:3px 0;font-size:10px;color:#506080;line-height:1.6\}
-.tip-toggle\{cursor:pointer;font-size:9px;color:var(--teal);text-transform:uppercase;letter-spacing:.1em;
-  margin:2px 0;display:block;background:none;border:none;font-family:var(--font-m);padding:0\}
-.tip-toggle:hover\{color:var(--orange)\}
-.hidden\{display:none!important\}
+.tip-box{background:#040810;border:1px solid var(--dim);border-radius:3px;padding:7px 8px;
+  margin:3px 0;font-size:10px;color:#506080;line-height:1.6}
+.tip-toggle{cursor:pointer;font-size:9px;color:var(--teal);text-transform:uppercase;letter-spacing:.1em;
+  margin:2px 0;display:block;background:none;border:none;font-family:var(--font-m);padding:0}
+.tip-toggle:hover{color:var(--orange)}
+.hidden{display:none!important}
 
 /* Actor 2 color accent */
-.actor2-accent .xy-col input[type=range]::-webkit-slider-thumb\{background:#FF44AA\}
-.actor2-accent .ctrl input[type=range]::-webkit-slider-thumb\{background:#FF44AA\}
+.actor2-accent .xy-col input[type=range]::-webkit-slider-thumb{background:#FF44AA}
+.actor2-accent .ctrl input[type=range]::-webkit-slider-thumb{background:#FF44AA}
 
-/* \uc0\u9472 \u9472  MAIN \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
-#main\{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--navy)\}
+/* ─ \u9472  MAIN \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
+#main{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--navy)}
 
-/* \uc0\u9472 \u9472  HEADER \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
-#hdr\{padding:6px 14px 4px;background:var(--panel);border-bottom:1px solid var(--border);flex-shrink:0\}
-.hdr-row\{display:flex;align-items:flex-start;justify-content:space-between\}
-.pv-title\{font-family:var(--font-d);font-size:44px;font-weight:900;letter-spacing:.05em;
+/* ─ \u9472  HEADER \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
+#hdr{padding:6px 14px 4px;background:var(--panel);border-bottom:1px solid var(--border);flex-shrink:0}
+.hdr-row{display:flex;align-items:flex-start;justify-content:space-between}
+.pv-title{font-family:var(--font-d);font-size:44px;font-weight:900;letter-spacing:.05em;
   text-transform:uppercase;color:var(--orange);line-height:.9;
-  text-shadow:0 0 40px rgba(255,69,0,.4);margin:0\}
-.pv-sub\{font-size:9px;color:var(--muted);letter-spacing:.17em;text-transform:uppercase;margin:3px 0 0 2px\}
-.pv-hint\{font-size:9px;color:var(--teal);letter-spacing:.12em;text-transform:uppercase;margin:1px 0 0 2px;animation:blink 2.4s ease-in-out infinite\}
-@keyframes blink\{0%,100%\{opacity:.4\}50%\{opacity:1\}\}
+  text-shadow:0 0 40px rgba(255,69,0,.4);margin:0}
+.pv-sub{font-size:9px;color:var(--muted);letter-spacing:.17em;text-transform:uppercase;margin:3px 0 0 2px}
+.pv-hint{font-size:9px;color:var(--teal);letter-spacing:.12em;text-transform:uppercase;margin:1px 0 0 2px;animation:blink 2.4s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:.4}50%{opacity:1}}
 
-.hdr-right\{display:flex;flex-direction:column;align-items:flex-end;gap:4px\}
-.hdr-badges\{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end\}
+.hdr-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.hdr-badges{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
 
-.badge-pill\{display:flex;align-items:center;gap:5px;background:var(--card);border:1px solid var(--border);
+.badge-pill{display:flex;align-items:center;gap:5px;background:var(--card);border:1px solid var(--border);
   border-radius:4px;padding:3px 9px;font-family:var(--font-d);font-size:12px;
-  font-weight:700;letter-spacing:.1em;color:white;white-space:nowrap\}
+  font-weight:700;letter-spacing:.1em;color:white;white-space:nowrap}
 
 /* Satellite badge */
-.sat-badge\{border-color:#1A3A60;color:#4080B0;font-size:10px\}
-.sat-badge .sat-dot\{width:6px;height:6px;border-radius:50%;background:#4080B0;
-  animation:sat-ping 2s ease-in-out infinite\}
-@keyframes sat-ping\{0%,100%\{opacity:.4;transform:scale(1)\}50%\{opacity:1;transform:scale(1.4)\}\}
+.sat-badge{border-color:#1A3A60;color:#4080B0;font-size:10px}
+.sat-badge .sat-dot{width:6px;height:6px;border-radius:50%;background:#4080B0;
+  animation:sat-ping 2s ease-in-out infinite}
+@keyframes sat-ping{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:1;transform:scale(1.4)}}
 
 /* Phone badge - lights up when 9:16 selected */
-.phone-badge\{border-color:#204040;color:#2A6060;font-size:11px;transition:.4s\}
-.phone-badge.active\{border-color:var(--teal);color:var(--teal);background:#020A0A;
-  animation:phone-glow 1.6s ease-in-out infinite\}
-@keyframes phone-glow\{0%,100%\{box-shadow:0 0 4px rgba(0,212,204,.2)\}50%\{box-shadow:0 0 14px rgba(0,212,204,.6)\}\}
+.phone-badge{border-color:#204040;color:#2A6060;font-size:11px;transition:.4s}
+.phone-badge.active{border-color:var(--teal);color:var(--teal);background:#020A0A;
+  animation:phone-glow 1.6s ease-in-out infinite}
+@keyframes phone-glow{0%,100%{box-shadow:0 0 4px rgba(0,212,204,.2)}50%{box-shadow:0 0 14px rgba(0,212,204,.6)}}
 
 /* Sun badge */
-.sun-badge\{border-color:#2A1A00;color:var(--sun);font-size:11px;transition:.4s\}
-.sun-badge.active\{background:#050300;animation:sun-glow 2s ease-in-out infinite\}
-@keyframes sun-glow\{0%,100%\{box-shadow:0 0 6px rgba(255,179,0,.3)\}50%\{box-shadow:0 0 20px rgba(255,179,0,.7)\}\}
+.sun-badge{border-color:#2A1A00;color:var(--sun);font-size:11px;transition:.4s}
+.sun-badge.active{background:#050300;animation:sun-glow 2s ease-in-out infinite}
+@keyframes sun-glow{0%,100%{box-shadow:0 0 6px rgba(255,179,0,.3)}50%{box-shadow:0 0 20px rgba(255,179,0,.7)}}
 
-.rec-badge\{display:flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--border);
-  border-radius:4px;padding:3px 9px;font-family:var(--font-d);font-size:12px;font-weight:700;letter-spacing:.1em;color:white\}
-.rec-dot\{width:8px;height:8px;border-radius:50%;background:var(--muted)\}
-.rec-dot.live\{background:var(--red);animation:rec-pulse .9s ease-in-out infinite\}
-@keyframes rec-pulse\{0%,100%\{transform:scale(1);box-shadow:0 0 6px var(--red)\}50%\{transform:scale(1.4);box-shadow:0 0 16px var(--red)\}\}
-.appr-pill\{border-radius:4px;padding:3px 9px;font-family:var(--font-d);font-size:12px;font-weight:700;letter-spacing:.12em;color:white\}
-.appr-pill.ok\{background:#003A10;border:1px solid var(--green);color:var(--green)\}
-.appr-pill.pending\{background:#200500;border:1px solid #5A1500;color:#FF6030\}
+.rec-badge{display:flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--border);
+  border-radius:4px;padding:3px 9px;font-family:var(--font-d);font-size:12px;font-weight:700;letter-spacing:.1em;color:white}
+.rec-dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
+.rec-dot.live{background:var(--red);animation:rec-pulse .9s ease-in-out infinite}
+@keyframes rec-pulse{0%,100%{transform:scale(1);box-shadow:0 0 6px var(--red)}50%{transform:scale(1.4);box-shadow:0 0 16px var(--red)}}
+.appr-pill{border-radius:4px;padding:3px 9px;font-family:var(--font-d);font-size:12px;font-weight:700;letter-spacing:.12em;color:white}
+.appr-pill.ok{background:#003A10;border:1px solid var(--green);color:var(--green)}
+.appr-pill.pending{background:#200500;border:1px solid #5A1500;color:#FF6030}
 
-/* \uc0\u9472 \u9472  PLACING BANNER \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
-#placing-banner\{
+/* ─ \u9472  PLACING BANNER \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
+#placing-banner{
   padding:6px 14px;background:#0A0800;border-bottom:2px solid var(--yellow);
   display:flex;align-items:center;justify-content:space-between;flex-shrink:0;
   font-family:var(--font-d);font-size:14px;letter-spacing:.1em;
   color:var(--yellow);animation:place-banner 1s ease-in-out infinite
-\}
-@keyframes place-banner\{0%,100%\{opacity:.85\}50%\{opacity:1\}\}
-#placing-banner button\{background:none;border:1px solid #5A4A00;color:#806000;padding:2px 10px;
-  border-radius:3px;cursor:pointer;font-family:var(--font-m);font-size:10px\}
-#placing-banner button:hover\{border-color:var(--yellow);color:var(--yellow)\}
+}
+@keyframes place-banner{0%,100%{opacity:.85}50%{opacity:1}}
+#placing-banner button{background:none;border:1px solid #5A4A00;color:#806000;padding:2px 10px;
+  border-radius:3px;cursor:pointer;font-family:var(--font-m);font-size:10px}
+#placing-banner button:hover{border-color:var(--yellow);color:var(--yellow)}
 
-/* \uc0\u9472 \u9472  METRIC STRIP \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
-#metric-strip\{display:flex;gap:4px;padding:4px 14px;background:var(--navy);
-  border-bottom:1px solid var(--border);flex-shrink:0;flex-wrap:wrap\}
-.mc\{background:var(--card);border:1px solid var(--border);border-radius:4px;
-  padding:4px 8px;flex:1;min-width:70px;text-align:center;position:relative;overflow:hidden\}
-.mc-bar\{position:absolute;top:0;left:10%;right:10%;height:2px;border-radius:0 0 2px 2px\}
-.mc-label\{font-size:7px;color:var(--muted);text-transform:uppercase;letter-spacing:.18em;margin-bottom:1px\}
-.mc-val\{font-family:var(--font-d);font-size:20px;font-weight:700;line-height:1;letter-spacing:.02em\}
-.mc-hint\{font-size:7px;color:var(--dim);margin-top:1px\}
+/* ─ \u9472  METRIC STRIP \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
+#metric-strip{display:flex;gap:4px;padding:4px 14px;background:var(--navy);
+  border-bottom:1px solid var(--border);flex-shrink:0;flex-wrap:wrap}
+.mc{background:var(--card);border:1px solid var(--border);border-radius:4px;
+  padding:4px 8px;flex:1;min-width:70px;text-align:center;position:relative;overflow:hidden}
+.mc-bar{position:absolute;top:0;left:10%;right:10%;height:2px;border-radius:0 0 2px 2px}
+.mc-label{font-size:7px;color:var(--muted);text-transform:uppercase;letter-spacing:.18em;margin-bottom:1px}
+.mc-val{font-family:var(--font-d);font-size:20px;font-weight:700;line-height:1;letter-spacing:.02em}
+.mc-hint{font-size:7px;color:var(--dim);margin-top:1px}
 
-/* \uc0\u9472 \u9472  TABS \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
-#tabs\{display:flex;padding:0 14px;background:var(--panel);border-bottom:1px solid var(--border);flex-shrink:0\}
-.tab-btn\{padding:6px 16px;border:none;background:none;cursor:pointer;font-family:var(--font-d);
+/* ─ \u9472  TABS \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
+#tabs{display:flex;padding:0 14px;background:var(--panel);border-bottom:1px solid var(--border);flex-shrink:0}
+.tab-btn{padding:6px 16px;border:none;background:none;cursor:pointer;font-family:var(--font-d);
   font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--muted);border-bottom:2px solid transparent;transition:.2s\}
-.tab-btn.active\{color:var(--orange);border-bottom-color:var(--orange)\}
-.tab-btn:hover:not(.active)\{color:var(--text)\}
+  color:var(--muted);border-bottom:2px solid transparent;transition:.2s}
+.tab-btn.active{color:var(--orange);border-bottom-color:var(--orange)}
+.tab-btn:hover:not(.active){color:var(--text)}
 
-/* \uc0\u9472 \u9472  TAB CONTENT \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
-#tab-content\{flex:1;overflow:hidden;position:relative\}
-.tab-panel\{position:absolute;inset:0;display:none;overflow:hidden\}
-.tab-panel.active\{display:flex;flex-direction:column\}
-#floor-plan\{flex:1;width:100%\}
+/* ─ \u9472  TAB CONTENT \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
+#tab-content{flex:1;overflow:hidden;position:relative}
+.tab-panel{position:absolute;inset:0;display:none;overflow:hidden}
+.tab-panel.active{display:flex;flex-direction:column}
+#floor-plan{flex:1;width:100%}
 
-/* \uc0\u9472 \u9472  MONITOR \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
-#monitor-area\{flex:1;display:flex;align-items:center;justify-content:center;padding:10px;background:var(--navy);overflow:hidden\}
-#bezel\{position:relative;background:linear-gradient(145deg,#2A2A2A,#0A0A0A);border-radius:10px;
+/* ─ \u9472  MONITOR \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
+#monitor-area{flex:1;display:flex;align-items:center;justify-content:center;padding:10px;background:var(--navy);overflow:hidden}
+#bezel{position:relative;background:linear-gradient(145deg,#2A2A2A,#0A0A0A);border-radius:10px;
   padding:14px 14px 40px 14px;box-shadow:0 0 0 1px #333,0 0 60px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.05);
-  max-width:calc(100% - 24px)\}
-#bezel::after\{content:'SmallHD · FOCUS 7 · PreViz Edition';position:absolute;bottom:10px;left:50%;transform:translateX(-50%);
-  font-family:var(--font-m);font-size:8px;color:#333;letter-spacing:.2em;white-space:nowrap\}
-#monitor-canvas\{display:block;border-radius:3px;box-shadow:0 0 30px rgba(0,0,0,.9)\}
+  max-width:calc(100% - 24px)}
+#bezel::after{content:'SmallHD · FOCUS 7 · PreViz Edition';position:absolute;bottom:10px;left:50%;transform:translateX(-50%);
+  font-family:var(--font-m);font-size:8px;color:#333;letter-spacing:.2em;white-space:nowrap}
+#monitor-canvas{display:block;border-radius:3px;box-shadow:0 0 30px rgba(0,0,0,.9)}
 
-#mon-pills\{display:flex;gap:4px;padding:4px 14px 0;flex-shrink:0;flex-wrap:wrap\}
-.mon-pill\{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:3px 8px;flex:1;min-width:70px;text-align:center\}
-.mon-pill-label\{font-size:7px;color:var(--muted);text-transform:uppercase;letter-spacing:.15em\}
-.mon-pill-val\{font-family:var(--font-d);font-size:18px;font-weight:700;line-height:1.1\}
-.mon-caption\{padding:3px 14px 5px;font-size:9px;color:var(--dim);letter-spacing:.07em;flex-shrink:0\}
+#mon-pills{display:flex;gap:4px;padding:4px 14px 0;flex-shrink:0;flex-wrap:wrap}
+.mon-pill{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:3px 8px;flex:1;min-width:70px;text-align:center}
+.mon-pill-label{font-size:7px;color:var(--muted);text-transform:uppercase;letter-spacing:.15em}
+.mon-pill-val{font-family:var(--font-d);font-size:18px;font-weight:700;line-height:1.1}
+.mon-caption{padding:3px 14px 5px;font-size:9px;color:var(--dim);letter-spacing:.07em;flex-shrink:0}
 
-/* \uc0\u9472 \u9472  FOOTER \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
-#footer\{padding:3px 14px;border-top:1px solid var(--border);font-size:9px;color:var(--dim);
-  text-align:center;letter-spacing:.09em;flex-shrink:0;background:var(--panel)\}
+/* ─ \u9472  FOOTER \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
+#footer{padding:3px 14px;border-top:1px solid var(--border);font-size:9px;color:var(--dim);
+  text-align:center;letter-spacing:.09em;flex-shrink:0;background:var(--panel)}
 
-@media print\{
-  #sidebar,#tabs,#metric-strip,#mon-pills,.mon-caption,#footer,#placing-banner\{display:none!important\}
-  #main\{display:block\}#hdr\{background:white\}
-  #tab-content\{position:static\}.tab-panel\{position:static;display:block!important\}
-  #monitor-area\{display:none\}
-  @page\{size:landscape;margin:.4in\}
-\}
+@media print{
+  #sidebar,#tabs,#metric-strip,#mon-pills,.mon-caption,#footer,#placing-banner{display:none!important}
+  #main{display:block}#hdr{background:white}
+  #tab-content{position:static}.tab-panel{position:static;display:block!important}
+  #monitor-area{display:none}
+  @page{size:landscape;margin:.4in}
+}
 </style>
 </head>
 <body>
 <div id="app">
 
-<!-- \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  SIDEBAR \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  -->
+<!-- ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  SIDEBAR \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  -->
 <div id="sidebar">
   <div class="sb-brand">PreViz 4.5</div>
   <div class="sb-ver" id="sb-ver">Beta 2.0 · Director's Monitor + Exterior</div>
@@ -267,14 +267,14 @@ html,body\{height:100%;background:var(--navy);color:var(--text);font-family:var(
       </select>
     </div>
     <div class="ctrl">
-      <label>Pan (deg) <span class="ctrl-val" id="cam_pan_val">0\'b0</span></label>
+      <label>Pan (deg) <span class="ctrl-val" id="cam_pan_val">0°</span></label>
       <input type="range" id="cam_pan" min="-45" max="45" step="1" value="0">
     </div>
     <div class="ctrl">
       <label data-i18n="dolly">Dolly (ft from Wall 4) <span class="ctrl-val" id="cam_dolly_val">3.0 ft</span></label>
       <input type="range" id="cam_dolly" min="0.5" max="9" step="0.5" value="3">
     </div>
-    <button class="tip-toggle" onclick="toggleTip('tip-cam')">\uc0\u9432  <span data-i18n="tip-cam-label">Camera basics</span></button>
+    <button class="tip-toggle" onclick="toggleTip('tip-cam')">ⓘ  <span data-i18n="tip-cam-label">Camera basics</span></button>
     <div id="tip-cam" class="tip-box hidden" data-i18n-content="tip-cam">Pan rotates the camera on its axis. Dolly physically moves it — changes perspective, not just magnification. FOV is the angle the lens captures; wider lens = wider angle.</div>
   </div>
 
@@ -285,7 +285,7 @@ html,body\{height:100%;background:var(--navy);color:var(--text);font-family:var(
       <label>FPS</label>
       <select id="fps"><option>24</option><option>25</option><option>30</option><option>60</option></select>
     </div>
-    <div id="shutter-display" class="shutter-pill">SHUTTER 1/48s · 180\'b0 RULE</div>
+    <div id="shutter-display" class="shutter-pill">SHUTTER 1/48s · 180° RULE</div>
     <div id="res-row" class="ctrl">
       <label data-i18n="resolution">Resolution</label>
       <select id="resolution"><option>720p</option><option>1080p</option><option>4K UHD</option><option>4K DCI</option></select>
@@ -313,14 +313,14 @@ html,body\{height:100%;background:var(--navy);color:var(--text);font-family:var(
     <div class="sec-title" data-i18n="keyLight">Key Light</div>
 
     <!-- SUN MODE -->
-    <label class="sun-toggle"><input type="checkbox" id="sun_mode"> \uc0\u9728  <span data-i18n="sunMode">Exterior / Sun Mode</span></label>
+    <label class="sun-toggle"><input type="checkbox" id="sun_mode"> ☀  <span data-i18n="sunMode">Exterior / Sun Mode</span></label>
     <div id="sun-card" class="sun-card hidden">
-      <div class="sun-title">\uc0\u9728  <span data-i18n="naturalLight">Natural Key Light</span></div>
+      <div class="sun-title">☀  <span data-i18n="naturalLight">Natural Key Light</span></div>
       <div class="sun-data" id="sun-data-display">
         <span data-i18n="locating">Locating...</span>
       </div>
       <button class="sb-btn" onclick="requestGeolocation()" style="margin-top:5px;font-size:11px" id="geo-btn">
-        \uc0\u55357 \u56545  <span data-i18n="getLocation">Get My Location</span>
+        ? \u56545  <span data-i18n="getLocation">Get My Location</span>
       </button>
     </div>
 
@@ -350,10 +350,10 @@ html,body\{height:100%;background:var(--navy);color:var(--text);font-family:var(
       </div>
     </div>
     <button class="place-btn" id="place-key-btn" onclick="startPlacing('key')">
-      \uc0\u55356 \u57263  <span data-i18n="placeOnStage">Place on Stage</span>
+      ? \u57263  <span data-i18n="placeOnStage">Place on Stage</span>
     </button>
-    <button class="tip-toggle" onclick="toggleTip('tip-key')">\uc0\u9432  <span data-i18n="tip-key-label">Key Light</span></button>
-    <div id="tip-key" class="tip-box hidden" data-i18n-content="tip-key">The primary light source. Establishes exposure and the direction of primary shadows. Position at roughly 90\'b0 to the camera axis — the side of the face that is lit is determined by where the key is on the floor plan.</div>
+    <button class="tip-toggle" onclick="toggleTip('tip-key')">ⓘ  <span data-i18n="tip-key-label">Key Light</span></button>
+    <div id="tip-key" class="tip-box hidden" data-i18n-content="tip-key">The primary light source. Establishes exposure and the direction of primary shadows. Position at roughly 90° to the camera axis — the side of the face that is lit is determined by where the key is on the floor plan.</div>
   </div>
 
   <!-- OVERHEAD / FILL LIGHTS -->
@@ -381,7 +381,7 @@ html,body\{height:100%;background:var(--navy);color:var(--text);font-family:var(
           <input type="range" id="fill1_y" min="0.5" max="19" step="0.5" value="16">
         </div>
       </div>
-      <button class="place-btn" id="place-fill1-btn" onclick="startPlacing('fill1')">\uc0\u55356 \u57263  <span data-i18n="placeOnStage">Place on Stage</span></button>
+      <button class="place-btn" id="place-fill1-btn" onclick="startPlacing('fill1')">? \u57263  <span data-i18n="placeOnStage">Place on Stage</span></button>
     </div>
 
     <label class="tog" style="margin-top:5px"><input type="checkbox" id="back_on" checked> <span data-i18n="back">Back Light</span></label>
@@ -405,7 +405,7 @@ html,body\{height:100%;background:var(--navy);color:var(--text);font-family:var(
           <input type="range" id="back_y" min="0.5" max="19" step="0.5" value="18">
         </div>
       </div>
-      <button class="place-btn" id="place-back-btn" onclick="startPlacing('back')">\uc0\u55356 \u57263  <span data-i18n="placeOnStage">Place on Stage</span></button>
+      <button class="place-btn" id="place-back-btn" onclick="startPlacing('back')">? \u57263  <span data-i18n="placeOnStage">Place on Stage</span></button>
     </div>
 
     <label class="tog" style="margin-top:5px"><input type="checkbox" id="fill2_on"> <span data-i18n="fill2">Fill 2 (mobile)</span></label>
@@ -420,8 +420,8 @@ html,body\{height:100%;background:var(--navy);color:var(--text);font-family:var(
       </div>
     </div>
 
-    <button class="tip-toggle" onclick="toggleTip('tip-fill')">\uc0\u9432  <span data-i18n="tip-fill-label">Fill / Back Light</span></button>
-    <div id="tip-fill" class="tip-box hidden" data-i18n-content="tip-fill">Fill reduces Key shadows — always dimmer. Back light (hair light) goes behind/above the subject, creates rim separation. Drag lights by clicking \uc0\u55356 \u57263  Place then clicking on the stage floor.</div>
+    <button class="tip-toggle" onclick="toggleTip('tip-fill')">ⓘ  <span data-i18n="tip-fill-label">Fill / Back Light</span></button>
+    <div id="tip-fill" class="tip-box hidden" data-i18n-content="tip-fill">Fill reduces Key shadows — always dimmer. Back light (hair light) goes behind/above the subject, creates rim separation. Drag lights by clicking ? \u57263  Place then clicking on the stage floor.</div>
   </div>
 
   <!-- LIGHT RATIO -->
@@ -448,8 +448,8 @@ html,body\{height:100%;background:var(--navy);color:var(--text);font-family:var(
       </div>
     </div>
     <div id="dist-readout" class="dist-readout"></div>
-    <button class="place-btn" id="place-actor1-btn" onclick="startPlacing('actor1')">\uc0\u55356 \u57263  <span data-i18n="placeOnStage">Place on Stage</span></button>
-    <button class="sb-btn" id="reset-btn" style="margin-top:4px">\uc0\u8617  <span data-i18n="resetCenter">Reset to Center</span></button>
+    <button class="place-btn" id="place-actor1-btn" onclick="startPlacing('actor1')">? \u57263  <span data-i18n="placeOnStage">Place on Stage</span></button>
+    <button class="sb-btn" id="reset-btn" style="margin-top:4px">↩  <span data-i18n="resetCenter">Reset to Center</span></button>
 
     <!-- ACTOR 2 -->
     <label class="tog" style="margin-top:8px"><input type="checkbox" id="actor2_on"> <span data-i18n="addActor2">+ Add Actor 2</span></label>
@@ -468,7 +468,7 @@ html,body\{height:100%;background:var(--navy);color:var(--text);font-family:var(
           <input type="range" id="actor2_y" min="1" max="19" step="0.5" value="10">
         </div>
       </div>
-      <button class="place-btn" id="place-actor2-btn" onclick="startPlacing('actor2')">\uc0\u55356 \u57263  <span data-i18n="placeOnStage">Place on Stage</span></button>
+      <button class="place-btn" id="place-actor2-btn" onclick="startPlacing('actor2')">? \u57263  <span data-i18n="placeOnStage">Place on Stage</span></button>
     </div>
   </div>
 
@@ -482,7 +482,7 @@ html,body\{height:100%;background:var(--navy);color:var(--text);font-family:var(
         <option value="2.39">2.39:1 — Anamorphic Scope</option>
         <option value="1.85">1.85:1 — Flat</option>
         <option value="1.3333">4:3 — Classic TV</option>
-        <option value="0.5625">9:16 — Vertical / Mobile \uc0\u55357 \u56561 </option>
+        <option value="0.5625">9:16 — Vertical / Mobile ? \u56561 </option>
       </select>
     </div>
     <label class="tog"><input type="checkbox" id="show_thirds" checked> <span data-i18n="thirds">Rule of Thirds</span></label>
@@ -502,7 +502,7 @@ html,body\{height:100%;background:var(--navy);color:var(--text);font-family:var(
     <label class="tog"><input type="checkbox" id="approved_gaffer"> <span data-i18n="gafferApproval">Gaffer Approved</span></label>
     <label class="tog"><input type="checkbox" id="approved_director"> <span data-i18n="directorApproval">Director Approved</span></label>
     <div id="appr-badge" class="appr-badge appr-pending" data-i18n="pending">PENDING</div>
-    <button class="sb-btn" id="print-btn" disabled>\uc0\u55357 \u56744  <span data-i18n="print">Print Floor Plan</span></button>
+    <button class="sb-btn" id="print-btn" disabled>? \u56744  <span data-i18n="print">Print Floor Plan</span></button>
   </div>
 
   <div style="font-size:8px;color:var(--dim);text-align:center;padding:8px 0;letter-spacing:.1em">
@@ -510,7 +510,7 @@ html,body\{height:100%;background:var(--navy);color:var(--text);font-family:var(
   </div>
 </div>
 
-<!-- \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  MAIN \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  -->
+<!-- ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  MAIN \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  -->
 <div id="main">
 
   <!-- HEADER -->
@@ -519,22 +519,22 @@ html,body\{height:100%;background:var(--navy);color:var(--text);font-family:var(
       <div>
         <p class="pv-title">PreViz 4.5</p>
         <p class="pv-sub" data-i18n="subtitle">Phase 1 · Studio + Exterior · Director's Monitor · Beta 2.0</p>
-        <p class="pv-hint" id="hdr-hint" data-i18n="clickHint">>> Click \uc0\u55356 \u57263  Place \u8594  click stage to position any element</p>
+        <p class="pv-hint" id="hdr-hint" data-i18n="clickHint">>> Click ? \u57263  Place \u8594  click stage to position any element</p>
       </div>
       <div class="hdr-right">
         <div class="hdr-badges">
           <!-- Satellite badge — always visible -->
           <div class="badge-pill sat-badge">
             <span class="sat-dot"></span>
-            \uc0\u55357 \u57072 \u65039  <span data-i18n="starlink">Via Starlink</span>
+            ? \u57072 \u65039  <span data-i18n="starlink">Via Starlink</span>
           </div>
           <!-- Phone badge — glows when 9:16 -->
           <div class="badge-pill phone-badge" id="phone-badge">
-            \uc0\u55357 \u56561  <span data-i18n="mobile">Mobile</span>
+            ? \u56561  <span data-i18n="mobile">Mobile</span>
           </div>
           <!-- Sun badge — glows when sun mode active -->
           <div class="badge-pill sun-badge" id="sun-badge">
-            \uc0\u9728  <span data-i18n="exterior">Exterior</span>
+            ☀  <span data-i18n="exterior">Exterior</span>
           </div>
           <div class="rec-badge"><span class="rec-dot" id="rec-dot"></span><span id="rec-label">STANDBY</span></div>
           <div id="hdr-appr" class="appr-pill pending" data-i18n="pending">PENDING</div>
@@ -546,7 +546,7 @@ html,body\{height:100%;background:var(--navy);color:var(--text);font-family:var(
   <!-- PLACING BANNER (hidden by default) -->
   <div id="placing-banner" class="hidden">
     <span id="placing-label">Click on stage to place element</span>
-    <button onclick="cancelPlacing()">\uc0\u10005  Cancel</button>
+    <button onclick="cancelPlacing()">✕  Cancel</button>
   </div>
 
   <!-- METRIC STRIP -->
@@ -561,7 +561,7 @@ html,body\{height:100%;background:var(--navy);color:var(--text);font-family:var(
       <div class="mc-bar" style="background:linear-gradient(90deg,transparent,#00D4CC,transparent)"></div>
       <div class="mc-label">Lens · FOV</div>
       <div class="mc-val" id="mc-lens" style="color:#00D4CC">24mm</div>
-      <div class="mc-hint" id="mc-fov">73\'b0 field</div>
+      <div class="mc-hint" id="mc-fov">73° field</div>
     </div>
     <div class="mc">
       <div class="mc-bar" id="mc-ratio-bar" style="background:linear-gradient(90deg,transparent,#00C896,transparent)"></div>
@@ -577,7 +577,7 @@ html,body\{height:100%;background:var(--navy);color:var(--text);font-family:var(
     </div>
     <div class="mc">
       <div class="mc-bar" style="background:linear-gradient(90deg,transparent,#FF6B00,transparent)"></div>
-      <div class="mc-label" data-i18n="camToTalent">C\uc0\u8594 T</div>
+      <div class="mc-label" data-i18n="camToTalent">C→ T</div>
       <div class="mc-val" id="mc-c2t" style="color:#FF6B00">—</div>
       <div class="mc-hint" id="mc-c2t-m">— m</div>
     </div>
@@ -591,8 +591,8 @@ html,body\{height:100%;background:var(--navy);color:var(--text);font-family:var(
 
   <!-- TABS -->
   <div id="tabs">
-    <button class="tab-btn active" onclick="switchTab('floor')">\uc0\u55356 \u57253  <span data-i18n="floorPlanTab">Floor Plan</span></button>
-    <button class="tab-btn" onclick="switchTab('monitor')">\uc0\u55357 \u56570  <span data-i18n="monitorTab">Director's Monitor</span></button>
+    <button class="tab-btn active" onclick="switchTab('floor')">? \u57253  <span data-i18n="floorPlanTab">Floor Plan</span></button>
+    <button class="tab-btn" onclick="switchTab('monitor')">? \u56570  <span data-i18n="monitorTab">Director's Monitor</span></button>
   </div>
 
   <!-- TAB CONTENT -->
@@ -607,7 +607,7 @@ html,body\{height:100%;background:var(--navy);color:var(--text);font-family:var(
         <div class="mon-pill"><div class="mon-pill-label" data-i18n="ratio">Key:Fill</div><div class="mon-pill-val" id="mp-ratio" style="color:#00C896">3:1</div></div>
         <div class="mon-pill"><div class="mon-pill-label" data-i18n="keyTemp">Key K</div><div class="mon-pill-val" id="mp-kelvin" style="color:#FFE200">5600K</div></div>
         <div class="mon-pill"><div class="mon-pill-label" data-i18n="aspect">Aspect</div><div class="mon-pill-val" id="mp-aspect" style="color:#8080C0">16:9</div></div>
-        <div class="mon-pill" id="mp-sun-pill" style="display:none"><div class="mon-pill-label">\uc0\u9728  Elev</div><div class="mon-pill-val" id="mp-sun-elev" style="color:var(--sun)">—</div></div>
+        <div class="mon-pill" id="mp-sun-pill" style="display:none"><div class="mon-pill-label">☀  Elev</div><div class="mon-pill-val" id="mp-sun-elev" style="color:var(--sun)">—</div></div>
       </div>
       <div id="monitor-area">
         <div id="bezel"><canvas id="monitor-canvas"></canvas></div>
@@ -625,15 +625,15 @@ html,body\{height:100%;background:var(--navy);color:var(--text);font-family:var(
 <script>
 'use strict';
 
-// \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
 // CONSTANTS
-// \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
 const STAGE_W=30, STAGE_H=20, CAM_X=15;
-const LENS_FOV=\{"12mm":90,"16mm":83,"24mm":73,"35mm":54,"50mm":39,"85mm":24,"100mm":20,"135mm":15\};
-const SHUTTER_BY_FPS=\{24:"1/48",25:"1/50",30:"1/60",60:"1/120"\};
-const SHUTTER_DENOM=\{"1/48":48,"1/50":50,"1/60":60,"1/120":120\};
-const ND_OPTIONS=\{"None (0 stops)":0,"ND 0.3 — 1 stop":1,"ND 0.6 — 2 stops":2,"ND 0.9 — 3 stops":3,
-  "ND 1.2 — 4 stops":4,"ND 1.8 — 6 stops":6,"ND 2.4 — 8 stops":8,"ND 3.0 — 10 stops":10\};
+const LENS_FOV={"12mm":90,"16mm":83,"24mm":73,"35mm":54,"50mm":39,"85mm":24,"100mm":20,"135mm":15};
+const SHUTTER_BY_FPS={24:"1/48",25:"1/50",30:"1/60",60:"1/120"};
+const SHUTTER_DENOM={"1/48":48,"1/50":50,"1/60":60,"1/120":120};
+const ND_OPTIONS={"None (0 stops)":0,"ND 0.3 — 1 stop":1,"ND 0.6 — 2 stops":2,"ND 0.9 — 3 stops":3,
+  "ND 1.2 — 4 stops":4,"ND 1.8 — 6 stops":6,"ND 2.4 — 8 stops":8,"ND 3.0 — 10 stops":10};
 const FSTOPS=[1.0,1.4,2.0,2.8,4.0,5.6,8.0,11,16,22];
 const KELVIN_SCALE=[
   [2000,"#FF5500","Candlelight"],[2700,"#FF8040","Incandescent"],
@@ -651,13 +651,13 @@ const RATIO_TABLE=[
   [10.0,"8:1","#FF6B00","Near noir"],
   [999,"16:1","#FF1744","High contrast noir"]
 ];
-const ASPECT_LABELS=\{"1.7778":"16:9","2.39":"2.39:1","1.85":"1.85:1","1.3333":"4:3","0.5625":"9:16"\};
+const ASPECT_LABELS={"1.7778":"16:9","2.39":"2.39:1","1.85":"1.85:1","1.3333":"4:3","0.5625":"9:16"};
 
-// \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
 // i18n — TRANSLATIONS
-// \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
-const I18N = \{
-  en: \{
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+const I18N = {
+  en: {
     mode:"Mode", camera:"Camera", specs:"Specs", lens:"Lens", dolly:"Dolly (ft from Wall 4)",
     keyLight:"Key Light", sunMode:"Exterior / Sun Mode", naturalLight:"Natural Key Light",
     locating:"Requesting GPS...", getLocation:"Get My Location",
@@ -673,21 +673,21 @@ const I18N = \{
     approved:"ALL APPROVED", pending:"PENDING", print:"Print Floor Plan",
     freeForEvery:"Free for every student", nd:"ND Filter", resolution:"Resolution",
     aperture:"Aperture", ratio:"Key:Fill", contrast:"lighting contrast",
-    camToTalent:"C\uc0\u8594 T", keyTemp:"Key Temp", floorPlanTab:"Floor Plan",
+    camToTalent:"C→ T", keyTemp:"Key Temp", floorPlanTab:"Floor Plan",
     monitorTab:"Director's Monitor", starlink:"Via Starlink", mobile:"Mobile",
     exterior:"Exterior", subtitle:"Phase 1 · Studio + Exterior · Director's Monitor · Beta 2.0",
-    clickHint:">> Click \uc0\u55356 \u57263  Place \u8594  click stage to position any element",
+    clickHint:">> Click ? \u57263  Place \u8594  click stage to position any element",
     monCaption:"Director's Monitor · Lighting, framing, and Kelvin respond live to sidebar controls.",
     tagline:"Free for every student — from Los Angeles to the world.",
     resetCenter:"Reset to Center",
     "tip-cam-label":"Camera basics","tip-key-label":"Key Light","tip-fill-label":"Fill / Back",
     "tip-cam":"Pan rotates the camera on its axis. Dolly physically moves it — changes perspective, not just magnification. FOV is the angle the lens captures; wider lens = wider angle.",
-    "tip-key":"The primary light source. Establishes exposure and shadow direction. Position at roughly 90\'b0 to camera axis — the lit side of the face in the Monitor reflects where the Key is on the floor plan.",
-    "tip-fill":"Fill reduces Key shadows — always dimmer. Back light creates rim separation. Click \uc0\u55356 \u57263  Place then click on the stage floor to move any light.",
+    "tip-key":"The primary light source. Establishes exposure and shadow direction. Position at roughly 90° to camera axis — the lit side of the face in the Monitor reflects where the Key is on the floor plan.",
+    "tip-fill":"Fill reduces Key shadows — always dimmer. Back light creates rim separation. Click ? \u57263  Place then click on the stage floor to move any light.",
     placingMsg:"Click on stage to place",
     sunElev:"Sun Elev",
-  \},
-  es: \{
+  },
+  es: {
     mode:"Modo", camera:"C\'e1mara", specs:"Especificaciones", lens:"Lente", dolly:"Dolly (pies desde Pared 4)",
     keyLight:"Luz Principal", sunMode:"Modo Exterior / Sol", naturalLight:"Luz Natural Principal",
     locating:"Obteniendo GPS...", getLocation:"Obtener Mi Ubicación",
@@ -703,21 +703,21 @@ const I18N = \{
     approved:"TODO APROBADO", pending:"PENDIENTE", print:"Imprimir Planta",
     freeForEvery:"Gratis para cada estudiante", nd:"Filtro ND", resolution:"Resolución",
     aperture:"Apertura", ratio:"Clave:Relleno", contrast:"contraste de luz",
-    camToTalent:"C\uc0\u8594 T", keyTemp:"Temp Clave", floorPlanTab:"Planta",
+    camToTalent:"C→ T", keyTemp:"Temp Clave", floorPlanTab:"Planta",
     monitorTab:"Monitor de Dirección", starlink:"Vía Satélite", mobile:"Móvil",
     exterior:"Exterior", subtitle:"Fase 1 · Estudio + Exterior · Monitor de Dirección · Beta 2.0",
-    clickHint:">> Clic en \uc0\u55356 \u57263  Colocar \u8594  clic en escenario para posicionar",
+    clickHint:">> Clic en ? \u57263  Colocar \u8594  clic en escenario para posicionar",
     monCaption:"Monitor de Dirección · Iluminación y Kelvin responden en tiempo real.",
     tagline:"Gratis para cada estudiante — de Los Ángeles al mundo.",
     resetCenter:"Resetear al Centro",
     "tip-cam-label":"C\'e1mara b\'e1sica","tip-key-label":"Luz Principal","tip-fill-label":"Relleno / Contra-Luz",
     "tip-cam":"Pan rota la c\'e1mara. Dolly la mueve físicamente — cambia perspectiva, no solo ampliación. FOV es el \'e1ngulo capturado.",
-    "tip-key":"Fuente de luz principal. Establece la exposición y dirección de sombras. Posicionar a ~90\'b0 del eje de c\'e1mara.",
+    "tip-key":"Fuente de luz principal. Establece la exposición y dirección de sombras. Posicionar a ~90° del eje de c\'e1mara.",
     "tip-fill":"El relleno reduce las sombras de la luz principal — siempre m\'e1s suave. La contra-luz crea separación de borde.",
     placingMsg:"Clic en escenario para colocar",
     sunElev:"Elev Sol",
-  \},
-  fr: \{
+  },
+  fr: {
     mode:"Mode", camera:"Caméra", specs:"Spécifications", lens:"Objectif", dolly:"Dolly (pi du Mur 4)",
     keyLight:"Lumière Principale", sunMode:"Mode Extérieur / Soleil", naturalLight:"Lumière Naturelle",
     locating:"Localisation...", getLocation:"Ma Position",
@@ -733,10 +733,10 @@ const I18N = \{
     approved:"TOUT APPROUVÉ", pending:"EN ATTENTE", print:"Imprimer Plan",
     freeForEvery:"Gratuit pour tous", nd:"Filtre ND", resolution:"Résolution",
     aperture:"Ouverture", ratio:"Clé:Remplissage", contrast:"contraste lumière",
-    camToTalent:"C\uc0\u8594 T", keyTemp:"Temp Clé", floorPlanTab:"Plan",
+    camToTalent:"C→ T", keyTemp:"Temp Clé", floorPlanTab:"Plan",
     monitorTab:"Moniteur Directeur", starlink:"Via Satellite", mobile:"Mobile",
     exterior:"Extérieur", subtitle:"Phase 1 · Studio + Extérieur · Moniteur · Beta 2.0",
-    clickHint:">> Clic \uc0\u55356 \u57263  Placer \u8594  clic sur scène pour positionner",
+    clickHint:">> Clic ? \u57263  Placer \u8594  clic sur scène pour positionner",
     monCaption:"Moniteur Directeur · Éclairage et Kelvin en temps réel.",
     tagline:"Gratuit pour chaque étudiant — de Los Angeles au monde entier.",
     resetCenter:"Centrer", "tip-cam-label":"Caméra","tip-key-label":"Lumière Principale","tip-fill-label":"Remplissage",
@@ -744,8 +744,8 @@ const I18N = \{
     "tip-key":"Source lumineuse principale. Établit l'exposition et la direction des ombres.",
     "tip-fill":"Le remplissage réduit les ombres. Le contre-jour crée la séparation de bord.",
     placingMsg:"Clic sur scène pour placer",sunElev:"Élév Soleil",
-  \},
-  pt: \{
+  },
+  pt: {
     mode:"Modo", camera:"Câmera", specs:"Especificações", lens:"Lente", dolly:"Dolly (pés da Parede 4)",
     keyLight:"Luz Principal", sunMode:"Modo Exterior / Sol", naturalLight:"Luz Natural",
     locating:"Localizando...", getLocation:"Minha Localização",
@@ -761,10 +761,10 @@ const I18N = \{
     approved:"TUDO APROVADO", pending:"PENDENTE", print:"Imprimir Planta",
     freeForEvery:"Gratuito para todo estudante", nd:"Filtro ND", resolution:"Resolução",
     aperture:"Abertura", ratio:"Chave:Preench.", contrast:"contraste de luz",
-    camToTalent:"C\uc0\u8594 T", keyTemp:"Temp Chave", floorPlanTab:"Planta",
+    camToTalent:"C→ T", keyTemp:"Temp Chave", floorPlanTab:"Planta",
     monitorTab:"Monitor do Diretor", starlink:"Via Satélite", mobile:"Móvel",
     exterior:"Exterior", subtitle:"Fase 1 · Estúdio + Exterior · Monitor · Beta 2.0",
-    clickHint:">> Clique \uc0\u55356 \u57263  Posicionar \u8594  clique no palco para colocar",
+    clickHint:">> Clique ? \u57263  Posicionar \u8594  clique no palco para colocar",
     monCaption:"Monitor do Diretor · Iluminação e Kelvin em tempo real.",
     tagline:"Gratuito para cada estudante — de Los Angeles ao mundo.",
     resetCenter:"Centralizar", "tip-cam-label":"Câmera","tip-key-label":"Luz Principal","tip-fill-label":"Preenchimento",
@@ -772,36 +772,36 @@ const I18N = \{
     "tip-key":"Fonte de luz principal. Estabelece a exposição e direção das sombras.",
     "tip-fill":"O preenchimento reduz as sombras. A contra-luz cria separação de borda.",
     placingMsg:"Clique no palco para posicionar",sunElev:"Elev Sol",
-  \}
-\};
+  }
+};
 
 let currentLang = 'en';
-function t(key)\{ return (I18N[currentLang]||I18N.en)[key] || (I18N.en[key]) || key; \}
+function t(key){ return (I18N[currentLang]||I18N.en)[key] || (I18N.en[key]) || key; }
 
-function setLang(lang)\{
+function setLang(lang){
   currentLang = lang;
-  document.querySelectorAll('.lang-btn').forEach(b=>\{
+  document.querySelectorAll('.lang-btn').forEach(b=>{
     b.classList.toggle('active', b.textContent.trim().toLowerCase()===lang);
-  \});
-  document.querySelectorAll('[data-i18n]').forEach(el=>\{
+  });
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
     const key = el.getAttribute('data-i18n');
     const txt = t(key);
     if(txt) el.textContent = txt;
-  \});
-  document.querySelectorAll('[data-i18n-content]').forEach(el=>\{
+  });
+  document.querySelectorAll('[data-i18n-content]').forEach(el=>{
     const key = el.getAttribute('data-i18n-content');
     const txt = t(key);
     if(txt) el.textContent = txt;
-  \});
+  });
   // Update html lang attr
   document.documentElement.lang = lang;
   updateReadouts();
-\}
+}
 
-// \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
 // STATE
-// \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
-const DEFAULT = \{
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+const DEFAULT = {
   mode:"Video/Cinema", lens:"24mm", cam_pan:0, cam_dolly:3.0,
   fps:24, resolution:"1080p", iso:800, nd_label:"None (0 stops)",
   key_intensity:80, key_kelvin:5600, key_x:22.0, key_y:3.0,
@@ -815,18 +815,18 @@ const DEFAULT = \{
   show_thirds:true, show_safe:true, show_center:true, show_hud:true,
   show_waveform:true, show_zebra:false, show_focus:false, show_false_color:false,
   sun_mode:false, sun_lat:null, sun_lon:null, sun_elevation:null, sun_azimuth:null,
-\};
+};
 
-let S = Object.assign(\{\}, DEFAULT);
-try\{ const sv=localStorage.getItem('previz45'); if(sv) S=Object.assign(\{\},DEFAULT,JSON.parse(sv)); \}catch(e)\{\}
-function saveState()\{ try\{localStorage.setItem('previz45',JSON.stringify(S));\}catch(e)\{\} \}
+let S = Object.assign({}, DEFAULT);
+try{ const sv=localStorage.getItem('previz45'); if(sv) S=Object.assign({},DEFAULT,JSON.parse(sv)); }catch(e){}
+function saveState(){ try{localStorage.setItem('previz45',JSON.stringify(S));}catch(e){} }
 
-// \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
 // SOLAR POSITION (Astronomical Algorithms)
-// \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
-function julianDate(d)\{ return d.valueOf()/86400000 + 2440587.5; \}
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+function julianDate(d){ return d.valueOf()/86400000 + 2440587.5; }
 
-function solarPosition(lat, lon, date)\{
+function solarPosition(lat, lon, date){
   const JD = julianDate(date);
   const n = JD - 2451545.0;
   const L = ((280.460 + 0.9856474*n) % 360 + 360) % 360;
@@ -846,145 +846,145 @@ function solarPosition(lat, lon, date)\{
   const elevation = Math.asin(Math.max(-1,Math.min(1,sinEl)))*180/Math.PI;
   const cosEl = Math.cos(Math.asin(Math.max(-1,Math.min(1,sinEl))));
   let azimuth = 180;
-  if(cosEl > 0.001)\{
+  if(cosEl > 0.001){
     const cosAz = (sinDec - Math.sin(latR)*sinEl)/(Math.cos(latR)*cosEl);
     azimuth = Math.acos(Math.max(-1,Math.min(1,cosAz)))*180/Math.PI;
     if(HA > 0) azimuth = 360 - azimuth;
-  \}
-  return \{ elevation, azimuth \};
-\}
+  }
+  return { elevation, azimuth };
+}
 
-function sunToKelvin(el)\{
+function sunToKelvin(el){
   if(el <= 0) return 2000;
   if(el <= 5)  return Math.round(2000 + el/5*600);    // 2000-2600K deep sunrise
   if(el <= 15) return Math.round(2600 + (el-5)/10*600); // 2600-3200K golden hour
   if(el <= 30) return Math.round(3200 + (el-15)/15*1400); // 3200-4600K morning
   if(el <= 60) return Math.round(4600 + (el-30)/30*1000); // 4600-5600K midday
   return 5600;
-\}
-function sunToIntensity(el)\{ return el<=0?0:Math.min(100,Math.round(el/90*88+12)); \}
-function sunToKeyX(az)\{
-  // Azimuth 0\'b0=N, 90\'b0=E, 180\'b0=S, 270\'b0=W
+}
+function sunToIntensity(el){ return el<=0?0:Math.min(100,Math.round(el/90*88+12)); }
+function sunToKeyX(az){
+  // Azimuth 0°=N, 90°=E, 180°=S, 270°=W
   // Camera faces North (positive Y). East=right=high X, West=left=low X
   return Math.max(2, Math.min(28, Math.round(2 + (Math.sin(az*Math.PI/180)+1)/2*26)));
-\}
-function sunToKeyY(el)\{
+}
+function sunToKeyY(el){
   // Higher sun = further back on stage (more overhead)
   return Math.max(1, Math.min(18, Math.round(1 + el/90*17)));
-\}
+}
 
-function applyGeoToSun(lat, lon)\{
+function applyGeoToSun(lat, lon){
   const pos = solarPosition(lat, lon, new Date());
   S.sun_lat = lat; S.sun_lon = lon;
   S.sun_elevation = pos.elevation;
   S.sun_azimuth   = pos.azimuth;
-  if(S.sun_mode)\{
+  if(S.sun_mode){
     S.key_kelvin   = sunToKelvin(pos.elevation);
     S.key_intensity = sunToIntensity(pos.elevation);
     S.key_x = sunToKeyX(pos.azimuth);
     S.key_y = sunToKeyY(pos.elevation);
-  \}
+  }
   updateSunCard();
   syncDOM();
   updateAll();
-\}
+}
 
-function updateSunCard()\{
+function updateSunCard(){
   const el = S.sun_elevation;
   const az = S.sun_azimuth;
   const lat = S.sun_lat;
   const lon = S.sun_lon;
   const disp = document.getElementById('sun-data-display');
   if(!disp) return;
-  if(el===null)\{
-    disp.innerHTML = `<span data-i18n="locating">$\{t('locating')\}</span>`;
-  \} else \{
+  if(el===null){
+    disp.innerHTML = `<span data-i18n="locating">${t('locating')}</span>`;
+  } else {
     const cardDir = az<22.5||az>=337.5?'N':az<67.5?'NE':az<112.5?'E':az<157.5?'SE':az<202.5?'S':az<247.5?'SW':az<292.5?'W':'NW';
     const kelvin = sunToKelvin(el);
     const [kc,kn] = kelvinDisplay(kelvin);
     disp.innerHTML =
-      `<b>\uc0\u55357 \u56525 </b> $\{lat!==null?lat.toFixed(4)+'\'b0 N':''\} $\{lon!==null?(lon>=0?lon.toFixed(4)+'\'b0 E':Math.abs(lon).toFixed(4)+'\'b0 W'):''\}<br>`+
-      `<b>$\{t('sunElev')\}:</b> $\{el.toFixed(1)\}\'b0 · Az: $\{az.toFixed(0)\}\'b0 ($\{cardDir\})<br>`+
-      `<b>K:</b> $\{kelvin\}K — $\{kn\} · Int: $\{sunToIntensity(el)\}%<br>`+
-      `<b>Temp:</b> $\{new Date().toLocaleTimeString()\}`;
-  \}
-\}
+      `<b>? \u56525 </b> ${lat!==null?lat.toFixed(4)+'° N':''} ${lon!==null?(lon>=0?lon.toFixed(4)+'° E':Math.abs(lon).toFixed(4)+'° W'):''}<br>`+
+      `<b>${t('sunElev')}:</b> ${el.toFixed(1)}° · Az: ${az.toFixed(0)}° (${cardDir})<br>`+
+      `<b>K:</b> ${kelvin}K — ${kn} · Int: ${sunToIntensity(el)}%<br>`+
+      `<b>Temp:</b> ${new Date().toLocaleTimeString()}`;
+  }
+}
 
-function requestGeolocation()\{
-  if(!navigator.geolocation)\{
+function requestGeolocation(){
+  if(!navigator.geolocation){
     alert('Geolocation not available in this browser.');
     return;
-  \}
+  }
   const btn = document.getElementById('geo-btn');
-  if(btn) btn.textContent = '\uc0\u55357 \u56545  Locating...';
+  if(btn) btn.textContent = '? \u56545  Locating...';
   navigator.geolocation.getCurrentPosition(
     pos => applyGeoToSun(pos.coords.latitude, pos.coords.longitude),
-    err => \{
-      if(btn) btn.innerHTML = `\uc0\u55357 \u56545  <span data-i18n="getLocation">$\{t('getLocation')\}</span>`;
+    err => {
+      if(btn) btn.innerHTML = `? \u56545  <span data-i18n="getLocation">${t('getLocation')}</span>`;
       alert('Could not get location. Check browser permissions.\\n' + err.message);
-    \},
-    \{ timeout:10000 \}
+    },
+    { timeout:10000 }
   );
-\}
+}
 
 // Auto-refresh sun position every 60s when sun_mode is on and coords available
-setInterval(()=>\{
-  if(S.sun_mode && S.sun_lat !== null)\{
+setInterval(()=>{
+  if(S.sun_mode && S.sun_lat !== null){
     applyGeoToSun(S.sun_lat, S.sun_lon);
-  \}
-\}, 60000);
+  }
+}, 60000);
 
-// \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
 // HELPERS
-// \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
-function kelvinDisplay(k)\{ for(const[m,c,n] of KELVIN_SCALE) if(k<=m) return[c,n]; return KELVIN_SCALE.at(-1).slice(1); \}
-function kRGB(k)\{ const h=kelvinDisplay(k)[0].slice(1); return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]; \}
-function hexRGB(h)\{ const s=h.slice(1); return[parseInt(s.slice(0,2),16),parseInt(s.slice(2,4),16),parseInt(s.slice(4,6),16)]; \}
-function calcFstop(ki,iso,sh,nd)\{
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+function kelvinDisplay(k){ for(const[m,c,n] of KELVIN_SCALE) if(k<=m) return[c,n]; return KELVIN_SCALE.at(-1).slice(1); }
+function kRGB(k){ const h=kelvinDisplay(k)[0].slice(1); return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]; }
+function hexRGB(h){ const s=h.slice(1); return[parseInt(s.slice(0,2),16),parseInt(s.slice(2,4),16),parseInt(s.slice(4,6),16)]; }
+function calcFstop(ki,iso,sh,nd){
   if(ki<=0) return "---";
   const idx=Math.max(0,Math.min(9,Math.round(5+Math.log2(Math.max(ki,.1)/100)+Math.log2(iso/800)+Math.log2(48/(SHUTTER_DENOM[sh]||48))-nd)));
-  return `f/$\{FSTOPS[idx]\}`;
-\}
-function calcRatio(ki,fi)\{
-  if(fi<.001) return["\uc0\u8734 :1","#FF1744","No fill — max contrast"];
+  return `f/${FSTOPS[idx]}`;
+}
+function calcRatio(ki,fi){
+  if(fi<.001) return["∞ :1","#FF1744","No fill — max contrast"];
   const r=ki/Math.max(fi,.1);
   for(const[u,l,c,m] of RATIO_TABLE) if(r<u) return[l,c,m];
   return["16:1","#FF1744","High contrast noir"];
-\}
-function dist(x1,y1,x2,y2)\{ return Math.hypot(x2-x1,y2-y1); \}
-function ftM(ft)\{ return Math.round(ft*3048)/10000; \}
-function rot2d(vx,vy,t)\{ return[vx*Math.cos(t)-vy*Math.sin(t),vx*Math.sin(t)+vy*Math.cos(t)]; \}
-function pad(n)\{ return n.toString().padStart(2,'0'); \}
-function getShutter()\{ return S.mode==="Video/Cinema"?(SHUTTER_BY_FPS[S.fps]||"1/48"):"1/125"; \}
-function getFstop()\{ return calcFstop(S.key_intensity, S.iso, getShutter(), ND_OPTIONS[S.nd_label]||0); \}
+}
+function dist(x1,y1,x2,y2){ return Math.hypot(x2-x1,y2-y1); }
+function ftM(ft){ return Math.round(ft*3048)/10000; }
+function rot2d(vx,vy,t){ return[vx*Math.cos(t)-vy*Math.sin(t),vx*Math.sin(t)+vy*Math.cos(t)]; }
+function pad(n){ return n.toString().padStart(2,'0'); }
+function getShutter(){ return S.mode==="Video/Cinema"?(SHUTTER_BY_FPS[S.fps]||"1/48"):"1/125"; }
+function getFstop(){ return calcFstop(S.key_intensity, S.iso, getShutter(), ND_OPTIONS[S.nd_label]||0); }
 
-// \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
 // PLACING MODE
-// \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
 let placing = null;
 
-function startPlacing(what)\{
+function startPlacing(what){
   placing = what;
   document.getElementById('placing-banner').classList.remove('hidden');
-  const names = \{key:t('keyLight'),fill1:t('fill1'),back:t('back'),actor1:t('talent'),actor2:t('actor2Name')\};
-  document.getElementById('placing-label').textContent = `$\{t('placingMsg')\}: $\{names[what]||what\}`;
+  const names = {key:t('keyLight'),fill1:t('fill1'),back:t('back'),actor1:t('talent'),actor2:t('actor2Name')};
+  document.getElementById('placing-label').textContent = `${t('placingMsg')}: ${names[what]||what}`;
   // Highlight active place button
   document.querySelectorAll('.place-btn').forEach(b=>b.classList.remove('active'));
-  const btn = document.getElementById(`place-$\{what\}-btn`);
+  const btn = document.getElementById(`place-${what}-btn`);
   if(btn) btn.classList.add('active');
-\}
+}
 
-function cancelPlacing()\{
+function cancelPlacing(){
   placing = null;
   document.getElementById('placing-banner').classList.add('hidden');
   document.querySelectorAll('.place-btn').forEach(b=>b.classList.remove('active'));
-\}
+}
 
-// \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
-// SYNC DOM \uc0\u8596  STATE
-// \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
-function syncDOM()\{
-  const set=(id,v)=>\{ const el=document.getElementById(id); if(el)\{ if(el.type==='checkbox') el.checked=v; else el.value=v; \}\};
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// SYNC DOM ↔  STATE
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+function syncDOM(){
+  const set=(id,v)=>{ const el=document.getElementById(id); if(el){ if(el.type==='checkbox') el.checked=v; else el.value=v; }};
   set('mode',S.mode); set('lens',S.lens); set('fps',S.fps); set('resolution',S.resolution);
   set('iso',S.iso); set('nd_label',S.nd_label); set('aspect',S.aspect);
   set('cam_pan',S.cam_pan); set('cam_dolly',S.cam_dolly);
@@ -1001,9 +1001,9 @@ function syncDOM()\{
   set('show_waveform',S.show_waveform); set('show_zebra',S.show_zebra); set('show_focus',S.show_focus); set('show_false_color',S.show_false_color);
   set('sun_mode',S.sun_mode);
   showHideCtrls();
-\}
+}
 
-function showHideCtrls()\{
+function showHideCtrls(){
   document.getElementById('fill1-ctrls').style.display   = S.fill1_on ? '' : 'none';
   document.getElementById('back-ctrls').style.display    = S.back_on  ? '' : 'none';
   document.getElementById('fill2-ctrls').classList.toggle('hidden',!S.fill2_on);
@@ -1023,9 +1023,9 @@ function showHideCtrls()\{
   // place-actor2 button visibility
   const pa2 = document.getElementById('place-actor2-btn');
   if(pa2) pa2.style.display = S.actor2_on ? '' : 'none';
-\}
+}
 
-function updateReadouts()\{
+function updateReadouts(){
   const shutter  = getShutter();
   const fstop    = getFstop();
   const fov      = LENS_FOV[S.lens];
@@ -1037,95 +1037,95 @@ function updateReadouts()\{
   const allOk = S.approved_dp && S.approved_gaffer && S.approved_director;
 
   // Val labels
-  const v=(id,txt)=>\{ const e=document.getElementById(id); if(e) e.textContent=txt; \};
-  v('cam_pan_val',`$\{S.cam_pan\}\'b0`); v('cam_dolly_val',`$\{S.cam_dolly.toFixed(1)\} ft`);
-  v('key_int_val',`$\{S.key_intensity\}%`); v('key_k_val',`$\{S.key_kelvin\}K`);
+  const v=(id,txt)=>{ const e=document.getElementById(id); if(e) e.textContent=txt; };
+  v('cam_pan_val',`${S.cam_pan}°`); v('cam_dolly_val',`${S.cam_dolly.toFixed(1)} ft`);
+  v('key_int_val',`${S.key_intensity}%`); v('key_k_val',`${S.key_kelvin}K`);
   v('key_x_val',S.key_x.toFixed(1)); v('key_y_val',S.key_y.toFixed(1));
-  v('fill1_int_val',`$\{S.fill1_intensity\}%`); v('fill1_k_val',`$\{S.fill1_kelvin\}K`);
+  v('fill1_int_val',`${S.fill1_intensity}%`); v('fill1_k_val',`${S.fill1_kelvin}K`);
   v('fill1_x_val',S.fill1_x.toFixed(1)); v('fill1_y_val',S.fill1_y.toFixed(1));
-  v('back_int_val',`$\{S.back_intensity\}%`); v('back_k_val',`$\{S.back_kelvin\}K`);
+  v('back_int_val',`${S.back_intensity}%`); v('back_k_val',`${S.back_kelvin}K`);
   v('back_x_val',S.back_x.toFixed(1)); v('back_y_val',S.back_y.toFixed(1));
-  v('fill2_int_val',`$\{S.fill2_intensity\}%`); v('fill2_k_val',`$\{S.fill2_kelvin\}K`);
+  v('fill2_int_val',`${S.fill2_intensity}%`); v('fill2_k_val',`${S.fill2_kelvin}K`);
   v('talent_x_val',S.talent_x.toFixed(1)); v('talent_y_val',S.talent_y.toFixed(1));
   v('actor2_x_val',S.actor2_x.toFixed(1)); v('actor2_y_val',S.actor2_y.toFixed(1));
 
   // Swatches
-  const sw=(id,k)=>\{ const [c,n]=kelvinDisplay(k); const el=document.getElementById(id); if(el)\{el.style.background=c;el.textContent=`$\{k\}K — $\{n\}`;\} \};
+  const sw=(id,k)=>{ const [c,n]=kelvinDisplay(k); const el=document.getElementById(id); if(el){el.style.background=c;el.textContent=`${k}K — ${n}`;} };
   sw('key-kswatch',S.key_kelvin); sw('fill1-kswatch',S.fill1_kelvin); sw('back-kswatch',S.back_kelvin);
 
   // f-stop
   v('fstop-display', fstop);
-  v('shutter-display', `SHUTTER $\{shutter\}s · 180\'b0 RULE`);
+  v('shutter-display', `SHUTTER ${shutter}s · 180° RULE`);
 
   // Ratio badge
   const rb=document.getElementById('ratio-badge');
-  if(rb)\{ rb.style.background=rc; rb.innerHTML=`KEY:FILL  $\{rl\}<br><span class="ratio-mood">$\{rm\}</span>`; \}
+  if(rb){ rb.style.background=rc; rb.innerHTML=`KEY:FILL  ${rl}<br><span class="ratio-mood">${rm}</span>`; }
 
   // Distances
-  v('dist-readout', `Cam\uc0\u8594 Talent: $\{c2t.toFixed(1)\} ft / $\{ftM(c2t).toFixed(1)\} m\\nKey\u8594 Talent: $\{k2t.toFixed(1)\} ft / $\{ftM(k2t).toFixed(1)\} m`);
+  v('dist-readout', `Cam→ Talent: ${c2t.toFixed(1)} ft / ${ftM(c2t).toFixed(1)} m\\nKey\u8594 Talent: ${k2t.toFixed(1)} ft / ${ftM(k2t).toFixed(1)} m`);
   document.getElementById('dist-readout').innerHTML =
-    `Cam\uc0\u8594 Talent: <b>$\{c2t.toFixed(1)\} ft / $\{ftM(c2t).toFixed(1)\} m</b><br>Key\u8594 Talent: <b>$\{k2t.toFixed(1)\} ft / $\{ftM(k2t).toFixed(1)\} m</b>`;
+    `Cam→ Talent: <b>${c2t.toFixed(1)} ft / ${ftM(c2t).toFixed(1)} m</b><br>Key\u8594 Talent: <b>${k2t.toFixed(1)} ft / ${ftM(k2t).toFixed(1)} m</b>`;
 
   // Approval
   if(allOk && !S.approved_at) S.approved_at = new Date().toISOString().slice(0,16).replace('T','  ');
   if(!allOk) S.approved_at = null;
   const missing=[!S.approved_dp&&"DP",!S.approved_gaffer&&"Gaffer",!S.approved_director&&"Director"].filter(Boolean);
   const ab=document.getElementById('appr-badge'), ha=document.getElementById('hdr-appr');
-  if(allOk)\{
-    ab.className='appr-badge appr-ok'; ab.textContent=`$\{t('approved')\} · $\{S.approved_at\}`;
+  if(allOk){
+    ab.className='appr-badge appr-ok'; ab.textContent=`${t('approved')} · ${S.approved_at}`;
     ha.className='appr-pill ok'; ha.textContent=t('approved');
     document.getElementById('print-btn').disabled=false;
-  \} else \{
-    ab.className='appr-badge appr-pending'; ab.textContent=`$\{t('pending')\}: $\{missing.join(' · ')\}`;
+  } else {
+    ab.className='appr-badge appr-pending'; ab.textContent=`${t('pending')}: ${missing.join(' · ')}`;
     ha.className='appr-pill pending'; ha.textContent=t('pending');
     document.getElementById('print-btn').disabled=true;
-  \}
+  }
 
   // Metric strip
-  v('mc-fstop',fstop); v('mc-lens',S.lens); v('mc-fov',`$\{fov\}\'b0 field`);
-  v('mc-ratio',rl); v('mc-iso',S.iso); v('mc-shutter',`$\{shutter\}s`);
+  v('mc-fstop',fstop); v('mc-lens',S.lens); v('mc-fov',`${fov}° field`);
+  v('mc-ratio',rl); v('mc-iso',S.iso); v('mc-shutter',`${shutter}s`);
   document.getElementById('mc-ratio').style.color=rc;
-  document.getElementById('mc-ratio-bar').style.background=`linear-gradient(90deg,transparent,$\{rc\},transparent)`;
-  document.getElementById('mc-c2t').innerHTML=`$\{c2t.toFixed(1)\}<span style="font-size:10px;opacity:.7">ft</span>`;
-  v('mc-c2t-m',`$\{ftM(c2t).toFixed(1)\} m`);
-  v('mc-kelvin',`$\{S.key_kelvin\}K`); v('mc-kname',kn);
+  document.getElementById('mc-ratio-bar').style.background=`linear-gradient(90deg,transparent,${rc},transparent)`;
+  document.getElementById('mc-c2t').innerHTML=`${c2t.toFixed(1)}<span style="font-size:10px;opacity:.7">ft</span>`;
+  v('mc-c2t-m',`${ftM(c2t).toFixed(1)} m`);
+  v('mc-kelvin',`${S.key_kelvin}K`); v('mc-kname',kn);
 
   // Monitor pills
   const aKey=Object.keys(ASPECT_LABELS).find(k=>Math.abs(parseFloat(k)-S.aspect)<.01);
-  const aLbl=aKey?ASPECT_LABELS[aKey]:`$\{S.aspect\}`;
-  v('mp-fstop',fstop); v('mp-lens',`$\{S.lens\}·$\{fov\}\'b0`);
+  const aLbl=aKey?ASPECT_LABELS[aKey]:`${S.aspect}`;
+  v('mp-fstop',fstop); v('mp-lens',`${S.lens}·${fov}°`);
   v('mp-ratio',rl); document.getElementById('mp-ratio').style.color=rc;
-  v('mp-kelvin',`$\{S.key_kelvin\}K`); v('mp-aspect',aLbl);
+  v('mp-kelvin',`${S.key_kelvin}K`); v('mp-aspect',aLbl);
 
   // Sun elevation pill
   const sunPill = document.getElementById('mp-sun-pill');
   const sunElev = document.getElementById('mp-sun-elev');
-  if(sunPill)\{
+  if(sunPill){
     sunPill.style.display = S.sun_mode && S.sun_elevation!==null ? '' : 'none';
-    if(S.sun_elevation!==null && sunElev) sunElev.textContent=`$\{S.sun_elevation.toFixed(1)\}\'b0`;
-  \}
+    if(S.sun_elevation!==null && sunElev) sunElev.textContent=`${S.sun_elevation.toFixed(1)}°`;
+  }
 
   // Sun card update
   if(S.sun_mode) updateSunCard();
-\}
+}
 
-// \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
 // DIRECTOR'S MONITOR — Canvas
-// \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
 const canvas = document.getElementById('monitor-canvas');
 const ctx    = canvas.getContext('2d');
 
-function sizeMonitor()\{
+function sizeMonitor(){
   const area=document.getElementById('monitor-area');
   const maxW=area.clientWidth-30, maxH=area.clientHeight-30;
   let W=maxW, H=W/S.aspect;
-  if(H>maxH)\{H=maxH;W=H*S.aspect;\}
+  if(H>maxH){H=maxH;W=H*S.aspect;}
   canvas.width=Math.max(100,Math.floor(W));
   canvas.height=Math.max(60,Math.floor(H));
   drawMonitor();
-\}
+}
 
-function drawMonitor()\{
+function drawMonitor(){
   const W=canvas.width, H=canvas.height;
   if(W<10||H<10) return;
   const fov=LENS_FOV[S.lens], fovRad=fov*Math.PI/180, panRad=S.cam_pan*Math.PI/180;
@@ -1149,75 +1149,75 @@ function drawMonitor()\{
   const [ar,ag,ab2]=kRGB(ambK);
   const bgLum=Math.max(.03,(keyAlpha*.4+fillAlpha*.3+backAlpha*.1)*.35);
   const bgGrad=ctx.createLinearGradient(0,0,0,H);
-  bgGrad.addColorStop(0,`rgba($\{ar\},$\{ag\},$\{ab2\},$\{bgLum*.6\})`);
-  bgGrad.addColorStop(.5,`rgba($\{Math.round(ar*.4)\},$\{Math.round(ag*.4)\},$\{Math.round(ab2*.4)\},$\{bgLum\})`);
+  bgGrad.addColorStop(0,`rgba(${ar},${ag},${ab2},${bgLum*.6})`);
+  bgGrad.addColorStop(.5,`rgba(${Math.round(ar*.4)},${Math.round(ag*.4)},${Math.round(ab2*.4)},${bgLum})`);
   bgGrad.addColorStop(1,'rgba(10,8,15,0.95)');
   ctx.fillStyle='#0A080F'; ctx.fillRect(0,0,W,H);
   ctx.fillStyle=bgGrad; ctx.fillRect(0,0,W,H);
   // Sun sky gradient when sun mode
-  if(S.sun_mode && S.sun_elevation!==null && S.sun_elevation>0)\{
+  if(S.sun_mode && S.sun_elevation!==null && S.sun_elevation>0){
     const skyK=sunToKelvin(S.sun_elevation);
     const [skR,skG,skB]=kRGB(skyK);
     const skyA=Math.min(.4,S.sun_elevation/90*.5);
     const sky=ctx.createLinearGradient(0,0,0,H*.6);
-    sky.addColorStop(0,`rgba($\{skR\},$\{skG\},$\{skB\},$\{skyA\})`);
+    sky.addColorStop(0,`rgba(${skR},${skG},${skB},${skyA})`);
     sky.addColorStop(1,'rgba(0,0,0,0)');
     ctx.fillStyle=sky; ctx.fillRect(0,0,W,H*.6);
-  \}
+  }
   // Floor/perspective
-  ctx.strokeStyle=`rgba($\{ar\},$\{ag\},$\{ab2\},$\{bgLum*1.5\})`; ctx.lineWidth=1;
+  ctx.strokeStyle=`rgba(${ar},${ag},${ab2},${bgLum*1.5})`; ctx.lineWidth=1;
   ctx.beginPath(); ctx.moveTo(0,H*.68); ctx.lineTo(W,H*.68); ctx.stroke();
-  ctx.strokeStyle=`rgba($\{ar\},$\{ag\},$\{ab2\},$\{bgLum*.5\})`; ctx.lineWidth=.5;
-  for(let i=-5;i<=5;i++)\{
+  ctx.strokeStyle=`rgba(${ar},${ag},${ab2},${bgLum*.5})`; ctx.lineWidth=.5;
+  for(let i=-5;i<=5;i++){
     if(!i) continue;
     ctx.beginPath(); ctx.moveTo(talCX,H*.1); ctx.lineTo(W/2+i*(W/8),H*.68); ctx.stroke();
-  \}
+  }
   // Key spill
-  if(keyAlpha>0)\{
+  if(keyAlpha>0){
     const [kr,kg,kb]=kRGB(S.key_kelvin);
     const ksx=W/2+(Math.sin(keyAngle-panRad)/Math.sin(fovRad/2))*(W/2);
     const sp=ctx.createRadialGradient(ksx,H*.4,0,ksx,H*.4,W*.5);
-    sp.addColorStop(0,`rgba($\{kr\},$\{kg\},$\{kb\},$\{keyAlpha*.18\})`);
-    sp.addColorStop(1,`rgba($\{kr\},$\{kg\},$\{kb\},0)`);
+    sp.addColorStop(0,`rgba(${kr},${kg},${kb},${keyAlpha*.18})`);
+    sp.addColorStop(1,`rgba(${kr},${kg},${kb},0)`);
     ctx.fillStyle=sp; ctx.fillRect(0,0,W,H);
-  \}
+  }
   // Sun disc in sky when sun mode + elevation > 0
-  if(S.sun_mode && S.sun_elevation!==null && S.sun_elevation>0)\{
+  if(S.sun_mode && S.sun_elevation!==null && S.sun_elevation>0){
     const azR=(S.sun_azimuth-S.cam_pan)*Math.PI/180;
     const sunX=W/2+Math.sin(azR)*W*.4;
     const sunY=H*.35-S.sun_elevation/90*H*.3;
     const [sr,sg,sb]=kRGB(sunToKelvin(S.sun_elevation));
     const sunR=Math.max(8,14*(1-S.sun_elevation/90));
     const sunGlow=ctx.createRadialGradient(sunX,sunY,0,sunX,sunY,sunR*4);
-    sunGlow.addColorStop(0,`rgba($\{sr\},$\{sg\},$\{sb\},0.7)`);
-    sunGlow.addColorStop(.3,`rgba($\{sr\},$\{sg\},$\{sb\},0.15)`);
+    sunGlow.addColorStop(0,`rgba(${sr},${sg},${sb},0.7)`);
+    sunGlow.addColorStop(.3,`rgba(${sr},${sg},${sb},0.15)`);
     sunGlow.addColorStop(1,'rgba(0,0,0,0)');
     ctx.fillStyle=sunGlow; ctx.fillRect(0,0,W,H);
-    ctx.fillStyle=`rgb($\{sr\},$\{sg\},$\{sb\})`;
+    ctx.fillStyle=`rgb(${sr},${sg},${sb})`;
     ctx.beginPath(); ctx.arc(sunX,sunY,sunR,0,Math.PI*2); ctx.fill();
-  \}
+  }
 
   // 3. TALENT
-  if(inFrame&&talH>6)\{
+  if(inFrame&&talH>6){
     const [kr,kg,kb]=kRGB(S.key_kelvin);
     const [fr,fg,fb]=kRGB(S.fill1_kelvin);
     const [br2,bg2,bb3]=kRGB(S.back_kelvin);
     const shadLum=Math.max(.05,fillAlpha*.35), litLum=Math.max(.12,keyAlpha*.75);
     const keyLit=keyLitDir>.1, keyMid=Math.abs(keyLitDir)<=.1;
     const bG=ctx.createLinearGradient(talCX-talW,0,talCX+talW,0);
-    if(keyMid)\{
-      bG.addColorStop(0,`rgba($\{Math.round(fr*.5)\},$\{Math.round(fg*.5)\},$\{Math.round(fb*.5)\},$\{shadLum+.1\})`);
-      bG.addColorStop(.5,`rgba($\{Math.round(kr*litLum+fr*shadLum)\},$\{Math.round(kg*litLum+fg*shadLum)\},$\{Math.round(kb*litLum+fb*shadLum)\},0.9)`);
-      bG.addColorStop(1,`rgba($\{Math.round(fr*.5)\},$\{Math.round(fg*.5)\},$\{Math.round(fb*.5)\},$\{shadLum+.1\})`);
-    \} else if(keyLit)\{
-      bG.addColorStop(0,`rgba($\{Math.round(kr*litLum)\},$\{Math.round(kg*litLum)\},$\{Math.round(kb*litLum)\},0.92)`);
-      bG.addColorStop(.45,`rgba($\{Math.round(kr*litLum*.6+fr*shadLum)\},$\{Math.round(kg*litLum*.6+fg*shadLum)\},$\{Math.round(kb*litLum*.6+fb*shadLum)\},0.85)`);
-      bG.addColorStop(1,`rgba($\{Math.round(fr*shadLum*2.5)\},$\{Math.round(fg*shadLum*2.5)\},$\{Math.round(fb*shadLum*2.5)\},$\{Math.max(.12,shadLum+.05)\})`);
-    \} else \{
-      bG.addColorStop(0,`rgba($\{Math.round(fr*shadLum*2.5)\},$\{Math.round(fg*shadLum*2.5)\},$\{Math.round(fb*shadLum*2.5)\},$\{Math.max(.12,shadLum+.05)\})`);
-      bG.addColorStop(.55,`rgba($\{Math.round(kr*litLum*.6+fr*shadLum)\},$\{Math.round(kg*litLum*.6+fg*shadLum)\},$\{Math.round(kb*litLum*.6+fb*shadLum)\},0.85)`);
-      bG.addColorStop(1,`rgba($\{Math.round(kr*litLum)\},$\{Math.round(kg*litLum)\},$\{Math.round(kb*litLum)\},0.92)`);
-    \}
+    if(keyMid){
+      bG.addColorStop(0,`rgba(${Math.round(fr*.5)},${Math.round(fg*.5)},${Math.round(fb*.5)},${shadLum+.1})`);
+      bG.addColorStop(.5,`rgba(${Math.round(kr*litLum+fr*shadLum)},${Math.round(kg*litLum+fg*shadLum)},${Math.round(kb*litLum+fb*shadLum)},0.9)`);
+      bG.addColorStop(1,`rgba(${Math.round(fr*.5)},${Math.round(fg*.5)},${Math.round(fb*.5)},${shadLum+.1})`);
+    } else if(keyLit){
+      bG.addColorStop(0,`rgba(${Math.round(kr*litLum)},${Math.round(kg*litLum)},${Math.round(kb*litLum)},0.92)`);
+      bG.addColorStop(.45,`rgba(${Math.round(kr*litLum*.6+fr*shadLum)},${Math.round(kg*litLum*.6+fg*shadLum)},${Math.round(kb*litLum*.6+fb*shadLum)},0.85)`);
+      bG.addColorStop(1,`rgba(${Math.round(fr*shadLum*2.5)},${Math.round(fg*shadLum*2.5)},${Math.round(fb*shadLum*2.5)},${Math.max(.12,shadLum+.05)})`);
+    } else {
+      bG.addColorStop(0,`rgba(${Math.round(fr*shadLum*2.5)},${Math.round(fg*shadLum*2.5)},${Math.round(fb*shadLum*2.5)},${Math.max(.12,shadLum+.05)})`);
+      bG.addColorStop(.55,`rgba(${Math.round(kr*litLum*.6+fr*shadLum)},${Math.round(kg*litLum*.6+fg*shadLum)},${Math.round(kb*litLum*.6+fb*shadLum)},0.85)`);
+      bG.addColorStop(1,`rgba(${Math.round(kr*litLum)},${Math.round(kg*litLum)},${Math.round(kb*litLum)},0.92)`);
+    }
     const torsoTop=talBase-talH+talH*.28, torsoH=talH*.46;
     const legTop=torsoTop+torsoH, legH=talH-talH*.28-torsoH;
     ctx.fillStyle=bG;
@@ -1226,46 +1226,46 @@ function drawMonitor()\{
     ctx.beginPath(); ctx.roundRect(talCX+talW*.05,legTop,talW*.45,legH,[0,0,3,3]); ctx.fill();
     const headR=talW*.52, headCY=torsoTop-headR*1.1;
     const hG=ctx.createRadialGradient(talCX+(keyLit?-headR*.3:headR*.3),headCY-headR*.2,headR*.1,talCX,headCY,headR*1.1);
-    hG.addColorStop(0,`rgba($\{Math.round(kr*litLum)\},$\{Math.round(kg*litLum)\},$\{Math.round(kb*litLum)\},0.95)`);
-    hG.addColorStop(1,`rgba($\{Math.round(fr*shadLum*3)\},$\{Math.round(fg*shadLum*3)\},$\{Math.round(fb*shadLum*3)\},0.7)`);
+    hG.addColorStop(0,`rgba(${Math.round(kr*litLum)},${Math.round(kg*litLum)},${Math.round(kb*litLum)},0.95)`);
+    hG.addColorStop(1,`rgba(${Math.round(fr*shadLum*3)},${Math.round(fg*shadLum*3)},${Math.round(fb*shadLum*3)},0.7)`);
     ctx.fillStyle=hG; ctx.beginPath(); ctx.ellipse(talCX,headCY,headR,headR*1.15,0,0,Math.PI*2); ctx.fill();
     // Rim
-    if(S.back_on&&S.back_intensity>10)\{
+    if(S.back_on&&S.back_intensity>10){
       const rimA=Math.min(.9,backAlpha*.8), rimS=keyLit?1:-1;
       const rG=ctx.createLinearGradient(talCX+rimS*(headR*.4),0,talCX+rimS*(headR*1.2),0);
-      rG.addColorStop(0,'rgba(0,0,0,0)'); rG.addColorStop(1,`rgba($\{br2\},$\{bg2\},$\{bb3\},$\{rimA\})`);
+      rG.addColorStop(0,'rgba(0,0,0,0)'); rG.addColorStop(1,`rgba(${br2},${bg2},${bb3},${rimA})`);
       ctx.fillStyle=rG; ctx.beginPath(); ctx.ellipse(talCX,headCY,headR,headR*1.15,0,0,Math.PI*2); ctx.fill();
       const rbG=ctx.createLinearGradient(talCX+rimS*(talW*.2),0,talCX+rimS*(talW*.7),0);
-      rbG.addColorStop(0,'rgba(0,0,0,0)'); rbG.addColorStop(1,`rgba($\{br2\},$\{bg2\},$\{bb3\},$\{rimA*.7\})`);
+      rbG.addColorStop(0,'rgba(0,0,0,0)'); rbG.addColorStop(1,`rgba(${br2},${bg2},${bb3},${rimA*.7})`);
       ctx.fillStyle=rbG; ctx.beginPath(); ctx.roundRect(talCX-talW/2,torsoTop,talW,torsoH,[4,4,2,2]); ctx.fill();
-    \}
-    if(S.show_hud)\{
-      ctx.font=`bold $\{Math.max(10,talW*.55)\}px Barlow Condensed,sans-serif`;
+    }
+    if(S.show_hud){
+      ctx.font=`bold ${Math.max(10,talW*.55)}px Barlow Condensed,sans-serif`;
       ctx.fillStyle='rgba(255,68,102,0.9)'; ctx.textAlign='center';
       ctx.fillText(S.talent_name.toUpperCase(), talCX, talBase+16);
-    \}
-    if(S.show_focus)\{ ctx.strokeStyle='rgba(0,212,204,0.75)'; ctx.lineWidth=1.5; ctx.beginPath(); ctx.ellipse(talCX,headCY,headR+1,headR*1.15+1,0,0,Math.PI*2); ctx.stroke(); \}
-    if(S.show_zebra&&keyAlpha>.7)\{
+    }
+    if(S.show_focus){ ctx.strokeStyle='rgba(0,212,204,0.75)'; ctx.lineWidth=1.5; ctx.beginPath(); ctx.ellipse(talCX,headCY,headR+1,headR*1.15+1,0,0,Math.PI*2); ctx.stroke(); }
+    if(S.show_zebra&&keyAlpha>.7){
       ctx.save(); ctx.beginPath(); ctx.ellipse(talCX,headCY,headR,headR*1.15,0,0,Math.PI*2); ctx.clip();
       ctx.strokeStyle='rgba(255,226,0,0.55)'; ctx.lineWidth=2;
-      for(let z=-headR*2;z<headR*2;z+=8)\{ ctx.beginPath(); ctx.moveTo(talCX-headR+z,headCY-headR*1.5); ctx.lineTo(talCX-headR+z+8,headCY+headR*1.5); ctx.stroke(); \}
+      for(let z=-headR*2;z<headR*2;z+=8){ ctx.beginPath(); ctx.moveTo(talCX-headR+z,headCY-headR*1.5); ctx.lineTo(talCX-headR+z+8,headCY+headR*1.5); ctx.stroke(); }
       ctx.restore();
-    \}
-    if(S.show_false_color)\{
+    }
+    if(S.show_false_color){
       const fc=keyAlpha<.2?'rgba(0,40,220,0.45)':keyAlpha<.45?'rgba(0,180,80,0.45)':keyAlpha<.75?'rgba(255,140,0,0.45)':'rgba(255,23,68,0.45)';
       ctx.fillStyle=fc; ctx.beginPath(); ctx.ellipse(talCX,headCY,headR,headR*1.15,0,0,Math.PI*2); ctx.fill();
       ctx.beginPath(); ctx.roundRect(talCX-talW/2,torsoTop,talW,torsoH+legH,[4,4,3,3]); ctx.fill();
-    \}
-  \}
+    }
+  }
 
   // 4. OVERLAYS
-  if(S.show_thirds)\{
+  if(S.show_thirds){
     ctx.strokeStyle='rgba(255,226,0,0.35)'; ctx.lineWidth=1; ctx.setLineDash([]);
-    for(const d of[1/3,2/3])\{ ctx.beginPath(); ctx.moveTo(d*W,0); ctx.lineTo(d*W,H); ctx.stroke(); ctx.beginPath(); ctx.moveTo(0,d*H); ctx.lineTo(W,d*H); ctx.stroke(); \}
+    for(const d of[1/3,2/3]){ ctx.beginPath(); ctx.moveTo(d*W,0); ctx.lineTo(d*W,H); ctx.stroke(); ctx.beginPath(); ctx.moveTo(0,d*H); ctx.lineTo(W,d*H); ctx.stroke(); }
     ctx.fillStyle='rgba(255,226,0,0.55)';
-    for(const dx of[1/3,2/3]) for(const dy of[1/3,2/3])\{ ctx.beginPath(); ctx.arc(dx*W,dy*H,3,0,Math.PI*2); ctx.fill(); \}
-  \}
-  if(S.show_safe)\{
+    for(const dx of[1/3,2/3]) for(const dy of[1/3,2/3]){ ctx.beginPath(); ctx.arc(dx*W,dy*H,3,0,Math.PI*2); ctx.fill(); }
+  }
+  if(S.show_safe){
     const ax=W*.05,ay=H*.05;
     ctx.strokeStyle='rgba(255,107,0,0.45)'; ctx.lineWidth=1; ctx.setLineDash([6,4]);
     ctx.beginPath(); ctx.roundRect(ax,ay,W-ax*2,H-ay*2,2); ctx.stroke();
@@ -1273,62 +1273,62 @@ function drawMonitor()\{
     ctx.strokeStyle='rgba(255,107,0,0.25)'; ctx.beginPath(); ctx.roundRect(tx,ty,W-tx*2,H-ty*2,2); ctx.stroke();
     ctx.setLineDash([]); ctx.font='7px JetBrains Mono,monospace'; ctx.fillStyle='rgba(255,107,0,0.5)'; ctx.textAlign='left';
     ctx.fillText('ACTION SAFE',ax+4,ay+10); ctx.fillText('TITLE SAFE',tx+4,ty+10);
-  \}
-  if(S.show_center)\{
+  }
+  if(S.show_center){
     const cx2=W/2,cy2=H/2; ctx.strokeStyle='rgba(255,255,255,0.3)'; ctx.lineWidth=1; ctx.setLineDash([]);
     ctx.beginPath(); ctx.moveTo(cx2-14,cy2); ctx.lineTo(cx2+14,cy2); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(cx2,cy2-14); ctx.lineTo(cx2,cy2+14); ctx.stroke();
     ctx.beginPath(); ctx.arc(cx2,cy2,4,0,Math.PI*2); ctx.stroke();
-  \}
-  if(S.show_hud)\{
+  }
+  if(S.show_hud){
     const fstop=getFstop(); const [kr,kg,kb]=kRGB(S.key_kelvin); const [,kn]=kelvinDisplay(S.key_kelvin);
     ctx.font='bold 10px JetBrains Mono,monospace'; ctx.setLineDash([]);
     ctx.textAlign='left'; ctx.fillStyle='rgba(0,212,204,0.85)';
-    ctx.fillText(`$\{S.lens\}  ·  FOV $\{LENS_FOV[S.lens]\}\'b0  ·  PAN $\{S.cam_pan\}\'b0`, 8, 14);
+    ctx.fillText(`${S.lens}  ·  FOV ${LENS_FOV[S.lens]}°  ·  PAN ${S.cam_pan}°`, 8, 14);
     ctx.textAlign='right'; ctx.fillStyle='rgba(0,255,136,0.85)';
-    ctx.fillText(`$\{fstop\}  ·  ISO $\{S.iso\}  ·  $\{getShutter()\}s`, W-8, 14);
+    ctx.fillText(`${fstop}  ·  ISO ${S.iso}  ·  ${getShutter()}s`, W-8, 14);
     ctx.textAlign='left'; ctx.fillStyle='rgba(255,107,0,0.75)';
-    ctx.fillText(`C\uc0\u8594 T: $\{dist(CAM_X,S.cam_dolly,S.talent_x,S.talent_y).toFixed(1)\} ft`, 8, H-8);
-    ctx.textAlign='right'; ctx.fillStyle=`rgba($\{kr\},$\{kg\},$\{kb\},0.85)`;
-    const sunStr = S.sun_mode&&S.sun_elevation!==null?` \uc0\u9728 $\{S.sun_elevation.toFixed(0)\}\'b0`:'';
-    ctx.fillText(`$\{S.key_kelvin\}K $\{kn\}$\{sunStr\}`, W-8, H-8);
+    ctx.fillText(`C→ T: ${dist(CAM_X,S.cam_dolly,S.talent_x,S.talent_y).toFixed(1)} ft`, 8, H-8);
+    ctx.textAlign='right'; ctx.fillStyle=`rgba(${kr},${kg},${kb},0.85)`;
+    const sunStr = S.sun_mode&&S.sun_elevation!==null?` ☀ ${S.sun_elevation.toFixed(0)}°`:'';
+    ctx.fillText(`${S.key_kelvin}K ${kn}${sunStr}`, W-8, H-8);
     const now=new Date();
     ctx.textAlign='center'; ctx.fillStyle='rgba(255,255,255,0.4)';
-    ctx.fillText(`$\{pad(now.getHours())\}:$\{pad(now.getMinutes())\}:$\{pad(now.getSeconds())\}:00`, W/2, 14);
+    ctx.fillText(`${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}:00`, W/2, 14);
     ctx.fillStyle='rgba(255,255,255,0.3)';
-    ctx.fillText(`DOLLY $\{S.cam_dolly.toFixed(1)\} ft`, W/2, H-8);
-    if(S.sun_mode&&S.sun_lat!==null)\{
+    ctx.fillText(`DOLLY ${S.cam_dolly.toFixed(1)} ft`, W/2, H-8);
+    if(S.sun_mode&&S.sun_lat!==null){
       ctx.textAlign='center'; ctx.fillStyle='rgba(255,179,0,0.5)';
-      ctx.fillText(`\uc0\u55357 \u56525 $\{S.sun_lat.toFixed(3)\}\'b0 $\{S.sun_lon>=0?S.sun_lon.toFixed(3)+'\'b0E':Math.abs(S.sun_lon).toFixed(3)+'\'b0W'\}`, W/2, H-20);
-    \}
-  \}
-  if(S.show_waveform)\{
+      ctx.fillText(`? \u56525 ${S.sun_lat.toFixed(3)}° ${S.sun_lon>=0?S.sun_lon.toFixed(3)+'°E':Math.abs(S.sun_lon).toFixed(3)+'°W'}`, W/2, H-20);
+    }
+  }
+  if(S.show_waveform){
     const wx=10,wy=H-96,ww=120,wh=78;
     ctx.fillStyle='rgba(5,10,20,0.88)'; ctx.beginPath(); ctx.roundRect(wx,wy,ww,wh,3); ctx.fill();
     ctx.strokeStyle='rgba(20,40,60,0.9)'; ctx.lineWidth=1; ctx.beginPath(); ctx.roundRect(wx,wy,ww,wh,3); ctx.stroke();
     ctx.font='7px JetBrains Mono,monospace'; ctx.fillStyle='rgba(40,100,80,0.8)'; ctx.textAlign='left';
     ctx.fillText('WAVEFORM',wx+5,wy+10);
     const kl=S.key_intensity/100, fl=S.fill1_on?S.fill1_intensity/100:0;
-    for(let x=wx+4;x<wx+ww-4;x+=2)\{
+    for(let x=wx+4;x<wx+ww-4;x+=2){
       ctx.strokeStyle='rgba(0,200,100,0.7)'; ctx.lineWidth=1;
       ctx.beginPath(); ctx.moveTo(x,wy+wh-8-fl*18); ctx.lineTo(x,wy+wh-8-kl*60); ctx.stroke();
-    \}
+    }
     ctx.fillStyle='rgba(60,100,80,0.6)'; ctx.textAlign='right';
     ctx.fillText('100',wx+ww-2,wy+14); ctx.fillText('0',wx+ww-2,wy+wh-4);
-  \}
+  }
   const vig=ctx.createRadialGradient(W/2,H/2,H*.22,W/2,H/2,H*.82);
   vig.addColorStop(0,'rgba(0,0,0,0)'); vig.addColorStop(1,'rgba(0,0,0,0.55)');
   ctx.fillStyle=vig; ctx.fillRect(0,0,W,H);
   ctx.fillStyle='rgba(0,0,0,0.025)';
   for(let y=0;y<H;y+=2) ctx.fillRect(0,y,W,1);
-\}
+}
 
-// \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
 // FLOOR PLAN — Plotly.js
-// \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
 let plotInited = false;
 
-function drawFloorPlan()\{
+function drawFloorPlan(){
   const W=STAGE_W, H=STAGE_H;
   const fov=LENS_FOV[S.lens], shutter=getShutter(), fstop=getFstop();
   const camX=CAM_X, camY=S.cam_dolly;
@@ -1346,254 +1346,254 @@ function drawFloorPlan()\{
   let shapes=[], annotations=[], data=[];
 
   // Stage floor
-  shapes.push(\{type:"rect",x0:0,y0:0,x1:W,y1:H,fillcolor:FLOOR,line:\{color:WALL,width:3\}\});
-  for(let x=1;x<W;x++)\{const c=x%5?GRID_M:GRID_5,w=x%5?.5:1.2; shapes.push(\{type:"line",x0:x,y0:0,x1:x,y1:H,line:\{color:c,width:w\}\});\}
-  for(let y=1;y<H;y++)\{const c=y%5?GRID_M:GRID_5,w=y%5?.5:1.2; shapes.push(\{type:"line",x0:0,y0:y,x1:W,y1:y,line:\{color:c,width:w\}\});\}
-  shapes.push(\{type:"line",x0:0,y0:0,x1:W,y1:0,line:\{color:"#0040A0",width:2.5,dash:"dot"\}\});
+  shapes.push({type:"rect",x0:0,y0:0,x1:W,y1:H,fillcolor:FLOOR,line:{color:WALL,width:3}});
+  for(let x=1;x<W;x++){const c=x%5?GRID_M:GRID_5,w=x%5?.5:1.2; shapes.push({type:"line",x0:x,y0:0,x1:x,y1:H,line:{color:c,width:w}});}
+  for(let y=1;y<H;y++){const c=y%5?GRID_M:GRID_5,w=y%5?.5:1.2; shapes.push({type:"line",x0:0,y0:y,x1:W,y1:y,line:{color:c,width:w}});}
+  shapes.push({type:"line",x0:0,y0:0,x1:W,y1:0,line:{color:"#0040A0",width:2.5,dash:"dot"}});
 
-  annotations.push(\{x:-2,y:H/2,text:"WALL 1",textangle:-90,showarrow:false,font:\{size:9,color:LBL,family:"JetBrains Mono"\}\});
-  annotations.push(\{x:W/2,y:H+1.7,text:"WALL 2 — BACK",showarrow:false,font:\{size:9,color:LBL,family:"JetBrains Mono"\}\});
-  annotations.push(\{x:W+2,y:H/2,text:"WALL 3",textangle:90,showarrow:false,font:\{size:9,color:LBL,family:"JetBrains Mono"\}\});
-  annotations.push(\{x:W/2,y:-.7,text:placing?`\uc0\u9889  $\{t('placingMsg').toUpperCase()\}: $\{placing.toUpperCase()\}`:"4TH WALL — OPEN  ·  CLICK \u55356 \u57263  PLACE TO MOVE LIGHTS",showarrow:false,
-    font:\{size:9,color:placing?"#FFE200":"#0050C0",family:"JetBrains Mono"\}\});
-  annotations.push(\{x:W/2,y:H+.9,text:"30 ft  ·  9.1 m",showarrow:false,font:\{size:8,color:DIM,family:"JetBrains Mono"\}\});
-  annotations.push(\{x:-.7,y:H/2,text:"20 ft · 6.1 m",textangle:-90,showarrow:false,font:\{size:8,color:DIM,family:"JetBrains Mono"\}\});
+  annotations.push({x:-2,y:H/2,text:"WALL 1",textangle:-90,showarrow:false,font:{size:9,color:LBL,family:"JetBrains Mono"}});
+  annotations.push({x:W/2,y:H+1.7,text:"WALL 2 — BACK",showarrow:false,font:{size:9,color:LBL,family:"JetBrains Mono"}});
+  annotations.push({x:W+2,y:H/2,text:"WALL 3",textangle:90,showarrow:false,font:{size:9,color:LBL,family:"JetBrains Mono"}});
+  annotations.push({x:W/2,y:-.7,text:placing?`⚡  ${t('placingMsg').toUpperCase()}: ${placing.toUpperCase()}`:"4TH WALL — OPEN  ·  CLICK \u55356 \u57263  PLACE TO MOVE LIGHTS",showarrow:false,
+    font:{size:9,color:placing?"#FFE200":"#0050C0",family:"JetBrains Mono"}});
+  annotations.push({x:W/2,y:H+.9,text:"30 ft  ·  9.1 m",showarrow:false,font:{size:8,color:DIM,family:"JetBrains Mono"}});
+  annotations.push({x:-.7,y:H/2,text:"20 ft · 6.1 m",textangle:-90,showarrow:false,font:{size:8,color:DIM,family:"JetBrains Mono"}});
 
   // Click grid
   const gx=[],gy=[];
-  for(let x=0;x<=W;x++) for(let y=0;y<=H;y++)\{gx.push(x);gy.push(y);\}
-  data.push(\{x:gx,y:gy,mode:"markers",marker:\{size:10,color:"rgba(0,0,0,0)",opacity:0\},showlegend:false,
-    hovertemplate:placing?`Click to place $\{placing\}<br>X:%\{x:.0f\}ft · Y:%\{y:.0f\}ft<extra></extra>`:"Click to place Actor 1<br>X:%\{x:.0f\}ft · Y:%\{y:.0f\}ft<extra></extra>",
-    name:"__click__"\});
+  for(let x=0;x<=W;x++) for(let y=0;y<=H;y++){gx.push(x);gy.push(y);}
+  data.push({x:gx,y:gy,mode:"markers",marker:{size:10,color:"rgba(0,0,0,0)",opacity:0},showlegend:false,
+    hovertemplate:placing?`Click to place ${placing}<br>X:%{x:.0f}ft · Y:%{y:.0f}ft<extra></extra>`:"Click to place Actor 1<br>X:%{x:.0f}ft · Y:%{y:.0f}ft<extra></extra>",
+    name:"__click__"});
 
-  // \uc0\u9472 \u9472  LIGHT COVERAGE CONES (radial glow on floor) \u9472 \u9472 
+  // ─ \u9472  LIGHT COVERAGE CONES (radial glow on floor) \u9472 \u9472 
   // Fill 1
-  if(S.fill1_on)\{
+  if(S.fill1_on){
     const [fc,fn]=kelvinDisplay(S.fill1_kelvin); const [fr2,fg2,fb2]=hexRGB(fc);
     const frad=Math.max(2,S.fill1_intensity/100*8);
-    for(const[r,a] of[[frad*1.2,.12],[frad*.8,.25],[frad*.4,.45]])\{
+    for(const[r,a] of[[frad*1.2,.12],[frad*.8,.25],[frad*.4,.45]]){
       const ga=(S.fill1_intensity/100*.28)*a;
-      shapes.push(\{type:"circle",x0:S.fill1_x-r,y0:S.fill1_y-r,x1:S.fill1_x+r,y1:S.fill1_y+r,
-        fillcolor:`rgba($\{fr2\},$\{fg2\},$\{fb2\},$\{ga.toFixed(3)\})`,line:\{color:"rgba(0,0,0,0)",width:0\}\});
-    \}
+      shapes.push({type:"circle",x0:S.fill1_x-r,y0:S.fill1_y-r,x1:S.fill1_x+r,y1:S.fill1_y+r,
+        fillcolor:`rgba(${fr2},${fg2},${fb2},${ga.toFixed(3)})`,line:{color:"rgba(0,0,0,0)",width:0}});
+    }
     // Beam to talent
-    if(S.fill1_on && S.fill1_intensity>10)\{
+    if(S.fill1_on && S.fill1_intensity>10){
       const bw=Math.max(.8,S.fill1_intensity/100*2.5);
-      data.push(\{x:[S.fill1_x,tx],y:[S.fill1_y,ty],mode:"lines",
-        line:\{color:`rgba($\{fr2\},$\{fg2\},$\{fb2\},0.30)`,width:bw,dash:"dot"\},showlegend:false,hoverinfo:"skip"\});
-    \}
-    shapes.push(\{type:"circle",x0:S.fill1_x-.9,y0:S.fill1_y-.9,x1:S.fill1_x+.9,y1:S.fill1_y+.9,
-      fillcolor:`rgba($\{fr2\},$\{fg2\},$\{fb2\},0.50)`,line:\{color:fc,width:1.5\}\});
-    data.push(\{x:[S.fill1_x],y:[S.fill1_y],mode:"markers",
-      marker:\{size:14,color:S.fill1_on?fc:"#151E30",symbol:"square",line:\{color:"#02050C",width:2\}\},showlegend:false,
-      hovertemplate:`<b>Fill 1</b><br>ON<br>$\{S.fill1_kelvin\}K — $\{fn\}<br>Intensity:$\{S.fill1_intensity\}%<extra></extra>`\});
-    annotations.push(\{x:S.fill1_x,y:S.fill1_y+2.2,text:`<b>FILL 1</b><br>$\{S.fill1_kelvin\}K`,
-      showarrow:false,font:\{size:8,color:fc,family:"JetBrains Mono"\},align:"center"\});
-  \}
+      data.push({x:[S.fill1_x,tx],y:[S.fill1_y,ty],mode:"lines",
+        line:{color:`rgba(${fr2},${fg2},${fb2},0.30)`,width:bw,dash:"dot"},showlegend:false,hoverinfo:"skip"});
+    }
+    shapes.push({type:"circle",x0:S.fill1_x-.9,y0:S.fill1_y-.9,x1:S.fill1_x+.9,y1:S.fill1_y+.9,
+      fillcolor:`rgba(${fr2},${fg2},${fb2},0.50)`,line:{color:fc,width:1.5}});
+    data.push({x:[S.fill1_x],y:[S.fill1_y],mode:"markers",
+      marker:{size:14,color:S.fill1_on?fc:"#151E30",symbol:"square",line:{color:"#02050C",width:2}},showlegend:false,
+      hovertemplate:`<b>Fill 1</b><br>ON<br>${S.fill1_kelvin}K — ${fn}<br>Intensity:${S.fill1_intensity}%<extra></extra>`});
+    annotations.push({x:S.fill1_x,y:S.fill1_y+2.2,text:`<b>FILL 1</b><br>${S.fill1_kelvin}K`,
+      showarrow:false,font:{size:8,color:fc,family:"JetBrains Mono"},align:"center"});
+  }
 
   // Back Light
-  if(S.back_on)\{
+  if(S.back_on){
     const [bc,bn]=kelvinDisplay(S.back_kelvin); const [bR2,bG2,bB2]=hexRGB(bc);
     const brad=Math.max(2,S.back_intensity/100*7);
-    for(const[r,a] of[[brad*1.2,.12],[brad*.8,.25],[brad*.4,.45]])\{
+    for(const[r,a] of[[brad*1.2,.12],[brad*.8,.25],[brad*.4,.45]]){
       const ga=(S.back_intensity/100*.25)*a;
-      shapes.push(\{type:"circle",x0:S.back_x-r,y0:S.back_y-r,x1:S.back_x+r,y1:S.back_y+r,
-        fillcolor:`rgba($\{bR2\},$\{bG2\},$\{bB2\},$\{ga.toFixed(3)\})`,line:\{color:"rgba(0,0,0,0)",width:0\}\});
-    \}
-    if(S.back_intensity>10)\{
+      shapes.push({type:"circle",x0:S.back_x-r,y0:S.back_y-r,x1:S.back_x+r,y1:S.back_y+r,
+        fillcolor:`rgba(${bR2},${bG2},${bB2},${ga.toFixed(3)})`,line:{color:"rgba(0,0,0,0)",width:0}});
+    }
+    if(S.back_intensity>10){
       const bw=Math.max(.8,S.back_intensity/100*2);
-      data.push(\{x:[S.back_x,tx],y:[S.back_y,ty],mode:"lines",
-        line:\{color:`rgba($\{bR2\},$\{bG2\},$\{bB2\},0.25)`,width:bw,dash:"dot"\},showlegend:false,hoverinfo:"skip"\});
-    \}
-    shapes.push(\{type:"circle",x0:S.back_x-.9,y0:S.back_y-.9,x1:S.back_x+.9,y1:S.back_y+.9,
-      fillcolor:`rgba($\{bR2\},$\{bG2\},$\{bB2\},0.50)`,line:\{color:bc,width:1.5\}\});
-    data.push(\{x:[S.back_x],y:[S.back_y],mode:"markers",
-      marker:\{size:14,color:bc,symbol:"square",line:\{color:"#02050C",width:2\}\},showlegend:false,
-      hovertemplate:`<b>Back Light</b><br>ON<br>$\{S.back_kelvin\}K — $\{bn\}<br>Intensity:$\{S.back_intensity\}%<extra></extra>`\});
-    annotations.push(\{x:S.back_x,y:S.back_y+2.2,text:`<b>BACK</b><br>$\{S.back_kelvin\}K`,
-      showarrow:false,font:\{size:8,color:bc,family:"JetBrains Mono"\},align:"center"\});
-  \}
+      data.push({x:[S.back_x,tx],y:[S.back_y,ty],mode:"lines",
+        line:{color:`rgba(${bR2},${bG2},${bB2},0.25)`,width:bw,dash:"dot"},showlegend:false,hoverinfo:"skip"});
+    }
+    shapes.push({type:"circle",x0:S.back_x-.9,y0:S.back_y-.9,x1:S.back_x+.9,y1:S.back_y+.9,
+      fillcolor:`rgba(${bR2},${bG2},${bB2},0.50)`,line:{color:bc,width:1.5}});
+    data.push({x:[S.back_x],y:[S.back_y],mode:"markers",
+      marker:{size:14,color:bc,symbol:"square",line:{color:"#02050C",width:2}},showlegend:false,
+      hovertemplate:`<b>Back Light</b><br>ON<br>${S.back_kelvin}K — ${bn}<br>Intensity:${S.back_intensity}%<extra></extra>`});
+    annotations.push({x:S.back_x,y:S.back_y+2.2,text:`<b>BACK</b><br>${S.back_kelvin}K`,
+      showarrow:false,font:{size:8,color:bc,family:"JetBrains Mono"},align:"center"});
+  }
 
-  // \uc0\u9472 \u9472  KEY LIGHT \u9472 \u9472 
+  // ─ \u9472  KEY LIGHT \u9472 \u9472 
   const keyX=S.key_x, keyY=S.key_y;
   const kaInt=Math.max(.04,S.key_intensity/100*.30);
-  for(const[gr,ga] of[[6,.25],[4,.5],[2.5,.8]])\{
-    shapes.push(\{type:"circle",x0:keyX-gr,y0:keyY-gr,x1:keyX+gr,y1:keyY+gr,
-      fillcolor:`rgba($\{kr\},$\{kg\},$\{kb\},$\{(kaInt*ga).toFixed(3)\})`,line:\{color:"rgba(0,0,0,0)",width:0\}\});
-  \}
+  for(const[gr,ga] of[[6,.25],[4,.5],[2.5,.8]]){
+    shapes.push({type:"circle",x0:keyX-gr,y0:keyY-gr,x1:keyX+gr,y1:keyY+gr,
+      fillcolor:`rgba(${kr},${kg},${kb},${(kaInt*ga).toFixed(3)})`,line:{color:"rgba(0,0,0,0)",width:0}});
+  }
   // Key beam to talent (solid)
   const bw=Math.max(1.5,S.key_intensity/100*4);
-  data.push(\{x:[keyX,tx],y:[keyY,ty],mode:"lines",line:\{color:`rgba($\{kr\},$\{kg\},$\{kb\},0.55)`,width:bw\},showlegend:false,hoverinfo:"skip"\});
+  data.push({x:[keyX,tx],y:[keyY,ty],mode:"lines",line:{color:`rgba(${kr},${kg},${kb},0.55)`,width:bw},showlegend:false,hoverinfo:"skip"});
 
   // Key dome / sun icon
   const angKey=Math.atan2(ty-keyY,tx-keyX), domeR=1.8;
-  if(S.sun_mode)\{
+  if(S.sun_mode){
     // Sun rays
-    for(let i=0;i<8;i++)\{
+    for(let i=0;i<8;i++){
       const a=i*Math.PI/4, ra1=domeR*1.0, ra2=domeR*1.8;
-      shapes.push(\{type:"line",x0:keyX+Math.cos(a)*ra1,y0:keyY+Math.sin(a)*ra1,
-        x1:keyX+Math.cos(a)*ra2,y1:keyY+Math.sin(a)*ra2,line:\{color:`rgba($\{kr\},$\{kg\},$\{kb\},0.7)`,width:2\}\});
-    \}
-    shapes.push(\{type:"circle",x0:keyX-domeR,y0:keyY-domeR,x1:keyX+domeR,y1:keyY+domeR,
-      fillcolor:`rgba($\{kr\},$\{kg\},$\{kb\},0.85)`,line:\{color:kc,width:2\}\});
-    if(S.sun_elevation!==null)\{
-      annotations.push(\{x:keyX,y:keyY+domeR+2.2,text:`<b>\uc0\u9728  SUN</b><br>$\{S.key_kelvin\}K · $\{S.sun_elevation.toFixed(0)\}\'b0 el`,
-        showarrow:false,font:\{size:9,color:kc,family:"JetBrains Mono"\},align:"center"\});
-    \}
-    if(S.sun_lat!==null)\{
-      annotations.push(\{x:keyX,y:keyY-domeR-1.2,text:`\uc0\u55357 \u56525 $\{S.sun_lat.toFixed(2)\}\'b0`,
-        showarrow:false,font:\{size:7,color:"#806040",family:"JetBrains Mono"\},align:"center"\});
-    \}
-  \} else \{
-    const arcA=Array.from(\{length:48\},(_,i)=>angKey-Math.PI/2+i*(Math.PI/47));
-    data.push(\{x:arcA.map(a=>keyX+domeR*Math.cos(a)),y:arcA.map(a=>keyY+domeR*Math.sin(a)),
-      mode:"lines",fill:"toself",fillcolor:`rgba($\{kr\},$\{kg\},$\{kb\},0.92)`,line:\{color:kc,width:2.5\},showlegend:false,
-      hovertemplate:`<b>KEY LIGHT</b><br>$\{S.key_kelvin\}K — $\{kn\}<br>$\{S.key_intensity\}%<extra></extra>`\});
-    annotations.push(\{x:keyX,y:keyY+domeR+1.8,text:`<b>KEY</b><br>$\{S.key_kelvin\}K`,
-      showarrow:false,font:\{size:9,color:kc,family:"JetBrains Mono"\},align:"center"\});
-  \}
+      shapes.push({type:"line",x0:keyX+Math.cos(a)*ra1,y0:keyY+Math.sin(a)*ra1,
+        x1:keyX+Math.cos(a)*ra2,y1:keyY+Math.sin(a)*ra2,line:{color:`rgba(${kr},${kg},${kb},0.7)`,width:2}});
+    }
+    shapes.push({type:"circle",x0:keyX-domeR,y0:keyY-domeR,x1:keyX+domeR,y1:keyY+domeR,
+      fillcolor:`rgba(${kr},${kg},${kb},0.85)`,line:{color:kc,width:2}});
+    if(S.sun_elevation!==null){
+      annotations.push({x:keyX,y:keyY+domeR+2.2,text:`<b>☀  SUN</b><br>${S.key_kelvin}K · ${S.sun_elevation.toFixed(0)}° el`,
+        showarrow:false,font:{size:9,color:kc,family:"JetBrains Mono"},align:"center"});
+    }
+    if(S.sun_lat!==null){
+      annotations.push({x:keyX,y:keyY-domeR-1.2,text:`? \u56525 ${S.sun_lat.toFixed(2)}°`,
+        showarrow:false,font:{size:7,color:"#806040",family:"JetBrains Mono"},align:"center"});
+    }
+  } else {
+    const arcA=Array.from({length:48},(_,i)=>angKey-Math.PI/2+i*(Math.PI/47));
+    data.push({x:arcA.map(a=>keyX+domeR*Math.cos(a)),y:arcA.map(a=>keyY+domeR*Math.sin(a)),
+      mode:"lines",fill:"toself",fillcolor:`rgba(${kr},${kg},${kb},0.92)`,line:{color:kc,width:2.5},showlegend:false,
+      hovertemplate:`<b>KEY LIGHT</b><br>${S.key_kelvin}K — ${kn}<br>${S.key_intensity}%<extra></extra>`});
+    annotations.push({x:keyX,y:keyY+domeR+1.8,text:`<b>KEY</b><br>${S.key_kelvin}K`,
+      showarrow:false,font:{size:9,color:kc,family:"JetBrains Mono"},align:"center"});
+  }
 
-  // \uc0\u9472 \u9472  CAMERA \u9472 \u9472 
-  for(const[gr,ga] of[[3.5,.06],[2,.12]])\{
-    shapes.push(\{type:"circle",x0:camX-gr,y0:camY-gr,x1:camX+gr,y1:camY+gr,
-      fillcolor:`rgba($\{tcR\},$\{tcG\},$\{tcB\},$\{ga\})`,line:\{color:"rgba(0,0,0,0)",width:0\}\});
-  \}
+  // ─ \u9472  CAMERA \u9472 \u9472 
+  for(const[gr,ga] of[[3.5,.06],[2,.12]]){
+    shapes.push({type:"circle",x0:camX-gr,y0:camY-gr,x1:camX+gr,y1:camY+gr,
+      fillcolor:`rgba(${tcR},${tcG},${tcB},${ga})`,line:{color:"rgba(0,0,0,0)",width:0}});
+  }
   const fwd=[Math.sin(panRad),Math.cos(panRad)];
   const coneLen=Math.min(14,H-camY+.5);
   const ld=rot2d(...fwd,fovHalf), rd=rot2d(...fwd,-fovHalf);
-  data.push(\{x:[camX,camX+ld[0]*coneLen,camX+rd[0]*coneLen,camX],y:[camY,camY+ld[1]*coneLen,camY+rd[1]*coneLen,camY],
-    fill:"toself",fillcolor:`rgba($\{tcR\},$\{tcG\},$\{tcB\},0.08)`,line:\{color:`rgba($\{tcR\},$\{tcG\},$\{tcB\},0.4)`,width:1.5\},
-    mode:"lines",showlegend:false,hoverinfo:"skip"\});
-  data.push(\{x:[camX],y:[camY],mode:"markers",
-    marker:\{size:28,color:`rgba($\{tcR\},$\{tcG\},$\{tcB\},1)`,symbol:"square",line:\{color:"rgba(0,240,230,1)",width:2.5\}\},
-    showlegend:false,hovertemplate:`<b>CAMERA</b><br>$\{S.lens\} | FOV:$\{fov\}\'b0<br>Pan:$\{S.cam_pan\}\'b0<extra></extra>`\});
-  annotations.push(\{x:camX+2.8,y:camY+.6,text:"MASTER SHOT",showarrow:false,font:\{size:9,color:'#00D4CC',family:"JetBrains Mono"\}\});
+  data.push({x:[camX,camX+ld[0]*coneLen,camX+rd[0]*coneLen,camX],y:[camY,camY+ld[1]*coneLen,camY+rd[1]*coneLen,camY],
+    fill:"toself",fillcolor:`rgba(${tcR},${tcG},${tcB},0.08)`,line:{color:`rgba(${tcR},${tcG},${tcB},0.4)`,width:1.5},
+    mode:"lines",showlegend:false,hoverinfo:"skip"});
+  data.push({x:[camX],y:[camY],mode:"markers",
+    marker:{size:28,color:`rgba(${tcR},${tcG},${tcB},1)`,symbol:"square",line:{color:"rgba(0,240,230,1)",width:2.5}},
+    showlegend:false,hovertemplate:`<b>CAMERA</b><br>${S.lens} | FOV:${fov}°<br>Pan:${S.cam_pan}°<extra></extra>`});
+  annotations.push({x:camX+2.8,y:camY+.6,text:"MASTER SHOT",showarrow:false,font:{size:9,color:'#00D4CC',family:"JetBrains Mono"}});
 
-  // \uc0\u9472 \u9472  TALENT / ACTOR 1 \u9472 \u9472 
+  // ─ \u9472  TALENT / ACTOR 1 \u9472 \u9472 
   const spill=Math.min(3.5,Math.max(.8,S.key_intensity/100*3.5));
-  shapes.push(\{type:"circle",x0:tx-spill,y0:ty-spill,x1:tx+spill,y1:ty+spill,
-    fillcolor:`rgba($\{kr\},$\{kg\},$\{kb\},$\{Math.max(.03,S.key_intensity/100*.12).toFixed(3)\})`,line:\{color:"rgba(0,0,0,0)",width:0\}\});
-  shapes.push(\{type:"circle",x0:tx-2.2,y0:ty-2.2,x1:tx+2.2,y1:ty+2.2,
-    fillcolor:"rgba(0,0,0,0)",line:\{color:"rgba(255,23,68,0.30)",width:1,dash:"dot"\}\});
-  data.push(\{x:[tx-2,tx+2,null,tx,tx],y:[ty,ty,null,ty-2,ty+2],mode:"lines",
-    line:\{color:"#FF1744",width:2.5\},showlegend:false,hoverinfo:"skip"\});
-  data.push(\{x:[tx],y:[ty],mode:"markers",
-    marker:\{size:30,color:"rgba(255,23,68,0.08)",symbol:"circle",line:\{color:"#FF1744",width:3\}\},showlegend:false,
-    hovertemplate:`<b>$\{S.talent_name\}</b><br>X:$\{tx.toFixed(1)\}ft<br>Y:$\{ty.toFixed(1)\}ft<br>C\uc0\u8594 T:$\{c2t.toFixed(1)\}ft<extra></extra>`\});
-  annotations.push(\{x:tx,y:ty+2.8,text:`<b>$\{S.talent_name.toUpperCase()\}</b>`,
-    showarrow:false,font:\{size:12,color:"#FF4466",family:"Barlow Condensed"\},align:"center"\});
+  shapes.push({type:"circle",x0:tx-spill,y0:ty-spill,x1:tx+spill,y1:ty+spill,
+    fillcolor:`rgba(${kr},${kg},${kb},${Math.max(.03,S.key_intensity/100*.12).toFixed(3)})`,line:{color:"rgba(0,0,0,0)",width:0}});
+  shapes.push({type:"circle",x0:tx-2.2,y0:ty-2.2,x1:tx+2.2,y1:ty+2.2,
+    fillcolor:"rgba(0,0,0,0)",line:{color:"rgba(255,23,68,0.30)",width:1,dash:"dot"}});
+  data.push({x:[tx-2,tx+2,null,tx,tx],y:[ty,ty,null,ty-2,ty+2],mode:"lines",
+    line:{color:"#FF1744",width:2.5},showlegend:false,hoverinfo:"skip"});
+  data.push({x:[tx],y:[ty],mode:"markers",
+    marker:{size:30,color:"rgba(255,23,68,0.08)",symbol:"circle",line:{color:"#FF1744",width:3}},showlegend:false,
+    hovertemplate:`<b>${S.talent_name}</b><br>X:${tx.toFixed(1)}ft<br>Y:${ty.toFixed(1)}ft<br>C→ T:${c2t.toFixed(1)}ft<extra></extra>`});
+  annotations.push({x:tx,y:ty+2.8,text:`<b>${S.talent_name.toUpperCase()}</b>`,
+    showarrow:false,font:{size:12,color:"#FF4466",family:"Barlow Condensed"},align:"center"});
 
-  // \uc0\u9472 \u9472  ACTOR 2 \u9472 \u9472 
-  if(S.actor2_on)\{
+  // ─ \u9472  ACTOR 2 \u9472 \u9472 
+  if(S.actor2_on){
     const ax=S.actor2_x, ay=S.actor2_y;
-    shapes.push(\{type:"circle",x0:ax-2,y0:ay-2,x1:ax+2,y1:ay+2,
-      fillcolor:"rgba(255,68,170,0.06)",line:\{color:"rgba(255,68,170,0.30)",width:1,dash:"dot"\}\});
-    data.push(\{x:[ax-2,ax+2,null,ax,ax],y:[ay,ay,null,ay-2,ay+2],mode:"lines",
-      line:\{color:"#FF44AA",width:2\},showlegend:false,hoverinfo:"skip"\});
-    data.push(\{x:[ax],y:[ay],mode:"markers",
-      marker:\{size:26,color:"rgba(255,68,170,0.08)",symbol:"circle",line:\{color:"#FF44AA",width:2.5\}\},showlegend:false,
-      hovertemplate:`<b>$\{S.actor2_name\}</b><br>X:$\{ax.toFixed(1)\}ft<br>Y:$\{ay.toFixed(1)\}ft<br>C\uc0\u8594 T:$\{dist(camX,camY,ax,ay).toFixed(1)\}ft<extra></extra>`\});
-    annotations.push(\{x:ax,y:ay+2.8,text:`<b>$\{S.actor2_name.toUpperCase()\}</b>`,
-      showarrow:false,font:\{size:11,color:"#FF44AA",family:"Barlow Condensed"\},align:"center"\});
-    // 180\'b0 line between actors
-    shapes.push(\{type:"line",x0:tx,y0:ty,x1:ax,y1:ay,
-      line:\{color:"rgba(255,226,0,0.18)",width:1.5,dash:"dot"\}\});
+    shapes.push({type:"circle",x0:ax-2,y0:ay-2,x1:ax+2,y1:ay+2,
+      fillcolor:"rgba(255,68,170,0.06)",line:{color:"rgba(255,68,170,0.30)",width:1,dash:"dot"}});
+    data.push({x:[ax-2,ax+2,null,ax,ax],y:[ay,ay,null,ay-2,ay+2],mode:"lines",
+      line:{color:"#FF44AA",width:2},showlegend:false,hoverinfo:"skip"});
+    data.push({x:[ax],y:[ay],mode:"markers",
+      marker:{size:26,color:"rgba(255,68,170,0.08)",symbol:"circle",line:{color:"#FF44AA",width:2.5}},showlegend:false,
+      hovertemplate:`<b>${S.actor2_name}</b><br>X:${ax.toFixed(1)}ft<br>Y:${ay.toFixed(1)}ft<br>C→ T:${dist(camX,camY,ax,ay).toFixed(1)}ft<extra></extra>`});
+    annotations.push({x:ax,y:ay+2.8,text:`<b>${S.actor2_name.toUpperCase()}</b>`,
+      showarrow:false,font:{size:11,color:"#FF44AA",family:"Barlow Condensed"},align:"center"});
+    // 180° line between actors
+    shapes.push({type:"line",x0:tx,y0:ty,x1:ax,y1:ay,
+      line:{color:"rgba(255,226,0,0.18)",width:1.5,dash:"dot"}});
     const midX=(tx+ax)/2, midY=(ty+ay)/2;
-    annotations.push(\{x:midX,y:midY,text:"180\'b0",showarrow:false,font:\{size:8,color:"rgba(255,226,0,0.5)",family:"JetBrains Mono"\}\});
-  \}
+    annotations.push({x:midX,y:midY,text:"180°",showarrow:false,font:{size:8,color:"rgba(255,226,0,0.5)",family:"JetBrains Mono"}});
+  }
 
   // Ratio badge
-  annotations.push(\{x:W+.8,y:H-1,xanchor:"left",
-    text:`<b>KEY:FILL</b><br><span style='font-size:22px'><b>$\{rl\}</b></span><br><i style='font-size:9px'>$\{rm\}</i>`,
-    showarrow:false,bgcolor:rc,bordercolor:rc,borderwidth:2,borderpad:10,font:\{size:10,color:"white",family:"Barlow Condensed"\},align:"center"\});
+  annotations.push({x:W+.8,y:H-1,xanchor:"left",
+    text:`<b>KEY:FILL</b><br><span style='font-size:22px'><b>${rl}</b></span><br><i style='font-size:9px'>${rm}</i>`,
+    showarrow:false,bgcolor:rc,bordercolor:rc,borderwidth:2,borderpad:10,font:{size:10,color:"white",family:"Barlow Condensed"},align:"center"});
 
   // Telemetry bars
-  let lights=`KEY $\{S.key_kelvin\}K`;
-  if(S.fill1_on) lights+=`·F1 $\{S.fill1_kelvin\}K`;
-  if(S.back_on)  lights+=`·BACK $\{S.back_kelvin\}K`;
-  if(S.fill2_on) lights+=`·F2 $\{S.fill2_kelvin\}K`;
+  let lights=`KEY ${S.key_kelvin}K`;
+  if(S.fill1_on) lights+=`·F1 ${S.fill1_kelvin}K`;
+  if(S.back_on)  lights+=`·BACK ${S.back_kelvin}K`;
+  if(S.fill2_on) lights+=`·F2 ${S.fill2_kelvin}K`;
   const ndS=S.nd_label.split("—")[0].trim();
   const rows=[
-    ["#0A1428","#4060A0",` CAM  $\{S.lens\}  FOV:$\{fov\}\'b0  PAN:$\{S.cam_pan\}\'b0  DOLLY:$\{camY.toFixed(1)\}ft  C\uc0\u8594 T:$\{c2t.toFixed(1)\}ft/$\{ftM(c2t).toFixed(1)\}m`],
-    ["#081508","#208040",` EXP  $\{fstop\}  ISO:$\{S.iso\}  $\{shutter\}s  $\{ndS\}  $\{S.mode==="Video/Cinema"?S.fps+"fps "+S.resolution:"PHOTO"\}`],
-    ["#0C0A04","#806020",` LGT  $\{lights\}$\{S.sun_mode&&S.sun_elevation!==null?`  \uc0\u9728  $\{S.sun_elevation.toFixed(0)\}\'b0el`:""\}`],
-    ["#150408","#A03030",` TLT  $\{S.talent_name.toUpperCase()\} X:$\{tx.toFixed(1)\}ft Y:$\{ty.toFixed(1)\}ft$\{S.actor2_on?`  |  $\{S.actor2_name.toUpperCase()\} X:$\{S.actor2_x.toFixed(1)\} Y:$\{S.actor2_y.toFixed(1)\}`:""\}`],
+    ["#0A1428","#4060A0",` CAM  ${S.lens}  FOV:${fov}°  PAN:${S.cam_pan}°  DOLLY:${camY.toFixed(1)}ft  C→ T:${c2t.toFixed(1)}ft/${ftM(c2t).toFixed(1)}m`],
+    ["#081508","#208040",` EXP  ${fstop}  ISO:${S.iso}  ${shutter}s  ${ndS}  ${S.mode==="Video/Cinema"?S.fps+"fps "+S.resolution:"PHOTO"}`],
+    ["#0C0A04","#806020",` LGT  ${lights}${S.sun_mode&&S.sun_elevation!==null?`  ☀  ${S.sun_elevation.toFixed(0)}°el`:""}`],
+    ["#150408","#A03030",` TLT  ${S.talent_name.toUpperCase()} X:${tx.toFixed(1)}ft Y:${ty.toFixed(1)}ft${S.actor2_on?`  |  ${S.actor2_name.toUpperCase()} X:${S.actor2_x.toFixed(1)} Y:${S.actor2_y.toFixed(1)}`:""}`],
   ];
-  rows.forEach(([bg,tc,txt],i)=>\{
+  rows.forEach(([bg,tc,txt],i)=>{
     const ry=-2.6-i*1.45;
     const [br2,bg2,bb2]=hexRGB(bg), [tr2,tg2,tb2]=hexRGB(tc);
-    shapes.push(\{type:"rect",x0:0,y0:ry-.6,x1:W,y1:ry+.6,fillcolor:`rgba($\{br2\},$\{bg2\},$\{bb2\},0.85)`,line:\{color:`rgba($\{tr2\},$\{tg2\},$\{tb2\},0.6)`,width:1\}\});
-    shapes.push(\{type:"rect",x0:0,y0:ry-.6,x1:.4,y1:ry+.6,fillcolor:`rgba($\{tr2\},$\{tg2\},$\{tb2\},0.8)`,line:\{color:"rgba(0,0,0,0)",width:0\}\});
-    annotations.push(\{x:.7,y:ry,text:txt,showarrow:false,font:\{size:9,color:tc,family:"JetBrains Mono"\},xanchor:"left",align:"left"\});
-  \});
+    shapes.push({type:"rect",x0:0,y0:ry-.6,x1:W,y1:ry+.6,fillcolor:`rgba(${br2},${bg2},${bb2},0.85)`,line:{color:`rgba(${tr2},${tg2},${tb2},0.6)`,width:1}});
+    shapes.push({type:"rect",x0:0,y0:ry-.6,x1:.4,y1:ry+.6,fillcolor:`rgba(${tr2},${tg2},${tb2},0.8)`,line:{color:"rgba(0,0,0,0)",width:0}});
+    annotations.push({x:.7,y:ry,text:txt,showarrow:false,font:{size:9,color:tc,family:"JetBrains Mono"},xanchor:"left",align:"left"});
+  });
 
-  const layout=\{
-    margin:\{l:55,r:175,t:16,b:16\},paper_bgcolor:"#02040A",plot_bgcolor:"#02040A",
-    xaxis:\{range:[-3,W+11],showgrid:false,zeroline:false,showticklabels:false,scaleanchor:"y",scaleratio:1,fixedrange:true\},
-    yaxis:\{range:[-12.5,H+4.5],showgrid:false,zeroline:false,showticklabels:false,fixedrange:true\},
+  const layout={
+    margin:{l:55,r:175,t:16,b:16},paper_bgcolor:"#02040A",plot_bgcolor:"#02040A",
+    xaxis:{range:[-3,W+11],showgrid:false,zeroline:false,showticklabels:false,scaleanchor:"y",scaleratio:1,fixedrange:true},
+    yaxis:{range:[-12.5,H+4.5],showgrid:false,zeroline:false,showticklabels:false,fixedrange:true},
     height:760,dragmode:false,showlegend:false,shapes,annotations
-  \};
-  const config=\{responsive:true,displayModeBar:false,scrollZoom:false\};
+  };
+  const config={responsive:true,displayModeBar:false,scrollZoom:false};
 
-  if(!plotInited)\{
-    Plotly.newPlot('floor-plan',data,layout,config).then(gd=>\{
-      gd.on('plotly_click',ev=>\{
+  if(!plotInited){
+    Plotly.newPlot('floor-plan',data,layout,config).then(gd=>{
+      gd.on('plotly_click',ev=>{
         if(!ev.points) return;
         const pt=ev.points[0], x=pt.x, y=pt.y;
         if(x<0||x>STAGE_W||y<0||y>STAGE_H) return;
         const snap=v=>Math.round(v*2)/2;
-        if(placing==='key')\{ S.key_x=snap(x); S.key_y=snap(y); \}
-        else if(placing==='fill1')\{ S.fill1_x=snap(x); S.fill1_y=snap(y); \}
-        else if(placing==='back')\{ S.back_x=snap(x); S.back_y=snap(y); \}
-        else if(placing==='actor2')\{ S.actor2_x=snap(x); S.actor2_y=snap(y); \}
-        else if(placing==='actor1'||!placing)\{
-          if(x>=.5&&x<=STAGE_W-.5&&y>=.5&&y<=STAGE_H-.5)\{ S.talent_x=snap(x); S.talent_y=snap(y); \}
-        \}
+        if(placing==='key'){ S.key_x=snap(x); S.key_y=snap(y); }
+        else if(placing==='fill1'){ S.fill1_x=snap(x); S.fill1_y=snap(y); }
+        else if(placing==='back'){ S.back_x=snap(x); S.back_y=snap(y); }
+        else if(placing==='actor2'){ S.actor2_x=snap(x); S.actor2_y=snap(y); }
+        else if(placing==='actor1'||!placing){
+          if(x>=.5&&x<=STAGE_W-.5&&y>=.5&&y<=STAGE_H-.5){ S.talent_x=snap(x); S.talent_y=snap(y); }
+        }
         cancelPlacing();
         syncDOM(); updateAll();
-      \});
-    \});
+      });
+    });
     plotInited=true;
-  \} else \{
+  } else {
     Plotly.react('floor-plan',data,layout,config);
-  \}
-\}
+  }
+}
 
-// \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
 // TABS
-// \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
 let activeTab='floor';
-function switchTab(tab)\{
+function switchTab(tab){
   activeTab=tab;
-  document.querySelectorAll('.tab-btn').forEach((b,i)=>\{b.classList.toggle('active',(i===0&&tab==='floor')||(i===1&&tab==='monitor'));\});
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>{b.classList.toggle('active',(i===0&&tab==='floor')||(i===1&&tab==='monitor'));});
   document.getElementById('panel-floor').classList.toggle('active',tab==='floor');
   document.getElementById('panel-monitor').classList.toggle('active',tab==='monitor');
   if(tab==='monitor') setTimeout(sizeMonitor,50);
-\}
+}
 
-function toggleTip(id)\{ const el=document.getElementById(id); if(el) el.classList.toggle('hidden'); \}
+function toggleTip(id){ const el=document.getElementById(id); if(el) el.classList.toggle('hidden'); }
 
-// \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
 // MAIN UPDATE
-// \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
-function updateAll()\{
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+function updateAll(){
   showHideCtrls(); updateReadouts(); drawFloorPlan();
   if(activeTab==='monitor') drawMonitor();
   saveState();
-\}
+}
 
-// \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
 // EVENT LISTENERS
-// \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
-function wire(id,key,type='float')\{
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+function wire(id,key,type='float'){
   const el=document.getElementById(id); if(!el) return;
   const ev=el.tagName==='INPUT'&&el.type==='range'?'input':'change';
-  el.addEventListener(ev,()=>\{
+  el.addEventListener(ev,()=>{
     S[key]=type==='bool'?el.checked:type==='str'?el.value:type==='int'?parseInt(el.value):parseFloat(el.value);
     if(key==='sun_mode'&&S.sun_mode&&S.sun_lat===null) requestGeolocation();
     updateAll();
-  \});
-\}
+  });
+}
 // Selects
 ['mode','lens','resolution','nd_label','talent_name','actor2_name'].forEach(k=>wire(k,k,'str'));
 wire('fps','fps','int'); wire('iso','iso','int'); wire('aspect','aspect','float');
@@ -1609,20 +1609,20 @@ wire('fps','fps','int'); wire('iso','iso','int'); wire('aspect','aspect','float'
  'show_thirds','show_safe','show_center','show_hud',
  'show_waveform','show_zebra','show_focus','show_false_color'].forEach(k=>wire(k,k,'bool'));
 
-document.getElementById('reset-btn').addEventListener('click',()=>\{
+document.getElementById('reset-btn').addEventListener('click',()=>{
   S.talent_x=15; S.talent_y=10;
   document.getElementById('talent_x').value=15; document.getElementById('talent_y').value=10;
   updateAll();
-\});
+});
 document.getElementById('print-btn').addEventListener('click',()=>window.print());
-window.addEventListener('resize',()=>\{ if(activeTab==='monitor') sizeMonitor(); \});
-setInterval(()=>\{ if(activeTab==='monitor'&&S.show_hud) drawMonitor(); \},1000);
+window.addEventListener('resize',()=>{ if(activeTab==='monitor') sizeMonitor(); });
+setInterval(()=>{ if(activeTab==='monitor'&&S.show_hud) drawMonitor(); },1000);
 
-// \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
 // BOOT
-// \uc0\u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
 syncDOM();
 updateAll();
 </script>
-<script>(function()\{function c()\{var b=a.contentDocument||a.contentWindow.document;if(b)\{var d=b.createElement('script');d.innerHTML="window.__CF$cv$params=\{r:'9d6a58ecad24f3c5',t:'MTc3MjU1ODc5OC4wMDAwMDA='\};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)\}\}if(document.body)\{var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else\{var e=document.onreadystatechange||function()\{\};document.onreadystatechange=function(b)\{e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())\}\}\}\})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d6a58ecad24f3c5',t:'MTc3MjU1ODc5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

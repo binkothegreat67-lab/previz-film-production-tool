@@ -365,7 +365,7 @@ html,body{height:100%;background:var(--navy);color:var(--text);font-family:var(-
         <span data-i18n="locating">Locating...</span>
       </div>
       <button class="sb-btn" onclick="requestGeolocation()" style="margin-top:5px;font-size:11px" id="geo-btn">
-        ? \u56545  <span data-i18n="getLocation">Get My Location</span>
+        📍  <span data-i18n="getLocation">Get My Location</span>
       </button>
     </div>
 
@@ -395,7 +395,7 @@ html,body{height:100%;background:var(--navy);color:var(--text);font-family:var(-
       </div>
     </div>
     <button class="place-btn" id="place-key-btn" onclick="startPlacing('key')">
-      ? \u57263  <span data-i18n="placeOnStage">Place on Stage</span>
+      📍  <span data-i18n="placeOnStage">Place on Stage</span>
     </button>
     <button class="tip-toggle" onclick="toggleTip('tip-key')">ⓘ  <span data-i18n="tip-key-label">Key Light</span></button>
     <div id="tip-key" class="tip-box hidden" data-i18n-content="tip-key">The primary light source. Establishes exposure and the direction of primary shadows. Position at roughly 90° to the camera axis — the side of the face that is lit is determined by where the key is on the floor plan.</div>
@@ -426,7 +426,7 @@ html,body{height:100%;background:var(--navy);color:var(--text);font-family:var(-
           <input type="range" id="fill1_y" min="0.5" max="19" step="0.5" value="16">
         </div>
       </div>
-      <button class="place-btn" id="place-fill1-btn" onclick="startPlacing('fill1')">? \u57263  <span data-i18n="placeOnStage">Place on Stage</span></button>
+      <button class="place-btn" id="place-fill1-btn" onclick="startPlacing('fill1')">📍  <span data-i18n="placeOnStage">Place on Stage</span></button>
     </div>
 
     <label class="tog" style="margin-top:5px"><input type="checkbox" id="back_on" checked> <span data-i18n="back">Back Light</span></label>
@@ -450,7 +450,7 @@ html,body{height:100%;background:var(--navy);color:var(--text);font-family:var(-
           <input type="range" id="back_y" min="0.5" max="19" step="0.5" value="18">
         </div>
       </div>
-      <button class="place-btn" id="place-back-btn" onclick="startPlacing('back')">? \u57263  <span data-i18n="placeOnStage">Place on Stage</span></button>
+      <button class="place-btn" id="place-back-btn" onclick="startPlacing('back')">📍  <span data-i18n="placeOnStage">Place on Stage</span></button>
     </div>
 
     <label class="tog" style="margin-top:5px"><input type="checkbox" id="fill2_on"> <span data-i18n="fill2">Fill 2 (mobile)</span></label>
@@ -466,7 +466,7 @@ html,body{height:100%;background:var(--navy);color:var(--text);font-family:var(-
     </div>
 
     <button class="tip-toggle" onclick="toggleTip('tip-fill')">ⓘ  <span data-i18n="tip-fill-label">Fill / Back Light</span></button>
-    <div id="tip-fill" class="tip-box hidden" data-i18n-content="tip-fill">Fill reduces Key shadows — always dimmer. Back light (hair light) goes behind/above the subject, creates rim separation. Drag lights by clicking ? \u57263  Place then clicking on the stage floor.</div>
+    <div id="tip-fill" class="tip-box hidden" data-i18n-content="tip-fill">Fill reduces Key shadows — always dimmer. Back light (hair light) goes behind/above the subject, creates rim separation. Drag lights by clicking 📍  Place then clicking on the stage floor.</div>
   </div>
 
   <!-- LIGHT RATIO -->
@@ -493,7 +493,7 @@ html,body{height:100%;background:var(--navy);color:var(--text);font-family:var(-
       </div>
     </div>
     <div id="dist-readout" class="dist-readout"></div>
-    <button class="place-btn" id="place-actor1-btn" onclick="startPlacing('actor1')">? \u57263  <span data-i18n="placeOnStage">Place on Stage</span></button>
+    <button class="place-btn" id="place-actor1-btn" onclick="startPlacing('actor1')">📍  <span data-i18n="placeOnStage">Place on Stage</span></button>
     <button class="sb-btn" id="reset-btn" style="margin-top:4px">↩  <span data-i18n="resetCenter">Reset to Center</span></button>
 
     <!-- ACTOR 2 -->
@@ -513,7 +513,7 @@ html,body{height:100%;background:var(--navy);color:var(--text);font-family:var(-
           <input type="range" id="actor2_y" min="1" max="19" step="0.5" value="10">
         </div>
       </div>
-      <button class="place-btn" id="place-actor2-btn" onclick="startPlacing('actor2')">? \u57263  <span data-i18n="placeOnStage">Place on Stage</span></button>
+      <button class="place-btn" id="place-actor2-btn" onclick="startPlacing('actor2')">📍  <span data-i18n="placeOnStage">Place on Stage</span></button>
     </div>
   </div>
 
@@ -527,7 +527,7 @@ html,body{height:100%;background:var(--navy);color:var(--text);font-family:var(-
         <option value="2.39">2.39:1 — Anamorphic Scope</option>
         <option value="1.85">1.85:1 — Flat</option>
         <option value="1.3333">4:3 — Classic TV</option>
-        <option value="0.5625">9:16 — Vertical / Mobile ? \u56561 </option>
+        <option value="0.5625">9:16 — Vertical / Mobile 📱 </option>
       </select>
     </div>
     <label class="tog"><input type="checkbox" id="show_thirds" checked> <span data-i18n="thirds">Rule of Thirds</span></label>
@@ -547,7 +547,7 @@ html,body{height:100%;background:var(--navy);color:var(--text);font-family:var(-
     <label class="tog"><input type="checkbox" id="approved_gaffer"> <span data-i18n="gafferApproval">Gaffer Approved</span></label>
     <label class="tog"><input type="checkbox" id="approved_director"> <span data-i18n="directorApproval">Director Approved</span></label>
     <div id="appr-badge" class="appr-badge appr-pending" data-i18n="pending">PENDING</div>
-    <button class="sb-btn" id="print-btn" disabled>? \u56744  <span data-i18n="print">Print Floor Plan</span></button>
+    <button class="sb-btn" id="print-btn" disabled>🖨  <span data-i18n="print">Print Floor Plan</span></button>
   </div>
 
   <div style="font-size:8px;color:var(--dim);text-align:center;padding:8px 0;letter-spacing:.1em">
@@ -564,18 +564,18 @@ html,body{height:100%;background:var(--navy);color:var(--text);font-family:var(-
       <div>
         <p class="pv-title">PreViz 4.5</p>
         <p class="pv-sub" data-i18n="subtitle">Phase 1 · Studio + Exterior · Director's Monitor · Beta 2.0</p>
-        <p class="pv-hint" id="hdr-hint" data-i18n="clickHint">>> Click ? \u57263  Place \u8594  click stage to position any element</p>
+        <p class="pv-hint" id="hdr-hint" data-i18n="clickHint">>> Click 📍  Place →  click stage to position any element</p>
       </div>
       <div class="hdr-right">
         <div class="hdr-badges">
           <!-- Satellite badge — always visible -->
           <div class="badge-pill sat-badge">
             <span class="sat-dot"></span>
-            ? \u57072 \u65039  <span data-i18n="starlink">Via Starlink</span>
+            📡  <span data-i18n="starlink">Via Starlink</span>
           </div>
           <!-- Phone badge — glows when 9:16 -->
           <div class="badge-pill phone-badge" id="phone-badge">
-            ? \u56561  <span data-i18n="mobile">Mobile</span>
+            📱  <span data-i18n="mobile">Mobile</span>
           </div>
           <!-- Sun badge — glows when sun mode active -->
           <div class="badge-pill sun-badge" id="sun-badge">
@@ -636,8 +636,8 @@ html,body{height:100%;background:var(--navy);color:var(--text);font-family:var(-
 
   <!-- TABS -->
   <div id="tabs">
-    <button class="tab-btn active" onclick="switchTab('floor')">? \u57253  <span data-i18n="floorPlanTab">Floor Plan</span></button>
-    <button class="tab-btn" onclick="switchTab('monitor')">? \u56570  <span data-i18n="monitorTab">Director's Monitor</span></button>
+    <button class="tab-btn active" onclick="switchTab('floor')">🎞  <span data-i18n="floorPlanTab">Floor Plan</span></button>
+    <button class="tab-btn" onclick="switchTab('monitor')">🎬  <span data-i18n="monitorTab">Director's Monitor</span></button>
   </div>
 
   <!-- TAB CONTENT -->
@@ -721,14 +721,14 @@ const I18N = {
     camToTalent:"C→ T", keyTemp:"Key Temp", floorPlanTab:"Floor Plan",
     monitorTab:"Director's Monitor", starlink:"Via Starlink", mobile:"Mobile",
     exterior:"Exterior", subtitle:"Phase 1 · Studio + Exterior · Director's Monitor · Beta 2.0",
-    clickHint:">> Click ? \u57263  Place \u8594  click stage to position any element",
+    clickHint:">> Click 📍  Place →  click stage to position any element",
     monCaption:"Director's Monitor · Lighting, framing, and Kelvin respond live to sidebar controls.",
     tagline:"Free for every student — from Los Angeles to the world.",
     resetCenter:"Reset to Center",
     "tip-cam-label":"Camera basics","tip-key-label":"Key Light","tip-fill-label":"Fill / Back",
     "tip-cam":"Pan rotates the camera on its axis. Dolly physically moves it — changes perspective, not just magnification. FOV is the angle the lens captures; wider lens = wider angle.",
     "tip-key":"The primary light source. Establishes exposure and shadow direction. Position at roughly 90° to camera axis — the lit side of the face in the Monitor reflects where the Key is on the floor plan.",
-    "tip-fill":"Fill reduces Key shadows — always dimmer. Back light creates rim separation. Click ? \u57263  Place then click on the stage floor to move any light.",
+    "tip-fill":"Fill reduces Key shadows — always dimmer. Back light creates rim separation. Click 📍  Place then click on the stage floor to move any light.",
     placingMsg:"Click on stage to place",
     sunElev:"Sun Elev",
   },
@@ -751,7 +751,7 @@ const I18N = {
     camToTalent:"C→ T", keyTemp:"Temp Clave", floorPlanTab:"Planta",
     monitorTab:"Monitor de Dirección", starlink:"Vía Satélite", mobile:"Móvil",
     exterior:"Exterior", subtitle:"Fase 1 · Estudio + Exterior · Monitor de Dirección · Beta 2.0",
-    clickHint:">> Clic en ? \u57263  Colocar \u8594  clic en escenario para posicionar",
+    clickHint:">> Clic en 📍  Colocar →  clic en escenario para posicionar",
     monCaption:"Monitor de Dirección · Iluminación y Kelvin responden en tiempo real.",
     tagline:"Gratis para cada estudiante — de Los Ángeles al mundo.",
     resetCenter:"Resetear al Centro",
@@ -781,7 +781,7 @@ const I18N = {
     camToTalent:"C→ T", keyTemp:"Temp Clé", floorPlanTab:"Plan",
     monitorTab:"Moniteur Directeur", starlink:"Via Satellite", mobile:"Mobile",
     exterior:"Extérieur", subtitle:"Phase 1 · Studio + Extérieur · Moniteur · Beta 2.0",
-    clickHint:">> Clic ? \u57263  Placer \u8594  clic sur scène pour positionner",
+    clickHint:">> Clic 📍  Placer →  clic sur scène pour positionner",
     monCaption:"Moniteur Directeur · Éclairage et Kelvin en temps réel.",
     tagline:"Gratuit pour chaque étudiant — de Los Angeles au monde entier.",
     resetCenter:"Centrer", "tip-cam-label":"Caméra","tip-key-label":"Lumière Principale","tip-fill-label":"Remplissage",
@@ -809,7 +809,7 @@ const I18N = {
     camToTalent:"C→ T", keyTemp:"Temp Chave", floorPlanTab:"Planta",
     monitorTab:"Monitor do Diretor", starlink:"Via Satélite", mobile:"Móvel",
     exterior:"Exterior", subtitle:"Fase 1 · Estúdio + Exterior · Monitor · Beta 2.0",
-    clickHint:">> Clique ? \u57263  Posicionar \u8594  clique no palco para colocar",
+    clickHint:">> Clique 📍  Posicionar →  clique no palco para colocar",
     monCaption:"Monitor do Diretor · Iluminação e Kelvin em tempo real.",
     tagline:"Gratuito para cada estudante — de Los Angeles ao mundo.",
     resetCenter:"Centralizar", "tip-cam-label":"Câmera","tip-key-label":"Luz Principal","tip-fill-label":"Preenchimento",
@@ -948,7 +948,7 @@ function updateSunCard(){
     const kelvin = sunToKelvin(el);
     const [kc,kn] = kelvinDisplay(kelvin);
     disp.innerHTML =
-      `<b>? \u56525 </b> ${lat!==null?lat.toFixed(4)+'° N':''} ${lon!==null?(lon>=0?lon.toFixed(4)+'° E':Math.abs(lon).toFixed(4)+'° W'):''}<br>`+
+      `<b>🌐 </b> ${lat!==null?lat.toFixed(4)+'° N':''} ${lon!==null?(lon>=0?lon.toFixed(4)+'° E':Math.abs(lon).toFixed(4)+'° W'):''}<br>`+
       `<b>${t('sunElev')}:</b> ${el.toFixed(1)}° · Az: ${az.toFixed(0)}° (${cardDir})<br>`+
       `<b>K:</b> ${kelvin}K — ${kn} · Int: ${sunToIntensity(el)}%<br>`+
       `<b>Temp:</b> ${new Date().toLocaleTimeString()}`;
@@ -961,11 +961,11 @@ function requestGeolocation(){
     return;
   }
   const btn = document.getElementById('geo-btn');
-  if(btn) btn.textContent = '? \u56545  Locating...';
+  if(btn) btn.textContent = '📍  Locating...';
   navigator.geolocation.getCurrentPosition(
     pos => applyGeoToSun(pos.coords.latitude, pos.coords.longitude),
     err => {
-      if(btn) btn.innerHTML = `? \u56545  <span data-i18n="getLocation">${t('getLocation')}</span>`;
+      if(btn) btn.innerHTML = `📍  <span data-i18n="getLocation">${t('getLocation')}</span>`;
       alert('Could not get location. Check browser permissions.\\n' + err.message);
     },
     { timeout:10000 }
@@ -1107,9 +1107,9 @@ function updateReadouts(){
   if(rb){ rb.style.background=rc; rb.innerHTML=`KEY:FILL  ${rl}<br><span class="ratio-mood">${rm}</span>`; }
 
   // Distances
-  v('dist-readout', `Cam→ Talent: ${c2t.toFixed(1)} ft / ${ftM(c2t).toFixed(1)} m\\nKey\u8594 Talent: ${k2t.toFixed(1)} ft / ${ftM(k2t).toFixed(1)} m`);
+  v('dist-readout', `Cam→ Talent: ${c2t.toFixed(1)} ft / ${ftM(c2t).toFixed(1)} m\\nKey→ Talent: ${k2t.toFixed(1)} ft / ${ftM(k2t).toFixed(1)} m`);
   document.getElementById('dist-readout').innerHTML =
-    `Cam→ Talent: <b>${c2t.toFixed(1)} ft / ${ftM(c2t).toFixed(1)} m</b><br>Key\u8594 Talent: <b>${k2t.toFixed(1)} ft / ${ftM(k2t).toFixed(1)} m</b>`;
+    `Cam→ Talent: <b>${c2t.toFixed(1)} ft / ${ftM(c2t).toFixed(1)} m</b><br>Key→ Talent: <b>${k2t.toFixed(1)} ft / ${ftM(k2t).toFixed(1)} m</b>`;
 
   // Approval
   if(allOk && !S.approved_at) S.approved_at = new Date().toISOString().slice(0,16).replace('T','  ');
@@ -1344,7 +1344,7 @@ function drawMonitor(){
     ctx.fillText(`DOLLY ${S.cam_dolly.toFixed(1)} ft`, W/2, H-8);
     if(S.sun_mode&&S.sun_lat!==null){
       ctx.textAlign='center'; ctx.fillStyle='rgba(255,179,0,0.5)';
-      ctx.fillText(`? \u56525 ${S.sun_lat.toFixed(3)}° ${S.sun_lon>=0?S.sun_lon.toFixed(3)+'°E':Math.abs(S.sun_lon).toFixed(3)+'°W'}`, W/2, H-20);
+      ctx.fillText(`🌐 ${S.sun_lat.toFixed(3)}° ${S.sun_lon>=0?S.sun_lon.toFixed(3)+'°E':Math.abs(S.sun_lon).toFixed(3)+'°W'}`, W/2, H-20);
     }
   }
   if(S.show_waveform){
@@ -1399,7 +1399,7 @@ function drawFloorPlan(){
   annotations.push({x:-2,y:H/2,text:"WALL 1",textangle:-90,showarrow:false,font:{size:9,color:LBL,family:"JetBrains Mono"}});
   annotations.push({x:W/2,y:H+1.7,text:"WALL 2 — BACK",showarrow:false,font:{size:9,color:LBL,family:"JetBrains Mono"}});
   annotations.push({x:W+2,y:H/2,text:"WALL 3",textangle:90,showarrow:false,font:{size:9,color:LBL,family:"JetBrains Mono"}});
-  annotations.push({x:W/2,y:-.7,text:placing?`⚡  ${t('placingMsg').toUpperCase()}: ${placing.toUpperCase()}`:"4TH WALL — OPEN  ·  CLICK \u55356 \u57263  PLACE TO MOVE LIGHTS",showarrow:false,
+  annotations.push({x:W/2,y:-.7,text:placing?`⚡  ${t('placingMsg').toUpperCase()}: ${placing.toUpperCase()}`:"4TH WALL — OPEN  ·  CLICK 📍  PLACE TO MOVE LIGHTS",showarrow:false,
     font:{size:9,color:placing?"#FFE200":"#0050C0",family:"JetBrains Mono"}});
   annotations.push({x:W/2,y:H+.9,text:"30 ft  ·  9.1 m",showarrow:false,font:{size:8,color:DIM,family:"JetBrains Mono"}});
   annotations.push({x:-.7,y:H/2,text:"20 ft · 6.1 m",textangle:-90,showarrow:false,font:{size:8,color:DIM,family:"JetBrains Mono"}});
@@ -1486,7 +1486,7 @@ function drawFloorPlan(){
         showarrow:false,font:{size:9,color:kc,family:"JetBrains Mono"},align:"center"});
     }
     if(S.sun_lat!==null){
-      annotations.push({x:keyX,y:keyY-domeR-1.2,text:`? \u56525 ${S.sun_lat.toFixed(2)}°`,
+      annotations.push({x:keyX,y:keyY-domeR-1.2,text:`🌐 ${S.sun_lat.toFixed(2)}°`,
         showarrow:false,font:{size:7,color:"#806040",family:"JetBrains Mono"},align:"center"});
     }
   } else {

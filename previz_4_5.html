@@ -1,135 +1,1437 @@
-PREVIZ 4.4
-Director's Monitor Build · Open Educational Edition
-MODE
-        Video/Cinema
-        Photography
-      
-CAMERA
-LENS
-        12mm16mm24mm
-        35mm50mm85mm
-        100mm135mm
-      
-PAN (DEG) 0°
-DOLLY — DISTANCE FROM WALL 4 (FT) 3.0 FT
-Ⓘ PAN / DOLLY / FOV
-SPECS
-FPS
-24253060
-SHUTTER 1/48s · 180° RULE
-RESOLUTION
-720p1080p4K UHD4K DCI
-ISO / GAIN
-        100200400
-        8001600
-        32006400
-      
-ND FILTER
-        None (0 stops)ND 0.3 — 1 stop
-        ND 0.6 — 2 stopsND 0.9 — 3 stops
-        ND 1.2 — 4 stopsND 1.8 — 6 stops
-        ND 2.4 — 8 stopsND 3.0 — 10 stops
-      
-SUGGESTED APERTURE
-f/5.6
-Ⓘ EXPOSURE TRIANGLE
-KEY LIGHT
-INTENSITY (%) 80%
-COLOR TEMP (K) 5600K
-5600K — Daylight
-POSITION LEFT/RIGHT (FT) 22.0 FT
-Ⓘ KEY LIGHT
-OVERHEAD LIGHTS
+<!--
+╔══════════════════════════════════════════════════════════════════════╗
+║              PreViz — Open Educational Film Production Tool          ║
+║                                                                      ║
+║  Copyright (C) 2024–2026 Eduardo Carmona, MFA                       ║
+║  Sole Author, Designer, and Creator                                  ║
+║  https://eduardo-carmona.com                                         ║
+║                                                                      ║
+║  Licensed under the GNU General Public License v3.0                  ║
+║  https://www.gnu.org/licenses/gpl-3.0.html                          ║
+║                                                                      ║
+║  This program is free software: you can redistribute it and/or       ║
+║  modify it under the terms of the GNU General Public License as      ║
+║  published by the Free Software Foundation, version 3.               ║
+║                                                                      ║
+║  This program is distributed in the hope that it will be useful,     ║
+║  but WITHOUT ANY WARRANTY; without even the implied warranty of       ║
+║  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the        ║
+║  GNU General Public License for more details.                        ║
+║                                                                      ║
+║  IMPORTANT: Removing or altering this copyright notice is a          ║
+║  violation of the GNU GPL v3.0 license and is legally actionable     ║
+║  under international copyright law (Berne Convention — 181 nations). ║
+║                                                                      ║
+║  This software was developed entirely on personal equipment,         ║
+║  personal time, and personal financial resources. No academic         ║
+║  institution, employer, or organization holds any claim to           ║
+║  this software or any derivative thereof.                            ║
+║                                                                      ║
+║  Repository: github.com/binkothegreat67-lab/previz-film-production-tool ║
+║                                                                      ║
+║  "Free for every student —                                           ║
+║   from Los Angeles to Lima to Windhoek."                             ║
+╚══════════════════════════════════════════════════════════════════════╝
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PreViz 4.5 — Open Educational Edition</title>
+<script src="https://cdn.plot.ly/plotly-3.4.0.min.js" charset="utf-8"></script>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-Fill 1 (upper left)
-INTENSITY 40%
-KELVIN 5600K
-5600K — Daylight
+<style>
+/* ═══════════════════════════════════════════
+   PREVIZ 4.4 — KINETIC BROADCAST DARK THEME
+   ═══════════════════════════════════════════ */
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-Back Light (Wall 2)
-INTENSITY 60%
-KELVIN 5600K
-5600K — Daylight
+:root {
+  --orange:  #FF4500;
+  --teal:    #00D4CC;
+  --yellow:  #FFE200;
+  --green:   #00FF88;
+  --red:     #FF1744;
+  --navy:    #03060F;
+  --panel:   #060A15;
+  --card:    #080E1C;
+  --border:  #0F1A30;
+  --dim:     #1A2540;
+  --muted:   #304060;
+  --text:    #C8D8F0;
+  --font-d:  'Barlow Condensed', sans-serif;
+  --font-m:  'JetBrains Mono', monospace;
+}
 
-Fill 2 (mobile)
-Ⓘ FILL / BACK LIGHT
-LIGHT RATIO
-—
-TALENT
-NAME
-Actor
-LEFT / RIGHT (FT) 15.0 FT
-DEPTH FROM WALL 4 (FT) 10.0 FT
+html, body {
+  height: 100%;
+  background: var(--navy);
+  color: var(--text);
+  font-family: var(--font-m);
+  font-size: 12px;
+  overflow: hidden;
+}
 
-↩ RESET TO CENTER
-DIRECTOR'S MONITOR
-ASPECT RATIO
-        16:9 — Cinema / Broadcast
-        2.39:1 — Anamorphic Scope
-        1.85:1 — Flat
-        4:3 — Classic TV
-        9:16 — Vertical / Mobile
-      
+#app { display: flex; height: 100vh; width: 100vw; }
 
-Rule of Thirds
+/* ── SIDEBAR ───────────────────────────────── */
+#sidebar {
+  width: 276px; min-width: 276px;
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+  overflow-y: auto; overflow-x: hidden;
+  padding: 10px 12px 24px;
+  display: flex; flex-direction: column;
+  flex-shrink: 0;
+}
+#sidebar::-webkit-scrollbar { width: 4px; }
+#sidebar::-webkit-scrollbar-thumb { background: #1E2A44; border-radius: 2px; }
 
-Safe Area
+.sb-brand {
+  font-family: var(--font-d); font-size: 22px; font-weight: 900;
+  letter-spacing: .10em; color: var(--orange); text-transform: uppercase;
+  padding: 6px 0 1px;
+  text-shadow: 0 0 20px rgba(255,69,0,.35);
+}
+.sb-ver { font-size: 8px; color: var(--muted); letter-spacing: .15em; margin-bottom: 10px; }
 
-Center Cross
+.section { padding: 8px 0; border-bottom: 1px solid var(--border); }
+.section:last-child { border-bottom: none; }
 
-HUD Readouts
+.sec-title {
+  font-family: var(--font-d); font-size: 13px; font-weight: 800;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--orange); margin-bottom: 6px;
+}
 
-Waveform Monitor
+.ctrl { margin-bottom: 7px; }
+.ctrl label {
+  display: block; font-size: 9px; color: var(--muted);
+  text-transform: uppercase; letter-spacing: .12em; margin-bottom: 2px;
+}
+.ctrl input[type=range] {
+  width: 100%; height: 3px; appearance: none;
+  background: var(--dim); border-radius: 2px; outline: none; cursor: pointer;
+}
+.ctrl input[type=range]::-webkit-slider-thumb {
+  appearance: none; width: 12px; height: 12px; border-radius: 50%;
+  background: var(--orange); cursor: pointer;
+  box-shadow: 0 0 6px rgba(255,69,0,.5);
+}
+.ctrl-val { font-size: 11px; color: var(--teal); margin-top: 1px; }
+.ctrl select, .ctrl input[type=text] {
+  width: 100%; background: var(--card); border: 1px solid var(--border);
+  color: var(--text); padding: 4px 7px; border-radius: 3px;
+  font-family: var(--font-m); font-size: 11px; cursor: pointer; outline: none;
+}
+.ctrl select:focus, .ctrl input[type=text]:focus { border-color: var(--muted); }
 
-Zebra (overexposure)
+.tog {
+  display: flex; align-items: center; gap: 7px;
+  margin-bottom: 5px; font-size: 10px; color: var(--text); cursor: pointer;
+}
+.tog input[type=checkbox] { width: 13px; height: 13px; accent-color: var(--orange); cursor: pointer; }
 
-Focus Peaking
+.sb-btn {
+  display: block; width: 100%; padding: 6px; margin: 3px 0;
+  background: var(--card); border: 1px solid var(--border);
+  color: var(--muted); border-radius: 3px;
+  font-family: var(--font-d); font-size: 13px; font-weight: 700;
+  letter-spacing: .1em; cursor: pointer; text-transform: uppercase; text-align: center;
+  transition: border-color .2s, color .2s;
+}
+.sb-btn:hover:not(:disabled) { border-color: var(--orange); color: var(--orange); }
+.sb-btn:disabled { opacity: .35; cursor: not-allowed; }
 
-False Color Map
-Ⓘ DIRECTOR'S MONITOR
-APPROVAL GATE
+.kswatch {
+  display: inline-block; padding: 2px 8px; border-radius: 3px;
+  font-size: 10px; font-weight: 700; color: #111; margin-top: 3px;
+}
+.ratio-badge {
+  border-radius: 4px; padding: 7px 10px; text-align: center; margin: 4px 0;
+  font-family: var(--font-d); font-size: 19px; font-weight: 700;
+  letter-spacing: .07em; color: white;
+}
+.ratio-mood { font-family: var(--font-m); font-size: 9px; opacity: .75; font-weight: 400; }
 
-DP Approved
+.fstop-card {
+  background: #020A04; border: 1px solid #0A2A0A;
+  border-radius: 4px; padding: 6px 10px; text-align: center; margin: 4px 0;
+}
+.fstop-label { font-size: 8px; color: #204020; text-transform: uppercase; letter-spacing: .14em; }
+.fstop-val {
+  font-family: var(--font-d); font-size: 28px; font-weight: 800;
+  color: var(--green); letter-spacing: .04em;
+  text-shadow: 0 0 16px rgba(0,255,136,.5);
+  animation: fstop-breathe 3s ease-in-out infinite;
+}
+@keyframes fstop-breathe {
+  0%,100% { text-shadow: 0 0 14px rgba(0,255,136,.4); }
+  50%      { text-shadow: 0 0 26px rgba(0,255,136,.75); }
+}
+.shutter-pill {
+  background: #0A0800; border: 1px solid #2A2000; border-radius: 3px;
+  padding: 3px 8px; font-size: 10px; color: var(--yellow);
+  letter-spacing: .06em; text-align: center; margin: 3px 0;
+}
+.dist-readout { font-size: 10px; color: #3A5080; padding: 3px 0; line-height: 1.7; }
+.dist-readout b { color: #6080B0; }
+.appr-badge {
+  border-radius: 4px; padding: 5px 8px; font-family: var(--font-d);
+  font-size: 13px; font-weight: 700; letter-spacing: .13em;
+  color: white; text-align: center; margin: 4px 0;
+}
+.appr-ok { background: #003A10; border: 1px solid var(--green); color: var(--green); animation: glow-ok 2.5s ease-in-out infinite; }
+@keyframes glow-ok { 0%,100%{box-shadow:0 0 6px rgba(0,255,136,.3)}50%{box-shadow:0 0 18px rgba(0,255,136,.6)} }
+.appr-pending { background: #200500; border: 1px solid #5A1500; color: #FF6030; }
 
-Gaffer Approved
+.tip-box {
+  background: #040810; border: 1px solid var(--dim); border-radius: 3px;
+  padding: 7px 8px; margin: 3px 0; font-size: 10px; color: #506080; line-height: 1.6;
+}
+.tip-toggle {
+  cursor: pointer; font-size: 9px; color: var(--teal); text-transform: uppercase;
+  letter-spacing: .1em; margin: 2px 0; display: block; background: none; border: none;
+  font-family: var(--font-m); padding: 0;
+}
+.tip-toggle:hover { color: var(--orange); }
+.hidden { display: none; }
 
-Director Approved
-WAITING: DP · Gaffer · Director
-🖨 PRINT FLOOR PLAN
-⌘/Ctrl+P → Landscape
-Ⓘ APPROVAL GATE
-GNU GPL v3.0 · Free for every student
-PREVIZ 4.4
-PHASE 1 · STUDIO LIGHTING · 30 × 20 FT STAGE · THREE-POINT SETUP · DIRECTOR'S MONITOR
->>> CLICK ANYWHERE ON STAGE FLOOR TO MOVE TALENT INSTANTLY
+/* ── MAIN ─────────────────────────────────── */
+#main { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--navy); }
 
-STANDBY
-PENDING
+/* ── HEADER ──────────────────────────────── */
+#hdr {
+  padding: 7px 14px 4px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.hdr-row { display: flex; align-items: flex-start; justify-content: space-between; }
+.pv-title {
+  font-family: var(--font-d); font-size: 46px; font-weight: 900;
+  letter-spacing: .05em; text-transform: uppercase; color: var(--orange);
+  line-height: .9; text-shadow: 0 0 40px rgba(255,69,0,.4); margin: 0;
+}
+.pv-sub { font-size: 9px; color: var(--muted); letter-spacing: .17em; text-transform: uppercase; margin: 3px 0 0 2px; }
+.pv-hint { font-size: 9px; color: var(--teal); letter-spacing: .12em; text-transform: uppercase; margin: 1px 0 0 2px; animation: blink 2.4s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:.5} 50%{opacity:1} }
 
-APERTURE
-f/5.6
-key drives exp
+.hdr-badges { display: flex; gap: 8px; align-items: center; margin-top: 8px; }
+.rec-badge {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--card); border: 1px solid var(--border); border-radius: 4px;
+  padding: 4px 10px; font-family: var(--font-d); font-size: 13px;
+  font-weight: 700; letter-spacing: .1em; color: white;
+}
+.rec-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+.rec-dot.live { background: var(--red); animation: rec-pulse .9s ease-in-out infinite; }
+@keyframes rec-pulse {
+  0%,100%{transform:scale(1);box-shadow:0 0 6px var(--red)}
+  50%{transform:scale(1.4);box-shadow:0 0 16px var(--red)}
+}
+.appr-pill {
+  border-radius: 4px; padding: 4px 10px; font-family: var(--font-d);
+  font-size: 13px; font-weight: 700; letter-spacing: .12em; color: white;
+}
+.appr-pill.ok { background:#003A10;border:1px solid var(--green);color:var(--green); }
+.appr-pill.pending { background:#200500;border:1px solid #5A1500;color:#FF6030; }
 
-LENS · FOV
-24mm
-73° field
+/* ── METRIC STRIP ───────────────────────── */
+#metric-strip {
+  display: flex; gap: 5px; padding: 5px 14px; background: var(--navy);
+  border-bottom: 1px solid var(--border); flex-shrink: 0; flex-wrap: wrap;
+}
+.mc {
+  background: var(--card); border: 1px solid var(--border); border-radius: 4px;
+  padding: 5px 10px; flex: 1; min-width: 80px; text-align: center; position: relative; overflow: hidden;
+}
+.mc-bar { position: absolute; top: 0; left: 10%; right: 10%; height: 2px; border-radius: 0 0 2px 2px; }
+.mc-label { font-size: 7px; color: var(--muted); text-transform: uppercase; letter-spacing: .18em; margin-bottom: 1px; }
+.mc-val { font-family: var(--font-d); font-size: 22px; font-weight: 700; line-height: 1; letter-spacing: .02em; }
+.mc-hint { font-size: 7px; color: var(--dim); margin-top: 1px; }
 
-KEY:FILL RATIO
-3:1
-lighting contrast
+/* ── TABS ───────────────────────────────── */
+#tabs { display: flex; gap: 0; padding: 0 14px; background: var(--panel); border-bottom: 1px solid var(--border); flex-shrink: 0; }
+.tab-btn {
+  padding: 7px 18px; border: none; background: none; cursor: pointer;
+  font-family: var(--font-d); font-size: 14px; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--muted); border-bottom: 2px solid transparent;
+  transition: color .2s, border-color .2s;
+}
+.tab-btn.active { color: var(--orange); border-bottom-color: var(--orange); }
+.tab-btn:hover:not(.active) { color: var(--text); }
 
-ISO
-800
-1/48s shutter
+/* ── TAB CONTENT ─────────────────────────── */
+#tab-content { flex: 1; overflow: hidden; position: relative; }
+.tab-panel { position: absolute; inset: 0; display: none; overflow: hidden; }
+.tab-panel.active { display: flex; flex-direction: column; }
 
-CAM TO TALENT
-—
-— m
+/* ── FLOOR PLAN ──────────────────────────── */
+#floor-plan { flex: 1; width: 100%; }
 
-KEY TEMP
-5600K
-Daylight
-🎥 FLOOR PLAN
-📺 DIRECTOR'S MONITOR
+/* ── DIRECTOR'S MONITOR ──────────────────── */
+#monitor-area {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  padding: 12px; background: var(--navy); overflow: hidden;
+}
+#bezel {
+  position: relative;
+  background: linear-gradient(145deg,#2A2A2A,#0A0A0A);
+  border-radius: 10px;
+  padding: 16px 16px 44px 16px;
+  box-shadow: 0 0 0 1px #333, 0 0 60px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.05);
+  max-width: calc(100% - 24px);
+}
+#bezel::after {
+  content: 'SmallHD · FOCUS 7 · PreViz Edition';
+  position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+  font-family: var(--font-m); font-size: 8px; color: #333;
+  letter-spacing: .2em; white-space: nowrap;
+}
+#monitor-canvas { display: block; border-radius: 3px; box-shadow: 0 0 30px rgba(0,0,0,.9); }
 
-Developed by Eduardo Carmona, MFA — CSUDH · LMU  ·  GNU GPL v3.0  ·  Free for every student — from Los Angeles to Lima to Windhoek.
+/* ── MONITOR PILLS ───────────────────────── */
+#mon-pills {
+  display: flex; gap: 5px; padding: 5px 14px 0;
+  flex-shrink: 0; flex-wrap: wrap;
+}
+.mon-pill {
+  background: var(--card); border: 1px solid var(--border); border-radius: 4px;
+  padding: 4px 10px; flex: 1; min-width: 80px; text-align: center;
+}
+.mon-pill-label { font-size: 7px; color: var(--muted); text-transform: uppercase; letter-spacing: .15em; }
+.mon-pill-val { font-family: var(--font-d); font-size: 19px; font-weight: 700; line-height: 1.1; }
+.mon-caption { padding: 4px 14px 6px; font-size: 9px; color: var(--dim); letter-spacing: .07em; flex-shrink: 0; }
+
+/* ── FOOTER ──────────────────────────────── */
+#footer {
+  padding: 4px 14px; border-top: 1px solid var(--border);
+  font-size: 9px; color: var(--dim); text-align: center;
+  letter-spacing: .09em; flex-shrink: 0; background: var(--panel);
+}
+
+/* ── PRINT ───────────────────────────────── */
+@media print {
+  #sidebar, #tabs, #metric-strip, #mon-pills, #mon-caption, #footer { display: none !important; }
+  #main { display: block; }
+  #hdr { background: white; }
+  #tab-content { position: static; }
+  .tab-panel { position: static; display: block !important; }
+  #monitor-area { display: none; }
+  @page { size: landscape; margin: .4in; }
+}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- ═══════════════════ SIDEBAR ═══════════════════ -->
+<div id="sidebar">
+  <div class="sb-brand">PreViz 4.4</div>
+  <div class="sb-ver">Director's Monitor Build · Open Educational Edition</div>
+
+  <!-- MODE -->
+  <div class="section">
+    <div class="sec-title">Mode</div>
+    <div class="ctrl">
+      <select id="mode">
+        <option>Video/Cinema</option>
+        <option>Photography</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- CAMERA -->
+  <div class="section">
+    <div class="sec-title">Camera</div>
+    <div class="ctrl">
+      <label>Lens</label>
+      <select id="lens">
+        <option>12mm</option><option>16mm</option><option>24mm</option>
+        <option>35mm</option><option>50mm</option><option>85mm</option>
+        <option>100mm</option><option>135mm</option>
+      </select>
+    </div>
+    <div class="ctrl">
+      <label>Pan (deg) <span class="ctrl-val" id="cam_pan_val">0°</span></label>
+      <input type="range" id="cam_pan" min="-45" max="45" step="1" value="0">
+    </div>
+    <div class="ctrl">
+      <label>Dolly — distance from Wall 4 (ft) <span class="ctrl-val" id="cam_dolly_val">3.0 ft</span></label>
+      <input type="range" id="cam_dolly" min="0.5" max="9" step="0.5" value="3">
+    </div>
+    <button class="tip-toggle" onclick="toggleTip('tip-pan')">ⓘ Pan / Dolly / FOV</button>
+    <div id="tip-pan" class="tip-box hidden">Pan rotates the camera left/right. Dolly physically moves it toward or away from the subject — changes perspective, not just framing. FOV is the angle the lens captures.</div>
+  </div>
+
+  <!-- SPECS -->
+  <div class="section">
+    <div class="sec-title">Specs</div>
+    <div id="fps-row" class="ctrl">
+      <label>FPS</label>
+      <select id="fps"><option>24</option><option>25</option><option>30</option><option>60</option></select>
+    </div>
+    <div id="shutter-display" class="shutter-pill">SHUTTER 1/48s · 180° RULE</div>
+    <div id="res-row" class="ctrl">
+      <label>Resolution</label>
+      <select id="resolution"><option>720p</option><option>1080p</option><option>4K UHD</option><option>4K DCI</option></select>
+    </div>
+    <div class="ctrl">
+      <label>ISO / Gain</label>
+      <select id="iso">
+        <option>100</option><option>200</option><option>400</option>
+        <option value="800" selected>800</option><option>1600</option>
+        <option>3200</option><option>6400</option>
+      </select>
+    </div>
+    <div class="ctrl">
+      <label>ND Filter</label>
+      <select id="nd_label">
+        <option>None (0 stops)</option><option>ND 0.3 — 1 stop</option>
+        <option>ND 0.6 — 2 stops</option><option>ND 0.9 — 3 stops</option>
+        <option>ND 1.2 — 4 stops</option><option>ND 1.8 — 6 stops</option>
+        <option>ND 2.4 — 8 stops</option><option>ND 3.0 — 10 stops</option>
+      </select>
+    </div>
+    <div class="fstop-card">
+      <div class="fstop-label">Suggested Aperture</div>
+      <div class="fstop-val" id="fstop-display">f/5.6</div>
+    </div>
+    <button class="tip-toggle" onclick="toggleTip('tip-exp')">ⓘ Exposure triangle</button>
+    <div id="tip-exp" class="tip-box hidden">ISO = sensor sensitivity. Shutter = exposure time (180° rule: 2× FPS). ND = sunglasses for the lens. f-stop = aperture; lower = more light.</div>
+  </div>
+
+  <!-- KEY LIGHT -->
+  <div class="section">
+    <div class="sec-title">Key Light</div>
+    <div class="ctrl">
+      <label>Intensity (%) <span class="ctrl-val" id="key_int_val">80%</span></label>
+      <input type="range" id="key_intensity" min="0" max="100" step="1" value="80">
+    </div>
+    <div class="ctrl">
+      <label>Color Temp (K) <span class="ctrl-val" id="key_k_val">5600K</span></label>
+      <input type="range" id="key_kelvin" min="2000" max="10000" step="100" value="5600">
+    </div>
+    <div id="key-kswatch" class="kswatch">5600K — Daylight</div>
+    <div class="ctrl">
+      <label>Position Left/Right (ft) <span class="ctrl-val" id="key_x_val">22.0 ft</span></label>
+      <input type="range" id="key_x" min="2" max="28" step="0.5" value="22">
+    </div>
+    <button class="tip-toggle" onclick="toggleTip('tip-key')">ⓘ Key Light</button>
+    <div id="tip-key" class="tip-box hidden">The main light source. Establishes exposure and the direction of primary shadows. Everything else is relative to it. Position it at roughly 90° to the camera axis for classic 3-point lighting.</div>
+  </div>
+
+  <!-- OVERHEAD / FILL LIGHTS -->
+  <div class="section">
+    <div class="sec-title">Overhead Lights</div>
+
+    <label class="tog"><input type="checkbox" id="fill1_on" checked> Fill 1 (upper left)</label>
+    <div id="fill1-ctrls">
+      <div class="ctrl">
+        <label>Intensity <span class="ctrl-val" id="fill1_int_val">40%</span></label>
+        <input type="range" id="fill1_intensity" min="0" max="100" step="1" value="40">
+      </div>
+      <div class="ctrl">
+        <label>Kelvin <span class="ctrl-val" id="fill1_k_val">5600K</span></label>
+        <input type="range" id="fill1_kelvin" min="2000" max="10000" step="100" value="5600">
+      </div>
+      <div id="fill1-kswatch" class="kswatch">5600K — Daylight</div>
+    </div>
+
+    <label class="tog" style="margin-top:6px"><input type="checkbox" id="back_on" checked> Back Light (Wall 2)</label>
+    <div id="back-ctrls">
+      <div class="ctrl">
+        <label>Intensity <span class="ctrl-val" id="back_int_val">60%</span></label>
+        <input type="range" id="back_intensity" min="0" max="100" step="1" value="60">
+      </div>
+      <div class="ctrl">
+        <label>Kelvin <span class="ctrl-val" id="back_k_val">5600K</span></label>
+        <input type="range" id="back_kelvin" min="2000" max="10000" step="100" value="5600">
+      </div>
+      <div id="back-kswatch" class="kswatch">5600K — Daylight</div>
+    </div>
+
+    <label class="tog" style="margin-top:6px"><input type="checkbox" id="fill2_on"> Fill 2 (mobile)</label>
+    <div id="fill2-ctrls" class="hidden">
+      <div class="ctrl">
+        <label>Intensity <span class="ctrl-val" id="fill2_int_val">40%</span></label>
+        <input type="range" id="fill2_intensity" min="0" max="100" step="1" value="40">
+      </div>
+      <div class="ctrl">
+        <label>Kelvin <span class="ctrl-val" id="fill2_k_val">5600K</span></label>
+        <input type="range" id="fill2_kelvin" min="2000" max="10000" step="100" value="5600">
+      </div>
+    </div>
+    <button class="tip-toggle" onclick="toggleTip('tip-fill')">ⓘ Fill / Back Light</button>
+    <div id="tip-fill" class="tip-box hidden">Fill: reduces Key shadows — always dimmer. Back light / hair light: behind/above the subject, creates rim separation from background. Classic 3:1 key-to-fill ratio = cinematic.</div>
+  </div>
+
+  <!-- LIGHT RATIO -->
+  <div class="section">
+    <div class="sec-title">Light Ratio</div>
+    <div id="ratio-badge" class="ratio-badge">—</div>
+  </div>
+
+  <!-- TALENT -->
+  <div class="section">
+    <div class="sec-title">Talent</div>
+    <div class="ctrl">
+      <label>Name</label>
+      <input type="text" id="talent_name" value="Actor">
+    </div>
+    <div class="ctrl">
+      <label>Left / Right (ft) <span class="ctrl-val" id="talent_x_val">15.0 ft</span></label>
+      <input type="range" id="talent_x" min="2" max="28" step="0.5" value="15">
+    </div>
+    <div class="ctrl">
+      <label>Depth from Wall 4 (ft) <span class="ctrl-val" id="talent_y_val">10.0 ft</span></label>
+      <input type="range" id="talent_y" min="2" max="18" step="0.5" value="10">
+    </div>
+    <div id="dist-readout" class="dist-readout"></div>
+    <button class="sb-btn" id="reset-btn">↩ Reset to Center</button>
+  </div>
+
+  <!-- DIRECTOR'S MONITOR SETTINGS -->
+  <div class="section">
+    <div class="sec-title">Director's Monitor</div>
+    <div class="ctrl">
+      <label>Aspect Ratio</label>
+      <select id="aspect">
+        <option value="1.7778">16:9 — Cinema / Broadcast</option>
+        <option value="2.39">2.39:1 — Anamorphic Scope</option>
+        <option value="1.85">1.85:1 — Flat</option>
+        <option value="1.3333">4:3 — Classic TV</option>
+        <option value="0.5625">9:16 — Vertical / Mobile</option>
+      </select>
+    </div>
+    <label class="tog"><input type="checkbox" id="show_thirds" checked> Rule of Thirds</label>
+    <label class="tog"><input type="checkbox" id="show_safe" checked> Safe Area</label>
+    <label class="tog"><input type="checkbox" id="show_center" checked> Center Cross</label>
+    <label class="tog"><input type="checkbox" id="show_hud" checked> HUD Readouts</label>
+    <label class="tog"><input type="checkbox" id="show_waveform" checked> Waveform Monitor</label>
+    <label class="tog"><input type="checkbox" id="show_zebra"> Zebra (overexposure)</label>
+    <label class="tog"><input type="checkbox" id="show_focus"> Focus Peaking</label>
+    <label class="tog"><input type="checkbox" id="show_false_color"> False Color Map</label>
+    <button class="tip-toggle" onclick="toggleTip('tip-mon')">ⓘ Director's Monitor</button>
+    <div id="tip-mon" class="tip-box hidden">Live camera POV simulation. Silhouette scale responds to dolly distance and lens FOV. Skin tone tint reflects Key Light Kelvin. Rim glow activates with Back Light. Overlays simulate a professional on-set director's monitor.</div>
+  </div>
+
+  <!-- APPROVAL GATE -->
+  <div class="section">
+    <div class="sec-title">Approval Gate</div>
+    <label class="tog"><input type="checkbox" id="approved_dp"> DP Approved</label>
+    <label class="tog"><input type="checkbox" id="approved_gaffer"> Gaffer Approved</label>
+    <label class="tog"><input type="checkbox" id="approved_director"> Director Approved</label>
+    <div id="appr-badge" class="appr-badge appr-pending">WAITING: DP · Gaffer · Director</div>
+    <button class="sb-btn" id="print-btn" disabled>🖨 Print Floor Plan</button>
+    <div style="font-size:9px;color:var(--dim);margin-top:3px">⌘/Ctrl+P → Landscape</div>
+    <button class="tip-toggle" onclick="toggleTip('tip-appr')">ⓘ Approval Gate</button>
+    <div id="tip-appr" class="tip-box hidden">All three department heads (DP, Gaffer, Director) must sign off before a floor plan becomes an official production document.</div>
+  </div>
+
+  <div style="font-size:8px;color:var(--dim);text-align:center;padding:8px 0;letter-spacing:.1em">
+    GNU GPL v3.0 · Free for every student
+  </div>
+</div>
+
+<!-- ═══════════════════ MAIN ═══════════════════ -->
+<div id="main">
+
+  <!-- HEADER -->
+  <div id="hdr">
+    <div class="hdr-row">
+      <div>
+        <p class="pv-title">PreViz 4.4</p>
+        <p class="pv-sub">Phase 1 · Studio Lighting · 30 × 20 ft Stage · Three-Point Setup · Director's Monitor</p>
+        <p class="pv-hint">>>> Click anywhere on stage floor to move talent instantly</p>
+      </div>
+      <div class="hdr-badges">
+        <div class="rec-badge"><span class="rec-dot" id="rec-dot"></span><span id="rec-label">STANDBY</span></div>
+        <div id="hdr-appr" class="appr-pill pending">PENDING</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- METRIC STRIP -->
+  <div id="metric-strip">
+    <div class="mc">
+      <div class="mc-bar" style="background:linear-gradient(90deg,transparent,#FF4500,transparent)"></div>
+      <div class="mc-label">Aperture</div>
+      <div class="mc-val" id="mc-fstop" style="color:#FF4500">f/5.6</div>
+      <div class="mc-hint">key drives exp</div>
+    </div>
+    <div class="mc">
+      <div class="mc-bar" style="background:linear-gradient(90deg,transparent,#00D4CC,transparent)"></div>
+      <div class="mc-label">Lens · FOV</div>
+      <div class="mc-val" id="mc-lens" style="color:#00D4CC">24mm</div>
+      <div class="mc-hint" id="mc-fov">73° field</div>
+    </div>
+    <div class="mc">
+      <div class="mc-bar" id="mc-ratio-bar" style="background:linear-gradient(90deg,transparent,#00C896,transparent)"></div>
+      <div class="mc-label">Key:Fill Ratio</div>
+      <div class="mc-val" id="mc-ratio" style="color:#00C896">3:1</div>
+      <div class="mc-hint">lighting contrast</div>
+    </div>
+    <div class="mc">
+      <div class="mc-bar" style="background:linear-gradient(90deg,transparent,#00FF88,transparent)"></div>
+      <div class="mc-label">ISO</div>
+      <div class="mc-val" id="mc-iso" style="color:#00FF88">800</div>
+      <div class="mc-hint" id="mc-shutter">1/48s shutter</div>
+    </div>
+    <div class="mc">
+      <div class="mc-bar" style="background:linear-gradient(90deg,transparent,#FF6B00,transparent)"></div>
+      <div class="mc-label">Cam to Talent</div>
+      <div class="mc-val" id="mc-c2t" style="color:#FF6B00">—</div>
+      <div class="mc-hint" id="mc-c2t-m">— m</div>
+    </div>
+    <div class="mc">
+      <div class="mc-bar" style="background:linear-gradient(90deg,transparent,#FFE200,transparent)"></div>
+      <div class="mc-label">Key Temp</div>
+      <div class="mc-val" id="mc-kelvin" style="color:#FFE200;font-size:17px">5600K</div>
+      <div class="mc-hint" id="mc-kname">Daylight</div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div id="tabs">
+    <button class="tab-btn active" onclick="switchTab('floor')">🎥 Floor Plan</button>
+    <button class="tab-btn" onclick="switchTab('monitor')">📺 Director's Monitor</button>
+  </div>
+
+  <!-- TAB CONTENT -->
+  <div id="tab-content">
+
+    <!-- FLOOR PLAN TAB -->
+    <div class="tab-panel active" id="panel-floor">
+      <div id="floor-plan"></div>
+    </div>
+
+    <!-- DIRECTOR'S MONITOR TAB -->
+    <div class="tab-panel" id="panel-monitor">
+      <div id="mon-pills">
+        <div class="mon-pill"><div class="mon-pill-label">Aperture</div><div class="mon-pill-val" id="mp-fstop" style="color:#FF4500">f/5.6</div></div>
+        <div class="mon-pill"><div class="mon-pill-label">Lens · FOV</div><div class="mon-pill-val" id="mp-lens" style="color:#00D4CC">24mm</div></div>
+        <div class="mon-pill"><div class="mon-pill-label">Key:Fill</div><div class="mon-pill-val" id="mp-ratio" style="color:#00C896">3:1</div></div>
+        <div class="mon-pill"><div class="mon-pill-label">Key Temp</div><div class="mon-pill-val" id="mp-kelvin" style="color:#FFE200">5600K</div></div>
+        <div class="mon-pill"><div class="mon-pill-label">Aspect</div><div class="mon-pill-val" id="mp-aspect" style="color:#8080C0">16:9</div></div>
+      </div>
+      <div id="monitor-area">
+        <div id="bezel">
+          <canvas id="monitor-canvas"></canvas>
+        </div>
+      </div>
+      <div class="mon-caption" id="mon-caption">
+        Director's Monitor · Silhouette scale, position, and Kelvin skin tone respond live to your sidebar controls.
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+    Developed by Eduardo Carmona, MFA &nbsp;·&nbsp; GNU GPL v3.0 &nbsp;·&nbsp; Free for every student — from Los Angeles to Lima to Windhoek.
+  </div>
+</div>
+</div>
+
+<script>
+'use strict';
+
+// ═══════════════════════════════════════════
+// CONSTANTS
+// ═══════════════════════════════════════════
+const STAGE_W = 30, STAGE_H = 20, CAM_X = 15;
+
+const LENS_FOV = { "12mm":90,"16mm":83,"24mm":73,"35mm":54,"50mm":39,"85mm":24,"100mm":20,"135mm":15 };
+const SHUTTER_BY_FPS = { 24:"1/48",25:"1/50",30:"1/60",60:"1/120" };
+const SHUTTER_DENOM  = { "1/48":48,"1/50":50,"1/60":60,"1/120":120 };
+const ND_OPTIONS     = {
+  "None (0 stops)":0,"ND 0.3 — 1 stop":1,"ND 0.6 — 2 stops":2,
+  "ND 0.9 — 3 stops":3,"ND 1.2 — 4 stops":4,"ND 1.8 — 6 stops":6,
+  "ND 2.4 — 8 stops":8,"ND 3.0 — 10 stops":10
+};
+const FSTOPS = [1.0,1.4,2.0,2.8,4.0,5.6,8.0,11,16,22];
+const KELVIN_SCALE = [
+  [2000,"#FF5500","Candlelight"],[2700,"#FF8040","Incandescent"],
+  [3200,"#FFB347","Tungsten"],[4000,"#FFD580","Warm White"],
+  [4300,"#FFE8C0","Late Afternoon"],[5600,"#FFF8E7","Daylight"],
+  [6500,"#EEF5FF","Overcast Sky"],[7500,"#D5E8FF","Cloudy"],
+  [10000,"#B8D5FF","Blue Sky"]
+];
+const RATIO_TABLE = [
+  [1.2,"1:1","#4A90D9","Flat — broadcast / news"],
+  [1.7,"2:1","#4A90D9","Soft, commercial look"],
+  [2.5,"3:1","#00C896","Classic cinematic"],
+  [3.5,"4:1","#00C896","Dramatic portrait"],
+  [5.0,"6:1","#FF6B00","High contrast"],
+  [10.0,"8:1","#FF6B00","Near noir"],
+  [999,"16:1","#FF1744","High contrast noir"]
+];
+const ASPECT_LABELS = {
+  "1.7778":"16:9","2.39":"2.39:1","1.85":"1.85:1","1.3333":"4:3","0.5625":"9:16"
+};
+
+// ═══════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════
+const DEFAULT_STATE = {
+  mode:"Video/Cinema",lens:"24mm",cam_pan:0,cam_dolly:3.0,
+  fps:24,resolution:"1080p",iso:800,nd_label:"None (0 stops)",
+  key_intensity:80,key_kelvin:5600,key_x:22.0,
+  fill1_on:true,fill1_intensity:40,fill1_kelvin:5600,
+  back_on:true,back_intensity:60,back_kelvin:5600,
+  fill2_on:false,fill2_intensity:40,fill2_kelvin:5600,
+  talent_name:"Actor",talent_x:15.0,talent_y:10.0,
+  approved_dp:false,approved_gaffer:false,approved_director:false,approved_at:null,
+  aspect:1.7778,
+  show_thirds:true,show_safe:true,show_center:true,show_hud:true,
+  show_waveform:true,show_zebra:false,show_focus:false,show_false_color:false,
+};
+
+let S = Object.assign({}, DEFAULT_STATE);
+try {
+  const saved = localStorage.getItem('previz44_state');
+  if(saved) S = Object.assign({}, DEFAULT_STATE, JSON.parse(saved));
+} catch(e){}
+
+function saveState(){ try{ localStorage.setItem('previz44_state', JSON.stringify(S)); }catch(e){} }
+
+// ═══════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════
+function kelvinDisplay(k){
+  for(const[m,c,n] of KELVIN_SCALE) if(k<=m) return [c,n];
+  return KELVIN_SCALE.at(-1).slice(1);
+}
+function kRGB(k){
+  const h = kelvinDisplay(k)[0].slice(1);
+  return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];
+}
+function hexRGB(h){ const s=h.slice(1); return[parseInt(s.slice(0,2),16),parseInt(s.slice(2,4),16),parseInt(s.slice(4,6),16)]; }
+function calcFstop(ki,iso,shutter_str,nd){
+  if(ki<=0) return "---";
+  const denom = SHUTTER_DENOM[shutter_str]||48;
+  const idx = Math.max(0,Math.min(9,Math.round(5+Math.log2(Math.max(ki,.1)/100)+Math.log2(iso/800)+Math.log2(48/denom)-nd)));
+  return `f/${FSTOPS[idx]}`;
+}
+function calcRatio(ki,fi){
+  if(fi<.001) return ["∞:1","#FF1744","No fill — maximum contrast"];
+  const r=ki/Math.max(fi,.1);
+  for(const[u,l,c,m] of RATIO_TABLE) if(r<u) return[l,c,m];
+  return["16:1","#FF1744","High contrast noir"];
+}
+function dist(x1,y1,x2,y2){ return Math.hypot(x2-x1,y2-y1); }
+function ftM(ft){ return Math.round(ft*3048)/10000; }
+function rot2d(vx,vy,t){ return[vx*Math.cos(t)-vy*Math.sin(t), vx*Math.sin(t)+vy*Math.cos(t)]; }
+function pad(n){ return n.toString().padStart(2,'0'); }
+
+function getShutter(){
+  return S.mode==="Video/Cinema" ? (SHUTTER_BY_FPS[S.fps]||"1/48") : "1/100";
+}
+function getFstop(){
+  return calcFstop(S.key_intensity, S.iso, getShutter(), ND_OPTIONS[S.nd_label]);
+}
+
+// ═══════════════════════════════════════════
+// UI SYNC
+// ═══════════════════════════════════════════
+function syncDOM(){
+  // Restore all inputs from state
+  const selects = ['mode','lens','fps','resolution','iso','nd_label'];
+  selects.forEach(id=>{ const el=document.getElementById(id); if(el) el.value=S[id.replace('_label','_label')]||S[id]; });
+  document.getElementById('mode').value = S.mode;
+  document.getElementById('lens').value = S.lens;
+  document.getElementById('fps').value = S.fps;
+  document.getElementById('resolution').value = S.resolution;
+  document.getElementById('iso').value = S.iso;
+  document.getElementById('nd_label').value = S.nd_label;
+  document.getElementById('cam_pan').value = S.cam_pan;
+  document.getElementById('cam_dolly').value = S.cam_dolly;
+  document.getElementById('key_intensity').value = S.key_intensity;
+  document.getElementById('key_kelvin').value = S.key_kelvin;
+  document.getElementById('key_x').value = S.key_x;
+  document.getElementById('fill1_on').checked = S.fill1_on;
+  document.getElementById('fill1_intensity').value = S.fill1_intensity;
+  document.getElementById('fill1_kelvin').value = S.fill1_kelvin;
+  document.getElementById('back_on').checked = S.back_on;
+  document.getElementById('back_intensity').value = S.back_intensity;
+  document.getElementById('back_kelvin').value = S.back_kelvin;
+  document.getElementById('fill2_on').checked = S.fill2_on;
+  document.getElementById('fill2_intensity').value = S.fill2_intensity;
+  document.getElementById('fill2_kelvin').value = S.fill2_kelvin;
+  document.getElementById('talent_name').value = S.talent_name;
+  document.getElementById('talent_x').value = S.talent_x;
+  document.getElementById('talent_y').value = S.talent_y;
+  document.getElementById('aspect').value = S.aspect;
+  document.getElementById('show_thirds').checked = S.show_thirds;
+  document.getElementById('show_safe').checked = S.show_safe;
+  document.getElementById('show_center').checked = S.show_center;
+  document.getElementById('show_hud').checked = S.show_hud;
+  document.getElementById('show_waveform').checked = S.show_waveform;
+  document.getElementById('show_zebra').checked = S.show_zebra;
+  document.getElementById('show_focus').checked = S.show_focus;
+  document.getElementById('show_false_color').checked = S.show_false_color;
+  document.getElementById('approved_dp').checked = S.approved_dp;
+  document.getElementById('approved_gaffer').checked = S.approved_gaffer;
+  document.getElementById('approved_director').checked = S.approved_director;
+  showHideCtrls();
+}
+
+function showHideCtrls(){
+  document.getElementById('fill1-ctrls').style.display = S.fill1_on ? '' : 'none';
+  document.getElementById('back-ctrls').style.display  = S.back_on  ? '' : 'none';
+  document.getElementById('fill2-ctrls').classList.toggle('hidden', !S.fill2_on);
+  const isPhoto = S.mode==="Photography";
+  document.getElementById('fps-row').style.display = isPhoto ? 'none' : '';
+  document.getElementById('res-row').style.display = isPhoto ? 'none' : '';
+  document.getElementById('shutter-display').style.display = isPhoto ? 'none' : '';
+}
+
+function updateReadouts(){
+  const shutter  = getShutter();
+  const fstop    = getFstop();
+  const fov      = LENS_FOV[S.lens];
+  const fillComb = ((S.fill1_on?S.fill1_intensity:0)+(S.fill2_on?S.fill2_intensity:0))/2;
+  const [rl,rc,rm] = calcRatio(S.key_intensity, fillComb);
+  const [kc,kn]    = kelvinDisplay(S.key_kelvin);
+  const c2t        = dist(CAM_X,S.cam_dolly,S.talent_x,S.talent_y);
+  const k2t        = dist(S.key_x,S.cam_dolly,S.talent_x,S.talent_y);
+  const allOk      = S.approved_dp && S.approved_gaffer && S.approved_director;
+
+  // Slider value labels
+  document.getElementById('cam_pan_val').textContent   = `${S.cam_pan}°`;
+  document.getElementById('cam_dolly_val').textContent = `${S.cam_dolly.toFixed(1)} ft`;
+  document.getElementById('key_int_val').textContent   = `${S.key_intensity}%`;
+  document.getElementById('key_k_val').textContent     = `${S.key_kelvin}K`;
+  document.getElementById('key_x_val').textContent     = `${S.key_x.toFixed(1)} ft`;
+  document.getElementById('fill1_int_val').textContent = `${S.fill1_intensity}%`;
+  document.getElementById('fill1_k_val').textContent   = `${S.fill1_kelvin}K`;
+  document.getElementById('back_int_val').textContent  = `${S.back_intensity}%`;
+  document.getElementById('back_k_val').textContent    = `${S.back_kelvin}K`;
+  document.getElementById('fill2_int_val').textContent = `${S.fill2_intensity}%`;
+  document.getElementById('fill2_k_val').textContent   = `${S.fill2_kelvin}K`;
+  document.getElementById('talent_x_val').textContent  = `${S.talent_x.toFixed(1)} ft`;
+  document.getElementById('talent_y_val').textContent  = `${S.talent_y.toFixed(1)} ft`;
+
+  // Kelvin swatches
+  function setSwatch(id, kelvin){
+    const [c,n] = kelvinDisplay(kelvin);
+    const el = document.getElementById(id);
+    if(el){ el.style.background = c; el.textContent = `${kelvin}K — ${n}`; }
+  }
+  setSwatch('key-kswatch',   S.key_kelvin);
+  setSwatch('fill1-kswatch', S.fill1_kelvin);
+  setSwatch('back-kswatch',  S.back_kelvin);
+
+  // f-stop
+  document.getElementById('fstop-display').textContent = fstop;
+  document.getElementById('shutter-display').textContent = `SHUTTER ${shutter}s · 180° RULE`;
+
+  // Ratio badge
+  const rb = document.getElementById('ratio-badge');
+  rb.style.background = rc;
+  rb.innerHTML = `KEY : FILL  ${rl}<br><span class="ratio-mood">${rm}</span>`;
+
+  // Distances
+  document.getElementById('dist-readout').innerHTML =
+    `Cam → Talent: <b>${c2t.toFixed(1)} ft / ${ftM(c2t).toFixed(1)} m</b><br>` +
+    `Key → Talent: <b>${k2t.toFixed(1)} ft / ${ftM(k2t).toFixed(1)} m</b>`;
+
+  // Approval gate
+  if(allOk && !S.approved_at) S.approved_at = new Date().toISOString().slice(0,16).replace('T','  ');
+  if(!allOk) S.approved_at = null;
+  const missing = [!S.approved_dp&&"DP",!S.approved_gaffer&&"Gaffer",!S.approved_director&&"Director"].filter(Boolean);
+  const ab = document.getElementById('appr-badge');
+  const hAppr = document.getElementById('hdr-appr');
+  if(allOk){
+    ab.className = 'appr-badge appr-ok'; ab.textContent = `ALL APPROVED · ${S.approved_at}`;
+    hAppr.className='appr-pill ok'; hAppr.textContent='APPROVED';
+    document.getElementById('print-btn').disabled = false;
+  } else {
+    ab.className = 'appr-badge appr-pending'; ab.textContent = `WAITING: ${missing.join(' · ')}`;
+    hAppr.className='appr-pill pending'; hAppr.textContent='PENDING';
+    document.getElementById('print-btn').disabled = true;
+  }
+
+  // Metric strip
+  document.getElementById('mc-fstop').textContent  = fstop;
+  document.getElementById('mc-lens').textContent   = S.lens;
+  document.getElementById('mc-fov').textContent    = `${fov}° field`;
+  document.getElementById('mc-ratio').textContent  = rl;
+  document.getElementById('mc-ratio').style.color  = rc;
+  document.getElementById('mc-ratio-bar').style.background = `linear-gradient(90deg,transparent,${rc},transparent)`;
+  document.getElementById('mc-iso').textContent    = S.iso;
+  document.getElementById('mc-shutter').textContent= `${shutter}s shutter`;
+  document.getElementById('mc-c2t').innerHTML      = `${c2t.toFixed(1)}<span style="font-size:12px;opacity:.7">ft</span>`;
+  document.getElementById('mc-c2t-m').textContent  = `${ftM(c2t).toFixed(1)} m`;
+  document.getElementById('mc-kelvin').textContent = `${S.key_kelvin}K`;
+  document.getElementById('mc-kname').textContent  = kn;
+
+  // Monitor pills
+  const aspectLabel = ASPECT_LABELS[String(parseFloat(S.aspect).toFixed(4))] ||
+                      ASPECT_LABELS[Object.keys(ASPECT_LABELS).find(k=>Math.abs(parseFloat(k)-S.aspect)<.01)] ||
+                      `${S.aspect}`;
+  document.getElementById('mp-fstop').textContent  = fstop;
+  document.getElementById('mp-lens').textContent   = `${S.lens} · ${fov}°`;
+  document.getElementById('mp-ratio').textContent  = rl;
+  document.getElementById('mp-ratio').style.color  = rc;
+  document.getElementById('mp-kelvin').textContent = `${S.key_kelvin}K`;
+  document.getElementById('mp-aspect').textContent = aspectLabel;
+}
+
+// ═══════════════════════════════════════════
+// DIRECTOR'S MONITOR — Canvas Render
+// ═══════════════════════════════════════════
+const canvas = document.getElementById('monitor-canvas');
+const ctx    = canvas.getContext('2d');
+
+function sizeMonitor(){
+  const area = document.getElementById('monitor-area');
+  const maxW = area.clientWidth  - 36;
+  const maxH = area.clientHeight - 36;
+  let W = maxW, H = W / S.aspect;
+  if(H > maxH){ H = maxH; W = H * S.aspect; }
+  canvas.width  = Math.max(100, Math.floor(W));
+  canvas.height = Math.max(60,  Math.floor(H));
+  drawMonitor();
+}
+
+function drawMonitor(){
+  const W = canvas.width, H = canvas.height;
+  if(W < 10 || H < 10) return;
+
+  const fov      = LENS_FOV[S.lens];
+  const fovRad   = fov * Math.PI / 180;
+  const panRad   = S.cam_pan * Math.PI / 180;
+  const dx       = S.talent_x - CAM_X;
+  const dy       = S.talent_y - S.cam_dolly;
+  const talDist  = dist(CAM_X, S.cam_dolly, S.talent_x, S.talent_y);
+  const angToTal = Math.atan2(dx, dy) - panRad;
+  const normX    = Math.sin(angToTal) / Math.sin(fovRad/2);
+  const screenX  = W/2 + normX * (W/2);
+  const inFrame  = Math.abs(normX) <= 1.2 && dy > 0.1;
+
+  // Talent size from focal length + distance (cinema optics)
+  const hRatio = 0.60 * (S.lens.replace('mm','') / 50) * (5 / Math.max(talDist, 0.3));
+  const talH   = H * Math.min(1.5, Math.max(0.04, hRatio));
+  const talW   = talH * 0.28;
+  const talBase = H * 0.72;
+  const talCX   = screenX;
+
+  const keyAngle  = Math.atan2(S.talent_x - S.key_x, S.talent_y - S.cam_dolly);
+  const keyLitDir = Math.sin(keyAngle - panRad);
+  const keyAlpha  = S.key_intensity / 100;
+  const fillAlpha = S.fill1_on ? S.fill1_intensity / 100 : 0;
+  const backAlpha = S.back_on  ? S.back_intensity  / 100 : 0;
+
+  // ── 1. BACKGROUND ─────────────────────────
+  const ambK = S.key_intensity > 0 ? S.key_kelvin : (S.fill1_on ? S.fill1_kelvin : 5600);
+  const [ar,ag,ab2] = kRGB(ambK);
+  const bgLum = Math.max(0.03, (keyAlpha*.4 + fillAlpha*.3 + backAlpha*.1) * .35);
+  const bgGrad = ctx.createLinearGradient(0,0,0,H);
+  bgGrad.addColorStop(0, `rgba(${ar},${ag},${ab2},${bgLum*.6})`);
+  bgGrad.addColorStop(.5,`rgba(${Math.round(ar*.4)},${Math.round(ag*.4)},${Math.round(ab2*.4)},${bgLum})`);
+  bgGrad.addColorStop(1, 'rgba(10,8,15,0.95)');
+  ctx.fillStyle = '#0A080F'; ctx.fillRect(0,0,W,H);
+  ctx.fillStyle = bgGrad;    ctx.fillRect(0,0,W,H);
+
+  // Floor line + perspective
+  ctx.strokeStyle = `rgba(${ar},${ag},${ab2},${bgLum*1.5})`; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(0,H*.68); ctx.lineTo(W,H*.68); ctx.stroke();
+  ctx.strokeStyle = `rgba(${ar},${ag},${ab2},${bgLum*.5})`; ctx.lineWidth=.5;
+  const vx = talCX, vy = H*.1;
+  for(let i=-5;i<=5;i++){
+    if(!i) continue;
+    ctx.beginPath(); ctx.moveTo(vx,vy); ctx.lineTo(W/2+i*(W/8),H*.68); ctx.stroke();
+  }
+
+  // ── 2. KEY SPILL on background ────────────
+  if(keyAlpha > 0){
+    const [kr,kg,kb] = kRGB(S.key_kelvin);
+    const ksx  = W/2 + (Math.sin(keyAngle-panRad)/Math.sin(fovRad/2))*(W/2);
+    const spill = ctx.createRadialGradient(ksx,H*.4,0,ksx,H*.4,W*.5);
+    spill.addColorStop(0,`rgba(${kr},${kg},${kb},${keyAlpha*.18})`);
+    spill.addColorStop(1,`rgba(${kr},${kg},${kb},0)`);
+    ctx.fillStyle = spill; ctx.fillRect(0,0,W,H);
+  }
+
+  // ── 3. TALENT FIGURE ─────────────────────
+  if(inFrame && talH > 6){
+    const [kr,kg,kb]   = kRGB(S.key_kelvin);
+    const [fr,fg,fb]   = kRGB(S.fill1_kelvin);
+    const [br2,bg2,bb3] = kRGB(S.back_kelvin);
+    const shadLum = Math.max(.05, fillAlpha*.35);
+    const litLum  = Math.max(.12, keyAlpha*.75);
+    const keyLit  = keyLitDir >  .1;
+    const keyMid  = Math.abs(keyLitDir) <= .1;
+
+    // Body gradient
+    const bodyGrad = ctx.createLinearGradient(talCX-talW,0,talCX+talW,0);
+    if(keyMid){
+      bodyGrad.addColorStop(0,   `rgba(${Math.round(fr*.5)},${Math.round(fg*.5)},${Math.round(fb*.5)},${shadLum+.1})`);
+      bodyGrad.addColorStop(.5,  `rgba(${Math.round(kr*litLum+fr*shadLum)},${Math.round(kg*litLum+fg*shadLum)},${Math.round(kb*litLum+fb*shadLum)},0.9)`);
+      bodyGrad.addColorStop(1,   `rgba(${Math.round(fr*.5)},${Math.round(fg*.5)},${Math.round(fb*.5)},${shadLum+.1})`);
+    } else if(keyLit){
+      bodyGrad.addColorStop(0,   `rgba(${Math.round(kr*litLum)},${Math.round(kg*litLum)},${Math.round(kb*litLum)},0.92)`);
+      bodyGrad.addColorStop(.45, `rgba(${Math.round(kr*litLum*.6+fr*shadLum)},${Math.round(kg*litLum*.6+fg*shadLum)},${Math.round(kb*litLum*.6+fb*shadLum)},0.85)`);
+      bodyGrad.addColorStop(1,   `rgba(${Math.round(fr*shadLum*2.5)},${Math.round(fg*shadLum*2.5)},${Math.round(fb*shadLum*2.5)},${Math.max(.12,shadLum+.05)})`);
+    } else {
+      bodyGrad.addColorStop(0,   `rgba(${Math.round(fr*shadLum*2.5)},${Math.round(fg*shadLum*2.5)},${Math.round(fb*shadLum*2.5)},${Math.max(.12,shadLum+.05)})`);
+      bodyGrad.addColorStop(.55, `rgba(${Math.round(kr*litLum*.6+fr*shadLum)},${Math.round(kg*litLum*.6+fg*shadLum)},${Math.round(kb*litLum*.6+fb*shadLum)},0.85)`);
+      bodyGrad.addColorStop(1,   `rgba(${Math.round(kr*litLum)},${Math.round(kg*litLum)},${Math.round(kb*litLum)},0.92)`);
+    }
+
+    const torsoTop = talBase - talH + talH*.28;
+    const torsoH   = talH*.46;
+    const legTop   = torsoTop + torsoH;
+    const legH     = talH - talH*.28 - torsoH;
+
+    ctx.fillStyle = bodyGrad;
+    ctx.beginPath(); ctx.roundRect(talCX-talW/2, torsoTop, talW, torsoH, [4,4,2,2]); ctx.fill();
+    ctx.beginPath(); ctx.roundRect(talCX-talW/2, legTop, talW*.45, legH, [0,0,3,3]); ctx.fill();
+    ctx.beginPath(); ctx.roundRect(talCX+talW*.05, legTop, talW*.45, legH, [0,0,3,3]); ctx.fill();
+
+    // Head
+    const headR  = talW*.52;
+    const headCY = torsoTop - headR*1.1;
+    const hGrad  = ctx.createRadialGradient(
+      talCX+(keyLit?-headR*.3:headR*.3), headCY-headR*.2, headR*.1,
+      talCX, headCY, headR*1.1);
+    hGrad.addColorStop(0, `rgba(${Math.round(kr*litLum)},${Math.round(kg*litLum)},${Math.round(kb*litLum)},0.95)`);
+    hGrad.addColorStop(1, `rgba(${Math.round(fr*shadLum*3)},${Math.round(fg*shadLum*3)},${Math.round(fb*shadLum*3)},0.7)`);
+    ctx.fillStyle = hGrad;
+    ctx.beginPath(); ctx.ellipse(talCX,headCY,headR,headR*1.15,0,0,Math.PI*2); ctx.fill();
+
+    // Rim / back light
+    if(S.back_on && S.back_intensity > 10){
+      const rimA  = Math.min(.9, backAlpha*.8);
+      const rimS  = keyLit ? 1 : -1;
+      const rimG  = ctx.createLinearGradient(talCX+rimS*(headR*.4),0,talCX+rimS*(headR*1.2),0);
+      rimG.addColorStop(0,'rgba(0,0,0,0)');
+      rimG.addColorStop(1,`rgba(${br2},${bg2},${bb3},${rimA})`);
+      ctx.fillStyle=rimG;
+      ctx.beginPath(); ctx.ellipse(talCX,headCY,headR,headR*1.15,0,0,Math.PI*2); ctx.fill();
+      const rbG = ctx.createLinearGradient(talCX+rimS*(talW*.2),0,talCX+rimS*(talW*.7),0);
+      rbG.addColorStop(0,'rgba(0,0,0,0)');
+      rbG.addColorStop(1,`rgba(${br2},${bg2},${bb3},${rimA*.7})`);
+      ctx.fillStyle=rbG;
+      ctx.beginPath(); ctx.roundRect(talCX-talW/2,torsoTop,talW,torsoH,[4,4,2,2]); ctx.fill();
+    }
+
+    // Talent label
+    if(S.show_hud){
+      const fs = Math.max(10, talW*.55);
+      ctx.font=`bold ${fs}px Barlow Condensed,sans-serif`;
+      ctx.fillStyle='rgba(255,68,102,0.9)';
+      ctx.textAlign='center';
+      ctx.fillText(S.talent_name.toUpperCase(), talCX, talBase+16);
+    }
+
+    // Focus peaking
+    if(S.show_focus){
+      ctx.strokeStyle='rgba(0,212,204,0.75)'; ctx.lineWidth=1.5;
+      ctx.beginPath(); ctx.ellipse(talCX,headCY,headR+1,headR*1.15+1,0,0,Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.roundRect(talCX-talW/2-1,torsoTop-1,talW+2,torsoH+legH+2,[4,4,3,3]); ctx.stroke();
+    }
+
+    // Zebra
+    if(S.show_zebra && keyAlpha > .7){
+      ctx.save();
+      ctx.beginPath(); ctx.ellipse(talCX,headCY,headR,headR*1.15,0,0,Math.PI*2); ctx.clip();
+      ctx.strokeStyle='rgba(255,226,0,0.55)'; ctx.lineWidth=2;
+      for(let z=-headR*2;z<headR*2;z+=8){
+        ctx.beginPath(); ctx.moveTo(talCX-headR+z,headCY-headR*1.5); ctx.lineTo(talCX-headR+z+8,headCY+headR*1.5); ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    // False color
+    if(S.show_false_color){
+      const fc = keyAlpha<.2?'rgba(0,40,220,0.45)':keyAlpha<.45?'rgba(0,180,80,0.45)':keyAlpha<.75?'rgba(255,140,0,0.45)':'rgba(255,23,68,0.45)';
+      ctx.fillStyle=fc;
+      ctx.beginPath(); ctx.ellipse(talCX,headCY,headR,headR*1.15,0,0,Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.roundRect(talCX-talW/2,torsoTop,talW,torsoH+legH,[4,4,3,3]); ctx.fill();
+    }
+  }
+
+  // ── 4. OVERLAYS ──────────────────────────
+  // Rule of Thirds
+  if(S.show_thirds){
+    ctx.strokeStyle='rgba(255,226,0,0.35)'; ctx.lineWidth=1; ctx.setLineDash([]);
+    for(const d of[1/3,2/3]){
+      ctx.beginPath(); ctx.moveTo(d*W,0); ctx.lineTo(d*W,H); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(0,d*H); ctx.lineTo(W,d*H); ctx.stroke();
+    }
+    ctx.fillStyle='rgba(255,226,0,0.55)';
+    for(const dx of[1/3,2/3]) for(const dy of[1/3,2/3]){
+      ctx.beginPath(); ctx.arc(dx*W,dy*H,3,0,Math.PI*2); ctx.fill();
+    }
+  }
+
+  // Safe Area
+  if(S.show_safe){
+    const ax=W*.05, ay=H*.05;
+    ctx.strokeStyle='rgba(255,107,0,0.45)'; ctx.lineWidth=1; ctx.setLineDash([6,4]);
+    ctx.beginPath(); ctx.roundRect(ax,ay,W-ax*2,H-ay*2,2); ctx.stroke();
+    const tx=W*.10, ty=H*.10;
+    ctx.strokeStyle='rgba(255,107,0,0.25)';
+    ctx.beginPath(); ctx.roundRect(tx,ty,W-tx*2,H-ty*2,2); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.font='7px JetBrains Mono,monospace'; ctx.fillStyle='rgba(255,107,0,0.5)'; ctx.textAlign='left';
+    ctx.fillText('ACTION SAFE',ax+4,ay+10);
+    ctx.fillText('TITLE SAFE', tx+4, ty+10);
+  }
+
+  // Center cross
+  if(S.show_center){
+    const cx2=W/2, cy2=H/2;
+    ctx.strokeStyle='rgba(255,255,255,0.3)'; ctx.lineWidth=1; ctx.setLineDash([]);
+    ctx.beginPath(); ctx.moveTo(cx2-14,cy2); ctx.lineTo(cx2+14,cy2); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx2,cy2-14); ctx.lineTo(cx2,cy2+14); ctx.stroke();
+    ctx.beginPath(); ctx.arc(cx2,cy2,4,0,Math.PI*2); ctx.stroke();
+  }
+
+  // ── 5. HUD ───────────────────────────────
+  if(S.show_hud){
+    const fstop = getFstop();
+    const [kr,kg,kb] = kRGB(S.key_kelvin);
+    const [,kn]      = kelvinDisplay(S.key_kelvin);
+    ctx.font='bold 10px JetBrains Mono,monospace'; ctx.setLineDash([]);
+    ctx.textAlign='left';
+    ctx.fillStyle='rgba(0,212,204,0.85)';
+    ctx.fillText(`${S.lens}  ·  FOV ${LENS_FOV[S.lens]}°  ·  PAN ${S.cam_pan}°`, 8, 14);
+    ctx.textAlign='right';
+    ctx.fillStyle='rgba(0,255,136,0.85)';
+    ctx.fillText(`${fstop}  ·  ISO ${S.iso}  ·  ${getShutter()}s`, W-8, 14);
+    ctx.textAlign='left';
+    ctx.fillStyle='rgba(255,107,0,0.75)';
+    ctx.fillText(`C→T: ${talDist.toFixed(1)} ft  ·  ${ftM(talDist).toFixed(1)} m`, 8, H-8);
+    ctx.textAlign='right';
+    ctx.fillStyle=`rgba(${kr},${kg},${kb},0.85)`;
+    ctx.fillText(`${S.key_kelvin}K ${kn}`, W-8, H-8);
+    const now=new Date();
+    ctx.textAlign='center'; ctx.fillStyle='rgba(255,255,255,0.4)';
+    ctx.fillText(`${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}:00`, W/2, 14);
+    ctx.fillStyle='rgba(255,255,255,0.3)';
+    ctx.fillText(`DOLLY ${S.cam_dolly.toFixed(1)} ft`, W/2, H-8);
+  }
+
+  // ── 6. WAVEFORM ──────────────────────────
+  if(S.show_waveform){
+    const wx=10, wy=H-96, ww=120, wh=78;
+    ctx.fillStyle='rgba(5,10,20,0.88)'; ctx.beginPath(); ctx.roundRect(wx,wy,ww,wh,3); ctx.fill();
+    ctx.strokeStyle='rgba(20,40,60,0.9)'; ctx.lineWidth=1; ctx.beginPath(); ctx.roundRect(wx,wy,ww,wh,3); ctx.stroke();
+    ctx.font='7px JetBrains Mono,monospace'; ctx.fillStyle='rgba(40,100,80,0.8)'; ctx.textAlign='left';
+    ctx.fillText('WAVEFORM', wx+5, wy+10);
+    const kl = S.key_intensity/100, fl = S.fill1_on?S.fill1_intensity/100:0;
+    for(let x=wx+4;x<wx+ww-4;x+=2){
+      const sH = wy+wh-8 - fl*18;
+      const hH = wy+wh-8 - kl*60;
+      ctx.strokeStyle='rgba(0,200,100,0.7)'; ctx.lineWidth=1;
+      ctx.beginPath(); ctx.moveTo(x,sH); ctx.lineTo(x,hH); ctx.stroke();
+    }
+    // IRE labels
+    ctx.fillStyle='rgba(60,100,80,0.6)'; ctx.textAlign='right';
+    ctx.fillText('100',wx+ww-2,wy+14);
+    ctx.fillText('0',  wx+ww-2,wy+wh-4);
+  }
+
+  // ── 7. VIGNETTE ──────────────────────────
+  const vig = ctx.createRadialGradient(W/2,H/2,H*.22,W/2,H/2,H*.82);
+  vig.addColorStop(0,'rgba(0,0,0,0)'); vig.addColorStop(1,'rgba(0,0,0,0.55)');
+  ctx.fillStyle=vig; ctx.fillRect(0,0,W,H);
+
+  // Scanlines
+  ctx.fillStyle='rgba(0,0,0,0.025)';
+  for(let y=0;y<H;y+=2) ctx.fillRect(0,y,W,1);
+}
+
+// ═══════════════════════════════════════════
+// FLOOR PLAN — Plotly.js
+// ═══════════════════════════════════════════
+let plotInited = false;
+
+function drawFloorPlan(){
+  const W=STAGE_W, H=STAGE_H;
+  const fov    = LENS_FOV[S.lens];
+  const shutter= getShutter();
+  const fstop  = getFstop();
+  const camX   = CAM_X, camY = S.cam_dolly;
+  const keyX   = S.key_x, keyY = camY;
+  const tx=S.talent_x, ty=S.talent_y;
+  const [kc,kn]   = kelvinDisplay(S.key_kelvin);
+  const fillComb  = ((S.fill1_on?S.fill1_intensity:0)+(S.fill2_on?S.fill2_intensity:0))/2;
+  const [rl,rc,rm]= calcRatio(S.key_intensity, fillComb);
+  const c2t       = dist(camX,camY,tx,ty);
+  const k2t       = dist(keyX,keyY,tx,ty);
+  const [kr,kg,kb]= hexRGB(kc);
+  const panRad    = S.cam_pan*Math.PI/180;
+  const fovHalf   = (fov/2)*Math.PI/180;
+
+  const FLOOR='#050912',WALL='#0E1830',GRID_M='#090E1A',GRID_5='#0C1224',DIM='#1E2A44',LBL='#2A3A5A';
+  const TEAL='#00D4CC'; const [tcr,tcg,tcb]=hexRGB(TEAL);
+
+  let shapes=[], annotations=[], data=[];
+
+  // Stage floor
+  shapes.push({type:"rect",x0:0,y0:0,x1:W,y1:H,fillcolor:FLOOR,line:{color:WALL,width:3}});
+
+  // Grid
+  for(let x=1;x<W;x++){
+    const c=x%5?GRID_M:GRID_5, w=x%5?.5:1.2;
+    shapes.push({type:"line",x0:x,y0:0,x1:x,y1:H,line:{color:c,width:w}});
+  }
+  for(let y=1;y<H;y++){
+    const c=y%5?GRID_M:GRID_5, w=y%5?.5:1.2;
+    shapes.push({type:"line",x0:0,y0:y,x1:W,y1:y,line:{color:c,width:w}});
+  }
+
+  // 4th wall
+  shapes.push({type:"line",x0:0,y0:0,x1:W,y1:0,line:{color:"#0040A0",width:2.5,dash:"dot"}});
+
+  // Wall labels
+  annotations.push({x:-2,y:H/2,text:"WALL 1",textangle:-90,showarrow:false,font:{size:9,color:LBL,family:"JetBrains Mono"}});
+  annotations.push({x:W/2,y:H+1.6,text:"WALL 2 — BACK",showarrow:false,font:{size:9,color:LBL,family:"JetBrains Mono"}});
+  annotations.push({x:W+2,y:H/2,text:"WALL 3",textangle:90,showarrow:false,font:{size:9,color:LBL,family:"JetBrains Mono"}});
+  annotations.push({x:W/2,y:-.7,text:"4TH WALL — OPEN  ·  CLICK STAGE TO MOVE TALENT",showarrow:false,font:{size:9,color:"#0050C0",family:"JetBrains Mono"}});
+  annotations.push({x:W/2,y:H+.8,text:"30 ft  ·  9.1 m",showarrow:false,font:{size:8,color:DIM,family:"JetBrains Mono"}});
+  annotations.push({x:-.7,y:H/2,text:"20 ft · 6.1 m",textangle:-90,showarrow:false,font:{size:8,color:DIM,family:"JetBrains Mono"}});
+
+  // Click grid (invisible — talent placement)
+  const gx=[],gy=[];
+  for(let x=0;x<=W;x++) for(let y=0;y<=H;y++){gx.push(x);gy.push(y);}
+  data.push({x:gx,y:gy,mode:"markers",marker:{size:10,color:"rgba(0,0,0,0)",opacity:0},
+    showlegend:false,hovertemplate:"Click to place talent<br>X:%{x:.0f}ft · Y:%{y:.0f}ft<extra></extra>",name:"__click__"});
+
+  // Overhead lights
+  const overheads=[
+    [4,16,"fill1_on","fill1_intensity","fill1_kelvin","FILL 1"],
+    [W/2,18,"back_on","back_intensity","back_kelvin","BACK"]
+  ];
+  for(const[lx,ly,kon,kint,kk,label] of overheads){
+    const isOn=S[kon], lkelvin=S[kk], lintens=S[kint];
+    const [lc,ln]=kelvinDisplay(lkelvin); const [r,g,b]=hexRGB(lc);
+    if(isOn){
+      for(const[rad,am] of[[4.5,.4],[2.8,.7],[1.5,1.0]]){
+        const ga=Math.max(.03,lintens/100*.22)*am;
+        shapes.push({type:"circle",x0:lx-rad,y0:ly-rad,x1:lx+rad,y1:ly+rad,fillcolor:`rgba(${r},${g},${b},${ga.toFixed(3)})`,line:{color:"rgba(0,0,0,0)",width:0}});
+      }
+      shapes.push({type:"circle",x0:lx-1,y0:ly-1,x1:lx+1,y1:ly+1,fillcolor:`rgba(${r},${g},${b},0.55)`,line:{color:lc,width:2}});
+    } else {
+      shapes.push({type:"circle",x0:lx-1,y0:ly-1,x1:lx+1,y1:ly+1,fillcolor:"#0A0E18",line:{color:"#151E30",width:1.5}});
+    }
+    data.push({x:[lx],y:[ly],mode:"markers",marker:{size:14,color:isOn?lc:"#151E30",symbol:"square",line:{color:"#02050C",width:2}},showlegend:false,
+      hovertemplate:`<b>${label}</b><br>${isOn?"ON":"OFF"}<br>${lkelvin}K — ${ln}<br>Intensity:${lintens}%<extra></extra>`});
+    annotations.push({x:lx,y:ly+1.9,text:`<b>${label}</b><br>${lkelvin}K`,showarrow:false,font:{size:8,color:isOn?lc:DIM,family:"JetBrains Mono"},align:"center"});
+  }
+
+  // Key light glow
+  const ka=Math.max(.04,S.key_intensity/100*.30);
+  for(const[rh,am] of[[6,.25],[4,.5],[2.5,.8]]){
+    shapes.push({type:"circle",x0:keyX-rh,y0:keyY-rh,x1:keyX+rh,y1:keyY+rh,fillcolor:`rgba(${kr},${kg},${kb},${(ka*am).toFixed(3)})`,line:{color:"rgba(0,0,0,0)",width:0}});
+  }
+  // Key beam
+  const bw=Math.max(1.5,S.key_intensity/100*4);
+  data.push({x:[keyX,tx],y:[keyY,ty],mode:"lines",line:{color:`rgba(${kr},${kg},${kb},0.55)`,width:bw},showlegend:false,hoverinfo:"skip"});
+  // Key dome
+  const angKey=Math.atan2(ty-keyY,tx-keyX), domeR=1.8;
+  const arcA=Array.from({length:48},(_,i)=>angKey-Math.PI/2+i*(Math.PI/47));
+  data.push({x:arcA.map(a=>keyX+domeR*Math.cos(a)),y:arcA.map(a=>keyY+domeR*Math.sin(a)),
+    mode:"lines",fill:"toself",fillcolor:`rgba(${kr},${kg},${kb},0.92)`,line:{color:kc,width:2.5},
+    showlegend:false,hovertemplate:`<b>KEY LIGHT</b><br>${S.key_kelvin}K — ${kn}<br>Intensity:${S.key_intensity}%<extra></extra>`});
+  annotations.push({x:keyX,y:keyY+domeR+1.5,text:`<b>KEY</b><br>${S.key_kelvin}K`,showarrow:false,font:{size:9,color:kc,family:"JetBrains Mono"},align:"center"});
+
+  // Camera glow
+  for(const[gr,ga] of[[3.5,.06],[2,.12]]){
+    shapes.push({type:"circle",x0:camX-gr,y0:camY-gr,x1:camX+gr,y1:camY+gr,fillcolor:`rgba(${tcr},${tcg},${tcb},${ga})`,line:{color:"rgba(0,0,0,0)",width:0}});
+  }
+  // FOV cone
+  const fwd=[Math.sin(panRad),Math.cos(panRad)];
+  const coneLen=Math.min(14,H-camY+.5);
+  const ld=rot2d(...fwd, fovHalf), rd=rot2d(...fwd,-fovHalf);
+  data.push({x:[camX,camX+ld[0]*coneLen,camX+rd[0]*coneLen,camX],y:[camY,camY+ld[1]*coneLen,camY+rd[1]*coneLen,camY],
+    fill:"toself",fillcolor:`rgba(${tcr},${tcg},${tcb},0.08)`,line:{color:`rgba(${tcr},${tcg},${tcb},0.4)`,width:1.5},mode:"lines",showlegend:false,hoverinfo:"skip"});
+  // Camera body
+  const sf=Math.max(.55,3/Math.max(camY,.5));
+  data.push({x:[camX],y:[camY],mode:"markers",
+    marker:{size:28*sf,color:`rgba(${tcr},${tcg},${tcb},1)`,symbol:"square",line:{color:"rgba(0,240,230,1)",width:2.5}},
+    showlegend:false,hovertemplate:`<b>CAMERA</b><br>${S.lens} | FOV:${fov}°<br>Pan:${S.cam_pan}°<br>Dolly:${camY}ft<extra></extra>`});
+  annotations.push({x:camX+2.6,y:camY+.5,text:"MASTER SHOT",showarrow:false,font:{size:9,color:TEAL,family:"JetBrains Mono"}});
+
+  // Talent spill
+  const spill=Math.min(3.5,Math.max(.8,S.key_intensity/100*3.5));
+  shapes.push({type:"circle",x0:tx-spill,y0:ty-spill,x1:tx+spill,y1:ty+spill,fillcolor:`rgba(${kr},${kg},${kb},${Math.max(.03,S.key_intensity/100*.12).toFixed(3)})`,line:{color:"rgba(0,0,0,0)",width:0}});
+  shapes.push({type:"circle",x0:tx-2.2,y0:ty-2.2,x1:tx+2.2,y1:ty+2.2,fillcolor:"rgba(0,0,0,0)",line:{color:"rgba(255,23,68,0.30)",width:1,dash:"dot"}});
+  data.push({x:[tx-2,tx+2,null,tx,tx],y:[ty,ty,null,ty-2,ty+2],mode:"lines",line:{color:"#FF1744",width:2.5},showlegend:false,hoverinfo:"skip"});
+  data.push({x:[tx],y:[ty],mode:"markers",marker:{size:30,color:"rgba(255,23,68,0.08)",symbol:"circle",line:{color:"#FF1744",width:3}},showlegend:false,
+    hovertemplate:`<b>${S.talent_name}</b><br>X:${tx.toFixed(1)}ft (${ftM(tx).toFixed(1)}m)<br>Y:${ty.toFixed(1)}ft (${ftM(ty).toFixed(1)}m)<br>Cam→Talent:${c2t.toFixed(1)}ft<br>Key→Talent:${k2t.toFixed(1)}ft<extra></extra>`});
+  annotations.push({x:tx,y:ty+2.6,text:`<b>${S.talent_name.toUpperCase()}</b>`,showarrow:false,font:{size:12,color:"#FF4466",family:"Barlow Condensed"},align:"center"});
+
+  // Ratio badge
+  annotations.push({x:W+.8,y:H-1,xanchor:"left",
+    text:`<b>KEY:FILL</b><br><span style='font-size:22px'><b>${rl}</b></span><br><i style='font-size:9px'>${rm}</i>`,
+    showarrow:false,bgcolor:rc,bordercolor:rc,borderwidth:2,borderpad:10,font:{size:10,color:"white",family:"Barlow Condensed"},align:"center"});
+
+  // Telemetry bars
+  let lights=`KEY ${S.key_kelvin}K`;
+  if(S.fill1_on) lights+=`  ·  F1 ${S.fill1_kelvin}K`;
+  if(S.back_on)  lights+=`  ·  BACK ${S.back_kelvin}K`;
+  if(S.fill2_on) lights+=`  ·  F2 ${S.fill2_kelvin}K`;
+  const ndS=S.nd_label.split("—")[0].trim();
+  const rows=[
+    ["#0A1428","#4060A0",`  CAM  ${S.lens}  FOV:${fov}d  PAN:${S.cam_pan}d  DOLLY:${camY.toFixed(1)}ft  C>T:${c2t.toFixed(1)}ft/${ftM(c2t).toFixed(1)}m`],
+    ["#081508","#208040",`  EXP  ${fstop}  ISO:${S.iso}  ${shutter}s  ${ndS}  ${S.mode==="Video/Cinema"?S.fps+"fps "+S.resolution:"PHOTO"}`],
+    ["#0C0A04","#806020",`  LGT  ${lights}`],
+    ["#150408","#A03030",`  TLT  ${S.talent_name.toUpperCase()}  X:${tx.toFixed(1)}ft/${ftM(tx).toFixed(1)}m  Y:${ty.toFixed(1)}ft/${ftM(ty).toFixed(1)}m  K>T:${k2t.toFixed(1)}ft/${ftM(k2t).toFixed(1)}m`]
+  ];
+  rows.forEach(([bg,tc,txt],i)=>{
+    const ry=-2.6-i*1.45;
+    const [br2,bg2,bb2]=hexRGB(bg); const [tr,tg,tb]=hexRGB(tc);
+    shapes.push({type:"rect",x0:0,y0:ry-.6,x1:W,y1:ry+.6,fillcolor:`rgba(${br2},${bg2},${bb2},0.85)`,line:{color:`rgba(${tr},${tg},${tb},0.6)`,width:1}});
+    shapes.push({type:"rect",x0:0,y0:ry-.6,x1:.4,y1:ry+.6,fillcolor:`rgba(${tr},${tg},${tb},0.8)`,line:{color:"rgba(0,0,0,0)",width:0}});
+    annotations.push({x:.7,y:ry,text:txt,showarrow:false,font:{size:9,color:tc,family:"JetBrains Mono"},xanchor:"left",align:"left"});
+  });
+
+  const layout = {
+    margin:{l:55,r:175,t:16,b:16},
+    paper_bgcolor:"#02040A",plot_bgcolor:"#02040A",
+    xaxis:{range:[-3,W+11],showgrid:false,zeroline:false,showticklabels:false,scaleanchor:"y",scaleratio:1,fixedrange:true},
+    yaxis:{range:[-12.5,H+4.5],showgrid:false,zeroline:false,showticklabels:false,fixedrange:true},
+    height:760,dragmode:false,showlegend:false,shapes,annotations
+  };
+
+  const config={responsive:true,displayModeBar:false,scrollZoom:false};
+
+  if(!plotInited){
+    Plotly.newPlot('floor-plan', data, layout, config).then(gd=>{
+      gd.on('plotly_click', ev=>{
+        if(!ev.points) return;
+        for(const pt of ev.points){
+          const x=pt.x, y=pt.y;
+          if(x>=.5 && x<=STAGE_W-.5 && y>=.5 && y<=STAGE_H-.5){
+            S.talent_x = Math.round(x*2)/2;
+            S.talent_y = Math.round(y*2)/2;
+            document.getElementById('talent_x').value = S.talent_x;
+            document.getElementById('talent_y').value = S.talent_y;
+            updateAll();
+          }
+        }
+      });
+    });
+    plotInited = true;
+  } else {
+    Plotly.react('floor-plan', data, layout, config);
+  }
+}
+
+// ═══════════════════════════════════════════
+// TAB SWITCHING
+// ═══════════════════════════════════════════
+let activeTab = 'floor';
+
+function switchTab(tab){
+  activeTab = tab;
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>{
+    b.classList.toggle('active', (i===0&&tab==='floor')||(i===1&&tab==='monitor'));
+  });
+  document.getElementById('panel-floor').classList.toggle('active', tab==='floor');
+  document.getElementById('panel-monitor').classList.toggle('active', tab==='monitor');
+  if(tab==='monitor'){ setTimeout(sizeMonitor,50); }
+}
+
+// ═══════════════════════════════════════════
+// TIP TOGGLES
+// ═══════════════════════════════════════════
+function toggleTip(id){
+  const el=document.getElementById(id);
+  if(el) el.classList.toggle('hidden');
+}
+
+// ═══════════════════════════════════════════
+// MAIN UPDATE
+// ═══════════════════════════════════════════
+function updateAll(){
+  showHideCtrls();
+  updateReadouts();
+  drawFloorPlan();
+  if(activeTab==='monitor') drawMonitor();
+  saveState();
+}
+
+// ═══════════════════════════════════════════
+// EVENT LISTENERS
+// ═══════════════════════════════════════════
+function wire(id, key, type='float'){
+  const el=document.getElementById(id); if(!el)return;
+  const ev = el.tagName==='INPUT'&&el.type==='range' ? 'input' : 'change';
+  el.addEventListener(ev, ()=>{
+    S[key] = type==='bool' ? el.checked : type==='str' ? el.value : (type==='int'?parseInt(el.value):parseFloat(el.value));
+    updateAll();
+  });
+}
+
+// Selects
+wire('mode','mode','str');
+wire('lens','lens','str');
+wire('fps','fps','int');
+wire('resolution','resolution','str');
+wire('iso','iso','int');
+wire('nd_label','nd_label','str');
+wire('aspect','aspect','float');
+
+// Sliders
+wire('cam_pan','cam_pan','float');
+wire('cam_dolly','cam_dolly','float');
+wire('key_intensity','key_intensity','float');
+wire('key_kelvin','key_kelvin','float');
+wire('key_x','key_x','float');
+wire('fill1_intensity','fill1_intensity','float');
+wire('fill1_kelvin','fill1_kelvin','float');
+wire('back_intensity','back_intensity','float');
+wire('back_kelvin','back_kelvin','float');
+wire('fill2_intensity','fill2_intensity','float');
+wire('fill2_kelvin','fill2_kelvin','float');
+wire('talent_x','talent_x','float');
+wire('talent_y','talent_y','float');
+
+// Text
+wire('talent_name','talent_name','str');
+
+// Checkboxes
+['fill1_on','back_on','fill2_on',
+ 'approved_dp','approved_gaffer','approved_director',
+ 'show_thirds','show_safe','show_center','show_hud',
+ 'show_waveform','show_zebra','show_focus','show_false_color'
+].forEach(k=>wire(k,k,'bool'));
+
+// Reset talent
+document.getElementById('reset-btn').addEventListener('click',()=>{
+  S.talent_x=15; S.talent_y=10;
+  document.getElementById('talent_x').value=15;
+  document.getElementById('talent_y').value=10;
+  updateAll();
+});
+
+// Print
+document.getElementById('print-btn').addEventListener('click',()=>window.print());
+
+// Monitor resize
+window.addEventListener('resize',()=>{ if(activeTab==='monitor') sizeMonitor(); });
+
+// Live timecode tick
+setInterval(()=>{ if(activeTab==='monitor'&&S.show_hud) drawMonitor(); },1000);
+
+// ═══════════════════════════════════════════
+// BOOT
+// ═══════════════════════════════════════════
+syncDOM();
+updateAll();
+</script>
+</body>
+</html>
+
+
+
+

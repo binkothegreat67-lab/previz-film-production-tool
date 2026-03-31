@@ -69,7 +69,7 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
 
 /* QR BLOCK */
 .qr-block{display:inline-flex;align-items:center;gap:16px;border:1px solid rgba(0,212,204,.22);background:rgba(0,212,204,.04);border-radius:4px;padding:14px 20px;margin-top:20px;animation:fadeUp .5s .5s both}
-#qrcode{background:#fff;padding:6px;border-radius:3px;flex-shrink:0}
+#qrcode{background:#fff;padding:8px;border-radius:4px;flex-shrink:0;box-shadow:0 4px 18px rgba(0,0,0,.22),0 1px 4px rgba(0,0,0,.14);line-height:0}
 .qr-text{text-align:left}
 .qr-label{font-family:var(--font-m);font-size:.58rem;letter-spacing:.18em;color:var(--teal);text-transform:uppercase;margin-bottom:4px}
 .qr-title{font-family:var(--font-b);font-size:.9rem;font-weight:600;color:var(--white);margin-bottom:3px}
@@ -319,10 +319,39 @@ footer{background:#03060F;padding:40px 48px;display:flex;align-items:flex-start;
 .typing-dot:nth-child(3){animation-delay:.44s}
 @keyframes typing{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
 
+
+/* LUX MOBILE CHAT PREVIEW — single message, phones only */
+.lux-chat-mobile{
+  display:none;
+  background:rgba(3,6,15,.75);
+  border:1px solid rgba(0,212,204,.15);
+  border-radius:12px;padding:20px;
+  backdrop-filter:blur(16px);
+  box-shadow:0 12px 40px rgba(0,0,0,.35),0 0 0 1px rgba(0,212,204,.06);
+  margin-top:8px;
+}
+.lux-chat-mobile .lux-chat-header{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:14px;padding-bottom:12px;
+  border-bottom:1px solid rgba(0,212,204,.1);
+}
+.lux-chat-mobile .msg-bubble{
+  font-family:var(--font-b);font-size:.84rem;line-height:1.7;
+  padding:11px 15px;border-radius:8px 8px 8px 2px;
+  background:rgba(0,212,204,.07);border:1px solid rgba(0,212,204,.12);
+  color:var(--text);
+}
+.lux-chat-mobile .msg-bubble em{color:var(--teal);font-style:normal;font-weight:600}
+.lux-chat-mobile .msg-label{
+  font-family:var(--font-m);font-size:.5rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px;
+}
+
 @media(max-width:820px){
   .lux-section{padding:0 20px;min-height:auto}
   .lux-inner{grid-template-columns:1fr;gap:40px;padding:80px 0}
   .lux-chat{display:none}
+  .lux-chat-mobile{display:block}
 }
 
 /* ── EDITION SECTION ── */
@@ -498,7 +527,7 @@ footer{background:#03060F;padding:40px 48px;display:flex;align-items:flex-start;
     </div>
     <p class="hero-meta">v5.2.4 · <span>Lux AI</span> · GNU GPL v3.0 · U.S. Copyright Registered · Eduardo Carmona, MFA</p>
     <div class="qr-block">
-      <div id="qrcode"></div>
+      <div id="qrcode" style="line-height:0"><svg xmlns="http://www.w3.org/2000/svg" style="border-radius:4px;display:block;background:#fff" width="145" height="145" class="segno"><path transform="scale(5)" class="qrline" stroke="#0A0E1C" stroke-width="1.1" d="M2 2.5h7m1 0h1m1 0h4m2 0h1m1 0h7m-25 1h1m5 0h1m1 0h1m1 0h1m1 0h1m5 0h1m5 0h1m-25 1h1m1 0h3m1 0h1m2 0h2m1 0h3m3 0h1m1 0h3m1 0h1m-25 1h1m1 0h3m1 0h1m1 0h3m1 0h2m4 0h1m1 0h3m1 0h1m-25 1h1m1 0h3m1 0h1m4 0h1m1 0h4m1 0h1m1 0h3m1 0h1m-25 1h1m5 0h1m2 0h1m1 0h2m1 0h1m3 0h1m5 0h1m-25 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-17 1h2m1 0h2m1 0h1m-15 1h1m1 0h2m1 0h3m3 0h2m1 0h3m1 0h1m2 0h1m1 0h2m-25 1h1m1 0h2m1 0h1m1 0h2m1 0h2m4 0h2m1 0h1m3 0h1m-24 1h1m3 0h3m1 0h2m2 0h3m2 0h1m2 0h1m-21 1h1m2 0h1m1 0h1m4 0h2m1 0h3m2 0h2m1 0h2m-22 1h1m3 0h3m1 0h1m1 0h5m1 0h4m1 0h3m-24 1h2m1 0h1m2 0h1m1 0h1m1 0h10m3 0h1m-24 1h1m2 0h1m1 0h1m4 0h1m2 0h1m1 0h2m2 0h1m1 0h2m-24 1h1m2 0h3m2 0h4m2 0h1m2 0h4m3 0h1m-22 1h4m1 0h1m1 0h1m1 0h2m1 0h10m-17 1h2m5 0h2m3 0h1m1 0h1m1 0h1m-25 1h7m1 0h1m5 0h1m1 0h1m1 0h1m1 0h1m1 0h3m-25 1h1m5 0h1m1 0h2m1 0h1m3 0h2m3 0h1m2 0h2m-25 1h1m1 0h3m1 0h1m3 0h1m2 0h1m2 0h6m1 0h1m-24 1h1m1 0h3m1 0h1m1 0h1m8 0h2m1 0h5m-25 1h1m1 0h3m1 0h1m1 0h3m3 0h1m1 0h1m1 0h1m1 0h1m1 0h2m-24 1h1m5 0h1m2 0h5m3 0h1m2 0h1m1 0h1m-23 1h7m1 0h1m2 0h2m6 0h6"/></svg></div>
       <div class="qr-text">
         <p class="qr-label">On desktop? Scan →</p>
         <p class="qr-title">Open on any device</p>
@@ -532,10 +561,10 @@ footer{background:#03060F;padding:40px 48px;display:flex;align-items:flex-start;
       <div class="lux-name">LUX</div>
       <div class="lux-tagline"><span>Show,</span> don't tell.</div>
       <p class="lux-body">
-        Lux isn't a chatbot. Lux <strong>teaches.</strong> When you ask why the key light ratio feels off, 
-        Lux doesn't hand you the answer — they ask you the right question until <strong>you figure it out.</strong><br><br>
-        No film school required. No $400 software. No mentor who only has time for the top student. 
-        Lux is in every session, in every language, on every device — 
+        Lux is not a chatbot. Lux <strong>teaches.</strong> When you ask why the key light feels off,
+        Lux does not hand you the answer. Lux <strong>guides and challenges</strong> you to <strong>discover the answer.</strong><br><br>
+        No film school required. No expensive software. No mentor who only has time for the top student.
+        Lux is in every session, in every language, on every device —
         <strong>from Lagos to Los Angeles.</strong>
       </p>
       <div class="lux-pills">
@@ -581,6 +610,19 @@ footer{background:#03060F;padding:40px 48px;display:flex;align-items:flex-start;
       </div>
     </div>
   </div>
+
+    <!-- MOBILE LUX PREVIEW — single message, shown on phones only -->
+    <div class="lux-chat-mobile">
+      <div class="lux-chat-header">
+        <div class="lux-avatar">LX</div>
+        <div>
+          <div class="lux-chat-name">Lux · AI Teaching Assistant</div>
+          <div class="lux-chat-status">Socratic mode active</div>
+        </div>
+      </div>
+      <span class="msg-label">Lux</span>
+      <div class="msg-bubble">Good instinct noticing that. Before I say anything — where is your key light positioned relative to the camera right now?</div>
+    </div>
 </section>
 
 
@@ -644,8 +686,8 @@ footer{background:#03060F;padding:40px 48px;display:flex;align-items:flex-start;
     <div class="modal-error hidden" id="modal-error">Incorrect code. Check your educator welcome email.</div>
     <button class="modal-submit" onclick="submitEduCode()">Unlock Educator Edition →</button>
     <div class="modal-footer">
-      Don't have a code? <a href="mailto:edu@previzfilm.com">edu@previzfilm.com</a><br>
-      Educator Edition is free · Desktop / laptop required for Ollama
+      Don't have a code? <a href="/cdn-cgi/l/email-protection#dfbabbaa9fafadbaa9b6a5b9b6b3b2f1bcb0b2"><span class="__cf_email__" data-cfemail="caafaebf8abab8afbca3b0aca3a6a7e4a9a5a7">[email&#160;protected]</span></a><br>
+      Educator access is free · Direct support + early feature access included
     </div>
   </div>
 </div>
@@ -707,21 +749,15 @@ footer{background:#03060F;padding:40px 48px;display:flex;align-items:flex-start;
   <div class="footer-links">
     <a class="footer-link" href="https://previzfilm.com/previz_5_2_4_2.html" target="_blank">Launch Pre-Viz™</a>
     <a class="footer-link" href="https://github.com/binkothegreat67-lab/previz-film-production-tool" target="_blank">GitHub → Source Code</a>
-    <a class="footer-link" href="mailto:hello@previzfilm.com">hello@previzfilm.com</a>
+    <a class="footer-link" href="/cdn-cgi/l/email-protection#0169646d6d6e4171736477687b67686d6c2f626e6c"><span class="__cf_email__" data-cfemail="f49c9198989bb4848691829d8e929d9899da979b99">[email&#160;protected]</span></a>
     <div class="footer-legal">GNU GPL v3.0 · previzfilm.com</div>
     <div class="footer-legal" style="margin-top:4px;opacity:.6;">Visitor stats collected anonymously · No cookies · No personal data</div>
   </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script>
-// QR Code
-new QRCode(document.getElementById("qrcode"),{
-  text:"https://previzfilm.com",
-  width:68,height:68,
-  colorDark:"#000000",colorLight:"#ffffff",
-  correctLevel:QRCode.CorrectLevel.M
-});
+// QR Code — rendered as inline SVG (no CDN dependency)
 
 // Subtle parallax on Lux section
 (function(){
@@ -776,21 +812,4 @@ function submitEduCode(){
   }
 }
 document.addEventListener('keydown',function(e){
-  if(e.key==='Escape') closeEduModal();
-});
-
-// ── LANG SWITCHER ────────────────────────────────────────────────────
-function setLang(lang){
-  document.querySelectorAll('[data-lang]').forEach(el=>{
-    el.style.display = el.getAttribute('data-lang')===lang ? '' : 'none';
-  });
-  document.querySelectorAll('.lang-pill').forEach(btn=>{
-    btn.classList.toggle('active', btn.textContent.toLowerCase()===lang);
-  });
-  document.documentElement.lang = lang;
-}
-// Init EN visible on load
-setLang('en');
-</script>
-</body>
-</html>
+  if(e.key==='

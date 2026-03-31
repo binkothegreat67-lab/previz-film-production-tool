@@ -782,6 +782,13 @@ footer{background:#03060F;padding:40px 48px;display:flex;align-items:flex-start;
   });
 })();
 
+// ── LANGUAGE SWITCHER ──────────────────────────────────────────────
+function setLang(lang){
+  document.querySelectorAll('.lang-pill').forEach(btn=>{
+    btn.classList.toggle('active', btn.textContent.trim().toLowerCase()===lang);
+  });
+}
+
 // ── EDUCATOR ACCESS MODAL ──────────────────────────────────────────
 const EDU_CODES = ['PREVIZ-EDU-2026','PREVIZEDU2026','PREVIZ-EDU'];  // change/expand as needed
 function openEduModal(){

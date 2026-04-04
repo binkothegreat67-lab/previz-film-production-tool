@@ -7,11 +7,82 @@
 <meta name="description" content="Pre-Viz™ is a free, browser-based film pre-visualization tool with Lux AI. No login. No paywall. Works on any device — from Los Angeles to Lagos.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://previzfilm.com">
-<!-- Open Graph -->
+<!-- ═══════════════════════════════════════════
+     SEO · OPEN GRAPH · TWITTER · STRUCTURED DATA
+     Eduardo Carmona, MFA — previzfilm.com
+     ═══════════════════════════════════════════ -->
+
+<!-- Core SEO -->
+<meta name="author" content="Eduardo Carmona, MFA">
+<meta name="keywords" content="film pre-visualization, free storyboard tool, pre-viz software, film education, shot planning, Lux AI, cinematography tool, free filmmaking app, film students, LATAM filmmaking">
+<meta name="geo.region" content="US-CA">
+<meta name="geo.placename" content="Los Angeles">
+
+<!-- hreflang: EN/ES (expand to FR/PT post-launch) -->
+<link rel="alternate" hreflang="en" href="https://previzfilm.com">
+<link rel="alternate" hreflang="es" href="https://previzfilm.com?lang=es">
+<link rel="alternate" hreflang="x-default" href="https://previzfilm.com">
+
+<!-- Open Graph (Facebook, WhatsApp, LinkedIn, iMessage) -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://previzfilm.com">
+<meta property="og:site_name" content="Pre-Viz™">
 <meta property="og:title" content="Pre-Viz™ — Free Film Pre-Visualization Tool">
-<meta property="og:description" content="Professional pre-visualization for every film program. Free forever. No login. Powered by Lux AI.">
+<meta property="og:description" content="Professional-grade pre-visualization for every film program. Free forever. No login. No paywall. Powered by Lux AI — from Los Angeles to Lagos.">
+<meta property="og:image" content="https://previzfilm.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Pre-Viz™ — Free browser-based film pre-visualization tool with Lux AI">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:locale:alternate" content="es_419">
+
+<!-- Twitter / X Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@previzfilm">
+<meta name="twitter:creator" content="@previzfilm">
+<meta name="twitter:title" content="Pre-Viz™ — Free Film Pre-Visualization Tool">
+<meta name="twitter:description" content="Professional pre-viz for every film program. Free forever. No login. Powered by Lux AI — from Los Angeles to Lagos.">
+<meta name="twitter:image" content="https://previzfilm.com/og-image.png">
+<meta name="twitter:image:alt" content="Pre-Viz™ film pre-visualization tool interface">
+
+<!-- JSON-LD Structured Data (Google Rich Results) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Pre-Viz™",
+  "alternateName": "Pre-Viz Film Pre-Visualization Tool",
+  "url": "https://previzfilm.com",
+  "applicationCategory": "MultimediaApplication",
+  "applicationSubCategory": "Film Pre-Visualization",
+  "operatingSystem": "Any (browser-based: Chrome, Firefox, Android, iOS)",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Pre-Viz™ is a free, browser-based film pre-visualization tool built for film students and educators worldwide. Features Lux AI — a Socratic teaching assistant — with a four-tier fallback stack that works offline. No login. No paywall. Android-first.",
+  "author": {
+    "@type": "Person",
+    "name": "Eduardo Carmona, MFA",
+    "url": "https://previzfilm.com"
+  },
+  "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "softwareVersion": "5.2.4",
+  "screenshot": "https://previzfilm.com/og-image.png",
+  "featureList": [
+    "Interactive floor plan via Plotly",
+    "Director's Monitor (HTML5 Canvas)",
+    "Lux AI teaching assistant (Socratic, multilingual)",
+    "Offline fallback — works without internet",
+    "Android-first, any browser",
+    "Free forever, no login required"
+  ],
+  "inLanguage": ["en", "es", "fr", "pt"],
+  "isAccessibleForFree": true
+}
+</script>
 <!-- Mobile / PWA -->
 <meta name="theme-color" content="#FF4500">
 <meta name="mobile-web-app-capable" content="yes">
@@ -48,27 +119,27 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
 
 /* ── HERO ── */
 #hero{background:var(--navy);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 24px 72px;position:relative;overflow:hidden}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,212,204,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,204,0.03) 1px,transparent 1px);background-size:56px 56px;animation:drift 40s linear infinite}
-@keyframes drift{from{background-position:0 0}to{background-position:56px 56px}}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,212,204,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,204,0.03) 1px,transparent 1px);background-size:56px 56px}
+
 .hero-glow{position:absolute;width:700px;height:700px;background:radial-gradient(circle,rgba(255,69,0,0.07) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-55%);pointer-events:none}
 .hero-content{position:relative;z-index:2;max-width:720px}
-.hero-tag{font-family:var(--font-m);font-size:.62rem;letter-spacing:.22em;color:var(--teal);text-transform:uppercase;margin-bottom:20px;border:1px solid rgba(0,212,204,.2);padding:5px 14px;border-radius:2px;background:rgba(0,212,204,.05);display:inline-block;animation:fadeUp .5s .1s both}
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-.hero-title{font-family:var(--font-d);font-size:clamp(5rem,13vw,10rem);font-weight:900;letter-spacing:.02em;line-height:.88;color:transparent;background:linear-gradient(135deg,#FFFFFF 0%,#FF4500 55%,#00D4CC 100%);-webkit-background-clip:text;background-clip:text;animation:fadeUp .5s .2s both;margin-bottom:12px}
-.hero-subtitle{font-family:var(--font-d);font-size:clamp(1.1rem,2.5vw,1.6rem);font-weight:700;letter-spacing:.08em;color:rgba(255,255,255,.35);text-transform:uppercase;animation:fadeUp .5s .25s both;margin-bottom:14px}
+.hero-tag{font-family:var(--font-m);font-size:.62rem;letter-spacing:.22em;color:var(--teal);text-transform:uppercase;margin-bottom:20px;border:1px solid rgba(0,212,204,.2);padding:5px 14px;border-radius:2px;background:rgba(0,212,204,.05);display:inline-block}
 
-.hero-desc{font-family:var(--font-b);font-size:1.05rem;color:var(--text);margin-bottom:32px;line-height:1.7;animation:fadeUp .5s .35s both}
+.hero-title{font-family:var(--font-d);font-size:clamp(5rem,13vw,10rem);font-weight:900;letter-spacing:.02em;line-height:.88;color:transparent;background:linear-gradient(135deg,#FFFFFF 0%,#FF4500 55%,#00D4CC 100%);-webkit-background-clip:text;background-clip:text;margin-bottom:12px}
+.hero-subtitle{font-family:var(--font-d);font-size:clamp(1.1rem,2.5vw,1.6rem);font-weight:700;letter-spacing:.08em;color:rgba(255,255,255,.35);text-transform:uppercase;margin-bottom:14px}
+
+.hero-desc{font-family:var(--font-b);font-size:1.05rem;color:var(--text);margin-bottom:32px;line-height:1.7}
 .hero-desc strong{color:#fff}
-.cta-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:22px;animation:fadeUp .5s .4s both}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:22px}
 .btn-primary{font-family:var(--font-d);font-size:1.2rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:14px 40px;border-radius:3px;background:var(--orange);color:#fff;border:none;cursor:pointer;box-shadow:0 0 28px rgba(255,69,0,.35);transition:.25s}
 .btn-primary:hover{background:#ff5a1f;box-shadow:0 0 44px rgba(255,69,0,.55);transform:translateY(-2px)}
 .btn-ghost{font-family:var(--font-d);font-size:1.2rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:14px 40px;border-radius:3px;background:transparent;color:var(--teal);border:1px solid rgba(0,212,204,.3);cursor:pointer;transition:.25s}
 .btn-ghost:hover{background:rgba(0,212,204,.07);transform:translateY(-2px)}
-.hero-meta{font-family:var(--font-m);font-size:.56rem;letter-spacing:.14em;color:var(--muted);animation:fadeUp .5s .45s both}
+.hero-meta{font-family:var(--font-m);font-size:.56rem;letter-spacing:.14em;color:var(--muted)}
 .hero-meta span{color:var(--teal)}
 
 /* QR BLOCK */
-.qr-block{display:inline-flex;align-items:center;gap:16px;border:1px solid rgba(0,212,204,.22);background:rgba(0,212,204,.04);border-radius:4px;padding:14px 20px;margin-top:20px;animation:fadeUp .5s .5s both}
+.qr-block{display:inline-flex;align-items:center;gap:16px;border:1px solid rgba(0,212,204,.22);background:rgba(0,212,204,.04);border-radius:4px;padding:14px 20px;margin-top:20px}
 #qrcode{background:#fff;padding:8px;border-radius:4px;flex-shrink:0;box-shadow:0 4px 18px rgba(0,0,0,.22),0 1px 4px rgba(0,0,0,.14);line-height:0}
 .qr-text{text-align:left}
 .qr-label{font-family:var(--font-m);font-size:.58rem;letter-spacing:.18em;color:var(--teal);text-transform:uppercase;margin-bottom:4px}
@@ -194,12 +265,8 @@ footer{background:#03060F;padding:40px 48px;display:flex;align-items:flex-start;
   top:50%;left:50%;
   transform:translate(-50%,-50%);
   pointer-events:none;
-  animation:luxorb 8s ease-in-out infinite;
 }
-@keyframes luxorb{
-  0%,100%{transform:translate(-50%,-50%) scale(1)}
-  50%{transform:translate(-50%,-52%) scale(1.06)}
-}
+
 .lux-inner{
   max-width:1080px;
   margin:0 auto;
@@ -217,8 +284,8 @@ footer{background:#03060F;padding:40px 48px;display:flex;align-items:flex-start;
   color:var(--teal);text-transform:uppercase;
   margin-bottom:14px;display:flex;align-items:center;gap:8px;
 }
-.lux-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:luxpulse 2.5s ease-in-out infinite}
-@keyframes luxpulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,212,204,.4)}60%{opacity:.5;box-shadow:0 0 0 6px rgba(0,212,204,0)}}
+.lux-dot{width:6px;height:6px;border-radius:50%;background:var(--teal)}
+
 .lux-name{
   font-family:var(--font-d);
   font-size:clamp(5rem,10vw,9rem);
@@ -313,11 +380,8 @@ footer{background:#03060F;padding:40px 48px;display:flex;align-items:flex-start;
 }
 .typing-dot{
   width:5px;height:5px;border-radius:50%;background:var(--teal);
-  animation:typing 1.4s ease-in-out infinite;
 }
-.typing-dot:nth-child(2){animation-delay:.22s}
-.typing-dot:nth-child(3){animation-delay:.44s}
-@keyframes typing{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
+
 
 
 /* LUX MOBILE CHAT PREVIEW — single message, phones only */
@@ -370,7 +434,7 @@ footer{background:#03060F;padding:40px 48px;display:flex;align-items:flex-start;
 .ed-badge{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-m);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;padding:4px 12px;border-radius:2px;margin-bottom:20px}
 .ed-card.free .ed-badge{background:rgba(255,69,0,.1);color:var(--orange);border:1px solid rgba(255,69,0,.25)}
 .ed-card.edu .ed-badge{background:rgba(0,212,204,.08);color:var(--teal);border:1px solid rgba(0,212,204,.22)}
-.ed-badge-dot{width:5px;height:5px;border-radius:50%;animation:luxpulse 2.5s ease-in-out infinite}
+.ed-badge-dot{width:5px;height:5px;border-radius:50%}
 .ed-card.free .ed-badge-dot{background:var(--orange)}
 .ed-card.edu .ed-badge-dot{background:var(--teal)}
 .ed-title{font-family:var(--font-d);font-size:2rem;font-weight:900;letter-spacing:.04em;color:#fff;margin-bottom:8px;text-transform:uppercase}
@@ -810,17 +874,4 @@ function submitEduCode(){
   const val = document.getElementById('edu-code-input').value.trim().toUpperCase();
   const valid = EDU_CODES.some(c=>c.toUpperCase()===val);
   if(valid){
-    closeEduModal();
-    window.open('https://previzfilm.com/previz_5_2_4_2.html?mode=educator','_blank');
-  } else {
-    const err = document.getElementById('modal-error');
-    err.classList.remove('hidden');
-    document.getElementById('edu-code-input').focus();
-  }
-}
-document.addEventListener('keydown',function(e){
-  if(e.key==='Escape') closeEduModal();
-});
-</script>
-</body>
-</html>
+    closeEd

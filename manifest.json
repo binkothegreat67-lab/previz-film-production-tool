@@ -1,0 +1,30 @@
+{
+  "name": "Pre-Viz™ — Free Film Pre-Visualization Tool",
+  "short_name": "Pre-Viz™",
+  "description": "Professional-grade film pre-visualization for every student. Free forever. No login. Powered by Lux AI.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#03060F",
+  "theme_color": "#FF4500",
+  "lang": "en",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "productivity", "utilities"],
+  "screenshots": [
+    {
+      "src": "/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png"
+    }
+  ],
+  "author": "Eduardo Carmona, MFA",
+  "related_applications": [],
+  "prefer_related_applications": false
+}

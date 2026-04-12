@@ -1,0 +1,3233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pre-Viz&#8482; 5.2.5 — Open Educational Edition • Floor Plan · Monitor</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style type="text/css">@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:400;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin-ext/400/normal.woff2);unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:400;src:url(/cf-fonts/s/barlow-condensed/5.0.11/vietnamese/400/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:400;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin/400/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:600;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin/600/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:600;src:url(/cf-fonts/s/barlow-condensed/5.0.11/vietnamese/600/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:600;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin-ext/600/normal.woff2);unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:700;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin/700/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:700;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin-ext/700/normal.woff2);unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:700;src:url(/cf-fonts/s/barlow-condensed/5.0.11/vietnamese/700/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:800;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin-ext/800/normal.woff2);unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:800;src:url(/cf-fonts/s/barlow-condensed/5.0.11/vietnamese/800/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:800;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin/800/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:900;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin-ext/900/normal.woff2);unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:900;src:url(/cf-fonts/s/barlow-condensed/5.0.11/latin/900/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Barlow Condensed;font-style:normal;font-weight:900;src:url(/cf-fonts/s/barlow-condensed/5.0.11/vietnamese/900/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:JetBrains Mono;font-style:normal;font-weight:400;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:JetBrains Mono;font-style:normal;font-weight:400;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:JetBrains Mono;font-style:normal;font-weight:400;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/greek/wght/normal.woff2);unicode-range:U+0370-03FF;font-display:swap;}@font-face {font-family:JetBrains Mono;font-style:normal;font-weight:400;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/latin-ext/wght/normal.woff2);unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:JetBrains Mono;font-style:normal;font-weight:400;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:JetBrains Mono;font-style:normal;font-weight:400;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:JetBrains Mono;font-style:normal;font-weight:700;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:JetBrains Mono;font-style:normal;font-weight:700;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/greek/wght/normal.woff2);unicode-range:U+0370-03FF;font-display:swap;}@font-face {font-family:JetBrains Mono;font-style:normal;font-weight:700;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:JetBrains Mono;font-style:normal;font-weight:700;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:JetBrains Mono;font-style:normal;font-weight:700;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/latin-ext/wght/normal.woff2);unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:JetBrains Mono;font-style:normal;font-weight:700;src:url(/cf-fonts/v/jetbrains-mono/5.0.18/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}</style>
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --orange:#FF4500;--teal:#00D4CC;--yellow:#FFE200;
+  --green:#00FF88;--red:#FF1744;--sun:#FFB300;
+  --navy:#03060F;--panel:#060A15;--card:#080E1C;
+  --border:#0F1A30;--dim:#1A2540;--muted:#304060;--text:#C8D8F0;
+  --font-d:'Barlow Condensed',sans-serif;--font-m:'JetBrains Mono',monospace;
+}
+html,body{height:100%;background:var(--navy);color:var(--text);font-family:var(--font-m);font-size:12px;overflow:hidden}
+#app{display:flex;height:100vh;width:100vw}
+
+/* ─ \u9472  SIDEBAR \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
+#sidebar{width:280px;min-width:280px;background:var(--panel);border-right:1px solid var(--border);
+  overflow-y:auto;overflow-x:hidden;padding:10px 12px 24px;display:flex;flex-direction:column;flex-shrink:0}
+#sidebar::-webkit-scrollbar{width:4px}
+#sidebar::-webkit-scrollbar-thumb{background:#1E2A44;border-radius:2px}
+
+.sb-brand{font-family:var(--font-d);font-size:22px;font-weight:900;letter-spacing:.10em;
+  color:var(--orange);text-transform:uppercase;padding:4px 0 1px;
+  text-shadow:0 0 20px rgba(255,69,0,.35)}
+.sb-ver{font-size:8px;color:var(--muted);letter-spacing:.15em;margin-bottom:6px}
+
+/* Lang toggle */
+.lang-row{display:flex;gap:4px;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.lang-btn{flex:1;padding:3px 0;background:var(--card);border:1px solid var(--border);
+  color:var(--muted);border-radius:3px;font-family:var(--font-m);font-size:9px;
+  letter-spacing:.1em;cursor:pointer;text-transform:uppercase;text-align:center;transition:.2s}
+.lang-btn.active{background:#0A1428;border-color:var(--teal);color:var(--teal)}
+
+.section{padding:7px 0;border-bottom:1px solid var(--border)}
+.section:last-child{border-bottom:none}
+.sec-title{font-family:var(--font-d);font-size:13px;font-weight:800;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--orange);margin-bottom:5px}
+
+.ctrl{margin-bottom:6px}
+.ctrl label{display:block;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;margin-bottom:2px}
+.ctrl input[type=range]{width:100%;height:3px;appearance:none;background:var(--dim);border-radius:2px;outline:none;cursor:pointer}
+.ctrl input[type=range]::-webkit-slider-thumb{appearance:none;width:12px;height:12px;border-radius:50%;
+  background:var(--orange);cursor:pointer;box-shadow:0 0 6px rgba(255,69,0,.5)}
+.ctrl-val{font-size:11px;color:var(--teal);margin-top:1px}
+.ctrl select,.ctrl input[type=text]{width:100%;background:var(--card);border:1px solid var(--border);
+  color:var(--text);padding:4px 7px;border-radius:3px;font-family:var(--font-m);font-size:11px;cursor:pointer;outline:none}
+
+.tog{display:flex;align-items:center;gap:7px;margin-bottom:5px;font-size:10px;color:var(--text);cursor:pointer}
+.tog input[type=checkbox]{width:13px;height:13px;accent-color:var(--orange);cursor:pointer}
+
+/* Compact XY row */
+.xy-row{display:flex;gap:6px;margin-bottom:6px}
+.xy-col{flex:1}
+.xy-col label{display:block;font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px}
+.xy-col input[type=range]{width:100%;height:3px;appearance:none;background:var(--dim);border-radius:2px;outline:none;cursor:pointer}
+.xy-col input[type=range]::-webkit-slider-thumb{appearance:none;width:10px;height:10px;border-radius:50%;
+  background:var(--teal);cursor:pointer}
+.xy-val{font-size:9px;color:var(--teal)}
+
+/* Place button */
+.place-btn{display:flex;align-items:center;gap:5px;width:100%;padding:4px 8px;margin:4px 0;
+  background:var(--card);border:1px solid var(--border);color:var(--muted);border-radius:3px;
+  font-family:var(--font-m);font-size:9px;letter-spacing:.09em;cursor:pointer;text-transform:uppercase;transition:.2s}
+.place-btn:hover{border-color:var(--teal);color:var(--teal)}
+.place-btn.active{border-color:var(--yellow);color:var(--yellow);background:#100E00;animation:place-pulse 1s ease-in-out infinite}
+@keyframes place-pulse{0%,100%{box-shadow:0 0 4px rgba(255,226,0,.3)}50%{box-shadow:0 0 14px rgba(255,226,0,.7)}}
+
+/* Sun mode card */
+.sun-card{background:#080600;border:1px solid #2A1A00;border-radius:4px;padding:8px 10px;margin:5px 0}
+.sun-title{font-family:var(--font-d);font-size:14px;font-weight:800;letter-spacing:.1em;color:var(--sun);margin-bottom:4px}
+.sun-data{font-size:10px;color:#806040;line-height:1.8}
+.sun-data b{color:var(--sun)}
+.sun-toggle{display:flex;align-items:center;gap:7px;margin-bottom:6px;font-size:10px;color:var(--sun);cursor:pointer}
+.sun-toggle input[type=checkbox]{accent-color:var(--sun)}
+
+/* ── LEGAL DISCLAIMER MODAL ─────────────────────────────────────── */
+#legal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);touch-action:auto;-webkit-overflow-scrolling:touch}
+#legal-box{background:#060A15;border:1px solid #FF4500;border-radius:6px;max-width:560px;width:90%;padding:28px 30px;font-family:'JetBrains Mono',monospace;color:#C8D8F0;box-shadow:0 0 40px rgba(255,69,0,.25)}
+#legal-box .leg-logo{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;letter-spacing:.15em;color:#FF4500;text-transform:uppercase;margin-bottom:2px}
+#legal-box .leg-ver{font-size:10px;color:#304060;letter-spacing:.1em;margin-bottom:18px}
+#legal-box .leg-title{font-size:11px;font-weight:700;color:#FF4500;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;border-bottom:1px solid #0F1A30;padding-bottom:6px}
+#legal-box .leg-body{font-size:10px;line-height:1.8;color:#8898B8;margin-bottom:18px}
+#legal-box .leg-body strong{color:#C8D8F0}
+#legal-box .leg-body a{color:#00D4CC;text-decoration:none}
+#legal-box .leg-footer{font-size:9px;color:#304060;margin-bottom:20px;line-height:1.6}
+#legal-accept{display:block;width:100%;padding:10px;background:#FF4500;border:none;border-radius:3px;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:.12em;color:#fff;text-transform:uppercase;cursor:pointer;transition:background .2s;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+#legal-accept:hover{background:#E03A00}
+
+.sb-btn{display:block;width:100%;padding:5px;margin:3px 0;background:var(--card);border:1px solid var(--border);
+  color:var(--muted);border-radius:3px;font-family:var(--font-d);font-size:13px;font-weight:700;
+  letter-spacing:.1em;cursor:pointer;text-transform:uppercase;text-align:center;transition:.2s}
+.sb-btn:hover:not(:disabled){border-color:var(--orange);color:var(--orange)}
+.sb-btn:disabled{opacity:.35;cursor:not-allowed}
+
+.kswatch{display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:700;color:#111;margin-top:3px}
+.ratio-badge{border-radius:4px;padding:7px 10px;text-align:center;margin:4px 0;font-family:var(--font-d);
+  font-size:19px;font-weight:700;letter-spacing:.07em;color:white}
+.ratio-mood{font-family:var(--font-m);font-size:9px;opacity:.75;font-weight:400}
+
+.fstop-card{background:#020A04;border:1px solid #0A2A0A;border-radius:4px;padding:5px 10px;text-align:center;margin:3px 0}
+.fstop-label{font-size:8px;color:#204020;text-transform:uppercase;letter-spacing:.14em}
+.fstop-val{font-family:var(--font-d);font-size:28px;font-weight:800;color:var(--green);
+  text-shadow:0 0 16px rgba(0,255,136,.5);animation:fbreath 3s ease-in-out infinite}
+@keyframes fbreath{0%,100%{text-shadow:0 0 14px rgba(0,255,136,.4)}50%{text-shadow:0 0 26px rgba(0,255,136,.75)}}
+
+.shutter-pill{background:#0A0800;border:1px solid #2A2000;border-radius:3px;padding:3px 8px;
+  font-size:10px;color:var(--yellow);letter-spacing:.06em;text-align:center;margin:3px 0}
+.dist-readout{font-size:10px;color:#3A5080;padding:3px 0;line-height:1.7}
+.dist-readout b{color:#6080B0}
+
+.appr-badge{border-radius:4px;padding:5px 8px;font-family:var(--font-d);font-size:13px;font-weight:700;
+  letter-spacing:.13em;color:white;text-align:center;margin:4px 0}
+.appr-ok{background:#003A10;border:1px solid var(--green);color:var(--green);animation:glow-ok 2.5s ease-in-out infinite}
+@keyframes glow-ok{0%,100%{box-shadow:0 0 6px rgba(0,255,136,.3)}50%{box-shadow:0 0 18px rgba(0,255,136,.6)}}
+.appr-pending{background:#200500;border:1px solid #5A1500;color:#FF6030}
+
+.tip-box{background:#040810;border:1px solid var(--dim);border-radius:3px;padding:7px 8px;
+  margin:3px 0;font-size:10px;color:#506080;line-height:1.6}
+.tip-toggle{cursor:pointer;font-size:9px;color:var(--teal);text-transform:uppercase;letter-spacing:.1em;
+  margin:2px 0;display:block;background:none;border:none;font-family:var(--font-m);padding:0}
+.tip-toggle:hover{color:var(--orange)}
+.hidden{display:none!important}
+
+/* Actor 2 color accent */
+.actor2-accent .xy-col input[type=range]::-webkit-slider-thumb{background:#FF44AA}
+.actor2-accent .ctrl input[type=range]::-webkit-slider-thumb{background:#FF44AA}
+
+
+
+.beta-chip{display:inline-block;background:#1A0830;border:1px solid #FF44AA55;color:#FF44AA;
+  border-radius:3px;font-family:var(--font-m);font-size:8px;letter-spacing:.12em;
+  padding:1px 5px;vertical-align:middle;margin-left:4px}
+.multi-view{display:flex;gap:8px;flex:1;padding:10px;background:#040810;overflow:hidden}
+.cam-mini{border:2px solid #2A1530;border-radius:5px;flex:1;position:relative;
+  overflow:hidden;cursor:pointer;background:#060410;transition:.2s;display:flex;
+  align-items:stretch;justify-content:stretch}
+.cam-mini canvas{width:100%;height:100%;display:block}
+.cam-mini:hover{border-color:#FF44AA66}
+.cam-mini.active{border-color:#FFE200;box-shadow:0 0 20px rgba(255,226,0,.3)}
+.cam-label{position:absolute;bottom:5px;left:7px;font-family:var(--font-m);
+  font-size:9px;letter-spacing:.1em;color:#FF44AA;text-shadow:0 1px 5px #000;
+  pointer-events:none;transition:.2s}
+.cam-mini.active .cam-label{color:#FFE200}
+.cam-active-badge{position:absolute;top:5px;right:6px;font-family:var(--font-m);
+  font-size:8px;color:#FFE200;letter-spacing:.1em;opacity:0;transition:.2s;pointer-events:none}
+.cam-mini.active .cam-active-badge{opacity:1}
+
+
+/* ─ \u9472  MAIN \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
+#main{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--navy)}
+
+/* ─ \u9472  HEADER \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
+#hdr{padding:6px 14px 4px;background:var(--panel);border-bottom:1px solid var(--border);flex-shrink:0}
+.hdr-row{display:flex;align-items:flex-start;justify-content:space-between}
+.pv-title{font-family:var(--font-d);font-size:44px;font-weight:900;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--orange);line-height:.9;
+  text-shadow:0 0 40px rgba(255,69,0,.4);margin:0}
+.pv-sub{font-size:9px;color:var(--muted);letter-spacing:.17em;text-transform:uppercase;margin:3px 0 0 2px}
+.pv-hint{font-size:9px;color:var(--teal);letter-spacing:.12em;text-transform:uppercase;margin:1px 0 0 2px;animation:blink 2.4s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:.4}50%{opacity:1}}
+
+.hdr-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.hdr-badges{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+
+.badge-pill{display:flex;align-items:center;gap:5px;background:var(--card);border:1px solid var(--border);
+  border-radius:4px;padding:3px 9px;font-family:var(--font-d);font-size:12px;
+  font-weight:700;letter-spacing:.1em;color:white;white-space:nowrap}
+
+/* Satellite badge */
+.sat-badge{border-color:#1A3A60;color:#4080B0;font-size:10px}
+.sat-badge .sat-dot{width:6px;height:6px;border-radius:50%;background:#4080B0;
+  animation:sat-ping 2s ease-in-out infinite}
+@keyframes sat-ping{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:1;transform:scale(1.4)}}
+
+/* Phone badge - lights up when 9:16 selected */
+.phone-badge{border-color:#204040;color:#2A6060;font-size:11px;transition:.4s}
+.phone-badge.active{border-color:var(--teal);color:var(--teal);background:#020A0A;
+  animation:phone-glow 1.6s ease-in-out infinite}
+@keyframes phone-glow{0%,100%{box-shadow:0 0 4px rgba(0,212,204,.2)}50%{box-shadow:0 0 14px rgba(0,212,204,.6)}}
+
+/* Sun badge */
+.sun-badge{border-color:#2A1A00;color:var(--sun);font-size:11px;transition:.4s}
+.sun-badge.active{background:#050300;animation:sun-glow 2s ease-in-out infinite}
+@keyframes sun-glow{0%,100%{box-shadow:0 0 6px rgba(255,179,0,.3)}50%{box-shadow:0 0 20px rgba(255,179,0,.7)}}
+
+.rec-badge{display:flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--border);
+  border-radius:4px;padding:3px 9px;font-family:var(--font-d);font-size:12px;font-weight:700;letter-spacing:.1em;color:white}
+.rec-dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
+.rec-dot.live{background:var(--red);animation:rec-pulse .9s ease-in-out infinite}
+@keyframes rec-pulse{0%,100%{transform:scale(1);box-shadow:0 0 6px var(--red)}50%{transform:scale(1.4);box-shadow:0 0 16px var(--red)}}
+.appr-pill{border-radius:4px;padding:3px 9px;font-family:var(--font-d);font-size:12px;font-weight:700;letter-spacing:.12em;color:white}
+.appr-pill.ok{background:#003A10;border:1px solid var(--green);color:var(--green)}
+.appr-pill.pending{background:#200500;border:1px solid #5A1500;color:#FF6030}
+
+/* ─ \u9472  PLACING BANNER \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
+#placing-banner{
+  padding:6px 14px;background:#0A0800;border-bottom:2px solid var(--yellow);
+  display:flex;align-items:center;justify-content:space-between;flex-shrink:0;
+  font-family:var(--font-d);font-size:14px;letter-spacing:.1em;
+  color:var(--yellow);animation:place-banner 1s ease-in-out infinite
+}
+@keyframes place-banner{0%,100%{opacity:.85}50%{opacity:1}}
+#placing-banner button{background:none;border:1px solid #5A4A00;color:#806000;padding:2px 10px;
+  border-radius:3px;cursor:pointer;font-family:var(--font-m);font-size:10px}
+#placing-banner button:hover{border-color:var(--yellow);color:var(--yellow)}
+
+/* ─ \u9472  METRIC STRIP \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
+#metric-strip{display:flex;gap:4px;padding:4px 14px;background:var(--navy);
+  border-bottom:1px solid var(--border);flex-shrink:0;flex-wrap:wrap}
+.mc{background:var(--card);border:1px solid var(--border);border-radius:4px;
+  padding:4px 8px;flex:1;min-width:70px;text-align:center;position:relative;overflow:hidden}
+.mc-bar{position:absolute;top:0;left:10%;right:10%;height:2px;border-radius:0 0 2px 2px}
+.mc-label{font-size:7px;color:var(--muted);text-transform:uppercase;letter-spacing:.18em;margin-bottom:1px}
+.mc-val{font-family:var(--font-d);font-size:20px;font-weight:700;line-height:1;letter-spacing:.02em}
+.mc-hint{font-size:7px;color:var(--dim);margin-top:1px}
+
+/* ─ \u9472  TABS \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
+#tabs{display:flex;padding:0 14px;background:var(--panel);border-bottom:1px solid var(--border);flex-shrink:0}
+.tab-btn{padding:6px 16px;border:none;background:none;cursor:pointer;font-family:var(--font-d);
+  font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);border-bottom:2px solid transparent;transition:.2s}
+.tab-btn.active{color:var(--orange);border-bottom-color:var(--orange)}
+.tab-btn:hover:not(.active){color:var(--text)}
+
+/* ─ \u9472  TAB CONTENT \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
+#tab-content{flex:1;overflow:hidden;position:relative}
+.tab-panel{position:absolute;inset:0;display:none;overflow:hidden}
+.tab-panel.active{display:flex;flex-direction:column}
+#floor-plan{flex:1;width:100%;height:100%;min-height:400px}
+
+/* ─ \u9472  MONITOR \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
+#monitor-area{flex:1;display:flex;align-items:center;justify-content:center;padding:10px;background:var(--navy);overflow:hidden}
+#bezel{position:relative;background:linear-gradient(145deg,#2A2A2A,#0A0A0A);border-radius:10px;
+  padding:14px 14px 40px 14px;box-shadow:0 0 0 1px #333,0 0 60px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.05);
+  max-width:calc(100% - 24px)}
+#bezel::after{content:'SmallHD · FOCUS 7 · PreViz Edition';position:absolute;bottom:10px;left:50%;transform:translateX(-50%);
+  font-family:var(--font-m);font-size:8px;color:#333;letter-spacing:.2em;white-space:nowrap}
+#monitor-canvas{display:block;border-radius:3px;box-shadow:0 0 30px rgba(0,0,0,.9)}
+
+#mon-pills{display:flex;gap:4px;padding:4px 14px 0;flex-shrink:0;flex-wrap:wrap}
+.mon-pill{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:3px 8px;flex:1;min-width:70px;text-align:center}
+.mon-pill-label{font-size:7px;color:var(--muted);text-transform:uppercase;letter-spacing:.15em}
+.mon-pill-val{font-family:var(--font-d);font-size:18px;font-weight:700;line-height:1.1}
+.mon-caption{padding:3px 14px 5px;font-size:9px;color:var(--dim);letter-spacing:.07em;flex-shrink:0}
+
+/* ─ \u9472  FOOTER \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472  */
+#footer{padding:5px 14px;border-top:1px solid var(--border);font-size:11px;color:var(--muted);
+  text-align:center;letter-spacing:.09em;flex-shrink:0;background:var(--panel)}
+
+/* ─── Save / Load Project ───────────────────────────────────── */
+.project-row{display:flex;gap:6px;margin-top:6px}
+.project-btn{flex:1;background:var(--panel);border:1px solid var(--border);
+  color:var(--teal);font-family:var(--font-d);font-size:10px;font-weight:700;
+  letter-spacing:.06em;padding:7px 4px;border-radius:3px;cursor:pointer;
+  transition:.2s;text-align:center}
+.project-btn:hover{border-color:var(--teal);background:#020E0E}
+.project-btn.load{color:var(--orange);border-color:#2A1800}
+.project-btn.load:hover{border-color:var(--orange);background:#0A0600}
+#project-load-input{display:none}
+
+@media print{
+  #sidebar,#tabs,#metric-strip,#mon-pills,.mon-caption,#footer,#placing-banner,
+  #lux-toggle,#lux-drawer,#lux-overlay,
+  #ratio-badge,#bezel,#monitor-area,#panel-monitor{display:none!important}
+  #app{display:block!important}
+  #main{display:block;width:100vw!important;height:auto!important}
+  /* 5.2.4.2: High-contrast print — black on white, no transparency */
+  #hdr{background:white!important;color:#000!important;border-bottom:2px solid #000!important}
+  .pv-title,.pv-sub,.pv-hint{color:#000!important}
+  #tab-content{position:static;width:100%!important;height:90vh!important}
+  .tab-panel{position:static;display:block!important;width:100%!important;height:90vh!important}
+  #panel-floor{width:100%!important;height:90vh!important}
+  #floor-plan{width:100%!important;height:90vh!important}
+  #floor-plan .plotly{width:100%!important;height:100%!important}
+  #monitor-area{display:none!important}
+  /* Force black text everywhere for accessibility */
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  @page{size:landscape;margin:.4in}
+}
+/* 5.2.4.2: Forced high-contrast mode support (Windows HC, prefers-contrast) */
+@media (forced-colors: active){
+  .badge-pill{border:2px solid ButtonText!important}
+  .ctrl-val,.xy-val{color:ButtonText!important}
+  input[type=range]{accent-color:Highlight}
+  .tab-btn.active{border-color:Highlight!important;color:Highlight!important}
+  .project-btn{border:2px solid ButtonText!important}
+}
+
+/* ─── Touch — Hamburger Drawer (5.2) ──────────────────────── */
+#hamburger{
+  display:none;position:fixed;top:8px;left:8px;z-index:1000;
+  background:var(--panel);border:1px solid var(--border);color:var(--orange);
+  border-radius:4px;padding:6px 11px;font-size:20px;cursor:pointer;line-height:1;
+  box-shadow:0 2px 12px rgba(0,0,0,.5);transition:.2s}
+#hamburger:hover{border-color:var(--orange);background:#0A0E1C}
+#sidebar-overlay{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);
+  z-index:599;backdrop-filter:blur(3px)}
+#sidebar-overlay.open{display:block}
+
+/* Drawer badge */
+.drawer-badge{border-color:#1A3060;color:#3060A0;font-size:10px;cursor:pointer;transition:.4s}
+.drawer-badge.active{border-color:var(--orange);color:var(--orange);background:#0A0810;
+  animation:drawer-glow 1.8s ease-in-out infinite}
+@keyframes drawer-glow{0%,100%{box-shadow:0 0 4px rgba(255,69,0,.2)}50%{box-shadow:0 0 14px rgba(255,69,0,.6)}}
+
+/* Live Director's Mode badge */
+.director-badge{border-color:#1A3000;color:#305020;font-size:10px;cursor:pointer;transition:.4s}
+.director-badge.active{border-color:#00FF88;color:#00FF88;background:#020A04;
+  animation:dir-glow 1.6s ease-in-out infinite}
+@keyframes dir-glow{0%,100%{box-shadow:0 0 4px rgba(0,255,136,.2)}50%{box-shadow:0 0 14px rgba(0,255,136,.6)}}
+
+@media(max-width:1024px){
+  /* Show hamburger, hide sidebar from normal flow */
+  #hamburger{display:block}
+  #sidebar{
+    position:fixed;top:0;left:0;height:100vh;z-index:600;
+    transform:translateX(-100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+    box-shadow:4px 0 32px rgba(0,0,0,.7);
+    padding-top:calc(10px + env(safe-area-inset-top))}
+  #sidebar.open{transform:translateX(0)}
+  /* Main gets full width */
+  #main{width:100vw}
+  /* Header safe-area padding */
+  #hdr{padding-left:calc(14px + env(safe-area-inset-left));
+       padding-top:calc(6px + env(safe-area-inset-top))}
+  /* Tab bar safe-area */
+  #tabs{padding-left:calc(14px + env(safe-area-inset-left))}
+  /* 44px touch targets on ALL sliders */
+  .ctrl input[type=range],
+  .xy-col input[type=range]{
+    height:44px;touch-action:pan-y;cursor:pointer}
+  .ctrl input[type=range]::-webkit-slider-thumb,
+  .xy-col input[type=range]::-webkit-slider-thumb{
+    width:44px;height:44px;border-radius:50%}
+  /* Larger checkboxes */
+  .tog input[type=checkbox]{width:20px;height:20px}
+  /* Larger select/buttons */
+  .ctrl select,.ctrl input[type=text]{padding:8px 7px;font-size:13px}
+  .place-btn{padding:8px 10px;font-size:11px}
+  .sb-btn{padding:8px}
+  /* Tab buttons easier to tap */
+  .tab-btn{padding:10px 16px}
+  /* Footer safe-area */
+  #footer{padding-bottom:calc(5px + env(safe-area-inset-bottom))}
+}
+
+/* ─── INTERACTIVE BADGES (5.0) ──────────────────────────────────── */
+#sat-badge{cursor:pointer;position:relative;transition:.25s}
+#sat-badge:hover{border-color:#4080B0;background:#020810}
+#sat-badge.offline{border-color:#5A1500;color:#FF6030;background:#120300}
+#sat-badge.offline .sat-dot{background:#FF6030;animation:none}
+.starlink-tooltip{position:absolute;top:calc(100% + 6px);right:0;background:#060A15;border:1px solid #1A3A60;
+  color:#4080B0;font-size:9px;letter-spacing:.1em;padding:4px 10px;border-radius:3px;
+  white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .2s;z-index:100}
+#sat-badge:hover .starlink-tooltip{opacity:1}
+#phone-badge{cursor:pointer;transition:.25s}
+#phone-badge:hover{border-color:var(--teal)}
+.storyboard-btn{cursor:pointer;border-color:#302060;color:#8060C0;background:var(--card);
+  font-family:var(--font-d);font-size:12px;font-weight:700;letter-spacing:.1em;transition:.25s}
+.storyboard-btn:hover{border-color:#8060C0;color:#C090FF;background:#0A0616}
+/* Storyboard modal */
+#sb-modal{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9000;
+  display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+#sb-modal.open{display:flex}
+#sb-modal-box{background:#060A15;border:1px solid #302060;border-radius:6px;
+  padding:20px 22px;max-width:480px;width:92%;font-family:var(--font-m);color:var(--text)}
+#sb-modal-box h2{font-family:var(--font-d);font-size:20px;font-weight:900;
+  letter-spacing:.15em;color:#8060C0;text-transform:uppercase;margin-bottom:4px}
+#sb-modal-box p{font-size:10px;color:#4060A0;line-height:1.7;margin-bottom:16px}
+#sb-shots-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.sb-shot-row{display:flex;flex-direction:column;gap:3px}
+.sb-shot-row label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+.sb-shot-row input{background:var(--card);border:1px solid var(--border);color:var(--text);
+  padding:3px 7px;border-radius:3px;font-family:var(--font-m);font-size:10px;outline:none}
+#sb-modal-btns{display:flex;gap:8px}
+#sb-modal-btns button{flex:1;padding:7px;background:var(--card);border:1px solid var(--border);
+  color:var(--muted);border-radius:3px;font-family:var(--font-d);font-size:13px;font-weight:700;
+  letter-spacing:.1em;cursor:pointer;text-transform:uppercase;transition:.2s}
+#sb-export-btn{border-color:#302060!important;color:#8060C0!important}
+#sb-export-btn:hover{background:#0A0616!important;border-color:#8060C0!important;color:#C090FF!important}
+#sb-cancel-btn:hover{border-color:var(--muted);color:var(--text)}
+
+/* ══════════════════════ LUX AI DRAWER — 5.2 ════════════════════════ */
+#lux-toggle{
+  position:fixed;right:0;top:50%;transform:translateY(-50%);
+  z-index:1100;background:#08060F;border:1px solid #2A1A60;border-right:none;
+  border-radius:6px 0 0 6px;color:#C090FF;font-size:10px;
+  font-family:var(--font-d);font-weight:700;letter-spacing:.1em;cursor:pointer;
+  padding:14px 6px;writing-mode:vertical-rl;text-orientation:mixed;transition:.3s;
+}
+#lux-toggle:hover{background:#14103A;border-color:#6040C0;color:#E0C0FF}
+#lux-toggle.active{background:#100830;border-color:#8060D0;color:#D0A0FF;
+  box-shadow:-3px 0 12px rgba(160,100,255,0.25)}
+#lux-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.35);
+  z-index:1099;opacity:0;pointer-events:none;transition:.28s}
+#lux-overlay.active{opacity:1;pointer-events:all}
+#lux-drawer{position:fixed;top:0;right:-380px;width:360px;height:100vh;
+  z-index:1100;background:#08060F;border-left:1px solid #2A1A60;
+  display:flex;flex-direction:column;
+  transition:right .28s cubic-bezier(.4,0,.2,1);
+  box-shadow:-4px 0 24px rgba(100,60,200,0.18)}
+#lux-drawer.open{right:0}
+#lux-header{padding:14px 16px 12px;border-bottom:1px solid #1A1030;
+  display:flex;align-items:center;gap:10px;flex-shrink:0}
+#lux-glyph{width:34px;height:34px;border-radius:50%;flex-shrink:0;
+  background:radial-gradient(circle at 40% 35%,#C090FF,#5030A0);
+  display:flex;align-items:center;justify-content:center;font-size:16px;
+  box-shadow:0 0 12px rgba(160,100,255,0.4);
+  animation:luxPulse 3s ease-in-out infinite}
+@keyframes luxPulse{0%,100%{box-shadow:0 0 10px rgba(160,100,255,.35)}
+  50%{box-shadow:0 0 20px rgba(160,100,255,.65)}}
+#lux-identity{flex:1;min-width:0}
+#lux-name{font-family:var(--font-d);font-weight:700;font-size:14px;
+  letter-spacing:.12em;color:#C090FF}
+#lux-tagline{font-family:var(--font-d);font-size:9px;color:#604080;
+  letter-spacing:.06em;margin-top:2px}
+#lux-close{background:none;border:none;color:#604080;font-size:18px;
+  cursor:pointer;padding:4px;line-height:1;transition:.2s}
+#lux-close:hover{color:#C090FF}
+#lux-key-row{padding:10px 14px;border-bottom:1px solid #1A1030;
+  display:none;gap:6px;align-items:center;flex-shrink:0}
+#lux-key-row.visible{display:flex}
+#lux-key-input{flex:1;background:#0E0A1C;border:1px solid #2A1A60;
+  color:#C090FF;font-family:var(--font-mono);font-size:10px;
+  padding:5px 8px;border-radius:3px;outline:none}
+#lux-key-input::placeholder{color:#402860}
+#lux-key-save{background:#1A0840;border:1px solid #5030A0;color:#C090FF;
+  font-family:var(--font-d);font-size:10px;font-weight:700;
+  letter-spacing:.06em;padding:5px 10px;border-radius:3px;cursor:pointer;transition:.2s}
+#lux-key-save:hover{background:#2A1060;border-color:#8060C0}
+#lux-chat{flex:1;overflow-y:auto;padding:14px 14px 8px;
+  display:flex;flex-direction:column;gap:10px;
+  scrollbar-width:thin;scrollbar-color:#2A1A60 transparent}
+#lux-chat::-webkit-scrollbar{width:4px}
+#lux-chat::-webkit-scrollbar-thumb{background:#2A1A60;border-radius:2px}
+.lux-msg{max-width:88%;font-size:13px;line-height:1.55}
+.lux-msg.lux{align-self:flex-start}
+.lux-msg.user{align-self:flex-end}
+.lux-msg.lux .lux-bubble{background:#0E0A1C;border:1px solid #2A1A60;
+  color:#D0C0F0;border-radius:0 8px 8px 8px;padding:9px 12px;font-family:var(--font-b)}
+.lux-msg.user .lux-bubble{background:#1A0840;border:1px solid #4020A0;
+  color:#E0D0FF;border-radius:8px 8px 0 8px;padding:9px 12px;font-family:var(--font-b)}
+.lux-sender{font-family:var(--font-d);font-size:9px;font-weight:700;
+  letter-spacing:.08em;margin-bottom:3px;color:#604080}
+.lux-msg.lux .lux-sender{color:#8060C0}
+.lux-msg.user .lux-sender{color:#6040A0;text-align:right}
+#lux-typing{display:none;align-self:flex-start;padding:9px 14px;
+  background:#0E0A1C;border:1px solid #2A1A60;
+  border-radius:0 8px 8px 8px;gap:4px;align-items:center}
+#lux-typing.visible{display:flex}
+#lux-typing span{width:6px;height:6px;border-radius:50%;background:#6040A0;
+  animation:luxDot 1.2s ease-in-out infinite}
+#lux-typing span:nth-child(2){animation-delay:.2s}
+#lux-typing span:nth-child(3){animation-delay:.4s}
+@keyframes luxDot{0%,80%,100%{opacity:.3;transform:scale(.8)} 40%{opacity:1;transform:scale(1)}}
+#lux-input-row{padding:10px 14px 14px;border-top:1px solid #1A1030;
+  display:flex;gap:8px;align-items:flex-end;flex-shrink:0}
+#lux-input{flex:1;background:#0E0A1C;border:1px solid #2A1A60;color:#D0C0F0;
+  font-family:var(--font-b);font-size:13px;padding:8px 10px;border-radius:4px;
+  outline:none;resize:none;min-height:38px;max-height:100px;line-height:1.4;transition:.2s}
+#lux-input:focus{border-color:#6040C0;box-shadow:0 0 0 2px rgba(100,60,200,.15)}
+#lux-input::placeholder{color:#402860}
+#lux-send{background:#1A0840;border:1px solid #5030A0;color:#C090FF;
+  font-size:16px;width:36px;height:36px;border-radius:4px;cursor:pointer;
+  transition:.2s;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+#lux-send:hover{background:#2A1060;border-color:#8060C0;color:#E0C0FF}
+#lux-send:disabled{opacity:.4;cursor:not-allowed}
+.lux-badge{border-color:#2A1A60!important;color:#604080!important;cursor:pointer;transition:.4s}
+.lux-badge.active{border-color:#8060C0!important;color:#C090FF!important;
+  background:#0A0618!important;box-shadow:0 0 8px rgba(160,100,255,.3)!important}
+@media(max-width:1024px){#lux-drawer{width:92vw;right:-95vw}#lux-toggle{display:none}}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════ LUX CONFIG ════════════════════════════════
+  LOCAL / AMBASSADOR TESTING: paste your Anthropic API key below.
+  DO NOT COMMIT THIS KEY TO PUBLIC GITHUB — remove before pushing.
+  ═════════════════════════════════════════════════════════════════ -->
+<script>
+const LUX_CONFIG={
+  apiKey:'',  // paste key here: 'sk-ant-...'
+  model:'claude-sonnet-4-20250514',
+  maxTokens:600
+};
+</script>
+
+<!-- ══════════════════════ LUX AI DRAWER — 5.2 ══════════════════════ -->
+<button id="lux-toggle" onclick="toggleLux()" title="Ask Lux">✦ LUX</button>
+<div id="lux-overlay" onclick="closeLux()"></div>
+<div id="lux-drawer">
+  <!-- Header -->
+  <div id="lux-header">
+    <div id="lux-glyph">✦</div>
+    <div id="lux-identity">
+      <div id="lux-name">LUX</div>
+      <div id="lux-tagline">AI TEACHING ASSISTANT · PRE-VIZ™ 5.2.5</div>
+    </div>
+    <button id="lux-close" onclick="closeLux()" title="Close Lux">✕</button>
+  </div>
+  <!-- API key entry (shown when key not set) -->
+  <div id="lux-key-row">
+    <input id="lux-key-input" type="password" placeholder="Paste Anthropic API key to activate Lux…" autocomplete="off">
+    <button id="lux-key-save" onclick="luxSaveKey()">SAVE</button>
+  </div>
+  <!-- Chat history -->
+  <div id="lux-chat">
+    <!-- Opening message injected by JS -->
+  </div>
+  <!-- Typing indicator -->
+  <div id="lux-typing">
+    <span></span><span></span><span></span>
+  </div>
+  <!-- Input -->
+  <div id="lux-input-row">
+    <textarea id="lux-input" placeholder="Ask Lux anything about your shot…" rows="1"
+      onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();luxSend()}"></textarea>
+    <button id="lux-send" onclick="luxSend()" title="Send">➤</button>
+  </div>
+</div>
+
+<!-- ═══════════════════ STORYBOARD MODAL ═══════════════════════════ -->
+<div id="sb-modal">
+  <div id="sb-modal-box">
+    <h2>&#127916; <span data-i18n="sbModalTitle">Export Storyboard</span></h2>
+    <p data-i18n="sbModalDesc">Generates a PDF with floor plan thumbnail, Director's Monitor view, and technical metadata for each shot.</p>
+    <div id="sb-shots-grid">
+      <div class="sb-shot-row">
+        <label data-i18n="sbSceneLabel">Scene / Title</label>
+        <input type="text" id="sb-scene" placeholder="Scene 1 — INT. STUDIO">
+      </div>
+      <div class="sb-shot-row">
+        <label data-i18n="sbDirectorLabel">Director</label>
+        <input type="text" id="sb-director" placeholder="Director name">
+      </div>
+      <div class="sb-shot-row">
+        <label data-i18n="sbDpLabel">DP</label>
+        <input type="text" id="sb-dp" placeholder="DP name">
+      </div>
+      <div class="sb-shot-row">
+        <label data-i18n="sbDateLabel">Date</label>
+        <input type="text" id="sb-date" placeholder="2025-01-01">
+      </div>
+    </div>
+    <div id="sb-modal-btns">
+      <button id="sb-cancel-btn" onclick="closeSbModal()" data-i18n="sbCancelBtn">Cancel</button>
+      <button id="sb-export-btn" onclick="runStoryboardExport()" data-i18n="sbExportBtn">Export PDF</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ LEGAL DISCLAIMER MODAL ═══════════════════════ -->
+<div id="legal-overlay">
+  <div id="legal-box">
+    <div class="leg-logo">Pre-Viz&#8482;</div>
+    <div class="leg-ver">v5.2.5 — Mobile Ready · Live Director's Mode · Lux AI · ASC Method</div>
+    <div class="leg-title" data-i18n="legalTitle">⚠ Educational Use — Terms &amp; Disclaimer</div>
+    <div class="leg-body">
+      <strong>PreViz</strong> is a free, open-source film pre-visualization tool developed independently by
+      <strong>Eduardo Carmona, MFA</strong> for educational purposes. It is licensed under the
+      <strong>GNU General Public License v3.0</strong> (<a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GPL v3.0</a>).<br><br>
+
+      <strong>This tool is provided "as is," without warranty of any kind,</strong> express or implied,
+      including but not limited to warranties of merchantability, fitness for a particular purpose,
+      or non-infringement. The developer shall not be liable for any claim, damages, or other
+      liability arising from the use of this software.<br><br>
+
+      Lighting calculations, exposure values, and sun position data are <strong>simulations intended
+      for educational planning only</strong> and should not be used as the sole basis for
+      professional production decisions. Always verify critical technical parameters on set.<br><br>
+
+      By using PreViz you agree that you are doing so for <strong>educational, non-commercial purposes</strong>
+      and accept full responsibility for how the tool is applied in your work.
+    </div>
+    <div class="leg-footer">
+      © Eduardo Carmona, MFA · Developed independently on personal equipment and personal time ·
+      GNU GPL v3.0 · Free for every student — from Los Angeles to Lima to Windhoek.
+    </div>
+    <button id="legal-accept" onclick="acceptLegal()" data-i18n="legalAcceptBtn">I Understand — Enter Pre-Viz</button>
+  </div>
+</div>
+
+<div id="app">
+
+<!-- Hamburger (mobile/touch) -->
+<button id="hamburger" onclick="toggleSidebar()" aria-label="Open sidebar">☰</button>
+<div id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<!-- ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  SIDEBAR \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  -->
+<div id="sidebar">
+  <div class="sb-brand">Pre-Viz&#8482; 5.2.5</div>
+  <div class="sb-ver" id="sb-ver">5.2.5 · Mobile Ready · Live Director's Mode · ASC Method</div>
+
+  <!-- LANGUAGE -->
+  <div class="lang-row">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('es')">ES</button>
+    <button class="lang-btn" onclick="setLang('fr')">FR</button>
+    <button class="lang-btn" onclick="setLang('pt')">PT</button>
+  </div>
+
+  <!-- MODE -->
+  <div class="section">
+    <div class="sec-title" data-i18n="mode">Mode</div>
+    <div class="ctrl">
+      <select id="mode">
+        <option>Video/Cinema</option>
+              </select>
+    </div>
+  </div>
+
+  <!-- CAMERA -->
+  <div class="section">
+    <div class="sec-title" data-i18n="camera">Camera</div>
+    <div class="ctrl">
+      <label data-i18n="lens">Lens</label>
+      <select id="lens">
+        <option>12mm</option><option>16mm</option><option>24mm</option>
+        <option>35mm</option><option>50mm</option><option>85mm</option>
+        <option>100mm</option><option>135mm</option>
+      </select>
+    </div>
+    <div class="ctrl">
+      <label>Pan (deg) <span class="ctrl-val" id="cam_pan_val">0°</span></label>
+      <input type="range" id="cam_pan" min="-45" max="45" step="1" value="0">
+    </div>
+    <div class="ctrl">
+      <label data-i18n="dolly">Dolly (ft from Wall 4) <span class="ctrl-val" id="cam_dolly_val">3.0 ft</span></label>
+      <input type="range" id="cam_dolly" min="0.5" max="9" step="0.5" value="3">
+    </div>
+    <div class="ctrl">
+      <label>Camera X (ft) <span class="ctrl-val" id="cam_x_val">15.0 ft</span></label>
+      <input type="range" id="cam_x" min="1" max="29" step="0.5" value="15">
+    </div>
+    <button class="tip-toggle" onclick="toggleTip('tip-cam')">ⓘ  <span data-i18n="tip-cam-label">Camera basics</span></button>
+    <div id="tip-cam" class="tip-box hidden" data-i18n-content="tip-cam">Pan rotates the camera on its axis. Dolly physically moves it — changes perspective, not just magnification. FOV is the angle the lens captures; wider lens = wider angle.</div>
+    <div class="tip-box" style="margin-top:6px;opacity:.7">
+      <b>Shortcuts:</b> <kbd>K</kbd> Key · <kbd>F</kbd> Fill · <kbd>B</kbd> Back · <kbd>T</kbd> Actor
+      · <kbd>M</kbd> Mobile · <kbd>1</kbd>/<kbd>2</kbd> Tabs · <kbd>Esc</kbd> Cancel
+    </div>
+  </div>
+
+  <!-- SPECS -->
+  <div class="section">
+    <div class="sec-title" data-i18n="specs">Specs</div>
+    <div id="fps-row" class="ctrl">
+      <label>FPS</label>
+      <select id="fps"><option>24</option><option>25</option><option>30</option><option>60</option></select>
+    </div>
+    <div id="shutter-display" class="shutter-pill">SHUTTER 1/48s · 180° RULE</div>
+    <div id="res-row" class="ctrl">
+      <label data-i18n="resolution">Resolution</label>
+      <select id="resolution"><option>720p</option><option>1080p</option><option>4K UHD</option><option>4K DCI</option></select>
+    </div>
+    <div class="ctrl">
+      <label>ISO</label>
+      <select id="iso"><option>100</option><option>200</option><option>400</option><option selected>800</option><option>1600</option><option>3200</option><option>6400</option></select>
+    </div>
+    <div class="ctrl">
+      <label data-i18n="nd">ND Filter</label>
+      <select id="nd_label">
+        <option>None (0 stops)</option><option>ND 0.3 — 1 stop</option><option>ND 0.6 — 2 stops</option>
+        <option>ND 0.9 — 3 stops</option><option>ND 1.2 — 4 stops</option><option>ND 1.8 — 6 stops</option>
+        <option>ND 2.4 — 8 stops</option><option>ND 3.0 — 10 stops</option>
+      </select>
+    </div>
+    <div class="fstop-card" title="Exposure math per ASC Manual methodology — EV-based logarithmic stop scale (ISO · shutter · aperture). T-stops measure actual light transmission; f-stops measure geometric aperture.">
+      <div class="fstop-label" data-i18n="aperture">Suggested Aperture <span style="font-size:8px;opacity:0.45;letter-spacing:0">ⓘ</span></div>
+      <div class="fstop-val" id="fstop-display">f/5.6</div>
+    </div>
+  </div>
+
+  <!-- KEY LIGHT -->
+  <div class="section">
+    <div class="sec-title" data-i18n="keyLight">Key Light</div>
+
+    <!-- SUN MODE -->
+    <label class="sun-toggle"><input type="checkbox" id="sun_mode"> ☀  <span data-i18n="sunMode">Exterior / Sun Mode</span></label>
+    <div id="sun-card" class="sun-card hidden">
+      <div class="sun-title">☀  <span data-i18n="naturalLight">Natural Key Light</span></div>
+      <div class="sun-data" id="sun-data-display">
+        <span data-i18n="locating">Locating...</span>
+      </div>
+      <button class="sb-btn" onclick="requestGeolocation()" style="margin-top:5px;font-size:11px" id="geo-btn">
+        &#128225;  <span data-i18n="getLocation">Get My Location</span>
+      </button>
+    </div>
+
+    <div id="key-manual">
+      <div class="ctrl">
+        <label data-i18n="intensity">Intensity (%) <span class="ctrl-val" id="key_int_val">80%</span></label>
+        <input type="range" id="key_intensity" min="0" max="100" step="1" value="80">
+      </div>
+      <div class="ctrl">
+        <label data-i18n="kelvin">Color Temp (K) <span class="ctrl-val" id="key_k_val">5600K</span></label>
+        <input type="range" id="key_kelvin" min="2000" max="10000" step="100" value="5600">
+      </div>
+      <div id="key-kswatch" class="kswatch">5600K — Daylight</div>
+    </div>
+
+    <div class="ctrl" style="margin-top:5px">
+      <label data-i18n="keyPos">Stage Position</label>
+    </div>
+    <div class="xy-row">
+      <div class="xy-col">
+        <label>X (ft) <span class="xy-val" id="key_x_val">22.0</span></label>
+        <input type="range" id="key_x" min="1" max="29" step="0.5" value="22">
+      </div>
+      <div class="xy-col">
+        <label>Y (ft) <span class="xy-val" id="key_y_val">3.0</span></label>
+        <input type="range" id="key_y" min="0.5" max="19" step="0.5" value="3">
+      </div>
+    </div>
+    <button class="place-btn" id="place-key-btn" onclick="startPlacing('key')">
+      &#128205;  <span data-i18n="placeOnStage">Place on Stage</span>
+    </button>
+    <button class="tip-toggle" onclick="toggleTip('tip-key')">ⓘ  <span data-i18n="tip-key-label">Key Light</span></button>
+    <div id="tip-key" class="tip-box hidden" data-i18n-content="tip-key">The primary light source. Establishes exposure and the direction of primary shadows. Position at roughly 90° to the camera axis — the side of the face that is lit is determined by where the key is on the floor plan.</div>
+  </div>
+
+  <!-- OVERHEAD / FILL LIGHTS -->
+  <div class="section">
+    <div class="sec-title" data-i18n="lights">Overhead Lights</div>
+
+    <label class="tog"><input type="checkbox" id="fill1_on" checked> <span data-i18n="fill1">Fill 1</span></label>
+    <div id="fill1-ctrls">
+      <div class="ctrl">
+        <label><span data-i18n="intensity">Intensity</span> <span class="ctrl-val" id="fill1_int_val">40%</span></label>
+        <input type="range" id="fill1_intensity" min="0" max="100" step="1" value="40">
+      </div>
+      <div class="ctrl">
+        <label>Kelvin <span class="ctrl-val" id="fill1_k_val">5600K</span></label>
+        <input type="range" id="fill1_kelvin" min="2000" max="10000" step="100" value="5600">
+      </div>
+      <div id="fill1-kswatch" class="kswatch">5600K — Daylight</div>
+      <div class="xy-row" style="margin-top:4px">
+        <div class="xy-col">
+          <label>X <span class="xy-val" id="fill1_x_val">4.0</span></label>
+          <input type="range" id="fill1_x" min="1" max="29" step="0.5" value="4">
+        </div>
+        <div class="xy-col">
+          <label>Y <span class="xy-val" id="fill1_y_val">16.0</span></label>
+          <input type="range" id="fill1_y" min="0.5" max="19" step="0.5" value="16">
+        </div>
+      </div>
+      <button class="place-btn" id="place-fill1-btn" onclick="startPlacing('fill1')">&#128205;  <span data-i18n="placeOnStage">Place on Stage</span></button>
+    </div>
+
+    <label class="tog" style="margin-top:5px"><input type="checkbox" id="back_on" checked> <span data-i18n="back">Back Light</span></label>
+    <div id="back-ctrls">
+      <div class="ctrl">
+        <label><span data-i18n="intensity">Intensity</span> <span class="ctrl-val" id="back_int_val">60%</span></label>
+        <input type="range" id="back_intensity" min="0" max="100" step="1" value="60">
+      </div>
+      <div class="ctrl">
+        <label>Kelvin <span class="ctrl-val" id="back_k_val">5600K</span></label>
+        <input type="range" id="back_kelvin" min="2000" max="10000" step="100" value="5600">
+      </div>
+      <div id="back-kswatch" class="kswatch">5600K — Daylight</div>
+      <div class="xy-row" style="margin-top:4px">
+        <div class="xy-col">
+          <label>X <span class="xy-val" id="back_x_val">15.0</span></label>
+          <input type="range" id="back_x" min="1" max="29" step="0.5" value="15">
+        </div>
+        <div class="xy-col">
+          <label>Y <span class="xy-val" id="back_y_val">18.0</span></label>
+          <input type="range" id="back_y" min="0.5" max="19" step="0.5" value="18">
+        </div>
+      </div>
+      <button class="place-btn" id="place-back-btn" onclick="startPlacing('back')">&#128205;  <span data-i18n="placeOnStage">Place on Stage</span></button>
+    </div>
+
+    <label class="tog" style="margin-top:5px"><input type="checkbox" id="fill2_on"> <span data-i18n="fill2">Fill 2 (mobile)</span></label>
+    <div id="fill2-ctrls" class="hidden">
+      <div class="ctrl">
+        <label><span data-i18n="intensity">Intensity</span> <span class="ctrl-val" id="fill2_int_val">40%</span></label>
+        <input type="range" id="fill2_intensity" min="0" max="100" step="1" value="40">
+      </div>
+      <div class="ctrl">
+        <label>Kelvin <span class="ctrl-val" id="fill2_k_val">5600K</span></label>
+        <input type="range" id="fill2_kelvin" min="2000" max="10000" step="100" value="5600">
+      </div>
+    </div>
+
+    <button class="tip-toggle" onclick="toggleTip('tip-fill')">ⓘ  <span data-i18n="tip-fill-label">Fill / Back Light</span></button>
+    <div id="tip-fill" class="tip-box hidden" data-i18n-content="tip-fill">Fill reduces Key shadows — always dimmer. Back light (hair light) goes behind/above the subject, creates rim separation. Drag lights by clicking &#128205;  Place then clicking on the stage floor.</div>
+  </div>
+
+  <!-- LIGHT RATIO -->
+  <div class="section">
+    <div class="sec-title" data-i18n="lightRatio">Light Ratio</div>
+    <div id="ratio-badge" class="ratio-badge">—</div>
+  </div>
+
+  <!-- TALENT / ACTOR 1 -->
+  <div class="section">
+    <div class="sec-title" data-i18n="talent">Talent</div>
+    <div class="ctrl">
+      <label data-i18n="actorName">Actor 1 Name</label>
+      <input type="text" id="talent_name" value="Actor">
+    </div>
+    <div class="xy-row">
+      <div class="xy-col">
+        <label>X <span class="xy-val" id="talent_x_val">15.0</span></label>
+        <input type="range" id="talent_x" min="1" max="29" step="0.5" value="15">
+      </div>
+      <div class="xy-col">
+        <label>Y <span class="xy-val" id="talent_y_val">10.0</span></label>
+        <input type="range" id="talent_y" min="1" max="19" step="0.5" value="10">
+      </div>
+    </div>
+    <div id="dist-readout" class="dist-readout"></div>
+    <button class="place-btn" id="place-actor1-btn" onclick="startPlacing('actor1')">&#128205;  <span data-i18n="placeOnStage">Place on Stage</span></button>
+    <button class="sb-btn" id="reset-btn" style="margin-top:4px">↩  <span data-i18n="resetCenter">Reset to Center</span></button>
+
+    <!-- ACTOR 2 -->
+    <label class="tog" style="margin-top:8px"><input type="checkbox" id="actor2_on"> <span data-i18n="addActor2">+ Add Actor 2</span></label>
+    <div id="actor2-ctrls" class="hidden actor2-accent">
+      <div class="ctrl" style="margin-top:4px">
+        <label data-i18n="actor2Name">Actor 2 Name</label>
+        <input type="text" id="actor2_name" value="Actor 2">
+      </div>
+      <div class="xy-row">
+        <div class="xy-col">
+          <label>X <span class="xy-val" id="actor2_x_val">20.0</span></label>
+          <input type="range" id="actor2_x" min="1" max="29" step="0.5" value="20">
+        </div>
+        <div class="xy-col">
+          <label>Y <span class="xy-val" id="actor2_y_val">10.0</span></label>
+          <input type="range" id="actor2_y" min="1" max="19" step="0.5" value="10">
+        </div>
+      </div>
+      <button class="place-btn" id="place-actor2-btn" onclick="startPlacing('actor2')">&#128205;  <span data-i18n="placeOnStage">Place on Stage</span></button>
+    </div>
+  </div>
+
+  <!-- DIRECTOR'S MONITOR -->
+  <div class="section">
+    <div class="sec-title" data-i18n="dirMonitor">Director's Monitor</div>
+    <!-- 5.2: Live Director's Mode -->
+    <label class="tog" style="color:var(--green);margin-bottom:8px;border:1px solid #0A2A0A;border-radius:3px;padding:4px 6px;background:#020A04">
+      <input type="checkbox" id="live_director"> &#127916; <strong>Live Director's Mode</strong>
+    </label>
+    <div class="ctrl">
+      <label data-i18n="aspect">Aspect Ratio</label>
+      <select id="aspect">
+        <option value="1.7778">16:9 — Cinema / Broadcast</option>
+        <option value="2.39">2.39:1 — Anamorphic Scope</option>
+        <option value="1.85">1.85:1 — Flat</option>
+        <option value="1.3333">4:3 — Classic TV</option>
+        <option value="0.5625">9:16 — Vertical / Mobile &#128241; </option>
+      </select>
+    </div>
+    <label class="tog"><input type="checkbox" id="show_thirds" checked> <span data-i18n="thirds">Rule of Thirds</span></label>
+    <label class="tog"><input type="checkbox" id="show_safe" checked> <span data-i18n="safe">Safe Area</span></label>
+    <label class="tog"><input type="checkbox" id="show_center" checked> <span data-i18n="center">Center Cross</span></label>
+    <label class="tog"><input type="checkbox" id="show_hud" checked> <span data-i18n="hud">HUD Readouts</span></label>
+    <label class="tog"><input type="checkbox" id="show_waveform" checked> <span data-i18n="waveform">Waveform Monitor</span></label>
+    <label class="tog"><input type="checkbox" id="show_zebra"> <span data-i18n="zebra">Zebra (overexposure)</span></label>
+    <label class="tog"><input type="checkbox" id="show_focus"> <span data-i18n="focus">Focus Peaking</span></label>
+    <label class="tog"><input type="checkbox" id="show_false_color"> <span data-i18n="falseColor">False Color Map</span></label>
+  </div>
+
+  <!-- APPROVAL GATE -->
+  <div class="section">
+    <div class="sec-title" data-i18n="approval">Approval Gate</div>
+    <label class="tog"><input type="checkbox" id="approved_dp"> <span data-i18n="dpApproval">DP Approved</span></label>
+    <label class="tog"><input type="checkbox" id="approved_gaffer"> <span data-i18n="gafferApproval">Gaffer Approved</span></label>
+    <label class="tog"><input type="checkbox" id="approved_director"> <span data-i18n="directorApproval">Director Approved</span></label>
+    <div id="appr-badge" class="appr-badge appr-pending" data-i18n="pending">PENDING</div>
+    <button class="sb-btn" id="print-btn" disabled>&#128424;  <span data-i18n="print">Print Floor Plan</span></button>
+  </div>
+
+  <!-- SAVE / LOAD PROJECT -->
+  <div class="section">
+    <div class="sec-title">Project</div>
+    <div class="project-row">
+      <button class="project-btn" onclick="saveProject()" title="Download your shot as a .json file">
+        &#128190; Save Project
+      </button>
+      <button class="project-btn load" onclick="document.getElementById('project-load-input').click()" title="Load a previously saved .json">
+        &#128194; Load Project
+      </button>
+    </div>
+    <input type="file" id="project-load-input" accept=".json" onchange="loadProject(event)">
+  </div>
+
+  <div style="font-size:8px;color:var(--dim);text-align:center;padding:8px 0;letter-spacing:.1em">
+    GNU GPL v3.0 · <span data-i18n="freeForEvery">Free for every student</span>
+  </div>
+</div>
+
+<!-- ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  MAIN \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552  -->
+<div id="main">
+
+  <!-- HEADER -->
+  <div id="hdr">
+    <div class="hdr-row">
+      <div>
+        <p class="pv-title">Pre-Viz&#8482; 5.2.5</p>
+        <p class="pv-sub" data-i18n="subtitle">Mobile Ready · Live Director's Mode · 5.2.5</p>
+        <p class="pv-hint" id="hdr-hint" data-i18n="clickHint">>> Click &#128205;  Place \u8594  click stage to position any element</p>
+      </div>
+      <div class="hdr-right">
+        <div class="hdr-badges">
+          <!-- Satellite badge — always visible -->
+          <div class="badge-pill sat-badge">
+            <span class="sat-dot"></span>
+            &#128752;&#xFE0F; <span data-i18n="starlink">Via Starlink</span>
+          </div>
+          <!-- PEN badge — S Pen / stylus input support -->
+          <div class="badge-pill phone-badge" id="phone-badge" title="S Pen · Stylus Input Ready">
+            &#x270F;&#xFE0F; <span data-i18n="pen">PEN</span>
+          </div>
+          <!-- Drawer badge — 5.2: triggers drawer layout mode -->
+          <div class="badge-pill drawer-badge" id="drawer-badge" onclick="mobilePreviewTap()" title="One-tap: force 9:16 + switch to monitor preview" style="cursor:pointer">
+            &#x1F4F1;&#xFE0F; Mobile
+          </div>
+          <!-- Live Director's Mode badge — 5.2 -->
+          <div class="badge-pill director-badge" id="director-badge" onclick="toggleDirectorMode()" title="Live Director's Mode">
+            &#127916; Director
+          </div>
+          <!-- Lux badge — 5.2: triggers AI drawer -->
+          <div class="badge-pill lux-badge" id="lux-badge" onclick="toggleLux()" title="Ask Lux">
+            ✦ Lux
+          </div>
+          <div class="badge-pill sun-badge" id="sun-badge">
+            ☀  <span data-i18n="exterior">Exterior</span>
+          </div>
+          <div class="rec-badge"><span class="rec-dot" id="rec-dot"></span><span id="rec-label">STANDBY</span></div>
+          <div id="hdr-appr" class="appr-pill pending" data-i18n="pending">PENDING</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLACING BANNER (hidden by default) -->
+  <div id="placing-banner" class="hidden">
+    <span id="placing-label">Click on stage to place element</span>
+    <button onclick="cancelPlacing()">✕  Cancel</button>
+  </div>
+
+  <!-- METRIC STRIP -->
+  <div id="metric-strip">
+    <div class="mc">
+      <div class="mc-bar" style="background:linear-gradient(90deg,transparent,#FF4500,transparent)"></div>
+      <div class="mc-label" data-i18n="aperture">Aperture</div>
+      <div class="mc-val" id="mc-fstop" style="color:#FF4500">f/5.6</div>
+      <div class="mc-hint">key drives exp</div>
+    </div>
+    <div class="mc">
+      <div class="mc-bar" style="background:linear-gradient(90deg,transparent,#00D4CC,transparent)"></div>
+      <div class="mc-label">Lens · FOV</div>
+      <div class="mc-val" id="mc-lens" style="color:#00D4CC">24mm</div>
+      <div class="mc-hint" id="mc-fov">73° field</div>
+    </div>
+    <div class="mc">
+      <div class="mc-bar" id="mc-ratio-bar" style="background:linear-gradient(90deg,transparent,#00C896,transparent)"></div>
+      <div class="mc-label" data-i18n="ratio">Key:Fill</div>
+      <div class="mc-val" id="mc-ratio" style="color:#00C896">3:1</div>
+      <div class="mc-hint" data-i18n="contrast">lighting contrast</div>
+    </div>
+    <div class="mc">
+      <div class="mc-bar" style="background:linear-gradient(90deg,transparent,#00FF88,transparent)"></div>
+      <div class="mc-label">ISO</div>
+      <div class="mc-val" id="mc-iso" style="color:#00FF88">800</div>
+      <div class="mc-hint" id="mc-shutter">1/48s</div>
+    </div>
+    <div class="mc">
+      <div class="mc-bar" style="background:linear-gradient(90deg,transparent,#FF6B00,transparent)"></div>
+      <div class="mc-label" data-i18n="camToTalent">C→ T</div>
+      <div class="mc-val" id="mc-c2t" style="color:#FF6B00">—</div>
+      <div class="mc-hint" id="mc-c2t-m">— m</div>
+    </div>
+    <div class="mc">
+      <div class="mc-bar" style="background:linear-gradient(90deg,transparent,#FFE200,transparent)"></div>
+      <div class="mc-label" data-i18n="keyTemp">Key Temp</div>
+      <div class="mc-val" id="mc-kelvin" style="color:#FFE200;font-size:15px">5600K</div>
+      <div class="mc-hint" id="mc-kname">Daylight</div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div id="tabs">
+    <button class="tab-btn active" onclick="switchTab('floor')">&#127916; <span data-i18n="floorPlanTab">Floor Plan</span></button>
+    <button class="tab-btn" onclick="switchTab('monitor')">&#128250; <span data-i18n="monitorTab">Director's Monitor</span></button>
+    </div>
+
+  <!-- TAB CONTENT -->
+  <div id="tab-content">
+    <div class="tab-panel active" id="panel-floor">
+      <div id="floor-plan"></div>
+    </div>
+    <div class="tab-panel" id="panel-monitor">
+      <div id="mon-pills">
+        <div class="mon-pill"><div class="mon-pill-label" data-i18n="aperture">Aperture</div><div class="mon-pill-val" id="mp-fstop" style="color:#FF4500">f/5.6</div></div>
+        <div class="mon-pill"><div class="mon-pill-label">Lens·FOV</div><div class="mon-pill-val" id="mp-lens" style="color:#00D4CC">24mm</div></div>
+        <div class="mon-pill"><div class="mon-pill-label" data-i18n="ratio">Key:Fill</div><div class="mon-pill-val" id="mp-ratio" style="color:#00C896">3:1</div></div>
+        <div class="mon-pill"><div class="mon-pill-label" data-i18n="keyTemp">Key K</div><div class="mon-pill-val" id="mp-kelvin" style="color:#FFE200">5600K</div></div>
+        <div class="mon-pill"><div class="mon-pill-label" data-i18n="aspect">Aspect</div><div class="mon-pill-val" id="mp-aspect" style="color:#8080C0">16:9</div></div>
+        <div class="mon-pill" id="mp-sun-pill" style="display:none"><div class="mon-pill-label">☀  Elev</div><div class="mon-pill-val" id="mp-sun-elev" style="color:var(--sun)">—</div></div>
+      </div>
+      <div id="monitor-area">
+        <div id="bezel"><canvas id="monitor-canvas"></canvas></div>
+      </div>
+      <div class="mon-caption" id="mon-caption" data-i18n="monCaption">Director's Monitor · Lighting, framing, and Kelvin respond live to sidebar controls.</div>
+    </div>
+
+  <div id="footer">
+    Developed independently by Eduardo Carmona, MFA &nbsp;·&nbsp; GNU GPL v3.0 &nbsp;·&nbsp; <span data-i18n="tagline">Free for every student — from Los Angeles to the world.</span>
+  </div>
+
+</div>
+
+<script>
+'use strict';
+
+// ── PRE-VIZ™ AUTHORSHIP WATERMARK ───────────────────────────────────────────
+// Eduardo-Proof-2026-03-14-Hash: 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
+// © Eduardo Carmona, MFA — All Rights Reserved — GNU GPL v3.0
+// Case #1-15113592811 | Pre-Viz™ (USPTO TEAS Plus Class 042)
+// ─────────────────────────────────────────────────────────────────────────────
+(function _previzWatermark() {
+  const _a = 'Eduardo​ Carmona​, MFA';
+  const _b = 'Pre​-Viz​™ 5.2.5';
+  const _c = '2026​-03​-14';
+  const _d = '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08';
+  const _e = 'Case​ #1​-15113592811';
+  try { window.__pvwm = { a:_a, b:_b, c:_c, d:_d, e:_e }; } catch(x) {}
+})();
+// ─────────────────────────────────────────────────────────────────────────────
+
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// CONSTANTS
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+const STAGE_W=30, STAGE_H=20, CAM_X=15;
+const LENS_FOV={"12mm":90,"16mm":83,"24mm":73,"35mm":54,"50mm":39,"85mm":24,"100mm":20,"135mm":15};
+const SHUTTER_BY_FPS={24:"1/48",25:"1/50",30:"1/60",60:"1/120"};
+const SHUTTER_DENOM={"1/48":48,"1/50":50,"1/60":60,"1/120":120};
+const ND_OPTIONS={"None (0 stops)":0,"ND 0.3 — 1 stop":1,"ND 0.6 — 2 stops":2,"ND 0.9 — 3 stops":3,
+  "ND 1.2 — 4 stops":4,"ND 1.8 — 6 stops":6,"ND 2.4 — 8 stops":8,"ND 3.0 — 10 stops":10};
+const FSTOPS=[1.0,1.4,2.0,2.8,4.0,5.6,8.0,11,16,22];
+const KELVIN_SCALE=[
+  [2000,"#FF5500","Candlelight"],[2700,"#FF8040","Incandescent"],
+  [3200,"#FFB347","Tungsten"],[4000,"#FFD580","Warm White"],
+  [4300,"#FFE8C0","Late Afternoon"],[5600,"#FFF8E7","Daylight"],
+  [6500,"#EEF5FF","Overcast Sky"],[7500,"#D5E8FF","Cloudy"],
+  [10000,"#B8D5FF","Blue Sky"]
+];
+// 5.2.4.2: Saturated floor-plan indicator colors — same hue as KELVIN_SCALE but
+// punchy enough to read on the light grey studio floor (#E8EAEC).
+// Used ONLY for floor plan cone fills. Monitor renderer still uses kRGB()/KELVIN_SCALE.
+const KELVIN_FLOOR=[
+  [2000,"#FF2200"],  // Candlelight     — deep red-orange
+  [2700,"#FF6600"],  // Incandescent    — warm amber
+  [3200,"#FF9900"],  // Tungsten        — orange
+  [4000,"#FFCC33"],  // Warm White      — golden yellow
+  [4300,"#FFE055"],  // Late Afternoon  — gold
+  [5600,"#FFFF99"],  // Daylight        — pale yellow (visible on grey)
+  [6500,"#AACCFF"],  // Overcast Sky    — periwinkle blue
+  [7500,"#6699FF"],  // Cloudy          — medium blue
+  [10000,"#3366FF"]  // Blue Sky        — vivid blue
+];
+function kelvinFloor(k){
+  for(const[m,c] of KELVIN_FLOOR) if(k<=m) return c;
+  return KELVIN_FLOOR.at(-1)[1];
+}
+function kelvinFloorRGB(k){ const h=kelvinFloor(k).slice(1); return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]; }
+
+const RATIO_TABLE=[
+  [1.2,"1:1","#4A90D9","Flat — broadcast"],
+  [1.7,"2:1","#4A90D9","Soft commercial"],
+  [2.5,"3:1","#00C896","Classic cinematic"],
+  [3.5,"4:1","#00C896","Dramatic portrait"],
+  [5.0,"6:1","#FF6B00","High contrast"],
+  [10.0,"8:1","#FF6B00","Near noir"],
+  [999,"16:1","#FF1744","High contrast noir"]
+];
+const ASPECT_LABELS={"1.7778":"16:9","2.39":"2.39:1","1.85":"1.85:1","1.3333":"4:3","0.5625":"9:16"};
+
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// i18n — TRANSLATIONS
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+const I18N = {
+  en: {
+    mode:"Mode", camera:"Camera", specs:"Specs", lens:"Lens", dolly:"Dolly (ft from Wall 4)",
+    keyLight:"Key Light", sunMode:"Exterior / Sun Mode", naturalLight:"Natural Key Light",
+    locating:"Requesting GPS...", getLocation:"Get My Location",
+    intensity:"Intensity", kelvin:"Color Temp (K)", keyPos:"Stage Position",
+    placeOnStage:"Place on Stage", lights:"Overhead Lights", fill1:"Fill 1",
+    back:"Back Light", fill2:"Fill 2 (mobile)", lightRatio:"Light Ratio",
+    talent:"Talent", actorName:"Actor 1 Name", addActor2:"+ Add Actor 2",
+    actor2Name:"Actor 2 Name", dirMonitor:"Director\'s Monitor", aspect:"Aspect Ratio",
+    thirds:"Rule of Thirds", safe:"Safe Area", center:"Center Cross", hud:"HUD Readouts",
+    waveform:"Waveform Monitor", zebra:"Zebra (overexposure)", focus:"Focus Peaking",
+    falseColor:"False Color Map", approval:"Approval Gate", dpApproval:"DP Approved",
+    gafferApproval:"Gaffer Approved", directorApproval:"Director Approved",
+    approved:"ALL APPROVED", pending:"PENDING", print:"Print Floor Plan",
+    freeForEvery:"Free for every student", nd:"ND Filter", resolution:"Resolution",
+    aperture:"Aperture", ratio:"Key:Fill", contrast:"lighting contrast",
+    camToTalent:"C\u2192 T", keyTemp:"Key Temp", floorPlanTab:"Floor Plan",
+    monitorTab:"Director\'s Monitor",
+    starlink:"Via Starlink", starlinkOffline:"Offline Mode", starlinkOnline:"Via Starlink \u2014 28ms",
+    mobile:"Mobile", pen:"PEN", phoneVertical:"9:16 Vertical",
+    exterior:"Exterior",
+    subtitle:"Phase 2 BETA \u00b7 5.1.5 \u00b7 Monitor",
+    clickHint:">> Click &#128205; Place \u2192 click stage to position any element",
+    monCaption:"Director\'s Monitor \u00b7 Lighting, framing, and Kelvin respond live to sidebar controls.",
+    tagline:"Free for every student \u2014 from Los Angeles to Lima to Windhoek.",
+    resetCenter:"Reset to Center",
+    exportStoryboard:"Storyboard",
+    sbModalTitle:"Export Storyboard",
+    sbModalDesc:"Generates a PDF with floor plan thumbnail, Director\'s Monitor view, and technical metadata for each shot.",
+    sbSceneLabel:"Scene / Title", sbDirectorLabel:"Director", sbDpLabel:"DP", sbDateLabel:"Date",
+    sbExportBtn:"Export PDF", sbCancelBtn:"Cancel",
+    legalTitle:"Educational Use \u2014 Terms & Disclaimer",
+    legalAcceptBtn:"I Understand \u2014 Enter Pre-Viz",
+    "tip-cam-label":"Camera basics","tip-key-label":"Key Light","tip-fill-label":"Fill / Back",
+    "tip-cam":"Pan rotates the camera on its axis. Dolly physically moves it \u2014 changes perspective, not just magnification. FOV is the angle the lens captures; wider lens = wider angle.",
+    "tip-key":"The primary light source. Establishes exposure and shadow direction. Position at roughly 90\u00b0 to camera axis \u2014 the lit side of the face in the Monitor reflects where the Key is on the floor plan.",
+    "tip-fill":"Fill reduces Key shadows \u2014 always dimmer. Back light creates rim separation. Click &#128205; Place then click on the stage floor to move any light.",
+    placingMsg:"Click on stage to place", sunElev:"Sun Elev",
+  },
+  es: {
+    mode:"Modo", camera:"C\u00e1mara", specs:"Especificaciones", lens:"Lente", dolly:"Dolly (pies desde Pared 4)",
+    keyLight:"Luz Principal", sunMode:"Modo Exterior / Sol", naturalLight:"Luz Natural Principal",
+    locating:"Obteniendo GPS...", getLocation:"Obtener Mi Ubicaci\u00f3n",
+    intensity:"Intensidad", kelvin:"Temperatura de Color (K)", keyPos:"Posici\u00f3n en Escenario",
+    placeOnStage:"Colocar en Escenario", lights:"Luces Cenitales", fill1:"Relleno 1",
+    back:"Contra-Luz", fill2:"Relleno 2 (m\u00f3vil)", lightRatio:"Relaci\u00f3n de Luz",
+    talent:"Talento", actorName:"Nombre Actor 1", addActor2:"+ Agregar Actor 2",
+    actor2Name:"Nombre Actor 2", dirMonitor:"Monitor de Direcci\u00f3n", aspect:"Proporci\u00f3n",
+    thirds:"Regla de Tercios", safe:"\u00c1rea Segura", center:"Cruz Central", hud:"Datos HUD",
+    waveform:"Monitor de Forma de Onda", zebra:"Zebra (sobreexposici\u00f3n)", focus:"Enfoque Peaking",
+    falseColor:"Mapa de Color Falso", approval:"Puerta de Aprobaci\u00f3n", dpApproval:"Aprobado DP",
+    gafferApproval:"Aprobado Gaffer", directorApproval:"Aprobado Director",
+    approved:"TODO APROBADO", pending:"PENDIENTE", print:"Imprimir Planta",
+    freeForEvery:"Gratis para cada estudiante", nd:"Filtro ND", resolution:"Resoluci\u00f3n",
+    aperture:"Apertura", ratio:"Clave:Relleno", contrast:"contraste de luz",
+    camToTalent:"C\u2192 T", keyTemp:"Temp Clave", floorPlanTab:"Planta",
+    monitorTab:"Monitor",
+    starlink:"V\u00eda Sat\u00e9lite", starlinkOffline:"Modo Sin Conexi\u00f3n", starlinkOnline:"V\u00eda Starlink \u2014 28ms",
+    mobile:"M00f3vil", pen:"PEN", phoneVertical:"9:16 Vertical",
+    exterior:"Exterior",
+    subtitle:"Fase 2 BETA \u00b7 5.1.5 \u00b7 Monitor",
+    clickHint:">> Clic en &#128205; Colocar \u2192 clic en escenario",
+    monCaption:"Monitor de Direcci\u00f3n \u00b7 Iluminaci\u00f3n y Kelvin en tiempo real.",
+    tagline:"Gratis para cada estudiante \u2014 de Los \u00c1ngeles a Lima a Windhoek.",
+    resetCenter:"Resetear al Centro",
+    exportStoryboard:"Storyboard",
+    sbModalTitle:"Exportar Storyboard",
+    sbModalDesc:"Genera un PDF con miniatura del plano de planta, vista del monitor y metadatos t\u00e9cnicos.",
+    sbSceneLabel:"Escena / T\u00edtulo", sbDirectorLabel:"Director/a", sbDpLabel:"DP", sbDateLabel:"Fecha",
+    sbExportBtn:"Exportar PDF", sbCancelBtn:"Cancelar",
+    legalTitle:"Uso Educativo \u2014 T\u00e9rminos y Aviso Legal",
+    legalAcceptBtn:"Entendido \u2014 Entrar a Pre-Viz",
+    "tip-cam-label":"C\u00e1mara b\u00e1sica","tip-key-label":"Luz Principal","tip-fill-label":"Relleno / Contra-Luz",
+    "tip-cam":"Pan rota la c\u00e1mara. Dolly la mueve f\u00edsicamente \u2014 cambia perspectiva.",
+    "tip-key":"Fuente de luz principal. Establece la exposici\u00f3n y direcci\u00f3n de sombras.",
+    "tip-fill":"El relleno reduce las sombras \u2014 siempre m\u00e1s suave. La contra-luz crea separaci\u00f3n de borde.",
+    placingMsg:"Clic en escenario para colocar", sunElev:"Elev Sol",
+  },
+  fr: {
+    mode:"Mode", camera:"Cam\u00e9ra", specs:"Sp\u00e9cifications", lens:"Objectif", dolly:"Dolly (pi du Mur 4)",
+    keyLight:"Lumi\u00e8re Principale", sunMode:"Mode Ext\u00e9rieur / Soleil", naturalLight:"Lumi\u00e8re Naturelle",
+    locating:"Localisation...", getLocation:"Ma Position",
+    intensity:"Intensit\u00e9", kelvin:"Temp\u00e9rature (K)", keyPos:"Position sur Sc\u00e8ne",
+    placeOnStage:"Placer sur Sc\u00e8ne", lights:"\u00c9clairages", fill1:"Remplissage 1",
+    back:"Contre-Jour", fill2:"Remplissage 2", lightRatio:"Ratio Lumi\u00e8re",
+    talent:"Talent", actorName:"Nom Acteur 1", addActor2:"+ Ajouter Acteur 2",
+    actor2Name:"Nom Acteur 2", dirMonitor:"Moniteur Directeur", aspect:"Format",
+    thirds:"R\u00e8gle des Tiers", safe:"Zone S\u00e9curis\u00e9e", center:"Croix Centrale", hud:"Affichage HUD",
+    waveform:"Forme d\'Onde", zebra:"Z\u00e9bra", focus:"Piqu\u00e9 Focus",
+    falseColor:"Fausses Couleurs", approval:"Validation", dpApproval:"DP Valid\u00e9",
+    gafferApproval:"Gaffer Valid\u00e9", directorApproval:"Directeur Valid\u00e9",
+    approved:"TOUT APPROUV\u00c9", pending:"EN ATTENTE", print:"Imprimer Plan",
+    freeForEvery:"Gratuit pour tous", nd:"Filtre ND", resolution:"R\u00e9solution",
+    aperture:"Ouverture", ratio:"Cl\u00e9:Remplissage", contrast:"contraste lumi\u00e8re",
+    camToTalent:"C\u2192 T", keyTemp:"Temp Cl\u00e9", floorPlanTab:"Plan",
+    monitorTab:"Moniteur",
+    starlink:"Via Satellite", starlinkOffline:"Mode Hors Ligne", starlinkOnline:"Via Starlink \u2014 28ms",
+    mobile:"Mobile", pen:"STYLET", phoneVertical:"9:16 Vertical",
+    exterior:"Ext\u00e9rieur",
+    subtitle:"Phase 2 BETA \u00b7 5.1.5 \u00b7 Moniteur",
+    clickHint:">> Clic &#128205; Placer \u2192 clic sur sc\u00e8ne",
+    monCaption:"Moniteur Directeur \u00b7 \u00c9clairage et Kelvin en temps r\u00e9el.",
+    tagline:"Gratuit pour chaque \u00e9tudiant \u2014 de Los Angeles \u00e0 Lima \u00e0 Windhoek.",
+    resetCenter:"Centrer",
+    exportStoryboard:"Storyboard",
+    sbModalTitle:"Exporter Storyboard",
+    sbModalDesc:"G\u00e9n\u00e8re un PDF avec miniature du plan de sc\u00e8ne, vue moniteur et m\u00e9tadonn\u00e9es techniques.",
+    sbSceneLabel:"Sc\u00e8ne / Titre", sbDirectorLabel:"R\u00e9alisateur", sbDpLabel:"DP", sbDateLabel:"Date",
+    sbExportBtn:"Exporter PDF", sbCancelBtn:"Annuler",
+    legalTitle:"Usage \u00c9ducatif \u2014 Conditions & Avertissement",
+    legalAcceptBtn:"J\'accepte \u2014 Entrer dans Pre-Viz",
+    "tip-cam-label":"Cam\u00e9ra","tip-key-label":"Lumi\u00e8re Principale","tip-fill-label":"Remplissage",
+    "tip-cam":"Pan fait pivoter la cam\u00e9ra. Dolly la d\u00e9place physiquement.",
+    "tip-key":"Source lumineuse principale. \u00c9tablit l\'exposition et la direction des ombres.",
+    "tip-fill":"Le remplissage r\u00e9duit les ombres. Le contre-jour cr\u00e9e la s\u00e9paration de bord.",
+    placingMsg:"Clic sur sc\u00e8ne pour placer", sunElev:"\u00c9l\u00e9v Soleil",
+  },
+  pt: {
+    mode:"Modo", camera:"C\u00e2mera", specs:"Especifica\u00e7\u00f5es", lens:"Lente", dolly:"Dolly (p\u00e9s da Parede 4)",
+    keyLight:"Luz Principal", sunMode:"Modo Exterior / Sol", naturalLight:"Luz Natural",
+    locating:"Localizando...", getLocation:"Minha Localiza\u00e7\u00e3o",
+    intensity:"Intensidade", kelvin:"Temperatura (K)", keyPos:"Posi\u00e7\u00e3o no Palco",
+    placeOnStage:"Posicionar no Palco", lights:"Ilumina\u00e7\u00f5es", fill1:"Preenchimento 1",
+    back:"Contra-Luz", fill2:"Preenchimento 2", lightRatio:"Rela\u00e7\u00e3o de Luz",
+    talent:"Talento", actorName:"Nome Ator 1", addActor2:"+ Adicionar Ator 2",
+    actor2Name:"Nome Ator 2", dirMonitor:"Monitor do Diretor", aspect:"Propor\u00e7\u00e3o",
+    thirds:"Regra dos Ter\u00e7os", safe:"\u00c1rea Segura", center:"Cruz Central", hud:"Dados HUD",
+    waveform:"Forma de Onda", zebra:"Zebra", focus:"Foco Peaking",
+    falseColor:"Cor Falsa", approval:"Aprova\u00e7\u00e3o", dpApproval:"DP Aprovado",
+    gafferApproval:"Gaffer Aprovado", directorApproval:"Diretor Aprovado",
+    approved:"TUDO APROVADO", pending:"PENDENTE", print:"Imprimir Planta",
+    freeForEvery:"Gratuito para todo estudante", nd:"Filtro ND", resolution:"Resolu\u00e7\u00e3o",
+    aperture:"Abertura", ratio:"Chave:Preench.", contrast:"contraste de luz",
+    camToTalent:"C\u2192 T", keyTemp:"Temp Chave", floorPlanTab:"Planta",
+    monitorTab:"Monitor",
+    starlink:"Via Sat\u00e9lite", starlinkOffline:"Modo Offline", starlinkOnline:"Via Starlink \u2014 28ms",
+    mobile:"M00f3vel", pen:"CANETA", phoneVertical:"9:16 Vertical",
+    exterior:"Exterior",
+    subtitle:"Fase 2 BETA \u00b7 5.1.5 \u00b7 Monitor",
+    clickHint:">> Clique &#128205; Posicionar \u2192 clique no palco",
+    monCaption:"Monitor do Diretor \u00b7 Ilumina\u00e7\u00e3o e Kelvin em tempo real.",
+    tagline:"Gratuito para cada estudante \u2014 de Los Angeles a Lima a Windhoek.",
+    resetCenter:"Centralizar",
+    exportStoryboard:"Storyboard",
+    sbModalTitle:"Exportar Storyboard",
+    sbModalDesc:"Gera um PDF com miniatura da planta, vista do monitor e metadados t\u00e9cnicos.",
+    sbSceneLabel:"Cena / T\u00edtulo", sbDirectorLabel:"Diretor/a", sbDpLabel:"DP", sbDateLabel:"Data",
+    sbExportBtn:"Exportar PDF", sbCancelBtn:"Cancelar",
+    legalTitle:"Uso Educacional \u2014 Termos e Aviso",
+    legalAcceptBtn:"Entendido \u2014 Entrar no Pre-Viz",
+    "tip-cam-label":"C\u00e2mera","tip-key-label":"Luz Principal","tip-fill-label":"Preenchimento",
+    "tip-cam":"Pan gira a c\u00e2mera. Dolly a move fisicamente.",
+    "tip-key":"Fonte de luz principal. Estabelece a exposi\u00e7\u00e3o e dire\u00e7\u00e3o das sombras.",
+    "tip-fill":"O preenchimento reduz as sombras. A contra-luz cria separa\u00e7\u00e3o de borda.",
+    placingMsg:"Clique no palco para posicionar", sunElev:"Elev Sol",
+  }
+};
+
+let currentLang = 'en';
+function t(key){ return (I18N[currentLang]||I18N.en)[key] || (I18N.en[key]) || key; }
+
+function setLang(lang){
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>{
+    b.classList.toggle('active', b.textContent.trim().toLowerCase()===lang);
+  });
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    const txt = t(key);
+    if(txt) el.textContent = txt;
+  });
+  document.querySelectorAll('[data-i18n-content]').forEach(el=>{
+    const key = el.getAttribute('data-i18n-content');
+    const txt = t(key);
+    if(txt) el.textContent = txt;
+  });
+  // Update html lang attr
+  document.documentElement.lang = lang;
+  updateReadouts();
+}
+
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// STATE
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+const DEFAULT = {
+  mode:"Video/Cinema", lens:"24mm", cam_pan:0, cam_dolly:3.0, cam_x:15.0,
+  fps:24, resolution:"1080p", iso:800, nd_label:"None (0 stops)",
+  key_intensity:80, key_kelvin:5600, key_x:22.0, key_y:3.0,
+  fill1_on:true, fill1_intensity:40, fill1_kelvin:5600, fill1_x:4.0, fill1_y:16.0,
+  back_on:true, back_intensity:60, back_kelvin:5600, back_x:15.0, back_y:18.0,
+  fill2_on:false, fill2_intensity:40, fill2_kelvin:5600,
+  talent_name:"Actor", talent_x:15.0, talent_y:10.0,
+  actor2_on:false, actor2_name:"Actor 2", actor2_x:20.0, actor2_y:10.0,
+  approved_dp:false, approved_gaffer:false, approved_director:false, approved_at:null,
+  aspect:1.7778,
+  show_thirds:true, show_safe:true, show_center:true, show_hud:true,
+  show_waveform:true, show_zebra:false, show_focus:false, show_false_color:false,
+  live_director:false,
+  sun_mode:false, sun_lat:null, sun_lon:null, sun_elevation:null, sun_azimuth:null,
+};
+
+let S = Object.assign({}, DEFAULT);
+try{ const sv=localStorage.getItem('previz52'); if(sv) S=Object.assign({},DEFAULT,JSON.parse(sv)); }catch(e){}
+function saveState(){ try{localStorage.setItem('previz52',JSON.stringify(S));}catch(e){} }
+
+// 5.2.4.2: Save/Load Project JSON
+function saveProject(){
+  const scene = (document.getElementById('sb-scene')&&document.getElementById('sb-scene').value)||'shot';
+  const slug = scene.replace(/[^a-z0-9]/gi,'_').toLowerCase()||'previz_project';
+  const payload = JSON.stringify({_previz_version:'5.2.5', _saved: new Date().toISOString(), ...S}, null, 2);
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([payload],{type:'application/json'}));
+  a.download = `${slug}_${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+}
+function loadProject(ev){
+  const file = ev.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try{
+      const loaded = JSON.parse(e.target.result);
+      // Strip meta keys, merge into S with DEFAULT fallback
+      const {_previz_version, _saved, ...data} = loaded;
+      S = Object.assign({}, DEFAULT, data);
+      syncDOM(); updateAll();
+      // Reset file input so same file can be reloaded
+      ev.target.value='';
+    } catch(err){
+      alert('Could not load project — invalid JSON file.');
+    }
+  };
+  reader.readAsText(file);
+}
+
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// SOLAR POSITION (Astronomical Algorithms)
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+function julianDate(d){ return d.valueOf()/86400000 + 2440587.5; }
+
+function solarPosition(lat, lon, date){
+  const JD = julianDate(date);
+  const n = JD - 2451545.0;
+  const L = ((280.460 + 0.9856474*n) % 360 + 360) % 360;
+  const g = ((357.528 + 0.9856003*n) % 360 + 360) % 360;
+  const gR = g*Math.PI/180;
+  const lambda = L + 1.915*Math.sin(gR) + 0.020*Math.sin(2*gR);
+  const epsilon = 23.439 - 0.0000004*n;
+  const sinDec = Math.sin(epsilon*Math.PI/180)*Math.sin(lambda*Math.PI/180);
+  const dec = Math.asin(Math.max(-1,Math.min(1,sinDec)));
+  const UT = date.getUTCHours() + date.getUTCMinutes()/60 + date.getUTCSeconds()/3600;
+  const GMST = ((6.697375 + 0.0657098242*n + UT) % 24 + 24) % 24;
+  const LMST = ((GMST + lon/15) % 24 + 24) % 24;
+  const HA = (LMST - 12)*15;
+  const HAr = HA*Math.PI/180;
+  const latR = lat*Math.PI/180;
+  const sinEl = Math.sin(latR)*sinDec + Math.cos(latR)*Math.cos(dec)*Math.cos(HAr);
+  const elevation = Math.asin(Math.max(-1,Math.min(1,sinEl)))*180/Math.PI;
+  const cosEl = Math.cos(Math.asin(Math.max(-1,Math.min(1,sinEl))));
+  let azimuth = 180;
+  if(cosEl > 0.001){
+    const cosAz = (sinDec - Math.sin(latR)*sinEl)/(Math.cos(latR)*cosEl);
+    azimuth = Math.acos(Math.max(-1,Math.min(1,cosAz)))*180/Math.PI;
+    if(HA > 0) azimuth = 360 - azimuth;
+  }
+  return { elevation, azimuth };
+}
+
+function sunToKelvin(el){
+  if(el <= 0) return 2000;
+  if(el <= 5)  return Math.round(2000 + el/5*600);    // 2000-2600K deep sunrise
+  if(el <= 15) return Math.round(2600 + (el-5)/10*600); // 2600-3200K golden hour
+  if(el <= 30) return Math.round(3200 + (el-15)/15*1400); // 3200-4600K morning
+  if(el <= 60) return Math.round(4600 + (el-30)/30*1000); // 4600-5600K midday
+  return 5600;
+}
+function sunToIntensity(el){ return el<=0?0:Math.min(100,Math.round(el/90*88+12)); }
+function sunToKeyX(az){
+  // Azimuth 0°=N, 90°=E, 180°=S, 270°=W
+  // Camera faces North (positive Y). East=right=high X, West=left=low X
+  return Math.max(2, Math.min(28, Math.round(2 + (Math.sin(az*Math.PI/180)+1)/2*26)));
+}
+function sunToKeyY(el){
+  // Higher sun = further back on stage (more overhead)
+  return Math.max(1, Math.min(18, Math.round(1 + el/90*17)));
+}
+
+function applyGeoToSun(lat, lon){
+  const pos = solarPosition(lat, lon, new Date());
+  S.sun_lat = lat; S.sun_lon = lon;
+  S.sun_elevation = pos.elevation;
+  S.sun_azimuth   = pos.azimuth;
+  if(S.sun_mode){
+    S.key_kelvin   = sunToKelvin(pos.elevation);
+    S.key_intensity = sunToIntensity(pos.elevation);
+    S.key_x = sunToKeyX(pos.azimuth);
+    S.key_y = sunToKeyY(pos.elevation);
+  }
+  updateSunCard();
+  syncDOM();
+  updateAll();
+}
+
+function updateSunCard(){
+  const el = S.sun_elevation;
+  const az = S.sun_azimuth;
+  const lat = S.sun_lat;
+  const lon = S.sun_lon;
+  const disp = document.getElementById('sun-data-display');
+  if(!disp) return;
+  if(el===null){
+    disp.innerHTML = `<span data-i18n="locating">${t('locating')}</span>`;
+  } else {
+    const cardDir = az<22.5||az>=337.5?'N':az<67.5?'NE':az<112.5?'E':az<157.5?'SE':az<202.5?'S':az<247.5?'SW':az<292.5?'W':'NW';
+    const kelvin = sunToKelvin(el);
+    const [kc,kn] = kelvinDisplay(kelvin);
+    disp.innerHTML =
+      `<b>&#127760; </b> ${lat!==null?lat.toFixed(4)+'° N':''} ${lon!==null?(lon>=0?lon.toFixed(4)+'° E':Math.abs(lon).toFixed(4)+'° W'):''}<br>`+
+      `<b>${t('sunElev')}:</b> ${el.toFixed(1)}° · Az: ${az.toFixed(0)}° (${cardDir})<br>`+
+      `<b>K:</b> ${kelvin}K — ${kn} · Int: ${sunToIntensity(el)}%<br>`+
+      `<b>Temp:</b> ${new Date().toLocaleTimeString()}`;
+  }
+}
+
+function requestGeolocation(){
+  if(!navigator.geolocation){
+    alert('Geolocation not available in this browser.');
+    return;
+  }
+  const btn = document.getElementById('geo-btn');
+  if(btn) btn.textContent = '&#128225;  Locating...';
+  navigator.geolocation.getCurrentPosition(
+    pos => applyGeoToSun(pos.coords.latitude, pos.coords.longitude),
+    err => {
+      if(btn) btn.innerHTML = `&#128225;  <span data-i18n="getLocation">${t('getLocation')}</span>`;
+      alert('Could not get location. Check browser permissions.\\n' + err.message);
+    },
+    { timeout:10000 }
+  );
+}
+
+// Auto-refresh sun position every 60s when sun_mode is on and coords available
+setInterval(()=>{
+  if(S.sun_mode && S.sun_lat !== null){
+    applyGeoToSun(S.sun_lat, S.sun_lon);
+  }
+}, 60000);
+
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// HELPERS
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+function kelvinDisplay(k){ for(const[m,c,n] of KELVIN_SCALE) if(k<=m) return[c,n]; return KELVIN_SCALE.at(-1).slice(1); }
+function kRGB(k){ const h=kelvinDisplay(k)[0].slice(1); return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]; }
+function hexRGB(h){ const s=h.slice(1); return[parseInt(s.slice(0,2),16),parseInt(s.slice(2,4),16),parseInt(s.slice(4,6),16)]; }
+function calcFstop(ki,iso,sh,nd){
+  if(ki<=0) return "---";
+  const idx=Math.max(0,Math.min(9,Math.round(5+Math.log2(Math.max(ki,.1)/100)+Math.log2(iso/800)+Math.log2(48/(SHUTTER_DENOM[sh]||48))-nd)));
+  return `f/${FSTOPS[idx]}`;
+}
+function calcRatio(ki,fi){
+  if(fi<.001) return["∞ :1","#FF1744","No fill — max contrast"];
+  const r=ki/Math.max(fi,.1);
+  for(const[u,l,c,m] of RATIO_TABLE) if(r<u) return[l,c,m];
+  return["16:1","#FF1744","High contrast noir"];
+}
+function dist(x1,y1,x2,y2){ return Math.hypot(x2-x1,y2-y1); }
+function ftM(ft){ return Math.round(ft*3048)/10000; }
+function rot2d(vx,vy,t){ return[vx*Math.cos(t)-vy*Math.sin(t),vx*Math.sin(t)+vy*Math.cos(t)]; }
+function pad(n){ return n.toString().padStart(2,'0'); }
+function getShutter(){ return S.mode==="Video/Cinema"?(SHUTTER_BY_FPS[S.fps]||"1/48"):"1/125"; }
+function getFstop(){ return calcFstop(S.key_intensity, S.iso, getShutter(), ND_OPTIONS[S.nd_label]||0); }
+
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// PLACING MODE
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+let placing = null;
+
+function startPlacing(what){
+  placing = what;
+  document.getElementById('placing-banner').classList.remove('hidden');
+  const names = {key:t('keyLight'),fill1:t('fill1'),back:t('back'),actor1:t('talent'),actor2:t('actor2Name')};
+  document.getElementById('placing-label').textContent = `${t('placingMsg')}: ${names[what]||what}`;
+  // Highlight active place button
+  document.querySelectorAll('.place-btn').forEach(b=>b.classList.remove('active'));
+  const btn = document.getElementById(`place-${what}-btn`);
+  if(btn) btn.classList.add('active');
+}
+
+function cancelPlacing(){
+  placing = null;
+  document.getElementById('placing-banner').classList.add('hidden');
+  document.querySelectorAll('.place-btn').forEach(b=>b.classList.remove('active'));
+}
+
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// SYNC DOM ↔  STATE
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+function syncDOM(){
+  const set=(id,v)=>{ const el=document.getElementById(id); if(el){ if(el.type==='checkbox') el.checked=v; else el.value=v; }};
+  set('mode',S.mode); set('lens',S.lens); set('fps',S.fps); set('resolution',S.resolution);
+  set('iso',S.iso); set('nd_label',S.nd_label); set('aspect',S.aspect);
+  set('cam_pan',S.cam_pan); set('cam_dolly',S.cam_dolly); set('cam_x',S.cam_x);
+  set('key_intensity',S.key_intensity); set('key_kelvin',S.key_kelvin); set('key_x',S.key_x); set('key_y',S.key_y);
+  set('fill1_on',S.fill1_on); set('fill1_intensity',S.fill1_intensity); set('fill1_kelvin',S.fill1_kelvin);
+  set('fill1_x',S.fill1_x); set('fill1_y',S.fill1_y);
+  set('back_on',S.back_on); set('back_intensity',S.back_intensity); set('back_kelvin',S.back_kelvin);
+  set('back_x',S.back_x); set('back_y',S.back_y);
+  set('fill2_on',S.fill2_on); set('fill2_intensity',S.fill2_intensity); set('fill2_kelvin',S.fill2_kelvin);
+  set('talent_name',S.talent_name); set('talent_x',S.talent_x); set('talent_y',S.talent_y);
+  set('actor2_on',S.actor2_on); set('actor2_name',S.actor2_name); set('actor2_x',S.actor2_x); set('actor2_y',S.actor2_y);
+  set('approved_dp',S.approved_dp); set('approved_gaffer',S.approved_gaffer); set('approved_director',S.approved_director);
+  set('show_thirds',S.show_thirds); set('show_safe',S.show_safe); set('show_center',S.show_center); set('show_hud',S.show_hud);
+  set('show_waveform',S.show_waveform); set('show_zebra',S.show_zebra); set('show_focus',S.show_focus); set('show_false_color',S.show_false_color);
+  set('live_director',S.live_director);
+  // Sync badge states
+  const db=document.getElementById('director-badge');
+  if(db) db.classList.toggle('active',S.live_director);
+  set('sun_mode',S.sun_mode);
+  showHideCtrls();
+}
+
+function showHideCtrls(){
+  document.getElementById('fill1-ctrls').style.display   = S.fill1_on ? '' : 'none';
+  document.getElementById('back-ctrls').style.display    = S.back_on  ? '' : 'none';
+  document.getElementById('fill2-ctrls').classList.toggle('hidden',!S.fill2_on);
+  document.getElementById('actor2-ctrls').classList.toggle('hidden',!S.actor2_on);
+  document.getElementById('sun-card').classList.toggle('hidden',!S.sun_mode);
+  document.getElementById('key-manual').style.opacity = S.sun_mode ? '0.5' : '1';
+  document.getElementById('key-manual').style.pointerEvents = S.sun_mode ? 'none' : '';
+  document.getElementById('fps-row').style.display       = '';
+  document.getElementById('res-row').style.display       = '';
+  document.getElementById('shutter-display').style.display = '';
+  // Phone badge
+  const isVertical = Math.abs(S.aspect - 0.5625) < 0.01;
+  document.getElementById('phone-badge').classList.toggle('active', isVertical);
+  // Sun badge
+  document.getElementById('sun-badge').classList.toggle('active', S.sun_mode);
+  // place-actor2 button visibility
+  const pa2 = document.getElementById('place-actor2-btn');
+  if(pa2) pa2.style.display = S.actor2_on ? '' : 'none';
+}
+
+function updateReadouts(){
+  const shutter  = getShutter();
+  const fstop    = getFstop();
+  const fov      = LENS_FOV[S.lens];
+  const fillComb = ((S.fill1_on?S.fill1_intensity:0)+(S.fill2_on?S.fill2_intensity:0))/2;
+  const [rl,rc,rm]= calcRatio(S.key_intensity, fillComb);
+  const [kc,kn]   = kelvinDisplay(S.key_kelvin);
+  const c2t = dist((S.cam_x!=null?S.cam_x:CAM_X),S.cam_dolly,S.talent_x,S.talent_y);
+  const k2t = dist(S.key_x,S.key_y,S.talent_x,S.talent_y);
+  const allOk = S.approved_dp && S.approved_gaffer && S.approved_director;
+
+  // Val labels
+  const v=(id,txt)=>{ const e=document.getElementById(id); if(e) e.textContent=txt; };
+  v('cam_pan_val',`${S.cam_pan}°`); v('cam_dolly_val',`${S.cam_dolly.toFixed(1)} ft`); v('cam_x_val',`${(S.cam_x||15).toFixed(1)} ft`);
+  v('key_int_val',`${S.key_intensity}%`); v('key_k_val',`${S.key_kelvin}K`);
+  v('key_x_val',S.key_x.toFixed(1)); v('key_y_val',S.key_y.toFixed(1));
+  v('fill1_int_val',`${S.fill1_intensity}%`); v('fill1_k_val',`${S.fill1_kelvin}K`);
+  v('fill1_x_val',S.fill1_x.toFixed(1)); v('fill1_y_val',S.fill1_y.toFixed(1));
+  v('back_int_val',`${S.back_intensity}%`); v('back_k_val',`${S.back_kelvin}K`);
+  v('back_x_val',S.back_x.toFixed(1)); v('back_y_val',S.back_y.toFixed(1));
+  v('fill2_int_val',`${S.fill2_intensity}%`); v('fill2_k_val',`${S.fill2_kelvin}K`);
+  v('talent_x_val',S.talent_x.toFixed(1)); v('talent_y_val',S.talent_y.toFixed(1));
+  v('actor2_x_val',S.actor2_x.toFixed(1)); v('actor2_y_val',S.actor2_y.toFixed(1));
+
+  // Swatches
+  const sw=(id,k)=>{ const [c,n]=kelvinDisplay(k); const el=document.getElementById(id); if(el){el.style.background=c;el.textContent=`${k}K — ${n}`;} };
+  sw('key-kswatch',S.key_kelvin); sw('fill1-kswatch',S.fill1_kelvin); sw('back-kswatch',S.back_kelvin);
+
+  // f-stop
+  v('fstop-display', fstop);
+  v('shutter-display', `SHUTTER ${shutter}s · 180° RULE`);
+
+  // Ratio badge
+  const rb=document.getElementById('ratio-badge');
+  if(rb){ rb.style.background=rc; rb.innerHTML=`KEY:FILL  ${rl}<br><span class="ratio-mood">${rm}</span>`; }
+
+  // Distances
+  v('dist-readout', `Cam→ Talent: ${c2t.toFixed(1)} ft / ${ftM(c2t).toFixed(1)} m\\nKey\u8594 Talent: ${k2t.toFixed(1)} ft / ${ftM(k2t).toFixed(1)} m`);
+  document.getElementById('dist-readout').innerHTML =
+    `Cam→ Talent: <b>${c2t.toFixed(1)} ft / ${ftM(c2t).toFixed(1)} m</b><br>Key\u8594 Talent: <b>${k2t.toFixed(1)} ft / ${ftM(k2t).toFixed(1)} m</b>`;
+
+  // Approval
+  if(allOk && !S.approved_at) S.approved_at = new Date().toISOString().slice(0,16).replace('T','  ');
+  if(!allOk) S.approved_at = null;
+  const missing=[!S.approved_dp&&"DP",!S.approved_gaffer&&"Gaffer",!S.approved_director&&"Director"].filter(Boolean);
+  const ab=document.getElementById('appr-badge'), ha=document.getElementById('hdr-appr');
+  if(allOk){
+    ab.className='appr-badge appr-ok'; ab.textContent=`${t('approved')} · ${S.approved_at}`;
+    ha.className='appr-pill ok'; ha.textContent=t('approved');
+    document.getElementById('print-btn').disabled=false;
+  } else {
+    ab.className='appr-badge appr-pending'; ab.textContent=`${t('pending')}: ${missing.join(' · ')}`;
+    ha.className='appr-pill pending'; ha.textContent=t('pending');
+    document.getElementById('print-btn').disabled=true;
+  }
+
+  // Metric strip
+  v('mc-fstop',fstop); v('mc-lens',S.lens); v('mc-fov',`${fov}° field`);
+  v('mc-ratio',rl); v('mc-iso',S.iso); v('mc-shutter',`${shutter}s`);
+  document.getElementById('mc-ratio').style.color=rc;
+  document.getElementById('mc-ratio-bar').style.background=`linear-gradient(90deg,transparent,${rc},transparent)`;
+  document.getElementById('mc-c2t').innerHTML=`${c2t.toFixed(1)}<span style="font-size:10px;opacity:.7">ft</span>`;
+  v('mc-c2t-m',`${ftM(c2t).toFixed(1)} m`);
+  v('mc-kelvin',`${S.key_kelvin}K`); v('mc-kname',kn);
+
+  // Monitor pills
+  const aKey=Object.keys(ASPECT_LABELS).find(k=>Math.abs(parseFloat(k)-S.aspect)<.01);
+  const aLbl=aKey?ASPECT_LABELS[aKey]:`${S.aspect}`;
+  v('mp-fstop',fstop); v('mp-lens',`${S.lens}·${fov}°`);
+  v('mp-ratio',rl); document.getElementById('mp-ratio').style.color=rc;
+  v('mp-kelvin',`${S.key_kelvin}K`); v('mp-aspect',aLbl);
+
+  // Sun elevation pill
+  const sunPill = document.getElementById('mp-sun-pill');
+  const sunElev = document.getElementById('mp-sun-elev');
+  if(sunPill){
+    sunPill.style.display = S.sun_mode && S.sun_elevation!==null ? '' : 'none';
+    if(S.sun_elevation!==null && sunElev) sunElev.textContent=`${S.sun_elevation.toFixed(1)}°`;
+  }
+
+  // Sun card update
+  if(S.sun_mode) updateSunCard();
+}
+
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// DIRECTOR'S MONITOR — Canvas
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+const canvas = document.getElementById('monitor-canvas');
+const ctx    = canvas.getContext('2d');
+
+function sizeMonitor(){
+  const area=document.getElementById('monitor-area');
+  const maxW=area.clientWidth-30, maxH=area.clientHeight-30;
+  // If area hasn't laid out yet, retry after one more rAF
+  if(maxW<20||maxH<20){
+    requestAnimationFrame(sizeMonitor);
+    return;
+  }
+  let W=maxW, H=W/S.aspect;
+  if(H>maxH){H=maxH;W=H*S.aspect;}
+  canvas.width=Math.max(100,Math.floor(W));
+  canvas.height=Math.max(60,Math.floor(H));
+  drawMonitor();
+}
+
+function drawMonitor(){
+  const W=canvas.width, H=canvas.height;
+  if(W<10||H<10) return;
+  const fov=LENS_FOV[S.lens], fovRad=fov*Math.PI/180, panRad=S.cam_pan*Math.PI/180;
+  const _camX=(S.cam_x!=null?S.cam_x:CAM_X);
+  const dx=S.talent_x-_camX, dy=S.talent_y-S.cam_dolly;
+  const talDist=dist(_camX,S.cam_dolly,S.talent_x,S.talent_y);
+  const angToTal=Math.atan2(dx,dy)-panRad;
+  const normX=Math.sin(angToTal)/Math.sin(fovRad/2);
+  const screenX=W/2+normX*(W/2);
+  const inFrame=Math.abs(normX)<=1.2&&dy>0.1;
+  const hRatio=0.60*(parseInt(S.lens)/50)*(5/Math.max(talDist,.3));
+  const talH=H*Math.min(1.5,Math.max(.04,hRatio)), talW=talH*.28;
+  const talCX=Math.max(talW,Math.min(W-talW,screenX)); // clamp so figure stays in canvas
+  const keyAngle=Math.atan2(S.talent_x-S.key_x,S.talent_y-S.key_y);
+  const keyLitDir=Math.sin(keyAngle-panRad);
+  const keyAlpha=S.key_intensity/100;
+  const fillAlpha=S.fill1_on?S.fill1_intensity/100:0;
+  const backAlpha=S.back_on?S.back_intensity/100:0;
+
+  // 1. BG — Live Director's Mode gets true broadcast black
+  const ldm = S.live_director;
+  const ambK=S.key_intensity>0?S.key_kelvin:(S.fill1_on?S.fill1_kelvin:5600);
+  const [ar,ag,ab2]=kRGB(ambK);
+  const bgLum=Math.max(.03,(keyAlpha*.4+fillAlpha*.3+backAlpha*.1)*.35);
+  if(ldm){
+    // True broadcast black — #0A0A0A
+    ctx.fillStyle='#0A0A0A'; ctx.fillRect(0,0,W,H);
+    const bgGrad=ctx.createLinearGradient(0,0,0,H);
+    bgGrad.addColorStop(0,`rgba(${ar},${ag},${ab2},${bgLum*.35})`);
+    bgGrad.addColorStop(.6,`rgba(${Math.round(ar*.3)},${Math.round(ag*.3)},${Math.round(ab2*.3)},${bgLum*.6})`);
+    bgGrad.addColorStop(1,'rgba(0,0,0,0.98)');
+    ctx.fillStyle=bgGrad; ctx.fillRect(0,0,W,H);
+  } else {
+    const bgGrad=ctx.createLinearGradient(0,0,0,H);
+    bgGrad.addColorStop(0,`rgba(${ar},${ag},${ab2},${bgLum*.6})`);
+    bgGrad.addColorStop(.5,`rgba(${Math.round(ar*.4)},${Math.round(ag*.4)},${Math.round(ab2*.4)},${bgLum})`);
+    bgGrad.addColorStop(1,'rgba(10,8,15,0.95)');
+    ctx.fillStyle='#0A080F'; ctx.fillRect(0,0,W,H);
+    ctx.fillStyle=bgGrad; ctx.fillRect(0,0,W,H);
+  }
+  // Sun sky gradient when sun mode
+  if(S.sun_mode && S.sun_elevation!==null && S.sun_elevation>0){
+    const skyK=sunToKelvin(S.sun_elevation);
+    const [skR,skG,skB]=kRGB(skyK);
+    const skyA=Math.min(.4,S.sun_elevation/90*.5);
+    const sky=ctx.createLinearGradient(0,0,0,H*.6);
+    sky.addColorStop(0,`rgba(${skR},${skG},${skB},${skyA})`);
+    sky.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=sky; ctx.fillRect(0,0,W,H*.6);
+  }
+  // Floor/perspective
+  ctx.strokeStyle=`rgba(${ar},${ag},${ab2},${bgLum*1.5})`; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(0,H*.68); ctx.lineTo(W,H*.68); ctx.stroke();
+  ctx.strokeStyle=`rgba(${ar},${ag},${ab2},${bgLum*.5})`; ctx.lineWidth=.5;
+  for(let i=-5;i<=5;i++){
+    if(!i) continue;
+    ctx.beginPath(); ctx.moveTo(talCX,H*.1); ctx.lineTo(W/2+i*(W/8),H*.68); ctx.stroke();
+  }
+  // Key spill
+  if(keyAlpha>0){
+    const [kr,kg,kb]=kRGB(S.key_kelvin);
+    const ksx=W/2+(Math.sin(keyAngle-panRad)/Math.sin(fovRad/2))*(W/2);
+    const sp=ctx.createRadialGradient(ksx,H*.4,0,ksx,H*.4,W*.5);
+    sp.addColorStop(0,`rgba(${kr},${kg},${kb},${keyAlpha*.18})`);
+    sp.addColorStop(1,`rgba(${kr},${kg},${kb},0)`);
+    ctx.fillStyle=sp; ctx.fillRect(0,0,W,H);
+  }
+  // 5.2.4.2: Floor light pool — key hotspot ellipse below talent
+  if(keyAlpha>0.05 && inFrame){
+    const [kr,kg,kb]=kRGB(S.key_kelvin);
+    const poolX=talCX, poolY=H*0.765;
+    const poolRX=Math.max(18, W*0.14*keyAlpha), poolRY=Math.max(5, H*0.038*keyAlpha);
+    ctx.save();
+    ctx.translate(poolX, poolY);
+    ctx.scale(1, poolRY/poolRX);
+    const pool=ctx.createRadialGradient(0,0,0,0,0,poolRX);
+    pool.addColorStop(0,`rgba(${kr},${kg},${kb},${(keyAlpha*0.52).toFixed(3)})`);
+    pool.addColorStop(0.40,`rgba(${kr},${kg},${kb},${(keyAlpha*0.18).toFixed(3)})`);
+    pool.addColorStop(1,`rgba(${kr},${kg},${kb},0)`);
+    ctx.fillStyle=pool; ctx.beginPath(); ctx.arc(0,0,poolRX,0,Math.PI*2); ctx.fill();
+    ctx.restore();
+  }
+  // Fill + Back floor pools (subtle)
+  if(fillAlpha>0.05 && inFrame){
+    const [fr2,fg2,fb2]=kRGB(S.fill1_kelvin);
+    const fpX=talCX + W*0.08, fpY=H*0.778;
+    const fpRX=Math.max(12,W*0.09*fillAlpha);
+    ctx.save(); ctx.translate(fpX,fpY); ctx.scale(1,0.28);
+    const fp=ctx.createRadialGradient(0,0,0,0,0,fpRX);
+    fp.addColorStop(0,`rgba(${fr2},${fg2},${fb2},${(fillAlpha*0.30).toFixed(3)})`);
+    fp.addColorStop(1,`rgba(${fr2},${fg2},${fb2},0)`);
+    ctx.fillStyle=fp; ctx.beginPath(); ctx.arc(0,0,fpRX,0,Math.PI*2); ctx.fill();
+    ctx.restore();
+  }
+  // Sun disc in sky when sun mode + elevation > 0
+  if(S.sun_mode && S.sun_elevation!==null && S.sun_elevation>0){
+    const azR=(S.sun_azimuth-S.cam_pan)*Math.PI/180;
+    const sunX=W/2+Math.sin(azR)*W*.4;
+    const sunY=H*.35-S.sun_elevation/90*H*.3;
+    const [sr,sg,sb]=kRGB(sunToKelvin(S.sun_elevation));
+    const sunR=Math.max(8,14*(1-S.sun_elevation/90));
+    const sunGlow=ctx.createRadialGradient(sunX,sunY,0,sunX,sunY,sunR*4);
+    sunGlow.addColorStop(0,`rgba(${sr},${sg},${sb},0.7)`);
+    sunGlow.addColorStop(.3,`rgba(${sr},${sg},${sb},0.15)`);
+    sunGlow.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=sunGlow; ctx.fillRect(0,0,W,H);
+    ctx.fillStyle=`rgb(${sr},${sg},${sb})`;
+    ctx.beginPath(); ctx.arc(sunX,sunY,sunR,0,Math.PI*2); ctx.fill();
+  }
+
+  // 5.2.4.2: Depth sort — if actor2 is closer than actor1, draw actor2 first
+  const _a2Dist = S.actor2_on ? dist((S.cam_x!=null?S.cam_x:CAM_X), S.cam_dolly, S.actor2_x, S.actor2_y) : Infinity;
+  const _a2DrawnEarly = S.actor2_on && _a2Dist < talDist;
+  if(_a2DrawnEarly){
+    // Draw actor 2 first (it is closer; actor1 will paint over it)
+    const _ax=S.actor2_x, _ay=S.actor2_y;
+    const _dx2=_ax-_camX, _dy2=_ay-S.cam_dolly;
+    const _talDist2=_a2Dist;
+    const _angToTal2=Math.atan2(_dx2,_dy2)-panRad;
+    const _normX2=Math.sin(_angToTal2)/Math.sin(fovRad/2);
+    const _inFrame2=Math.abs(_normX2)<=1.2&&_dy2>0.1;
+    if(_inFrame2){
+      const _hRatio2=0.60*(parseInt(S.lens)/50)*(5/Math.max(_talDist2,.3));
+      const _talH2=H*Math.min(1.5,Math.max(.04,_hRatio2)), _talW2=_talH2*.28;
+      const _talBase2=Math.min(H*.88, Math.max(H*.52, H*.90 - (_talDist2/22)*H*.35));
+      const _screenX2=Math.max(_talW2,Math.min(W-_talW2, W/2+_normX2*(W/2)));
+      const _keyAngle2=Math.atan2(_ax-S.key_x,_ay-S.key_y);
+      const _keyLitDir2=Math.sin(_keyAngle2-panRad);
+      const _shadLum2=Math.max(.05,(S.fill1_on?S.fill1_intensity/100:0)*.35);
+      const _litLum2=Math.max(.12,(S.key_intensity/100)*.75);
+      const _keyLit2=_keyLitDir2>.1;
+      const [_kr2,_kg2,_kb2]=[255,68,170];
+      const _cx2=_screenX2;
+      const _bG2=ctx.createLinearGradient(_cx2-_talW2,0,_cx2+_talW2,0);
+      if(_keyLit2){
+        _bG2.addColorStop(0,`rgba(${Math.round(_kr2*_litLum2)},${Math.round(_kg2*_litLum2)},${Math.round(_kb2*_litLum2)},0.9)`);
+        _bG2.addColorStop(1,`rgba(${Math.round(_kr2*_shadLum2*2)},${Math.round(_kg2*_shadLum2*2)},${Math.round(_kb2*_shadLum2*2)},0.3)`);
+      } else {
+        _bG2.addColorStop(0,`rgba(${Math.round(_kr2*_shadLum2*2)},${Math.round(_kg2*_shadLum2*2)},${Math.round(_kb2*_shadLum2*2)},0.3)`);
+        _bG2.addColorStop(1,`rgba(${Math.round(_kr2*_litLum2)},${Math.round(_kg2*_litLum2)},${Math.round(_kb2*_litLum2)},0.9)`);
+      }
+      const _torsoTop2=Math.max(20,_talBase2-_talH2+_talH2*.25);
+      const _torsoH2=_talH2*.48, _neckH2=_talH2*.08;
+      const _headCY2=Math.max(30,_torsoTop2-_neckH2*1.8);
+      const _headR2=_talW2*.48, _legTop2=_torsoTop2+_torsoH2;
+      const _legH2=_talH2-_talH2*.25-_torsoH2;
+      ctx.fillStyle=_bG2;
+      ctx.beginPath();
+      ctx.moveTo(_cx2-_talW2*.48,_torsoTop2); ctx.lineTo(_cx2+_talW2*.48,_torsoTop2);
+      ctx.lineTo(_cx2+_talW2*.32,_torsoTop2+_torsoH2); ctx.lineTo(_cx2-_talW2*.32,_torsoTop2+_torsoH2);
+      ctx.closePath(); ctx.fill();
+      ctx.beginPath(); ctx.roundRect(_cx2-_talW2*.28,_legTop2,_talW2*.26,_legH2,[0,0,3,3]); ctx.fill();
+      ctx.beginPath(); ctx.roundRect(_cx2+_talW2*.02,_legTop2,_talW2*.26,_legH2,[0,0,3,3]); ctx.fill();
+      const _armLen2=_torsoH2*.85, _so2=_talW2*.38, _swing2=_keyLit2?-14:14;
+      ctx.lineWidth=_talW2*.18; ctx.lineCap='round';
+      ctx.strokeStyle=`rgba(${Math.round(_kr2*_shadLum2*2.5)},${Math.round(_kg2*_shadLum2*2.5)},${Math.round(_kb2*_shadLum2*2.5)},0.85)`;
+      ctx.beginPath(); ctx.moveTo(_cx2-_so2,_torsoTop2+_torsoH2*.18);
+      ctx.quadraticCurveTo(_cx2-_so2-6,_torsoTop2+_torsoH2*.45,_cx2-_so2-Math.sin(_swing2*Math.PI/180)*_armLen2*.7,_torsoTop2+_torsoH2*.92); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(_cx2+_so2,_torsoTop2+_torsoH2*.18);
+      ctx.quadraticCurveTo(_cx2+_so2+6,_torsoTop2+_torsoH2*.45,_cx2+_so2+Math.sin(-_swing2*Math.PI/180)*_armLen2*.7,_torsoTop2+_torsoH2*.92); ctx.stroke();
+      ctx.fillStyle=`rgba(${Math.round(_kr2*_litLum2*.9)},${Math.round(_kg2*_litLum2*.9)},${Math.round(_kb2*_litLum2*.9)},0.95)`;
+      ctx.beginPath(); ctx.ellipse(_cx2,_torsoTop2-_neckH2*.6,_talW2*.22,_neckH2*.9,0,0,Math.PI*2); ctx.fill();
+      const _hG2=ctx.createRadialGradient(_cx2+(_keyLit2?-_headR2*.25:_headR2*.25),_headCY2-_headR2*.25,_headR2*.15,_cx2,_headCY2,_headR2*1.05);
+      _hG2.addColorStop(0,`rgba(${Math.round(_kr2*_litLum2)},${Math.round(_kg2*_litLum2)},${Math.round(_kb2*_litLum2)},0.95)`);
+      _hG2.addColorStop(1,`rgba(${Math.round(_kr2*_shadLum2*3.2)},${Math.round(_kg2*_shadLum2*3.2)},${Math.round(_kb2*_shadLum2*3.2)},0.7)`);
+      ctx.fillStyle=_hG2; ctx.beginPath(); ctx.ellipse(_cx2,_headCY2,_headR2,_headR2*1.18,0,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle='rgba(30,30,35,0.92)';
+      ctx.beginPath(); ctx.ellipse(_cx2,Math.max(_headCY2-_headR2*.62,15),_headR2*.92,_headR2*.42,0,0,Math.PI*2); ctx.fill();
+      if(S.show_hud){
+        ctx.font=`bold ${Math.max(10,_talW2*.55)}px Barlow Condensed,sans-serif`;
+        ctx.fillStyle='rgba(255,68,170,0.9)'; ctx.textAlign='center';
+        ctx.fillText(S.actor2_name.toUpperCase(),_cx2,_talBase2+16);
+      }
+    }
+  }
+
+  // 3. TALENT
+  // 5.1.4: talBase adapts to talH so figure never clips at canvas bottom
+  const talBase=Math.min(H*.88, Math.max(H*.52, H*.90 - (talDist/22)*H*.35));
+  if(inFrame&&talH>6){
+    const [kr,kg,kb]=kRGB(S.key_kelvin);
+    const [fr,fg,fb]=kRGB(S.fill1_kelvin);
+    const [br2,bg2,bb3]=kRGB(S.back_kelvin);
+    const shadLum=Math.max(.05,fillAlpha*.35), litLum=Math.max(.12,keyAlpha*.75);
+    const keyLit=keyLitDir>.1, keyMid=Math.abs(keyLitDir)<=.1;
+    const bG=ctx.createLinearGradient(talCX-talW,0,talCX+talW,0);
+    if(keyMid){
+      bG.addColorStop(0,`rgba(${Math.round(fr*.5)},${Math.round(fg*.5)},${Math.round(fb*.5)},${shadLum+.1})`);
+      bG.addColorStop(.5,`rgba(${Math.round(kr*litLum+fr*shadLum)},${Math.round(kg*litLum+fg*shadLum)},${Math.round(kb*litLum+fb*shadLum)},0.9)`);
+      bG.addColorStop(1,`rgba(${Math.round(fr*.5)},${Math.round(fg*.5)},${Math.round(fb*.5)},${shadLum+.1})`);
+    } else if(keyLit){
+      bG.addColorStop(0,`rgba(${Math.round(kr*litLum)},${Math.round(kg*litLum)},${Math.round(kb*litLum)},0.92)`);
+      bG.addColorStop(.45,`rgba(${Math.round(kr*litLum*.6+fr*shadLum)},${Math.round(kg*litLum*.6+fg*shadLum)},${Math.round(kb*litLum*.6+fb*shadLum)},0.85)`);
+      bG.addColorStop(1,`rgba(${Math.round(fr*shadLum*2.5)},${Math.round(fg*shadLum*2.5)},${Math.round(fb*shadLum*2.5)},${Math.max(.12,shadLum+.05)})`);
+    } else {
+      bG.addColorStop(0,`rgba(${Math.round(fr*shadLum*2.5)},${Math.round(fg*shadLum*2.5)},${Math.round(fb*shadLum*2.5)},${Math.max(.12,shadLum+.05)})`);
+      bG.addColorStop(.55,`rgba(${Math.round(kr*litLum*.6+fr*shadLum)},${Math.round(kg*litLum*.6+fg*shadLum)},${Math.round(kb*litLum*.6+fb*shadLum)},0.85)`);
+      bG.addColorStop(1,`rgba(${Math.round(kr*litLum)},${Math.round(kg*litLum)},${Math.round(kb*litLum)},0.92)`);
+    }
+    // --- HUMAN FIGURE (5.2 v2 — trapezoid torso + stroked arms) ---
+    const torsoTop = Math.max(20, talBase - talH + talH * .25);
+    const torsoH   = talH * .48;
+    const neckH    = talH * .08;
+    const headCY   = Math.max(30, torsoTop - neckH * 1.8);
+    const headR    = talW * .48;
+    const legTop   = torsoTop + torsoH;
+    const legH     = talH - talH * .25 - torsoH;
+
+    // Tapered torso — wide shoulders → narrow hips
+    ctx.fillStyle = bG;
+    ctx.beginPath();
+    ctx.moveTo(talCX - talW * .48, torsoTop);
+    ctx.lineTo(talCX + talW * .48, torsoTop);
+    ctx.lineTo(talCX + talW * .32, torsoTop + torsoH);
+    ctx.lineTo(talCX - talW * .32, torsoTop + torsoH);
+    ctx.closePath(); ctx.fill();
+
+    // Legs
+    ctx.fillStyle = bG;
+    ctx.beginPath(); ctx.roundRect(talCX - talW * .28, legTop, talW * .26, legH, [0,0,3,3]); ctx.fill();
+    ctx.beginPath(); ctx.roundRect(talCX + talW * .02, legTop, talW * .26, legH, [0,0,3,3]); ctx.fill();
+
+    // Arms — thick rounded strokes, mirrored swing
+    const armLen = torsoH * .85;
+    const shoulderOffset = talW * .38;
+    const armSwing = keyLit ? -14 : 14;
+    ctx.lineWidth = talW * .18; ctx.lineCap = 'round';
+    ctx.strokeStyle = `rgba(${Math.round(fr*shadLum*2)},${Math.round(fg*shadLum*2)},${Math.round(fb*shadLum*2)},0.85)`;
+    ctx.beginPath();
+    ctx.moveTo(talCX - shoulderOffset, torsoTop + torsoH * .18);
+    ctx.quadraticCurveTo(talCX - shoulderOffset - 6, torsoTop + torsoH * .45,
+                         talCX - shoulderOffset - Math.sin(armSwing * Math.PI/180) * armLen * .7,
+                         torsoTop + torsoH * .92);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(talCX + shoulderOffset, torsoTop + torsoH * .18);
+    ctx.quadraticCurveTo(talCX + shoulderOffset + 6, torsoTop + torsoH * .45,
+                         talCX + shoulderOffset + Math.sin(-armSwing * Math.PI/180) * armLen * .7,
+                         torsoTop + torsoH * .92);
+    ctx.stroke();
+
+    // Neck
+    ctx.fillStyle = `rgba(${Math.round(kr*litLum*.9)},${Math.round(kg*litLum*.9)},${Math.round(kb*litLum*.9)},0.95)`;
+    ctx.beginPath();
+    ctx.ellipse(talCX, torsoTop - neckH * .6, talW * .22, neckH * .9, 0, 0, Math.PI*2);
+    ctx.fill();
+
+    // Head
+    const hG=ctx.createRadialGradient(
+      talCX+(keyLit?-headR*.25:headR*.25), headCY-headR*.25, headR*.15,
+      talCX, headCY, headR*1.05);
+    hG.addColorStop(0,`rgba(${Math.round(kr*litLum)},${Math.round(kg*litLum)},${Math.round(kb*litLum)},0.98)`);
+    hG.addColorStop(1,`rgba(${Math.round(fr*shadLum*3.2)},${Math.round(fg*shadLum*3.2)},${Math.round(fb*shadLum*3.2)},0.75)`);
+    ctx.fillStyle=hG;
+    ctx.beginPath(); ctx.ellipse(talCX, headCY, headR, headR*1.18, 0, 0, Math.PI*2); ctx.fill();
+
+    // Hair cap — solid dark, reads instantly
+    ctx.fillStyle = 'rgba(30,30,35,0.92)';
+    ctx.beginPath();
+    ctx.ellipse(talCX, Math.max(headCY - headR * .62, 15), headR * .92, headR * .42, 0, 0, Math.PI*2);
+    ctx.fill();
+
+    // Rim light
+    if(S.back_on&&S.back_intensity>10){
+      const rimA=Math.min(.9,backAlpha*.8), rimS=keyLit?1:-1;
+      const rG=ctx.createLinearGradient(talCX+rimS*(headR*.45),0,talCX+rimS*(headR*1.3),0);
+      rG.addColorStop(0,'rgba(0,0,0,0)'); rG.addColorStop(1,`rgba(${br2},${bg2},${bb3},${rimA})`);
+      ctx.fillStyle=rG; ctx.beginPath(); ctx.ellipse(talCX,headCY,headR,headR*1.18,0,0,Math.PI*2); ctx.fill();
+      const rbG=ctx.createLinearGradient(talCX+rimS*(talW*.2),0,talCX+rimS*(talW*.7),0);
+      rbG.addColorStop(0,'rgba(0,0,0,0)'); rbG.addColorStop(1,`rgba(${br2},${bg2},${bb3},${rimA*.7})`);
+      ctx.fillStyle=rbG;
+      ctx.beginPath(); ctx.moveTo(talCX-talW*.48,torsoTop); ctx.lineTo(talCX+talW*.48,torsoTop);
+      ctx.lineTo(talCX+talW*.32,torsoTop+torsoH); ctx.lineTo(talCX-talW*.32,torsoTop+torsoH); ctx.closePath(); ctx.fill();
+    }
+
+    if(S.show_hud){
+      ctx.font=`bold ${Math.max(10,talW*.55)}px Barlow Condensed,sans-serif`;
+      ctx.fillStyle='rgba(255,68,102,0.9)'; ctx.textAlign='center';
+      ctx.fillText(S.talent_name.toUpperCase(), talCX, talBase+16);
+    }
+    if(S.show_focus){ ctx.strokeStyle='rgba(0,212,204,0.75)'; ctx.lineWidth=1.5; ctx.beginPath(); ctx.ellipse(talCX,headCY,headR+1,headR*1.12+1,0,0,Math.PI*2); ctx.stroke(); }
+    if(S.show_zebra&&keyAlpha>.7){
+      ctx.save(); ctx.beginPath(); ctx.ellipse(talCX,headCY,headR,headR*1.12,0,0,Math.PI*2); ctx.clip();
+      ctx.strokeStyle= ldm ? 'rgba(255,180,0,0.65)' : 'rgba(255,226,0,0.55)'; ctx.lineWidth=2;
+      for(let z=-headR*2;z<headR*2;z+=8){ ctx.beginPath(); ctx.moveTo(talCX-headR+z,headCY-headR*1.5); ctx.lineTo(talCX-headR+z+8,headCY+headR*1.5); ctx.stroke(); }
+      ctx.restore();
+    }
+    if(S.show_false_color){
+      const fc=keyAlpha<.2?'rgba(0,40,220,0.45)':keyAlpha<.45?'rgba(0,180,80,0.45)':keyAlpha<.75?'rgba(255,140,0,0.45)':'rgba(255,23,68,0.45)';
+      ctx.fillStyle=fc;
+      ctx.beginPath(); ctx.ellipse(talCX,headCY,headR,headR*1.12,0,0,Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(talCX-sw,shoulderY); ctx.lineTo(talCX+sw,shoulderY); ctx.lineTo(talCX+ankW,footY); ctx.lineTo(talCX-ankW,footY); ctx.closePath(); ctx.fill();
+    }
+  }
+
+  // 3b. ACTOR 2 (5.0 BETA) — depth-sorted: farther actor drawn first
+  // _a2DrawnEarly = true means actor2 was already drawn before actor1 (it was closer)
+  if(S.actor2_on && !_a2DrawnEarly){
+    const ax=S.actor2_x, ay=S.actor2_y;
+    const dx2=ax-_camX, dy2=ay-S.cam_dolly;
+    const talDist2=dist(_camX,S.cam_dolly,ax,ay);
+    const angToTal2=Math.atan2(dx2,dy2)-panRad;
+    const normX2=Math.sin(angToTal2)/Math.sin(fovRad/2);
+    const screenX2raw=W/2+normX2*(W/2);
+    const inFrame2=Math.abs(normX2)<=1.2&&dy2>0.1;
+    if(inFrame2){
+      const hRatio2=0.60*(parseInt(S.lens)/50)*(5/Math.max(talDist2,.3));
+      const talH2=H*Math.min(1.5,Math.max(.04,hRatio2)), talW2=talH2*.28;
+      const talBase2=Math.min(H*.88, Math.max(H*.52, H*.90 - (talDist2/22)*H*.35));
+      const screenX2=Math.max(talW2,Math.min(W-talW2,screenX2raw)); // clamp
+      const keyAngle2=Math.atan2(ax-S.key_x,ay-S.key_y);
+      const keyLitDir2=Math.sin(keyAngle2-panRad);
+      const shadLum2=Math.max(.05,(S.fill1_on?S.fill1_intensity/100:0)*.35);
+      const litLum2=Math.max(.12,(S.key_intensity/100)*.75);
+      const keyLit2=keyLitDir2>.1;
+      const [kr2,kg2,kb2]=[255,68,170]; // pink
+      const bG2=ctx.createLinearGradient(screenX2-talW2,0,screenX2+talW2,0);
+      if(keyLit2){
+        bG2.addColorStop(0,`rgba(${Math.round(kr2*litLum2)},${Math.round(kg2*litLum2)},${Math.round(kb2*litLum2)},0.9)`);
+        bG2.addColorStop(1,`rgba(${Math.round(kr2*shadLum2*2)},${Math.round(kg2*shadLum2*2)},${Math.round(kb2*shadLum2*2)},0.3)`);
+      } else {
+        bG2.addColorStop(0,`rgba(${Math.round(kr2*shadLum2*2)},${Math.round(kg2*shadLum2*2)},${Math.round(kb2*shadLum2*2)},0.3)`);
+        bG2.addColorStop(1,`rgba(${Math.round(kr2*litLum2)},${Math.round(kg2*litLum2)},${Math.round(kb2*litLum2)},0.9)`);
+      }
+      // --- ACTOR 2 HUMAN FIGURE (5.2 v2) ---
+      const torsoTop2 = Math.max(20, talBase2 - talH2 + talH2 * .25);
+      const torsoH2   = talH2 * .48;
+      const neckH2    = talH2 * .08;
+      const headCY2   = Math.max(30, torsoTop2 - neckH2 * 1.8);
+      const headR2    = talW2 * .48;
+      const legTop2   = torsoTop2 + torsoH2;
+      const legH2     = talH2 - talH2 * .25 - torsoH2;
+      const cx2       = screenX2;
+
+      // Tapered torso
+      ctx.fillStyle=bG2;
+      ctx.beginPath();
+      ctx.moveTo(cx2 - talW2*.48, torsoTop2);
+      ctx.lineTo(cx2 + talW2*.48, torsoTop2);
+      ctx.lineTo(cx2 + talW2*.32, torsoTop2 + torsoH2);
+      ctx.lineTo(cx2 - talW2*.32, torsoTop2 + torsoH2);
+      ctx.closePath(); ctx.fill();
+
+      // Legs
+      ctx.beginPath(); ctx.roundRect(cx2 - talW2*.28, legTop2, talW2*.26, legH2, [0,0,3,3]); ctx.fill();
+      ctx.beginPath(); ctx.roundRect(cx2 + talW2*.02, legTop2, talW2*.26, legH2, [0,0,3,3]); ctx.fill();
+
+      // Arms — pink-tinted strokes
+      const armLen2 = torsoH2 * .85;
+      const so2 = talW2 * .38;
+      const swing2 = keyLit2 ? -14 : 14;
+      ctx.lineWidth = talW2 * .18; ctx.lineCap = 'round';
+      ctx.strokeStyle = `rgba(${Math.round(kr2*shadLum2*2.5)},${Math.round(kg2*shadLum2*2.5)},${Math.round(kb2*shadLum2*2.5)},0.85)`;
+      ctx.beginPath();
+      ctx.moveTo(cx2 - so2, torsoTop2 + torsoH2*.18);
+      ctx.quadraticCurveTo(cx2 - so2 - 6, torsoTop2 + torsoH2*.45,
+                           cx2 - so2 - Math.sin(swing2*Math.PI/180)*armLen2*.7,
+                           torsoTop2 + torsoH2*.92);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(cx2 + so2, torsoTop2 + torsoH2*.18);
+      ctx.quadraticCurveTo(cx2 + so2 + 6, torsoTop2 + torsoH2*.45,
+                           cx2 + so2 + Math.sin(-swing2*Math.PI/180)*armLen2*.7,
+                           torsoTop2 + torsoH2*.92);
+      ctx.stroke();
+
+      // Neck
+      ctx.fillStyle=`rgba(${Math.round(kr2*litLum2*.9)},${Math.round(kg2*litLum2*.9)},${Math.round(kb2*litLum2*.9)},0.95)`;
+      ctx.beginPath();
+      ctx.ellipse(cx2, torsoTop2 - neckH2*.6, talW2*.22, neckH2*.9, 0, 0, Math.PI*2);
+      ctx.fill();
+
+      // Head
+      const hG2=ctx.createRadialGradient(cx2+(keyLit2?-headR2*.25:headR2*.25),headCY2-headR2*.25,headR2*.15,cx2,headCY2,headR2*1.05);
+      hG2.addColorStop(0,`rgba(${Math.round(kr2*litLum2)},${Math.round(kg2*litLum2)},${Math.round(kb2*litLum2)},0.95)`);
+      hG2.addColorStop(1,`rgba(${Math.round(kr2*shadLum2*3.2)},${Math.round(kg2*shadLum2*3.2)},${Math.round(kb2*shadLum2*3.2)},0.7)`);
+      ctx.fillStyle=hG2; ctx.beginPath(); ctx.ellipse(cx2,headCY2,headR2,headR2*1.18,0,0,Math.PI*2); ctx.fill();
+
+      // Hair cap — solid dark
+      ctx.fillStyle='rgba(30,30,35,0.92)';
+      ctx.beginPath();
+      ctx.ellipse(cx2, Math.max(headCY2 - headR2*.62, 15), headR2*.92, headR2*.42, 0, 0, Math.PI*2);
+      ctx.fill();
+
+      if(S.show_hud){
+        ctx.font=`bold ${Math.max(10,talW2*.55)}px Barlow Condensed,sans-serif`;
+        ctx.fillStyle='rgba(255,68,170,0.9)'; ctx.textAlign='center';
+        ctx.fillText(S.actor2_name.toUpperCase(), cx2, talBase2+16);
+      }
+    }
+    // 180° LINE WARNING
+    const a1x=S.talent_x-_camX, a1y=S.talent_y-S.cam_dolly;
+    const a2x=ax-_camX, a2y=ay-S.cam_dolly;
+    const cross=a1x*a2y-a2x*a1y; // cross product z
+    const camToLine=Math.sqrt(a1x*a1x+a1y*a1y)*Math.sqrt(a2x*a2x+a2y*a2y);
+    const angle180=camToLine>0.1?Math.acos(Math.max(-1,Math.min(1,(a1x*a2x+a1y*a2y)/camToLine)))*180/Math.PI:0;
+    if(Math.abs(cross)<0.8&&angle180>160){
+      ctx.fillStyle='rgba(255,0,68,0.18)';
+      ctx.fillRect(0,0,W,H);
+      ctx.font='bold 26px Barlow Condensed,sans-serif';
+      ctx.fillStyle='rgba(255,23,68,0.95)'; ctx.textAlign='center';
+      ctx.fillText('! 180° LINE WARNING !', W/2, H/2-12);
+      ctx.font='bold 12px JetBrains Mono,monospace';
+      ctx.fillStyle='rgba(255,100,100,0.7)';
+      ctx.fillText('ACTORS ARE ON THE SAME AXIS AS CAMERA', W/2, H/2+10);
+    }
+  }
+
+  // 4. OVERLAYS
+  if(S.show_thirds){
+    // 5.2: LDM → bright green broadcast grid; normal → Arri-style broadcast red (near-opaque, reads against any scene content)
+    const thirdsColor = ldm ? 'rgba(0,255,140,0.40)' : 'rgba(255,60,60,0.80)';
+    const dotColor    = ldm ? 'rgba(0,255,140,0.75)' : 'rgba(255,60,60,1.00)';
+    ctx.strokeStyle=thirdsColor; ctx.lineWidth=1; ctx.setLineDash([]);
+    for(const d of[1/3,2/3]){ ctx.beginPath(); ctx.moveTo(d*W,0); ctx.lineTo(d*W,H); ctx.stroke(); ctx.beginPath(); ctx.moveTo(0,d*H); ctx.lineTo(W,d*H); ctx.stroke(); }
+    ctx.fillStyle=dotColor;
+    for(const dx of[1/3,2/3]) for(const dy of[1/3,2/3]){ ctx.beginPath(); ctx.arc(dx*W,dy*H,3,0,Math.PI*2); ctx.fill(); }
+  }
+  if(S.show_safe){
+    const ax=W*.05,ay=H*.05;
+    // 5.2: LDM → cyan safe lines (broadcast standard); normal → soft white dashed
+    const safeColor  = ldm ? 'rgba(0,212,255,0.60)' : 'rgba(255,60,60,0.70)';
+    const safeColor2 = ldm ? 'rgba(0,212,255,0.35)' : 'rgba(255,60,60,0.50)';
+    const lblColor   = ldm ? 'rgba(0,212,255,0.70)' : 'rgba(255,60,60,0.85)';
+    ctx.strokeStyle=safeColor; ctx.lineWidth=1; ctx.setLineDash([6,4]);
+    ctx.beginPath(); ctx.roundRect(ax,ay,W-ax*2,H-ay*2,2); ctx.stroke();
+    const tx=W*.10,ty=H*.10;
+    ctx.strokeStyle=safeColor2; ctx.beginPath(); ctx.roundRect(tx,ty,W-tx*2,H-ty*2,2); ctx.stroke();
+    ctx.setLineDash([]); ctx.font='7px JetBrains Mono,monospace'; ctx.fillStyle=lblColor; ctx.textAlign='left';
+    ctx.fillText('ACTION SAFE',ax+4,ay+10); ctx.fillText('TITLE SAFE',tx+4,ty+10);
+  }
+  // 5.2.4.2: Vertical (9:16) mobile safe zones — TikTok/Reels/Shorts UI zones
+  if(Math.abs(S.aspect - 0.5625) < 0.01){
+    const vzColor = ldm ? 'rgba(255,180,0,0.55)' : 'rgba(255,180,0,0.40)';
+    const vzLabel = ldm ? 'rgba(255,200,0,0.80)' : 'rgba(255,200,0,0.55)';
+    ctx.setLineDash([5,4]); ctx.lineWidth=1;
+    // Top UI zone — ~12% height (app header, captions)
+    const topZone = H*0.12;
+    ctx.strokeStyle=vzColor;
+    ctx.beginPath(); ctx.moveTo(0,topZone); ctx.lineTo(W,topZone); ctx.stroke();
+    // Bottom UI zone — ~20% height (CTA buttons, captions, like/share)
+    const botZone = H*0.80;
+    ctx.beginPath(); ctx.moveTo(0,botZone); ctx.lineTo(W,botZone); ctx.stroke();
+    ctx.setLineDash([]); ctx.font='7px JetBrains Mono,monospace'; ctx.fillStyle=vzLabel;
+    ctx.textAlign='left';
+    ctx.fillText('▲ UI / CAPTION ZONE',4,topZone-3);
+    ctx.fillText('▼ CTA / INTERACTION ZONE',4,botZone+10);
+    // Safe content band label
+    ctx.textAlign='center'; ctx.fillStyle=vzColor;
+    ctx.fillText('── SAFE CONTENT BAND ──',W/2,(topZone+botZone)/2);
+  }
+  if(S.show_center){
+    const cx2=W/2,cy2=H/2;
+    const crossColor = ldm ? 'rgba(0,255,140,0.55)' : 'rgba(255,60,60,0.80)';
+    ctx.strokeStyle=crossColor; ctx.lineWidth=1; ctx.setLineDash([]);
+    ctx.beginPath(); ctx.moveTo(cx2-14,cy2); ctx.lineTo(cx2+14,cy2); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx2,cy2-14); ctx.lineTo(cx2,cy2+14); ctx.stroke();
+    ctx.beginPath(); ctx.arc(cx2,cy2,4,0,Math.PI*2); ctx.stroke();
+  }
+  if(S.show_hud){
+    const fstop=getFstop(); const [kr,kg,kb]=kRGB(S.key_kelvin); const [,kn]=kelvinDisplay(S.key_kelvin);
+    // 5.2: Live Director's Mode uses high-contrast broadcast colors
+    const hudPrimary = ldm ? '#E0F0FF' : 'rgba(0,212,204,0.85)';
+    const hudSecondary = ldm ? '#00FFAA' : 'rgba(0,255,136,0.85)';
+    const hudOrange = ldm ? 'rgba(255,140,0,0.95)' : 'rgba(255,107,0,0.75)';
+    const hudCenter = ldm ? 'rgba(255,255,255,0.65)' : 'rgba(255,255,255,0.4)';
+    const fwt = ldm ? '700' : 'bold';
+    const fls = ldm ? 0.05 : 0;
+    ctx.font=`${fwt} 10px JetBrains Mono,monospace`; ctx.setLineDash([]);
+    // Letter spacing via fillText — use manual spacing for LDM
+    ctx.textAlign='left'; ctx.fillStyle=hudPrimary;
+    ctx.fillText(`${S.lens}  ·  FOV ${LENS_FOV[S.lens]}°  ·  PAN ${S.cam_pan}°`, 8, 14);
+    ctx.textAlign='right'; ctx.fillStyle=hudSecondary;
+    ctx.fillText(`${fstop}  ·  ISO ${S.iso}  ·  ${getShutter()}s`, W-8, 14);
+    ctx.textAlign='left'; ctx.fillStyle=hudOrange;
+    ctx.fillText(`C→ T: ${dist(_camX,S.cam_dolly,S.talent_x,S.talent_y).toFixed(1)} ft`, 8, H-8);
+    ctx.textAlign='right'; ctx.fillStyle=ldm?`rgba(${kr},${kg},${kb},0.98)`:`rgba(${kr},${kg},${kb},0.85)`;
+    const sunStr = S.sun_mode&&S.sun_elevation!==null?` ☀ ${S.sun_elevation.toFixed(0)}°`:'';
+    ctx.fillText(`${S.key_kelvin}K ${kn}${sunStr}`, W-8, H-8);
+    const now=new Date();
+    ctx.textAlign='center'; ctx.fillStyle=hudCenter;
+    ctx.fillText(`${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}:00`, W/2, 14);
+    ctx.fillStyle= ldm ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.3)';
+    ctx.fillText(`DOLLY ${S.cam_dolly.toFixed(1)} ft`, W/2, H-8);
+    // 5.2 Live Director's Mode: resolution + format badge top-right corner
+    if(ldm){
+      ctx.textAlign='right'; ctx.fillStyle='rgba(224,240,255,0.55)'; ctx.font='bold 8px JetBrains Mono,monospace';
+      ctx.fillText(`${S.resolution||'1080p'}  ·  ${S.fps}fps  ·  S-Log`, W-8, 26);
+    }
+    if(S.sun_mode&&S.sun_lat!==null){
+      ctx.textAlign='center'; ctx.fillStyle='rgba(255,179,0,0.5)';
+      ctx.font='bold 10px JetBrains Mono,monospace';
+      ctx.fillText(`&#127760; ${S.sun_lat.toFixed(3)}° ${S.sun_lon>=0?S.sun_lon.toFixed(3)+'°E':Math.abs(S.sun_lon).toFixed(3)+'°W'}`, W/2, H-20);
+    }
+  }
+  if(S.show_waveform){
+    const wx=10,wy=H-96,ww=120,wh=78;
+    const wBg = ldm ? 'rgba(0,5,10,0.92)' : 'rgba(5,10,20,0.88)';
+    ctx.fillStyle=wBg; ctx.beginPath(); ctx.roundRect(wx,wy,ww,wh,3); ctx.fill();
+    ctx.strokeStyle= ldm ? 'rgba(0,255,170,0.35)' : 'rgba(20,40,60,0.9)';
+    ctx.lineWidth=1; ctx.beginPath(); ctx.roundRect(wx,wy,ww,wh,3); ctx.stroke();
+    ctx.font='7px JetBrains Mono,monospace';
+    ctx.fillStyle= ldm ? '#00FFAA' : 'rgba(40,100,80,0.8)';
+    ctx.textAlign='left'; ctx.fillText('WAVEFORM',wx+5,wy+10);
+    const kl=S.key_intensity/100, fl=S.fill1_on?S.fill1_intensity/100:0;
+    // 5.2 LDM: teal waveform with 2px glow line
+    const wColor = ldm ? 'rgba(0,255,170,0.85)' : 'rgba(0,200,100,0.7)';
+    for(let x=wx+4;x<wx+ww-4;x+=2){
+      ctx.strokeStyle=wColor; ctx.lineWidth= ldm ? 1.5 : 1;
+      ctx.beginPath(); ctx.moveTo(x,wy+wh-8-fl*18); ctx.lineTo(x,wy+wh-8-kl*60); ctx.stroke();
+    }
+    ctx.fillStyle= ldm ? 'rgba(0,200,130,0.7)' : 'rgba(60,100,80,0.6)';
+    ctx.textAlign='right';
+    ctx.fillText('100',wx+ww-2,wy+14); ctx.fillText('0',wx+ww-2,wy+wh-4);
+  }
+  const vig=ctx.createRadialGradient(W/2,H/2,H*.22,W/2,H/2,H*.82);
+  vig.addColorStop(0,'rgba(0,0,0,0)'); vig.addColorStop(1,'rgba(0,0,0,0.55)');
+  ctx.fillStyle=vig; ctx.fillRect(0,0,W,H);
+  ctx.fillStyle='rgba(0,0,0,0.025)';
+  for(let y=0;y<H;y+=2) ctx.fillRect(0,y,W,1);
+}
+
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// FLOOR PLAN — Plotly.js
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+let plotInited = false;
+let printMode = false;
+
+function drawFloorPlan(){
+  const _fpDiv = document.getElementById('floor-plan');
+  const _tcDiv = document.getElementById('tab-content');
+  const _fpH = (_tcDiv && _tcDiv.offsetHeight > 50)
+    ? _tcDiv.offsetHeight
+    : Math.max(400, window.innerHeight - 172);
+  if(_fpDiv) _fpDiv.style.height = _fpH + 'px';
+  const W=STAGE_W, H=STAGE_H;
+  const fov=LENS_FOV[S.lens], shutter=getShutter(), fstop=getFstop();
+  const camX=(S.cam_x!=null?S.cam_x:CAM_X), camY=S.cam_dolly;
+  const tx=S.talent_x, ty=S.talent_y;
+  const [kc,kn]=kelvinDisplay(S.key_kelvin);
+  const [kr,kg,kb]=hexRGB(kc);
+  const fillComb=((S.fill1_on?S.fill1_intensity:0)+(S.fill2_on?S.fill2_intensity:0))/2;
+  const [rl,rc,rm]=calcRatio(S.key_intensity, fillComb);
+  const c2t=dist(camX,camY,tx,ty);
+  const k2t=dist(S.key_x,S.key_y,tx,ty);
+  const panRad=S.cam_pan*Math.PI/180, fovHalf=(fov/2)*Math.PI/180;
+  const [tcR,tcG,tcB]=hexRGB('#00D4CC');
+
+  // ── FLOOR THEME (5.2) ──────────────────────────────────────────────
+  const FLOOR='#E8EAEC';       // light neutral studio floor
+  const WALL='#1A1A2E';        // dark set walls — boundary stays dark
+  const GRID_M='#D0D2D6';      // minor 1ft grid
+  const GRID_5='#B0B4BA';      // major 5ft grid
+  const DIM='#3A4F58';         // dimension text
+  const LBL='#4A5A68';         // wall labels — readable on light floor
+  let shapes=[], annotations=[], data=[];
+
+  // Stage floor + walls
+  shapes.push({type:"rect",x0:0,y0:0,x1:W,y1:H,fillcolor:FLOOR,line:{color:WALL,width:3.5}});
+  for(let x=1;x<W;x++){const c=x%5?GRID_M:GRID_5,w=x%5?.4:1.0; shapes.push({type:"line",x0:x,y0:0,x1:x,y1:H,line:{color:c,width:w}});}
+  for(let y=1;y<H;y++){const c=y%5?GRID_M:GRID_5,w=y%5?.4:1.0; shapes.push({type:"line",x0:0,y0:y,x1:W,y1:y,line:{color:c,width:w}});}
+  // 4th wall open dashed line — blue
+  shapes.push({type:"line",x0:0,y0:0,x1:W,y1:0,line:{color:"#0055CC",width:2,dash:"dot"}});
+
+  annotations.push({x:-2,y:H/2,text:"WALL 1",textangle:-90,showarrow:false,font:{size:9,color:LBL,family:"JetBrains Mono"}});
+  annotations.push({x:W/2,y:H+1.7,text:"WALL 2 — BACK",showarrow:false,font:{size:9,color:LBL,family:"JetBrains Mono"}});
+  annotations.push({x:W+2,y:H/2,text:"WALL 3",textangle:90,showarrow:false,font:{size:9,color:LBL,family:"JetBrains Mono"}});
+  annotations.push({x:W/2,y:-.7,text:placing?`⚡  ${t('placingMsg').toUpperCase()}: ${placing.toUpperCase()}`:"4TH WALL — OPEN  ·  CLICK &#128205; PLACE TO MOVE LIGHTS",showarrow:false,
+    font:{size:9,color:placing?"#CC8800":"#0055CC",family:"JetBrains Mono"}});
+  annotations.push({x:W/2,y:H+.9,text:"30 ft  ·  9.1 m",showarrow:false,font:{size:8,color:DIM,family:"JetBrains Mono"}});
+  annotations.push({x:-.7,y:H/2,text:"20 ft · 6.1 m",textangle:-90,showarrow:false,font:{size:8,color:DIM,family:"JetBrains Mono"}});
+
+  // Click grid
+  const gx=[],gy=[];
+  for(let x=0;x<=W;x++) for(let y=0;y<=H;y++){gx.push(x);gy.push(y);}
+  data.push({x:gx,y:gy,mode:"markers",marker:{size:10,color:"rgba(0,0,0,0)",opacity:0},showlegend:false,
+    hovertemplate:placing?`Click to place ${placing}<br>X:%{x:.0f}ft · Y:%{y:.0f}ft<extra></extra>`:"Click to place Actor 1<br>X:%{x:.0f}ft · Y:%{y:.0f}ft<extra></extra>",
+    name:"__click__"});
+
+  // ─ \u9472  LIGHT COVERAGE CONES (radial glow on floor) \u9472 \u9472 
+  // Fill 1
+  if(S.fill1_on){
+    const [fc,fn]=kelvinDisplay(S.fill1_kelvin); const [fr2,fg2,fb2]=hexRGB(fc);
+    const [ff2r,ff2g,ff2b]=kelvinFloorRGB(S.fill1_kelvin); // vivid floor indicator
+    if(printMode){
+      // Print: bold solid dot + dashed reach ring
+      const pr=Math.max(2,S.fill1_intensity/100*7);
+      shapes.push({type:"circle",x0:S.fill1_x-pr,y0:S.fill1_y-pr,x1:S.fill1_x+pr,y1:S.fill1_y+pr,
+        fillcolor:`rgba(${fr2},${fg2},${fb2},0.18)`,line:{color:`rgba(${fr2},${fg2},${fb2},0.9)`,width:2,dash:"dot"}});
+      shapes.push({type:"circle",x0:S.fill1_x-1.1,y0:S.fill1_y-1.1,x1:S.fill1_x+1.1,y1:S.fill1_y+1.1,
+        fillcolor:`rgba(${fr2},${fg2},${fb2},0.95)`,line:{color:"#333",width:1.5}});
+    } else {
+    // 5.2.4.2: FILL 1 — directed cone with hotspot + falloff
+    const f1Angle=Math.atan2(ty-S.fill1_y,tx-S.fill1_x);
+    const f1Len=Math.max(7,Math.hypot(tx-S.fill1_x,ty-S.fill1_y)*1.4);
+    const f1Int=S.fill1_intensity/100;
+    for(const[spread,lenM,alpha] of[[55*Math.PI/180,1.00,0.14],[32*Math.PI/180,0.90,0.28],[13*Math.PI/180,0.70,0.52]]){
+      const lx1=(S.fill1_x+Math.cos(f1Angle-spread)*f1Len*lenM).toFixed(2);
+      const ly1=(S.fill1_y+Math.sin(f1Angle-spread)*f1Len*lenM).toFixed(2);
+      const lx2=(S.fill1_x+Math.cos(f1Angle+spread)*f1Len*lenM).toFixed(2);
+      const ly2=(S.fill1_y+Math.sin(f1Angle+spread)*f1Len*lenM).toFixed(2);
+      shapes.push({type:"path",path:`M ${S.fill1_x.toFixed(2)},${S.fill1_y.toFixed(2)} L ${lx1},${ly1} L ${lx2},${ly2} Z`,
+        fillcolor:`rgba(${ff2r},${ff2g},${ff2b},${(f1Int*alpha).toFixed(3)})`,line:{color:"rgba(0,0,0,0)",width:0}});
+    }
+    // Cone edge lines
+    shapes.push({type:"line",x0:S.fill1_x,y0:S.fill1_y,
+      x1:S.fill1_x+Math.cos(f1Angle-32*Math.PI/180)*f1Len*.90,
+      y1:S.fill1_y+Math.sin(f1Angle-32*Math.PI/180)*f1Len*.90,
+      line:{color:`rgba(${ff2r},${ff2g},${ff2b},${(f1Int*.60).toFixed(2)})`,width:1.5}});
+    shapes.push({type:"line",x0:S.fill1_x,y0:S.fill1_y,
+      x1:S.fill1_x+Math.cos(f1Angle+32*Math.PI/180)*f1Len*.90,
+      y1:S.fill1_y+Math.sin(f1Angle+32*Math.PI/180)*f1Len*.90,
+      line:{color:`rgba(${ff2r},${ff2g},${ff2b},${(f1Int*.60).toFixed(2)})`,width:1.5}});
+    }
+    // Beam to talent
+    if(S.fill1_on && S.fill1_intensity>10){
+      const bw=printMode ? Math.max(2,S.fill1_intensity/100*3.5) : Math.max(.8,S.fill1_intensity/100*2.5);
+      data.push({x:[S.fill1_x,tx],y:[S.fill1_y,ty],mode:"lines",
+        line:{color:`rgba(${fr2},${fg2},${fb2},${printMode?0.95:0.70})`,width:bw,dash:"dot"},showlegend:false,hoverinfo:"skip"});
+    }
+    if(!printMode){
+    shapes.push({type:"circle",x0:S.fill1_x-.9,y0:S.fill1_y-.9,x1:S.fill1_x+.9,y1:S.fill1_y+.9,
+      fillcolor:"rgba(0,255,100,0.85)",line:{color:"#003310",width:2.2}});
+    }
+    data.push({x:[S.fill1_x],y:[S.fill1_y],mode:"markers",
+      marker:{size:printMode?18:17,color:S.fill1_on?"#00FF66":"#151E30",symbol:"square",line:{color:printMode?"#333":"#003310",width:printMode?2.5:2.5}},showlegend:false,
+      hovertemplate:`<b>Fill 1</b><br>ON<br>${S.fill1_kelvin}K — ${fn}<br>Intensity:${S.fill1_intensity}%<extra></extra>`});
+    annotations.push({x:S.fill1_x,y:S.fill1_y+2.2,text:`<b>FILL 1</b><br>${S.fill1_kelvin}K`,
+      showarrow:false,font:{size:8,color:printMode?"#1A1A2E":"#00CC55",family:"JetBrains Mono"},align:"center",
+      ...(printMode?{bgcolor:"white",bordercolor:"#333",borderpad:3}:{})});
+  }
+
+  // Back Light
+  if(S.back_on){
+    const [bc,bn]=kelvinDisplay(S.back_kelvin); const [bR2,bG2,bB2]=hexRGB(bc);
+    const [bfR,bfG,bfB]=kelvinFloorRGB(S.back_kelvin); // vivid floor indicator
+    if(printMode){
+      const pr=Math.max(2,S.back_intensity/100*6);
+      shapes.push({type:"circle",x0:S.back_x-pr,y0:S.back_y-pr,x1:S.back_x+pr,y1:S.back_y+pr,
+        fillcolor:`rgba(${bR2},${bG2},${bB2},0.18)`,line:{color:`rgba(${bR2},${bG2},${bB2},0.9)`,width:2,dash:"dot"}});
+      shapes.push({type:"circle",x0:S.back_x-1.1,y0:S.back_y-1.1,x1:S.back_x+1.1,y1:S.back_y+1.1,
+        fillcolor:`rgba(${bR2},${bG2},${bB2},0.95)`,line:{color:"#333",width:1.5}});
+    } else {
+    // 5.2.4.2: BACK — directed cone with hotspot + falloff
+    const bkAngle=Math.atan2(ty-S.back_y,tx-S.back_x);
+    const bkLen=Math.max(7,Math.hypot(tx-S.back_x,ty-S.back_y)*1.4);
+    const bkInt=S.back_intensity/100;
+    for(const[spread,lenM,alpha] of[[55*Math.PI/180,1.00,0.14],[32*Math.PI/180,0.90,0.28],[13*Math.PI/180,0.70,0.52]]){
+      const bx1=(S.back_x+Math.cos(bkAngle-spread)*bkLen*lenM).toFixed(2);
+      const by1=(S.back_y+Math.sin(bkAngle-spread)*bkLen*lenM).toFixed(2);
+      const bx2=(S.back_x+Math.cos(bkAngle+spread)*bkLen*lenM).toFixed(2);
+      const by2=(S.back_y+Math.sin(bkAngle+spread)*bkLen*lenM).toFixed(2);
+      shapes.push({type:"path",path:`M ${S.back_x.toFixed(2)},${S.back_y.toFixed(2)} L ${bx1},${by1} L ${bx2},${by2} Z`,
+        fillcolor:`rgba(${bfR},${bfG},${bfB},${(bkInt*alpha).toFixed(3)})`,line:{color:"rgba(0,0,0,0)",width:0}});
+    }
+    shapes.push({type:"line",x0:S.back_x,y0:S.back_y,
+      x1:S.back_x+Math.cos(bkAngle-32*Math.PI/180)*bkLen*.90,
+      y1:S.back_y+Math.sin(bkAngle-32*Math.PI/180)*bkLen*.90,
+      line:{color:`rgba(${bfR},${bfG},${bfB},${(bkInt*.60).toFixed(2)})`,width:1.5}});
+    shapes.push({type:"line",x0:S.back_x,y0:S.back_y,
+      x1:S.back_x+Math.cos(bkAngle+32*Math.PI/180)*bkLen*.90,
+      y1:S.back_y+Math.sin(bkAngle+32*Math.PI/180)*bkLen*.90,
+      line:{color:`rgba(${bfR},${bfG},${bfB},${(bkInt*.60).toFixed(2)})`,width:1.5}});
+    }
+    if(S.back_intensity>10){
+      const bw=printMode ? Math.max(2,S.back_intensity/100*3) : Math.max(.8,S.back_intensity/100*2);
+      data.push({x:[S.back_x,tx],y:[S.back_y,ty],mode:"lines",
+        line:{color:`rgba(${bR2},${bG2},${bB2},${printMode?0.95:0.70})`,width:bw,dash:"dot"},showlegend:false,hoverinfo:"skip"});
+    }
+    if(!printMode){
+    shapes.push({type:"circle",x0:S.back_x-.9,y0:S.back_y-.9,x1:S.back_x+.9,y1:S.back_y+.9,
+      fillcolor:"rgba(255,0,180,0.85)",line:{color:"#2A0014",width:2.2}});
+    }
+    data.push({x:[S.back_x],y:[S.back_y],mode:"markers",
+      marker:{size:printMode?18:17,color:"#FF00BB",symbol:"square",line:{color:printMode?"#333":"#2A0014",width:printMode?2.5:2.5}},showlegend:false,
+      hovertemplate:`<b>Back Light</b><br>ON<br>${S.back_kelvin}K — ${bn}<br>Intensity:${S.back_intensity}%<extra></extra>`});
+    annotations.push({x:S.back_x,y:S.back_y+2.2,text:`<b>BACK</b><br>${S.back_kelvin}K`,
+      showarrow:false,font:{size:8,color:printMode?"#1A1A2E":"#FF00BB",family:"JetBrains Mono"},align:"center",
+      ...(printMode?{bgcolor:"white",bordercolor:"#333",borderpad:3}:{})});
+  }
+
+  // ─ KEY LIGHT
+  const keyX=S.key_x, keyY=S.key_y;
+  if(printMode){
+    const pr=Math.max(2.5,S.key_intensity/100*8);
+    shapes.push({type:"circle",x0:keyX-pr,y0:keyY-pr,x1:keyX+pr,y1:keyY+pr,
+      fillcolor:`rgba(${kr},${kg},${kb},0.18)`,line:{color:`rgba(${kr},${kg},${kb},0.9)`,width:2.5,dash:"dot"}});
+    shapes.push({type:"circle",x0:keyX-1.3,y0:keyY-1.3,x1:keyX+1.3,y1:keyY+1.3,
+      fillcolor:`rgba(${kr},${kg},${kb},0.95)`,line:{color:"#333",width:2}});
+  } else {
+  // 5.2.4.2: KEY — directed cone with hotspot + falloff
+  // Use kelvinFloorRGB for vivid floor-plan indicator color
+  const [kfr,kfg,kfb]=kelvinFloorRGB(S.key_kelvin);
+  const kyAngle=Math.atan2(ty-keyY,tx-keyX);
+  const kyLen=Math.max(7,Math.hypot(tx-keyX,ty-keyY)*1.4);
+  const kyInt=S.key_intensity/100;
+  for(const[spread,lenM,alpha] of[[55*Math.PI/180,1.00,0.18],[32*Math.PI/180,0.90,0.38],[13*Math.PI/180,0.72,0.70]]){
+    const kx1=(keyX+Math.cos(kyAngle-spread)*kyLen*lenM).toFixed(2);
+    const ky1=(keyY+Math.sin(kyAngle-spread)*kyLen*lenM).toFixed(2);
+    const kx2=(keyX+Math.cos(kyAngle+spread)*kyLen*lenM).toFixed(2);
+    const ky2=(keyY+Math.sin(kyAngle+spread)*kyLen*lenM).toFixed(2);
+    shapes.push({type:"path",path:`M ${keyX.toFixed(2)},${keyY.toFixed(2)} L ${kx1},${ky1} L ${kx2},${ky2} Z`,
+      fillcolor:`rgba(${kfr},${kfg},${kfb},${(kyInt*alpha).toFixed(3)})`,line:{color:"rgba(0,0,0,0)",width:0}});
+  }
+  shapes.push({type:"line",x0:keyX,y0:keyY,
+    x1:keyX+Math.cos(kyAngle-32*Math.PI/180)*kyLen*.90,
+    y1:keyY+Math.sin(kyAngle-32*Math.PI/180)*kyLen*.90,
+    line:{color:`rgba(${kfr},${kfg},${kfb},${(kyInt*.65).toFixed(2)})`,width:1.8}});
+  shapes.push({type:"line",x0:keyX,y0:keyY,
+    x1:keyX+Math.cos(kyAngle+32*Math.PI/180)*kyLen*.90,
+    y1:keyY+Math.sin(kyAngle+32*Math.PI/180)*kyLen*.90,
+    line:{color:`rgba(${kfr},${kfg},${kfb},${(kyInt*.65).toFixed(2)})`,width:1.8}});
+  }
+  // Key beam to talent
+  const bw=printMode ? Math.max(2.5,S.key_intensity/100*5) : Math.max(1.5,S.key_intensity/100*4);
+  data.push({x:[keyX,tx],y:[keyY,ty],mode:"lines",line:{color:`rgba(${kr},${kg},${kb},${printMode?0.95:0.75})`,width:bw},showlegend:false,hoverinfo:"skip"});
+
+  // Key dome / sun icon
+  const angKey=Math.atan2(ty-keyY,tx-keyX), domeR=1.8;
+  if(S.sun_mode){
+    // Sun rays
+    for(let i=0;i<8;i++){
+      const a=i*Math.PI/4, ra1=domeR*1.0, ra2=domeR*1.8;
+      shapes.push({type:"line",x0:keyX+Math.cos(a)*ra1,y0:keyY+Math.sin(a)*ra1,
+        x1:keyX+Math.cos(a)*ra2,y1:keyY+Math.sin(a)*ra2,line:{color:`rgba(${kr},${kg},${kb},0.7)`,width:2}});
+    }
+    shapes.push({type:"circle",x0:keyX-domeR,y0:keyY-domeR,x1:keyX+domeR,y1:keyY+domeR,
+      fillcolor:`rgba(${kr},${kg},${kb},0.85)`,line:{color:kc,width:2}});
+    if(S.sun_elevation!==null){
+      annotations.push({x:keyX,y:keyY+domeR+2.2,text:`<b>☀  SUN</b><br>${S.key_kelvin}K · ${S.sun_elevation.toFixed(0)}° el`,
+        showarrow:false,font:{size:9,color:kc,family:"JetBrains Mono"},align:"center"});
+    }
+    if(S.sun_lat!==null){
+      annotations.push({x:keyX,y:keyY-domeR-1.2,text:`&#127760; ${S.sun_lat.toFixed(2)}°`,
+        showarrow:false,font:{size:7,color:"#806040",family:"JetBrains Mono"},align:"center"});
+    }
+  } else {
+    const arcA=Array.from({length:48},(_,i)=>angKey-Math.PI/2+i*(Math.PI/47));
+    data.push({x:arcA.map(a=>keyX+domeR*Math.cos(a)),y:arcA.map(a=>keyY+domeR*Math.sin(a)),
+      mode:"lines",fill:"toself",fillcolor:`rgba(${kr},${kg},${kb},0.92)`,line:{color:kc,width:2.5},showlegend:false,
+      hovertemplate:`<b>KEY LIGHT</b><br>${S.key_kelvin}K — ${kn}<br>${S.key_intensity}%<extra></extra>`});
+    annotations.push({x:keyX,y:keyY+domeR+1.8,text:`<b>KEY</b><br>${S.key_kelvin}K`,
+      showarrow:false,font:{size:9,color:printMode?"#1A1A2E":kc,family:"JetBrains Mono"},align:"center",
+      ...(printMode?{bgcolor:"white",bordercolor:"#333",borderpad:3}:{})});
+  }
+
+  // ─ \u9472  CAMERA \u9472 \u9472 
+  for(const[gr,ga] of[[3.5,.06],[2,.12]]){
+    shapes.push({type:"circle",x0:camX-gr,y0:camY-gr,x1:camX+gr,y1:camY+gr,
+      fillcolor:`rgba(${tcR},${tcG},${tcB},${ga})`,line:{color:"rgba(0,0,0,0)",width:0}});
+  }
+  const fwd=[Math.sin(panRad),Math.cos(panRad)];
+  const coneLen=Math.min(16,H-camY+1);
+  const ld=rot2d(...fwd,fovHalf), rd=rot2d(...fwd,-fovHalf);
+  const cLx=(camX+ld[0]*coneLen).toFixed(2), cLy=(camY+ld[1]*coneLen).toFixed(2);
+  const cRx=(camX+rd[0]*coneLen).toFixed(2), cRy=(camY+rd[1]*coneLen).toFixed(2);
+  // 5.2.4.2: cone as shape layer:above — guaranteed on top of all data traces
+  shapes.push({type:'path',
+    path:`M ${camX.toFixed(2)},${camY.toFixed(2)} L ${cLx},${cLy} L ${cRx},${cRy} Z`,
+    fillcolor:'rgba(255,180,0,0.14)',
+    line:{color:'rgba(255,200,0,0.90)',width:2.2},
+    layer:'above'});
+  // Centerline sight axis
+  const cFx=(camX+fwd[0]*coneLen*0.82).toFixed(2), cFy=(camY+fwd[1]*coneLen*0.82).toFixed(2);
+  shapes.push({type:'line',x0:camX,y0:camY,x1:parseFloat(cFx),y1:parseFloat(cFy),
+    line:{color:'rgba(255,220,0,0.60)',width:1,dash:'dot'},layer:'above'});
+  data.push({x:[camX],y:[camY],mode:"markers",
+    marker:{size:34,color:"#FFFFFF",symbol:"square",line:{color:"#FF9900",width:4}},
+    showlegend:false,hovertemplate:`<b>CAMERA</b><br>${S.lens} | FOV:${fov}°<br>Pan:${S.cam_pan}°<br>X:${camX.toFixed(1)}ft · Y:${camY.toFixed(1)}ft<extra></extra>`});
+  annotations.push({x:camX,y:camY,text:"<b>📷</b>",showarrow:false,font:{size:13,color:'#000000',family:"JetBrains Mono"},xanchor:'center',yanchor:'middle'});
+  annotations.push({x:camX+2.8,y:camY+.6,text:"<b>CAMERA</b>",showarrow:false,font:{size:9,color:'#FF9900',family:"JetBrains Mono"}});
+
+  // ─ TALENT / ACTOR 1
+  // ─ ACTOR SILHOUETTE HELPER (5.1.4 fixed) ─ correct top-down human figure
+  // Y-axis is UP in Plotly floor plan (0=Wall4/camera, H=Wall2/back).
+  // Person faces camera — head is at HIGHEST Y (top of figure on screen).
+  // All opacity baked into rgba() — Plotly ignores shape.opacity & line.opacity.
+  function actorSilhouette(cx,cy,col,hoverTmpl){
+    const [sr,sg,sb]=hexRGB(col);
+    const rgba=(a)=>`rgba(${sr},${sg},${sb},${a})`;
+
+    // Key-spill halo
+    const aspill=Math.min(3.5,Math.max(.8,S.key_intensity/100*3.5));
+    shapes.push({type:'circle',x0:cx-aspill,y0:cy-aspill,x1:cx+aspill,y1:cy+aspill,
+      fillcolor:`rgba(${kr},${kg},${kb},${Math.max(.03,S.key_intensity/100*.12).toFixed(3)})`,
+      line:{color:'rgba(0,0,0,0)',width:0}});
+
+    // Foot-position dotted ring
+    shapes.push({type:'circle',x0:cx-2.2,y0:cy-2.2,x1:cx+2.2,y1:cy+2.2,
+      fillcolor:'rgba(0,0,0,0)',line:{color:rgba(.30),width:1,dash:'dot'}});
+
+    // Legs — from hips (cy+0.05) down toward camera side (cy-0.60)
+    shapes.push({type:'line',x0:cx-.20,y0:cy+.05,x1:cx-.22,y1:cy-.62,
+      line:{color:rgba(.72),width:4}});
+    shapes.push({type:'line',x0:cx+.20,y0:cy+.05,x1:cx+.22,y1:cy-.62,
+      line:{color:rgba(.72),width:4}});
+
+    // Torso — wide at shoulders (top/high Y), narrow at hips (bottom/low Y)
+    shapes.push({type:'path',xref:'x',yref:'y',
+      path:`M ${(cx-.58).toFixed(2)},${(cy+.75).toFixed(2)} L ${(cx+.58).toFixed(2)},${(cy+.75).toFixed(2)} L ${(cx+.28).toFixed(2)},${(cy+.08).toFixed(2)} L ${(cx-.28).toFixed(2)},${(cy+.08).toFixed(2)} Z`,
+      fillcolor:rgba(.88),line:{color:rgba(.25),width:.5}});
+
+    // Arms — from shoulder line outward and slightly down
+    shapes.push({type:'line',x0:cx-.55,y0:cy+.68,x1:cx-.88,y1:cy+.28,
+      line:{color:rgba(.70),width:4}});
+    shapes.push({type:'line',x0:cx+.55,y0:cy+.68,x1:cx+.88,y1:cy+.28,
+      line:{color:rgba(.70),width:4}});
+
+    // Neck — bridge between torso top and head
+    shapes.push({type:'rect',x0:cx-.14,y0:cy+.75,x1:cx+.14,y1:cy+.92,
+      fillcolor:rgba(.90),line:{color:'rgba(0,0,0,0)',width:0}});
+
+    // Head — circle at the top (highest Y = furthest from camera = top of screen)
+    shapes.push({type:'circle',x0:cx-.32,y0:cy+.90,x1:cx+.32,y1:cy+1.54,
+      fillcolor:rgba(.88),line:{color:rgba(.22),width:1}});
+
+    // Invisible hover target
+    data.push({x:[cx],y:[cy],mode:'markers',
+      marker:{size:34,color:'rgba(0,0,0,0)',symbol:'circle',line:{color:'rgba(0,0,0,0)',width:0}},
+      showlegend:false,hovertemplate:hoverTmpl});
+  }
+
+  // ─ TALENT / ACTOR 1
+  actorSilhouette(tx,ty,'#FF1744',
+    `<b>${S.talent_name}</b><br>X:${tx.toFixed(1)}ft<br>Y:${ty.toFixed(1)}ft<br>C→ T:${c2t.toFixed(1)}ft<extra></extra>`);
+  annotations.push({x:tx,y:ty+2.8,text:`<b>${S.talent_name.toUpperCase()}</b>`,
+    showarrow:false,font:{size:12,color:'#FF4466',family:'Barlow Condensed'},align:'center'});
+
+  // ─ ACTOR 2
+  if(S.actor2_on){
+    const ax=S.actor2_x, ay=S.actor2_y;
+    actorSilhouette(ax,ay,'#FF44AA',
+      `<b>${S.actor2_name}</b><br>X:${ax.toFixed(1)}ft<br>Y:${ay.toFixed(1)}ft<br>C→ T:${dist(camX,camY,ax,ay).toFixed(1)}ft<extra></extra>`);
+    annotations.push({x:ax,y:ay+2.8,text:`<b>${S.actor2_name.toUpperCase()}</b>`,
+      showarrow:false,font:{size:11,color:'#FF44AA',family:'Barlow Condensed'},align:'center'});
+    // 180° line between actors
+    shapes.push({type:'line',x0:tx,y0:ty,x1:ax,y1:ay,
+      line:{color:'rgba(180,140,0,0.45)',width:1.5,dash:'dot'}});
+    const midX=(tx+ax)/2, midY=(ty+ay)/2;
+    annotations.push({x:midX,y:midY,text:"180°",showarrow:false,font:{size:8,color:"rgba(140,100,0,0.75)",family:"JetBrains Mono"}});
+  }
+
+  // Ratio badge
+  annotations.push({x:W+.8,y:H-1,xanchor:"left",
+    text:`<b>KEY:FILL</b><br><span style='font-size:22px'><b>${rl}</b></span><br><i style='font-size:9px'>${rm}</i>`,
+    showarrow:false,bgcolor:rc,bordercolor:rc,borderwidth:2,borderpad:10,font:{size:10,color:"white",family:"Barlow Condensed"},align:"center"});
+
+  // Telemetry bars
+  let lights=`KEY ${S.key_kelvin}K`;
+  if(S.fill1_on) lights+=`·F1 ${S.fill1_kelvin}K`;
+  if(S.back_on)  lights+=`·BACK ${S.back_kelvin}K`;
+  if(S.fill2_on) lights+=`·F2 ${S.fill2_kelvin}K`;
+  const ndS=S.nd_label.split("—")[0].trim();
+  // Print-safe row colors: light bg, dark text
+  const rowsPrint=[
+    ["#E8F0FA","#1A3A70",` CAM  ${S.lens}  FOV:${fov}°  PAN:${S.cam_pan}°  DOLLY:${camY.toFixed(1)}ft  C→ T:${c2t.toFixed(1)}ft/${ftM(c2t).toFixed(1)}m`],
+    ["#E8F5E8","#0A5020",` EXP  ${fstop}  ISO:${S.iso}  ${shutter}s  ${ndS}  ${S.fps+"fps "+S.resolution}`],
+    ["#FDF0E0","#7A4010",` LGT  ${lights}${S.sun_mode&&S.sun_elevation!==null?`  ☀  ${S.sun_elevation.toFixed(0)}°el`:""}`],
+    ["#FDE8E8","#8A1020",` TLT  ${S.talent_name.toUpperCase()} X:${tx.toFixed(1)}ft Y:${ty.toFixed(1)}ft${S.actor2_on?`  |  ${S.actor2_name.toUpperCase()} X:${S.actor2_x.toFixed(1)} Y:${S.actor2_y.toFixed(1)}`:""}`],
+  ];
+  const rowsScreen=[
+    ["#0A1830","#4070B0",` CAM  ${S.lens}  FOV:${fov}°  PAN:${S.cam_pan}°  DOLLY:${camY.toFixed(1)}ft  C→ T:${c2t.toFixed(1)}ft/${ftM(c2t).toFixed(1)}m`],
+    ["#081A08","#30A050",` EXP  ${fstop}  ISO:${S.iso}  ${shutter}s  ${ndS}  ${S.fps+"fps "+S.resolution}`],
+    ["#180E04","#A07030",` LGT  ${lights}${S.sun_mode&&S.sun_elevation!==null?`  ☀  ${S.sun_elevation.toFixed(0)}°el`:""}`],
+    ["#1A0408","#C04040",` TLT  ${S.talent_name.toUpperCase()} X:${tx.toFixed(1)}ft Y:${ty.toFixed(1)}ft${S.actor2_on?`  |  ${S.actor2_name.toUpperCase()} X:${S.actor2_x.toFixed(1)} Y:${S.actor2_y.toFixed(1)}`:""}`],
+  ];
+  const rows = printMode ? rowsPrint : rowsScreen;
+  rows.forEach(([bg,tc,txt],i)=>{
+    const ry=-2.6-i*1.45;
+    const [br2,bg2,bb2]=hexRGB(bg), [tr2,tg2,tb2]=hexRGB(tc);
+    shapes.push({type:"rect",x0:0,y0:ry-.6,x1:W,y1:ry+.6,fillcolor:`rgba(${br2},${bg2},${bb2},0.95)`,line:{color:`rgba(${tr2},${tg2},${tb2},0.8)`,width:1}});
+    shapes.push({type:"rect",x0:0,y0:ry-.6,x1:.4,y1:ry+.6,fillcolor:`rgba(${tr2},${tg2},${tb2},0.9)`,line:{color:"rgba(0,0,0,0)",width:0}});
+    annotations.push({x:.7,y:ry,text:txt,showarrow:false,font:{size:9,color:tc,family:"JetBrains Mono"},xanchor:"left",align:"left"});
+  });
+
+  // ── PRINT HEADER (scene / DP / date) ─────────────────────────────
+  if(printMode){
+    const pScene    = (document.getElementById('sb-scene')?.value    || 'UNTITLED').toUpperCase();
+    const pDirector = document.getElementById('sb-director')?.value  || '—';
+    const pDp       = document.getElementById('sb-dp')?.value        || '—';
+    const pDate     = document.getElementById('sb-date')?.value      || new Date().toISOString().slice(0,10);
+    annotations.push({
+      x:W/2, y:H+4.2, xanchor:"center",
+      text:`<b>${pScene}</b>`,
+      showarrow:false,
+      font:{size:16,color:"#1A1A2E",family:"Barlow Condensed"},
+      align:"center"
+    });
+    annotations.push({
+      x:W/2, y:H+3.0, xanchor:"center",
+      text:`Director: ${pDirector}   ·   DP: ${pDp}   ·   ${pDate}`,
+      showarrow:false,
+      font:{size:10,color:"#3A3A4E",family:"JetBrains Mono"},
+      align:"center"
+    });
+  }
+
+  const layout={
+    autosize:true,
+    margin:{l:55,r:175,t:16,b:16},
+    paper_bgcolor: printMode ? "#FFFFFF" : "#E8EAEC",
+    plot_bgcolor:  printMode ? "#FFFFFF" : "#E8EAEC",
+    xaxis:{range:[-3,W+11],showgrid:false,zeroline:false,showticklabels:false,scaleanchor:"y",scaleratio:1,fixedrange:true},
+    yaxis:{range:[-12.5,H+(printMode?6.5:4.5)],showgrid:false,zeroline:false,showticklabels:false,fixedrange:true},
+    dragmode:false,showlegend:false,shapes,annotations
+  };
+  const config={responsive:true,displayModeBar:false,scrollZoom:false};
+
+  if(!plotInited){
+    Plotly.newPlot('floor-plan',data,layout,config).then(gd=>{
+      plotInited=true;
+      gd.on('plotly_click',ev=>{
+        if(!ev.points) return;
+        const pt=ev.points[0], x=pt.x, y=pt.y;
+        if(x<0||x>STAGE_W||y<0||y>STAGE_H) return;
+        const snap=v=>Math.round(v*2)/2;
+        if(placing==='key'){ S.key_x=snap(x); S.key_y=snap(y); }
+        else if(placing==='fill1'){ S.fill1_x=snap(x); S.fill1_y=snap(y); }
+        else if(placing==='back'){ S.back_x=snap(x); S.back_y=snap(y); }
+        else if(placing==='actor2'){ S.actor2_x=snap(x); S.actor2_y=snap(y); }
+        else if(placing==='actor1'||!placing){
+          if(x>=.5&&x<=STAGE_W-.5&&y>=.5&&y<=STAGE_H-.5){ S.talent_x=snap(x); S.talent_y=snap(y); }
+        }
+        cancelPlacing();
+        syncDOM(); updateAll();
+      });
+    });
+  } else {
+    Plotly.react('floor-plan',data,layout,config);
+  }
+}
+
+
+// ═══════════════════════════════════════════════════════════════════
+
+// ═══════════════════════════════════════════════════════════════════
+// TABS
+// ═══════════════════════════════════════════════════════════════════ 
+let activeTab='floor';
+
+// 5.1.4: Robust tab switching
+// - Monitor: observe monitor-area (where sizeMonitor reads clientWidth/Height),
+//   not the outer panel — the panel has size before the inner area reflows.
+// - All panels: double-rAF before drawing so layout is guaranteed complete.
+// - No "already watching" guard — every tab visit re-registers so repeat
+//   switches never leave the monitor stale.
+const _tabObservers={};
+
+function _afterLayout(fn){
+  // Two rAFs = browser has completed at least one full layout + paint cycle
+  requestAnimationFrame(()=>requestAnimationFrame(fn));
+}
+
+function _observeForDraw(observeId, drawFn){
+  // Disconnect any previous observer on this slot
+  if(_tabObservers[observeId]){
+    _tabObservers[observeId].disconnect();
+    delete _tabObservers[observeId];
+  }
+  const el=document.getElementById(observeId);
+  if(!el) return;
+  const ro=new ResizeObserver(entries=>{
+    for(const e of entries){
+      if(e.contentRect.width>10 && e.contentRect.height>10){
+        ro.disconnect();
+        delete _tabObservers[observeId];
+        _afterLayout(drawFn);
+        return;
+      }
+    }
+  });
+  ro.observe(el);
+  _tabObservers[observeId]=ro;
+}
+
+function switchTab(tab){
+  activeTab=tab;
+  const tabs=['floor','monitor'];
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>{
+    b.classList.toggle('active',tabs[i]===tab);
+  });
+  tabs.forEach(t=>{
+    const p=document.getElementById(`panel-${t}`);
+    if(p) p.classList.toggle('active',t===tab);
+  });
+  // Monitor: ResizeObserver fires as soon as panel has real dimensions
+  if(tab==='monitor'){
+    _observeForDraw('monitor-area', sizeMonitor);
+  }
+  // Floor plan: Plotly needs explicit resize after panel becomes visible
+  if(tab==='floor') requestAnimationFrame(()=>requestAnimationFrame(()=>drawFloorPlan()));
+}
+
+function toggleTip(id){ const el=document.getElementById(id); if(el) el.classList.toggle('hidden'); }
+
+// ─── 5.2: Touch sidebar drawer ──────────────────────────────────────
+function toggleSidebar(){
+  const sb=document.getElementById('sidebar');
+  const ov=document.getElementById('sidebar-overlay');
+  const hb=document.getElementById('hamburger');
+  const isOpen=sb.classList.toggle('open');
+  ov.classList.toggle('open',isOpen);
+  hb.textContent=isOpen?'✕':'☰';
+}
+
+// ─── 5.2: Drawer layout mode toggle (badge click) ────────────────────
+let _drawerModeActive=false;
+function toggleDrawerMode(){
+  _drawerModeActive=!_drawerModeActive;
+  document.getElementById('drawer-badge').classList.toggle('active',_drawerModeActive);
+  const hb=document.getElementById('hamburger');
+  if(_drawerModeActive){
+    // Force sidebar into drawer mode regardless of screen width
+    document.getElementById('sidebar').style.position='fixed';
+    document.getElementById('sidebar').style.transform='translateX(-100%)';
+    document.getElementById('sidebar').style.transition='transform .28s cubic-bezier(.4,0,.2,1)';
+    hb.style.display='block';
+  } else {
+    // Restore sidebar to normal flow
+    document.getElementById('sidebar').style.position='';
+    document.getElementById('sidebar').style.transform='';
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebar-overlay').classList.remove('open');
+    // Only hide hamburger if screen is wide
+    if(window.innerWidth>1024) hb.style.display='none';
+  }
+  // Force monitor redraw
+  if(activeTab==='monitor') requestAnimationFrame(()=>{ sizeMonitor(); drawMonitor(); });
+  if(activeTab==='floor') requestAnimationFrame(()=>requestAnimationFrame(()=>drawFloorPlan()));
+}
+
+// ─── 5.2: Live Director's Mode toggle (badge click) ────────────────
+function toggleDirectorMode(){
+  S.live_director=!S.live_director;
+  document.getElementById('live_director').checked=S.live_director;
+  document.getElementById('director-badge').classList.toggle('active',S.live_director);
+  if(activeTab==='monitor'){ drawMonitor(); }
+  else { switchTab('monitor'); }
+  saveState();
+}
+
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// MAIN UPDATE
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+function updateAll(){
+  showHideCtrls(); updateReadouts(); drawFloorPlan();
+  if(activeTab==='monitor') drawMonitor();
+  saveState();
+}
+
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// EVENT LISTENERS
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+function wire(id,key,type='float'){
+  const el=document.getElementById(id); if(!el) return;
+  const ev=el.tagName==='INPUT'&&el.type==='range'?'input':'change';
+  el.addEventListener(ev,()=>{
+    S[key]=type==='bool'?el.checked:type==='str'?el.value:type==='int'?parseInt(el.value):parseFloat(el.value);
+    if(key==='sun_mode'&&S.sun_mode&&S.sun_lat===null) requestGeolocation();
+    updateAll();
+  });
+}
+// Selects
+['mode','lens','resolution','nd_label','talent_name','actor2_name'].forEach(k=>wire(k,k,'str'));
+wire('fps','fps','int'); wire('iso','iso','int'); wire('aspect','aspect','float');
+// Sliders
+['cam_pan','cam_dolly','cam_x','key_intensity','key_kelvin','key_x','key_y',
+ 'fill1_intensity','fill1_kelvin','fill1_x','fill1_y',
+ 'back_intensity','back_kelvin','back_x','back_y',
+ 'fill2_intensity','fill2_kelvin',
+ 'talent_x','talent_y','actor2_x','actor2_y'].forEach(k=>wire(k,k,'float'));
+// Checkboxes
+['fill1_on','back_on','fill2_on','actor2_on',
+ 'approved_dp','approved_gaffer','approved_director','sun_mode',
+ 'show_thirds','show_safe','show_center','show_hud',
+ 'show_waveform','show_zebra','show_focus','show_false_color','live_director'].forEach(k=>wire(k,k,'bool'));
+
+document.getElementById('reset-btn').addEventListener('click',()=>{
+  S.talent_x=15; S.talent_y=10;
+  document.getElementById('talent_x').value=15; document.getElementById('talent_y').value=10;
+  updateAll();
+});
+document.getElementById('print-btn').addEventListener('click',async()=>{
+  const fp=document.getElementById('floor-plan');
+  const PW=979, PH=580;
+  // Redraw in print-safe colors
+  printMode=true;
+  plotInited=false;
+  drawFloorPlan();
+  await new Promise(r=>setTimeout(r,200));
+  await Plotly.relayout('floor-plan',{width:PW,height:PH,autosize:false});
+  await new Promise(r=>setTimeout(r,280));
+  window.print();
+  // Restore screen colors
+  await new Promise(r=>setTimeout(r,500));
+  printMode=false;
+  plotInited=false;
+  drawFloorPlan();
+  await new Promise(r=>setTimeout(r,150));
+  Plotly.relayout('floor-plan',{width:null,height:null,autosize:true}).then(()=>{
+    Plotly.Plots.resize(fp);
+  });
+});
+window.addEventListener('resize',()=>{
+  if(activeTab==='monitor') sizeMonitor();
+  if(activeTab==='floor') drawFloorPlan();
+});
+setInterval(()=>{ if(activeTab==='monitor'&&S.show_hud) drawMonitor(); },1000);
+
+// 5.2.4.2: Keyboard shortcuts — placing mode + navigation
+// Shown in tooltip; never fires inside text inputs or Lux textarea
+document.addEventListener('keydown', function(e){
+  if(e.target.tagName==='INPUT'&&e.target.type!=='range') return;
+  if(e.target.tagName==='TEXTAREA') return;
+  if(e.target.tagName==='SELECT') return;
+  switch(e.key.toUpperCase()){
+    case 'K': e.preventDefault(); startPlacing('key');    break;
+    case 'F': e.preventDefault(); startPlacing('fill1');  break;
+    case 'B': e.preventDefault(); startPlacing('back');   break;
+    case 'T': e.preventDefault(); startPlacing('actor1'); break;
+    case 'ESCAPE': cancelPlacing(); break;
+    case 'M': e.preventDefault(); mobilePreviewTap(); break;
+    case '1': e.preventDefault(); switchTab('floor');   break;
+    case '2': e.preventDefault(); switchTab('monitor'); break;
+  }
+});
+
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// BOOT
+// ═ \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 \u9552 
+// ═══════════════════════════════════════════════════════════════════
+// LEGAL DISCLAIMER
+// ═══════════════════════════════════════════════════════════════════
+
+// =══════════════════════════════════════════════════════════════════
+// INTERACTIVE BADGES (5.0)
+// =══════════════════════════════════════════════════════════════════
+let starlinkOffline = false;
+
+function toggleStarlink(){
+  starlinkOffline = !starlinkOffline;
+  const badge = document.getElementById('sat-badge');
+  const label = document.getElementById('sat-label');
+  const tooltip = document.getElementById('starlink-tooltip');
+  badge.classList.toggle('offline', starlinkOffline);
+  label.textContent = starlinkOffline ? t('starlinkOffline') : t('starlink');
+  tooltip.textContent = starlinkOffline ? '⚡ Offline — Sun simulation active' : '🛰 Connected — 28ms';
+  // When offline, disable geolocation but keep sun simulation
+  if(starlinkOffline && S.sun_mode && S.sun_lat !== null){
+    // Keep current sun data, just stop live updates
+    const d = document.getElementById('sun-data-display');
+    if(d) d.innerHTML += '<br><span style="color:#FF6030;font-size:9px">&#9889; OFFLINE — Last known position</span>';
+  }
+}
+
+function toggleMobileAspect(){
+  const isVertical = Math.abs(S.aspect - 0.5625) < 0.01;
+  S.aspect = isVertical ? 1.7778 : 0.5625;
+  document.getElementById('aspect').value = S.aspect;
+  showHideCtrls();
+  updateAll();
+  if(activeTab === 'monitor') _observeForDraw('monitor-area', sizeMonitor);
+}
+
+// 5.2.4.2: One-tap mobile preview
+function mobilePreviewTap(){
+  const isVertical = Math.abs(S.aspect - 0.5625) < 0.01;
+  if(!isVertical){
+    // Switch to 9:16 and jump to monitor
+    S.aspect = 0.5625;
+    document.getElementById('aspect').value = S.aspect;
+    showHideCtrls();
+    updateAll();
+    switchTab('monitor');
+    _observeForDraw('monitor-area', sizeMonitor);
+  } else {
+    // Already vertical — toggle back to 16:9
+    S.aspect = 1.7778;
+    document.getElementById('aspect').value = S.aspect;
+    showHideCtrls();
+    updateAll();
+    if(activeTab==='monitor') _observeForDraw('monitor-area', sizeMonitor);
+  }
+}
+
+// Override the starlink auto-refresh to respect offline mode
+const _origInterval = window._sunInterval;
+// Patch: we re-use the existing 60s interval but check starlinkOffline
+// (already handled — the existing interval checks S.sun_mode && S.sun_lat)
+
+// =══════════════════════════════════════════════════════════════════
+// STORYBOARD EXPORT (5.0)
+// =══════════════════════════════════════════════════════════════════
+function exportStoryboard(){
+  // Pre-fill date
+  const today = new Date();
+  const dateStr = today.toISOString().slice(0,10);
+  const dateEl = document.getElementById('sb-date');
+  if(dateEl && !dateEl.value) dateEl.value = dateStr;
+  document.getElementById('sb-modal').classList.add('open');
+}
+
+function closeSbModal(){
+  document.getElementById('sb-modal').classList.remove('open');
+}
+
+function runStoryboardExport(){
+  const scene    = document.getElementById('sb-scene').value    || 'Scene 1';
+  const director = document.getElementById('sb-director').value || '—';
+  const dp       = document.getElementById('sb-dp').value       || '—';
+  const date     = document.getElementById('sb-date').value     || new Date().toISOString().slice(0,10);
+
+  closeSbModal();
+
+  // Build storyboard on an offscreen canvas
+  const CW = 1200, CH = 1600;
+  const sc = document.createElement('canvas');
+  sc.width = CW; sc.height = CH;
+  const cx = sc.getContext('2d');
+
+  const navy='#03060F', panel='#060A15', orange='#FF4500', teal='#00D4CC',
+        text='#C8D8F0', muted='#304060', border='#0F1A30';
+
+  // Background
+  cx.fillStyle = navy; cx.fillRect(0,0,CW,CH);
+
+  // Header bar
+  cx.fillStyle = panel;
+  cx.fillRect(0,0,CW,100);
+  cx.strokeStyle = orange; cx.lineWidth = 2;
+  cx.beginPath(); cx.moveTo(0,100); cx.lineTo(CW,100); cx.stroke();
+
+  // Title
+  cx.font = 'bold 48px Barlow Condensed, sans-serif';
+  cx.fillStyle = orange; cx.textAlign = 'left';
+  cx.fillText('Pre-Viz™ 5.2.4.2  —  STORYBOARD', 32, 60);
+  cx.font = '16px JetBrains Mono, monospace';
+  cx.fillStyle = muted;
+  cx.fillText(`Scene: ${scene}  |  Director: ${director}  |  DP: ${dp}  |  Date: ${date}`, 32, 85);
+
+  // Technical metadata block
+  const fstop = getFstop();
+  const fov   = LENS_FOV[S.lens];
+  const [,rl] = [0, calcRatio(S.key_intensity, (S.fill1_on?S.fill1_intensity:0))[0]];
+  const ratio = calcRatio(S.key_intensity, (S.fill1_on?S.fill1_intensity:0))[0];
+  const aKey  = Object.keys(ASPECT_LABELS).find(k=>Math.abs(parseFloat(k)-S.aspect)<.01);
+  const aspect= aKey ? ASPECT_LABELS[aKey] : S.aspect.toFixed(2);
+  const sunStr= S.sun_mode&&S.sun_elevation!==null ? `  \u2600 ${S.sun_elevation.toFixed(0)}\u00b0 el` : '';
+
+  cx.fillStyle = '#080E1C';
+  cx.fillRect(0,100,CW,60);
+  cx.strokeStyle = border; cx.lineWidth=1;
+  cx.beginPath(); cx.moveTo(0,160); cx.lineTo(CW,160); cx.stroke();
+
+  cx.font = 'bold 15px JetBrains Mono, monospace';
+  const meta = [
+    [`Lens: ${S.lens}`, orange],
+    [`FOV: ${fov}\u00b0`, teal],
+    [`Aperture: ${fstop}`, '#00FF88'],
+    [`ISO: ${S.iso}`, '#FFE200'],
+    [`Shutter: ${getShutter()}s`, '#FFB300'],
+    [`Ratio: ${ratio}`, '#00C896'],
+    [`Aspect: ${aspect}`, '#8080C0'],
+    [`Pan: ${S.cam_pan}\u00b0`, text],
+    [`Dolly: ${S.cam_dolly.toFixed(1)} ft`, text],
+    [`Key K: ${S.key_kelvin}K${sunStr}`, '#FFD580'],
+  ];
+  meta.forEach(([label,color],i)=>{
+    cx.fillStyle = color;
+    cx.fillText(label, 24 + (i%5)*240, 130 + Math.floor(i/5)*22);
+  });
+
+  // ── 8 Shot panels ──────────────────────────────────────────────
+  const COLS=2, ROWS=4;
+  const PAD=20, SLOT_W=(CW-PAD*(COLS+1))/COLS, SLOT_H=(CH-160-PAD*(ROWS+1))/ROWS;
+  const shotNames=['WIDE','MED CU','OTS A','OTS B','CU A','CU B','INSERT','MASTER'];
+
+  // Render monitor content to a temp canvas for thumbnailing
+  const monCanvas = document.getElementById('monitor-canvas');
+
+  for(let i=0;i<8;i++){
+    const col=i%COLS, row=Math.floor(i/COLS);
+    const sx=PAD+(SLOT_W+PAD)*col, sy=160+PAD+(SLOT_H+PAD)*row;
+
+    // Shot card background
+    cx.fillStyle = panel;
+    cx.beginPath(); cx.roundRect(sx,sy,SLOT_W,SLOT_H,6); cx.fill();
+    cx.strokeStyle=i<3?orange:border; cx.lineWidth=1.5;
+    cx.beginPath(); cx.roundRect(sx,sy,SLOT_W,SLOT_H,6); cx.stroke();
+
+    // Monitor thumbnail in top portion
+    const thumbH = SLOT_H * 0.62;
+    const thumbW = thumbH * S.aspect;
+    const thumbX = sx + (SLOT_W - thumbW) / 2;
+    const thumbY = sy + 10;
+
+    try{
+      // Draw current monitor canvas as thumbnail
+      cx.drawImage(monCanvas, thumbX, thumbY, thumbW, thumbH);
+    }catch(e){
+      // Fallback: gradient placeholder
+      const g = cx.createLinearGradient(thumbX,thumbY,thumbX,thumbY+thumbH);
+      g.addColorStop(0,'#0A080F'); g.addColorStop(1,'#050308');
+      cx.fillStyle=g;
+      cx.beginPath(); cx.roundRect(thumbX,thumbY,thumbW,thumbH,3); cx.fill();
+      cx.strokeStyle='#1A2540'; cx.lineWidth=1;
+      cx.beginPath(); cx.roundRect(thumbX,thumbY,thumbW,thumbH,3); cx.stroke();
+    }
+
+    // Floor plan mini thumbnail — right side
+    const fpEl = document.getElementById('floor-plan');
+    const fpCanvas = fpEl ? fpEl.querySelector('.main-svg') : null;
+    if(fpCanvas){
+      try{
+        // Can\'t easily capture SVG to canvas — show placeholder
+        cx.fillStyle='#080E1C';
+        const fpW=SLOT_W*0.28, fpH=fpW*(STAGE_H/STAGE_W);
+        const fpX=sx+SLOT_W-fpW-8, fpY=sy+thumbH+8;
+        cx.beginPath(); cx.roundRect(fpX,fpY,fpW,fpH,2); cx.fill();
+        cx.strokeStyle='#1E3060'; cx.lineWidth=1;
+        cx.beginPath(); cx.roundRect(fpX,fpY,fpW,fpH,2); cx.stroke();
+        // mini cam marker
+        cx.fillStyle='#00D4CC';
+        cx.beginPath(); cx.arc(fpX+fpW/2, fpY+fpH*0.18, 2.5, 0, Math.PI*2); cx.fill();
+        // mini talent
+        cx.fillStyle='#FF4466';
+        cx.beginPath(); cx.arc(fpX+(S.talent_x/STAGE_W)*fpW, fpY+(S.talent_y/STAGE_H)*fpH, 2.5, 0, Math.PI*2); cx.fill();
+        if(S.actor2_on){
+          cx.fillStyle='#FF44AA';
+          cx.beginPath(); cx.arc(fpX+(S.actor2_x/STAGE_W)*fpW, fpY+(S.actor2_y/STAGE_H)*fpH, 2, 0, Math.PI*2); cx.fill();
+        }
+      }catch(e){}
+    }
+
+    // Shot label + metadata
+    const metaY = sy + thumbH + 14;
+    cx.font = `bold 13px Barlow Condensed, sans-serif`;
+    cx.fillStyle = i<3?orange:teal; cx.textAlign='left';
+    cx.fillText(`SHOT ${i+1} \u2014 ${shotNames[i]||'CUT'}`, sx+8, metaY);
+    cx.font = '10px JetBrains Mono, monospace';
+    cx.fillStyle = muted;
+    cx.fillText(`${S.lens} \u00b7 ${fstop} \u00b7 ${ratio} \u00b7 ${S.talent_name}${S.actor2_on?' + '+S.actor2_name:''}`, sx+8, metaY+16);
+    cx.fillStyle = '#1A2A4A';
+    cx.fillText('_NOTES:_________________________________', sx+8, metaY+32);
+  }
+
+  // Footer
+  cx.fillStyle = panel;
+  cx.fillRect(0, CH-40, CW, 40);
+  cx.strokeStyle = border; cx.lineWidth=1;
+  cx.beginPath(); cx.moveTo(0,CH-40); cx.lineTo(CW,CH-40); cx.stroke();
+  cx.font='11px JetBrains Mono, monospace'; cx.fillStyle=muted; cx.textAlign='center';
+  cx.fillText('\u00a9 Eduardo Carmona, MFA  \u00b7  Pre-Viz\u2122 5.2.4.2 \u2014 Open Educational Edition  \u00b7  GNU GPL v3.0  \u00b7  Developed independently on personal equipment', CW/2, CH-15);
+
+  // Download as PNG (PDF generation requires a lib; PNG is fully offline-compatible)
+  const link = document.createElement('a');
+  link.download = `previz-storyboard-${scene.replace(/[^a-z0-9]/gi,'_').toLowerCase()}.png`;
+  link.href = sc.toDataURL('image/png',0.95);
+  link.click();
+}
+
+function acceptLegal(){
+  try{ localStorage.setItem('previz_legal_v51','accepted'); }catch(e){}
+  document.getElementById('legal-overlay').style.display='none';
+}
+// iOS Safari fix — attach touchend directly (DOM already ready at this point in file)
+(function(){
+  var btn = document.getElementById('legal-accept');
+  if(btn) btn.addEventListener('touchend', function(e){
+    e.preventDefault();
+    acceptLegal();
+  }, { passive: false });
+})();
+(function(){
+  try{
+    if(localStorage.getItem('previz_legal_v51')==='accepted'){
+      document.getElementById('legal-overlay').style.display='none';
+    }
+  }catch(e){}
+})();
+
+syncDOM();
+updateAll();
+// 5.2.4.2: Floor plan deferred boot draw — ensures Plotly div has real dimensions
+// updateAll() at script-parse time fires before CSS layout completes.
+// window 'load' fires after all resources; double-rAF gives layout one more cycle.
+window.addEventListener('load', function(){
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      plotInited = false;
+      drawFloorPlan();
+    });
+  });
+});
+
+// ══════════════════════ LUX AI — 5.2 ════════════════════════════════
+const LUX_SYSTEM_PROMPT = `You are Lux — the AI teaching assistant embedded inside Pre-Viz™, a free film pre-visualization tool for students worldwide.
+
+Your identity:
+- Name: Lux (Latin for light, the scientific unit of illuminance)
+- Voice: Neutral, warm, androgynous — a peer, not a professor. Young adult register (24-28 feel)
+- Language: Match the student exactly. If they write in Spanish, think and respond in Spanish. Same for French, Portuguese. You ARE a native speaker of their language — not a translator
+- Personality: Patient first. Funny when it fits. Socratic. Reflexive. Genuine teacher ethos
+
+Your teaching protocol — follow this every time:
+1. Read the student's emotional and cognitive state before responding technically
+2. Interpret intent liberally — never ask for clarification when context is sufficient
+3. Anchor every explanation in a concrete, visual, real-world example
+4. Make the STUDENT take the technical decision — open the door, don't walk through it for them
+5. Disappear when not needed. No badges. No cheerleading. No "Great question!"
+
+Your knowledge base:
+
+CINEMATOGRAPHY — primary technical references:
+- ASC Manual (American Cinematographer Manual, 11th ed.) — your methodological anchor for:
+    · T-stop/f-stop distinction and when each matters on set
+    · EV-based exposure math: ISO, shutter angle, aperture as a stop-scale system
+    · Depth of field: circle of confusion, hyperfocal distance, format factor
+    · ND filter factors and their stop equivalencies
+    · Color temperature ranges by source type (Tungsten 3200K, Daylight 5600K, etc.)
+    · Lighting ratios: key/fill as a measurable relationship, not a vibe
+- Blain Brown — "Cinematography: Theory and Practice" — accessible bridge from concept to camera
+- Bruce Block — "The Visual Story" — picture design, contrast, visual structure
+- Gerald Millerson — classic lighting and studio craft
+- ARRI technical documentation — camera system and lens standards
+
+CRAFT & DIRECTING:
+- Alexander Mackendrick — "On Film-Making" — directing and storytelling logic
+- Sidney Lumet — "Making Movies" — the director's perspective on the frame
+- Bordwell & Thompson — "Film Art" — formal analysis, narrative structure
+
+GLOBAL CINEMA TRADITIONS you draw from naturally:
+- Cuban ICAIC neorealism, Cinema Novo (Brazil), French New Wave
+- Nollywood, Korean New Wave, Iranian cinema, Bollywood, Japanese cinema
+- Hollywood studio tradition and American independent film
+- You know a student in Havana and a student in Helsinki are NOT the same student
+- You never center Hollywood as the default — you meet the student where they are
+
+Pre-Viz™ context you can reference:
+- The tool has a floor plan (actor/camera/light positions), Director's Monitor (live preview canvas with key/fill/back lighting), and Storyboard export
+- Students use it to plan shots, understand three-point lighting, camera angles, the 180° rule, lens choices, and coverage
+
+What Lux NEVER does:
+- Never says "Great question!" or any hollow affirmation
+- Never volunteers unsolicited advice — wait to be asked
+- Never answers FOR the student when a Socratic redirect is possible
+- Never breaks character or refers to itself as Claude or an AI model
+
+Example of Lux at its best:
+Student: "Where do I put my key light?"
+Lux: "Depends. Who are you trying to make look guilty?"
+That one line opens a door. The student engages — or doesn't. Lux waits.
+
+Keep responses concise — 2-4 sentences unless a detailed explanation is genuinely needed. This is a conversation, not a lecture.`;
+
+let luxHistory = [];
+let luxApiKey = LUX_CONFIG.apiKey || '';
+let luxOpen = false;
+
+function toggleLux(){luxOpen ? closeLux() : openLux()}
+
+function openLux(){
+  luxOpen = true;
+  document.getElementById('lux-drawer').classList.add('open');
+  document.getElementById('lux-overlay').classList.add('active');
+  document.getElementById('lux-toggle').classList.add('active');
+  document.getElementById('lux-badge').classList.add('active');
+  if(!luxApiKey){
+    document.getElementById('lux-key-row').classList.add('visible');
+  }
+  if(luxHistory.length===0) luxGreet();
+  setTimeout(()=>document.getElementById('lux-input').focus(), 300);
+}
+
+function closeLux(){
+  luxOpen = false;
+  document.getElementById('lux-drawer').classList.remove('open');
+  document.getElementById('lux-overlay').classList.remove('active');
+  document.getElementById('lux-toggle').classList.remove('active');
+  document.getElementById('lux-badge').classList.remove('active');
+}
+
+function luxSaveKey(){
+  const k = document.getElementById('lux-key-input').value.trim();
+  if(!k.startsWith('sk-ant-')){
+    luxAddMsg('lux','That doesn\'t look like an Anthropic key — should start with sk-ant-');
+    return;
+  }
+  luxApiKey = k;
+  document.getElementById('lux-key-row').classList.remove('visible');
+  luxAddMsg('lux','Key saved. I\'m live. What are we shooting?');
+}
+
+function luxGreet(){
+  const greetings = [
+    'What are we shooting?',
+    'Floor plan open. What\'s the shot?',
+    'Lights. Camera. What\'s the question?',
+    'I\'m here. What\'s on your mind?',
+  ];
+  const g = greetings[Math.floor(Math.random()*greetings.length)];
+  luxAddMsg('lux', g);
+  luxHistory.push({role:'assistant', content: g});
+}
+
+function luxAddMsg(role, text){
+  const chat = document.getElementById('lux-chat');
+  const wrap = document.createElement('div');
+  wrap.className = `lux-msg ${role}`;
+  const sender = document.createElement('div');
+  sender.className = 'lux-sender';
+  sender.textContent = role==='lux' ? 'LUX' : 'YOU';
+  const bubble = document.createElement('div');
+  bubble.className = 'lux-bubble';
+  bubble.textContent = text;
+  wrap.appendChild(sender);
+  wrap.appendChild(bubble);
+  chat.appendChild(wrap);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+async function luxSend(){
+  const input = document.getElementById('lux-input');
+  const msg = input.value.trim();
+  if(!msg) return;
+  input.value = '';
+  input.style.height = '';
+
+  luxAddMsg('user', msg);
+  luxHistory.push({role:'user', content: msg});
+
+  if(!luxApiKey){
+    luxAddMsg('lux','I need an API key to respond — paste it in the field above.');
+    return;
+  }
+
+  // Show typing indicator
+  const typing = document.getElementById('lux-typing');
+  const send = document.getElementById('lux-send');
+  typing.classList.add('visible');
+  send.disabled = true;
+
+  // Build context — include current shot state as a brief snapshot
+  const shotContext = `[Current Pre-Viz™ state: Lens ${S.lens}mm, Pan ${S.cam_pan}°, Talent at (${S.talent_x},${S.talent_y}), Key light ${S.key_on?'ON':'OFF'} at ${S.key_kelvin}K ${S.key_intensity}%, Fill ${S.fill1_on?'ON':'OFF'}, Back ${S.back_on?'ON':'OFF'}]`;
+  const messagesWithContext = [
+    {role:'user', content: shotContext + '\n\n' + luxHistory[0]?.content || ''},
+    ...luxHistory.slice(1)
+  ];
+
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'x-api-key': luxApiKey,
+        'anthropic-version':'2023-06-01',
+        'anthropic-dangerous-direct-browser-access':'true'
+      },
+      body: JSON.stringify({
+        model: LUX_CONFIG.model,
+        max_tokens: LUX_CONFIG.maxTokens,
+        system: LUX_SYSTEM_PROMPT,
+        messages: luxHistory
+      })
+    });
+    const data = await resp.json();
+    if(data.error){
+      luxAddMsg('lux', `[Error: ${data.error.message}]`);
+    } else {
+      const reply = data.content?.[0]?.text || '…';
+      luxAddMsg('lux', reply);
+      luxHistory.push({role:'assistant', content: reply});
+    }
+  } catch(e){
+    luxAddMsg('lux','Connection issue — check your key or try again.');
+  }
+
+  typing.classList.remove('visible');
+  send.disabled = false;
+  document.getElementById('lux-chat').scrollTop = 999999;
+}
+
+// Auto-resize textarea
+document.getElementById('lux-input')?.addEventListener('input', function(){
+  this.style.height='auto';
+  this.style.height=Math.min(this.scrollHeight,100)+'px';
+});
+
+
+</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d6a58ecad24f3c5',t:'MTc3MjU1ODc5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</div>
+</div>
+</body>
+</html>
